@@ -45,10 +45,6 @@ use orion::operators::tensor::I8Tensor;
 
 
 
-
-
-
-
 fn splittosequence<
     T,
     +Copy<T>,
@@ -59,7 +55,7 @@ fn splittosequence<
     +PartialEq<Tensor<T>>,
     +PartialOrd<Tensor<T>>
 >(
-    self: @Tensor<u32>, split: Option<Tensor<usize>>, axis:u32, keepdims:u32 ) -> Array<Tensor<u32>> {
+    self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize ) -> Array<Tensor<T>> {
 
     
     let split_defined = match split {
@@ -131,8 +127,8 @@ fn splittosequence<
        
     }
 
-    let mut final_array: Array<Tensor<u32>> = array![];
-    let mut splited_t: Array<Tensor<u32>> = array![];
+    let mut final_array: Array<Tensor<T>> = array![];
+    let mut splited_t: Array<Tensor<T>> = array![];
     let mut sli: MutMatrix<usize> = MutMatrixImpl::new((*self).shape.len(), 2);    
     let mut pos: usize = 0;
     let mut i = 0;
@@ -195,7 +191,7 @@ fn splittosequence<
         let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
         let axes: Option<Span<usize>> = Option::None(());
         let steps: Option<Span<usize>> = Option::None(());
-        let mut sub_t: Tensor<u32> = (self).slice(starts, ends, axes, steps); 
+        let mut sub_t: Tensor<T> = (self).slice(starts, ends, axes, steps); 
         'koko'.print();
         let mut len = sub_t.shape.len();
         let mut gg = sub_t.unsqueeze(axes: array![len].span());
@@ -211,8 +207,8 @@ fn splittosequence<
 
 
 
-    if keepdims ==1{ 
-        let mut splited_t2: Array<Tensor<u32>> = array![];
+    if keepdims ==0{ 
+        let mut splited_t2: Array<Tensor<T>> = array![];
         'jiji'.print();
         let mut i: usize = 0;
         loop {
@@ -231,6 +227,9 @@ fn splittosequence<
     };
 
     return final_result;
+
+
+    }
 
 
     }
