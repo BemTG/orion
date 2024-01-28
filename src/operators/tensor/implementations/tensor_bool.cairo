@@ -484,6 +484,11 @@ impl BoolTensor of TensorTrait<bool> {
     ) -> Array<Tensor<bool>> {
         panic(array!['not supported!'])
     }
+    fn splittosequence(
+        self: @Tensor<bool>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+    ) -> Array<Tensor<bool>> {
+        panic(array!['not supported!'])
+    }
 }
 
 /// Implements partial equal for two `Tensor<bool>` using the `PartialEq` trait.
