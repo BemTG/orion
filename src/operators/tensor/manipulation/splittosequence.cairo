@@ -196,7 +196,8 @@ fn splittosequence<
         let mut len = sub_t.shape.len();
         let mut gg = sub_t.unsqueeze(axes: array![len].span());
         // let mut final_result = SequenceTrait::sequence_construct(tensors: array![sub_t]);
-        splited_t.append(gg);
+        // splited_t.append(gg);
+        splited_t.append(sub_t);
         'opopo'.print();
         i += 1;
 
