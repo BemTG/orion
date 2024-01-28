@@ -5165,8 +5165,8 @@ trait TensorTrait<T> {
 
 
     fn splittosequence(
-        self: @Tensor<u32>, split: Option<Tensor<usize>>, axis:u32, keepdims:u32 
-    ) -> Array<Tensor<u32>> ;
+        self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+    ) -> Array<Tensor<usize>> ;
 }
 
 
