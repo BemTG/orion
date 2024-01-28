@@ -231,5 +231,3 @@ fn splittosequence<
 
     }
 
-
-    }
