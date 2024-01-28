@@ -5162,7 +5162,14 @@ trait TensorTrait<T> {
     fn split(
         self: @Tensor<T>, axis: usize, num_outputs: Option<usize>, spl: Option<Tensor<usize>>
     ) -> Array<Tensor<T>>;
+
+
+    fn splittosequence(
+        self: @Tensor<u32>, split: Option<Tensor<usize>>, axis:u32, keepdims:u32 
+    ) -> Array<Tensor<u32>> ;
 }
+
+
 
 /// Cf: TensorTrait::new docstring
 fn new_tensor<T>(shape: Span<usize>, data: Span<T>) -> Tensor<T> {
