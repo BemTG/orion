@@ -561,6 +561,11 @@ impl FP64x64Tensor of TensorTrait<FP64x64> {
     ) -> Array<Tensor<FP64x64>> {
         manipulation::split::split(self, axis, num_outputs, spl)
     }
+    fn splittosequence(
+        self: @Tensor<FP64x64>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+    ) -> Array<Tensor<FP64x64>> {
+        manipulation::splittosequence::splittosequence(self, split, axis, keepdims)
+    }
 }
 
 /// Implements addition for `Tensor<FP64x64>` using the `Add` trait.
