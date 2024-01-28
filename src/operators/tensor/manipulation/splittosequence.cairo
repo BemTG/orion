@@ -191,7 +191,7 @@ fn splittosequence<
         let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
         let axes: Option<Span<usize>> = Option::None(());
         let steps: Option<Span<usize>> = Option::None(());
-        let mut sub_t: Tensor<T> = (self).slice(starts, ends, axes, steps); 
+        let mut sub_t: Tensor<u32> = (self).slice(starts, ends, axes, steps); 
         'koko'.print();
         let mut len = sub_t.shape.len();
         let mut gg = sub_t.unsqueeze(axes: array![len].span());
