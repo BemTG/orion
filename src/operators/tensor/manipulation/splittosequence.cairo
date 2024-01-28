@@ -203,7 +203,8 @@ fn splittosequence<
     };
 
     
-    let mut final_result = SequenceTrait::sequence_construct(splited_t);
+    // let mut final_result = SequenceTrait::sequence_construct(splited_t);
+     let mut final_result = splited_t;
 
 
 
@@ -222,7 +223,8 @@ fn splittosequence<
         i+=1;
  
     };
-     final_result = SequenceTrait::sequence_construct(splited_t2);
+     // final_result = SequenceTrait::sequence_construct(splited_t2);
+     final_result = splited_t2;
     
     };
 
