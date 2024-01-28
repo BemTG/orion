@@ -208,7 +208,7 @@ fn splittosequence<
 
 
 
-    if keepdims ==0{ 
+    if keepdims ==0  && split_defined == false { 
         let mut splited_t2: Array<Tensor<T>> = array![];
         'jiji'.print();
         let mut i: usize = 0;
