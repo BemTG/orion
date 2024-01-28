@@ -498,6 +498,12 @@ impl Complex64Tensor of TensorTrait<complex64> {
         panic(array!['not supported!'])
     }
 
+     fn splittosequence(
+        self: @Tensor<complex64>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+    ) -> Array<Tensor<complex64>> {
+        panic(array!['not supported!'])
+    }
+
     fn resize(
         self: @Tensor<complex64>,
         roi: Option<Tensor<complex64>>,
