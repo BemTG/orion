@@ -148,9 +148,9 @@ fn splittosequence<
      'jj'.print();
     //  (*split.unwrap().shape.at(0)).print();
 
-     let mut split = split.unwrap();
+     // let mut split = split.unwrap();
      'fifi'.print();
-     (*split.data.at(0)).print();
+     // (*split.data.at(0)).print();
 
     //  if split.shape.len()== 0 {
 
