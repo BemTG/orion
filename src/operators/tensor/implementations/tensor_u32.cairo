@@ -486,7 +486,7 @@ impl U32Tensor of TensorTrait<u32> {
     fn splittosequence(
         self: @Tensor<u32>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
     ) -> Array<Tensor<u32>> {
-        manipulation::splittosequence::splittosequence(self, split, axis, keepdims:u32)
+        manipulation::splittosequence::splittosequence(self, split, axis, keepdims)
     }
 }
 
