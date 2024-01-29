@@ -128,7 +128,7 @@ fn splittosequence<
     }
 
     let mut final_array: Array<Tensor<T>> = array![];
-    let mut splited_t: Array<Tensor<T>> = array![];
+    let mut splited_t: Array<Tensor<u32>> = array![];
     let mut sli: MutMatrix<usize> = MutMatrixImpl::new((*self).shape.len(), 2);    
     let mut pos: usize = 0;
     let mut i = 0;
