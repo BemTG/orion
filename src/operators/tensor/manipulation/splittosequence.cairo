@@ -227,7 +227,7 @@ fn splittosequence<
 
     // let tensor1:Tensor<T>  = TensorTrait::new(shape: array![2, 2].span(), data: array![0, 1, 2, 3].span());
     // let tensor2:Tensor<T>  = TensorTrait::new(shape: array![2, 2].span(), data: array![4, 5, 6, 7].span());
-    let result22 = SequenceTrait::<T>::sequence_construct(sub_t);
+    let result22 = SequenceTrait::<T>::sequence_construct(splited_t2);
 
     
     };
