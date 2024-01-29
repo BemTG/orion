@@ -50,6 +50,7 @@ fn splittosequence<
     +Copy<T>,
     +Drop<T>,
     +TensorTrait<T>,
+    +SequenceTrait<T>,
     +PartialOrd<T>,
     +PartialEq<T>,
     +PartialEq<Tensor<T>>,
