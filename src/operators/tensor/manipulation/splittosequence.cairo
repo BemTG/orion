@@ -55,7 +55,7 @@ fn splittosequence<
     +PartialEq<Tensor<T>>,
     +PartialOrd<Tensor<T>>
 >(
-    self: @Tensor<u32>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize ) -> Array<Tensor<u32>> {
+    self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize ) -> Array<Tensor<T>> {
 
     
     let split_defined = match split {
