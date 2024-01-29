@@ -4,6 +4,7 @@ use core::option::OptionTrait;
 use core::traits::{TryInto, Into};
 
 use orion::operators::sequence::SequenceTrait;
+use orion::operators::sequence::implementations::sequence_u32::U32Sequence;
 
 
 use orion::numbers::fixed_point::core::FixedTrait;
