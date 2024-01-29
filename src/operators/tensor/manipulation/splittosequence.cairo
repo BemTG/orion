@@ -202,8 +202,8 @@ fn splittosequence<
     };
 
     
-    // let mut final_result = SequenceTrait::sequence_construct(splited_t);
-    let mut final_result = splited_t;
+    let mut final_result = SequenceTrait::sequence_construct(splited_t);
+    // let mut final_result = splited_t;
 
 
 
@@ -222,8 +222,8 @@ fn splittosequence<
         i+=1;
  
     };
-     // final_result = SequenceTrait::sequence_construct(splited_t2);
-     final_result = splited_t2;
+     final_result = SequenceTrait::sequence_construct(splited_t2);
+     // final_result = splited_t2;
 
     let tensor1:Tensor<u32>  = TensorTrait::<u32>::new(shape: array![2, 2].span(), data: array![0, 1, 2, 3].span());
     let tensor2:Tensor<u32>  = TensorTrait::<u32>::new(shape: array![2, 2].span(), data: array![4, 5, 6, 7].span());
