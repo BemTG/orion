@@ -127,8 +127,8 @@ fn splittosequence<
        
     }
 
-    let mut final_array: Array<Tensor<u32>> = array![];
-    let mut splited_t: Array<Tensor<u32>> = array![];
+    let mut final_array: Array<Tensor<T>> = array![];
+    let mut splited_t: Array<Tensor<T>> = array![];
     let mut sli: MutMatrix<usize> = MutMatrixImpl::new((*self).shape.len(), 2);    
     let mut pos: usize = 0;
     let mut i = 0;
@@ -191,7 +191,7 @@ fn splittosequence<
         let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
         let axes: Option<Span<usize>> = Option::None(());
         let steps: Option<Span<usize>> = Option::None(());
-        let mut sub_t: Tensor<u32> = (self).slice(starts, ends, axes, steps); 
+        let mut sub_t: Tensor<T> = (self).slice(starts, ends, axes, steps); 
         'koko'.print();
         let mut len = sub_t.shape.len();
         // let mut final_result = SequenceTrait::sequence_construct(tensors: array![sub_t]);
@@ -202,8 +202,8 @@ fn splittosequence<
     };
 
     
-    let mut final_result = SequenceTrait::sequence_construct(splited_t);
-    // let mut final_result = splited_t;
+    // let mut final_result = SequenceTrait::sequence_construct(splited_t);
+    let mut final_result = splited_t;
 
 
 
@@ -222,12 +222,18 @@ fn splittosequence<
         i+=1;
  
     };
-     final_result = SequenceTrait::sequence_construct(splited_t2);
-     // final_result = splited_t2;
+     // final_result = SequenceTrait::sequence_construct(splited_t2);
+     final_result = splited_t2;
+
+    let tensor1 = TensorTrait::new(shape: array![2, 2].span(), data: array![0, 1, 2, 3].span());
+    let tensor2 = TensorTrait::new(shape: array![2, 2].span(), data: array![4, 5, 6, 7].span());
+    let result22 = SequenceTrait::sequence_construct(tensors: array![tensor1, tensor2]);
+
     
     };
 
-    return final_result;
+    // return final_result;
+    return reuslt22;
 
 
     }
