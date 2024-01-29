@@ -55,7 +55,7 @@ fn splittosequence<
     +PartialEq<Tensor<T>>,
     +PartialOrd<Tensor<T>>
 >(
-    self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize ) -> Array<Tensor<T>> {
+    self: @Tensor<u32>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize ) -> Array<Tensor<u32>> {
 
     
     let split_defined = match split {
@@ -127,7 +127,7 @@ fn splittosequence<
        
     }
 
-    let mut final_array: Array<Tensor<T>> = array![];
+    let mut final_array: Array<Tensor<u32>> = array![];
     let mut splited_t: Array<Tensor<u32>> = array![];
     let mut sli: MutMatrix<usize> = MutMatrixImpl::new((*self).shape.len(), 2);    
     let mut pos: usize = 0;
@@ -191,12 +191,10 @@ fn splittosequence<
         let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
         let axes: Option<Span<usize>> = Option::None(());
         let steps: Option<Span<usize>> = Option::None(());
-        let mut sub_t: Tensor<T> = (self).slice(starts, ends, axes, steps); 
+        let mut sub_t: Tensor<u32> = (self).slice(starts, ends, axes, steps); 
         'koko'.print();
         let mut len = sub_t.shape.len();
-        // let mut gg = sub_t.unsqueeze(axes: array![len].span());
         // let mut final_result = SequenceTrait::sequence_construct(tensors: array![sub_t]);
-        // splited_t.append(gg);
         splited_t.append(sub_t);
         'opopo'.print();
         i += 1;
