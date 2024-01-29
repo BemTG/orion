@@ -4,7 +4,7 @@ use core::option::OptionTrait;
 use core::traits::{TryInto, Into};
 
 use orion::operators::sequence::SequenceTrait;
-use orion::operators::sequence::implementations::sequence_fp16x16wide::FP16x16Sequence;
+use orion::operators::sequence::implementations::sequence_fp16x16wide::FP16x16WSequence;
 
 use orion::numbers::fixed_point::core::FixedTrait;
 use orion::operators::tensor::helpers::SpanPartialOrd;
