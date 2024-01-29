@@ -4,7 +4,7 @@ use alexandria_data_structures::array_ext::{SpanTraitExt};
 use core::array::{ArrayTrait, SpanTrait};
 use orion::operators::tensor::{Tensor, TensorTrait, U32Tensor};
 use orion::numbers::fixed_point::{core::{FixedTrait}};
-
+use array::{ArrayTrait, SpanTrait};
 
 use core::option::OptionTrait;
 
