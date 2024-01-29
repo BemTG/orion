@@ -169,7 +169,7 @@ fn splittosequence<
         sli.set(axis, 1, pos);
         
 
-        let end_ele_0 = match sli.get(axis, 0) {
+        let end_ele_0 = match sli.get(1, 0) {
                     Option::Some(res) => {
                         res
                     },
@@ -178,7 +178,7 @@ fn splittosequence<
                         0
                     },
         };
-        let end_ele_1 = match sli.get(axis, 1) {
+        let end_ele_1 = match sli.get(1, 1) {
                     Option::Some(res) => {
                         res
                     },
