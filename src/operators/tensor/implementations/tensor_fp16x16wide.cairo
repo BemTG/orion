@@ -515,10 +515,11 @@ impl FP16x16WTensor of TensorTrait<FP16x16W> {
     ) -> Array<Tensor<FP16x16W>> {
         manipulation::split::split(self, axis, num_outputs, spl)
     }
-    fn splittosequence(
-        self: @Tensor<FP16x16W>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+
+    fn split_to_sequence(
+        self: @Tensor<FP16x16W>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
     ) -> Array<Tensor<FP16x16W>> {
-        manipulation::splittosequence::splittosequence(self, split, axis, keepdims)
+        manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
     }
 }
 
