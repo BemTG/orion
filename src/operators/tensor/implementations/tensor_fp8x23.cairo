@@ -563,10 +563,10 @@ impl FP8x23Tensor of TensorTrait<FP8x23> {
         manipulation::split::split(self, axis, num_outputs, spl)
     }
 
-    fn splittosequence(
-        self: @Tensor<FP8x23>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+    fn split_to_sequence(
+        self: @Tensor<FP8x23>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
     ) -> Array<Tensor<FP8x23>> {
-        manipulation::splittosequence::splittosequence(self, split, axis, keepdims)
+        manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
     }
 }
 
