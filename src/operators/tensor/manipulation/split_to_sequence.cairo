@@ -120,7 +120,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
     loop {
         match tmp_tensor.shape.pop_front() {
             Option::Some(item) => { 
-                let s: usize = item;
+                let s: usize = *item;
                 sli.set(i,0,0); 
                 sli.set(i,1,s); 
                 i += 1;
