@@ -487,8 +487,9 @@ impl BoolTensor of TensorTrait<bool> {
     ) -> Array<Tensor<bool>> {
         panic(array!['not supported!'])
     }
-    fn splittosequence(
-        self: @Tensor<bool>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+
+    fn split_to_sequence(
+        self: @Tensor<bool>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
     ) -> Array<Tensor<bool>> {
         panic(array!['not supported!'])
     }
