@@ -564,10 +564,11 @@ impl FP64x64Tensor of TensorTrait<FP64x64> {
     ) -> Array<Tensor<FP64x64>> {
         manipulation::split::split(self, axis, num_outputs, spl)
     }
-    fn splittosequence(
-        self: @Tensor<FP64x64>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+
+    fn split_to_sequence(
+        self: @Tensor<FP64x64>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
     ) -> Array<Tensor<FP64x64>> {
-        manipulation::splittosequence::splittosequence(self, split, axis, keepdims)
+        manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
     }
 }
 
