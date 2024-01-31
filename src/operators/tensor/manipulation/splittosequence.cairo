@@ -44,8 +44,7 @@ use orion::operators::tensor::I8Tensor;
 
 
 
-
-fn splittosequence<
+fn split_to_sequence<
     T,
     +Copy<T>,
     +Drop<T>,
@@ -56,36 +55,32 @@ fn splittosequence<
     +PartialEq<Tensor<T>>,
     +PartialOrd<Tensor<T>>
 >(
-    self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize ) -> Array<Tensor<T>> {
+self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool> ) -> Array<Tensor<T>> {
 
-    
-    let split_defined = match split {
+    let has_split = match split {
         Option::Some(value) => {
             true
         },
         Option::None => false,
     };
 
-    let mut split_length: Array<usize> = array![];
 
+    let mut split_length: Array<usize> = array![];
     let mut i: usize = 0;
-    if split_defined ==false{
+    if has_split ==false {
         loop {
-            if (i>=*(*self).shape.at(axis)) {    
+            if (i>=*(*self).shape.at(axis)) {
                 break;
             }
             split_length.append(1);
             i += 1;
-            'in here'.print();
         };
-
     }
     //scalar
     else if split.unwrap().shape.len()==0 {
-
         let mut dim = *(*self).shape.at(axis);
         let length = split.unwrap().data.at(0);
-        let mut n = dim/*length;
+        let mut n = *dim/*length;
         let mut i: usize = 0;
         loop {
             if i>=n {
@@ -93,149 +88,116 @@ fn splittosequence<
             }
             split_length.append(*length);
             i += 1;
-            'the len len'.print();
         };
         
-        // split_length.len().print();
-        
+        let mut left = *dim - *length * n;
 
-        let mut left = dim - *length * n;
-        // left.print();
-
-        if left >0 {
-            split_length.append(left);
-            'the jump'.print();
-            split_length.len().print();
-            (*split_length.at(0)).print();
-            (*split_length.at(1)).print();
-            // (*split_length.at(2)).print();
-           
+        if left > 0 {
+            split_length.append(left);    
         }
     }
-
     else {
-        let mut i: usize = 0;
+        let mut tmp_split = split.unwrap();
         loop {
-            // 'heyhey'.print();
-            // split.unwrap().data.len().print();
-            if i>=split.unwrap().data.len() {
-                break;
-            }
-            split_length.append(*split.unwrap().data.at(i));
-            i += 1;
-            'ova here'.print();
+        let mut i: usize = 0;
+        match tmp_split.data.pop_front() { 
+            Option::Some(item) => { 
+                split_length.append(*item);
+                i += 1;
+            },
+            Option::None(_) => { break; }
         };
-       
+    };
     }
 
-    let mut final_array: Array<Tensor<T>> = array![];
+
     let mut splited_t: Array<Tensor<T>> = array![];
-    let mut sli: MutMatrix<usize> = MutMatrixImpl::new((*self).shape.len(), 2);    
+    let mut sli: MutMatrix<usize> =  MutMatrixImpl::new((*self).shape.len(), 2);  
     let mut pos: usize = 0;
     let mut i = 0;
 
+    let mut tmp_tensor = *(*self);
     loop {
-        if (i>=(*self).shape.len()) {
-            break;
-        }
-        let s: usize = *(*self).shape.at(i);
-        sli.set(i,0,0); 
-        sli.set(i,1,s); 
-        i += 1;
-        i.print();
+        match tmp_tensor.shape.pop_front() {
+            Option::Some(item) => { 
+                let s: usize = *item;
+                sli.set(i,0,0); 
+                sli.set(i,1,s); 
+                i += 1;
+            },
+            Option::None(_) => { break; }
+        };
     };
 
+
+
+    loop {
     let mut i: usize = 0;
-     'jj'.print();
-    //  (*split.unwrap().shape.at(0)).print();
-
-     // let mut split = split.unwrap();
-     'fifi'.print();
-     // (*split.data.at(0)).print();
-
-    //  if split.shape.len()== 0 {
-
-    //     split  = TensorTrait::new(shape: array![1].span(), data: array![2].span());
-    //  };
+    match split_length.pop_front() {
+    Option::Some(item) => { 
+            let mut spl: usize = item;
+            sli.set(axis, 0, pos);
+            pos += spl; 
+            sli.set(axis, 1, pos);
+            
+            let end_ele_0 = match sli.get(1,0) {
+                        Option::Some(res) => {
+                            res
+                        },
+                        Option::None(_) => {
+                            assert(false, 'Get end_ele_0 is failed');
+                            0
+                        },
+            };
+            let end_ele_1 = match sli.get(1, 1) {
+                        Option::Some(res) => {
+                            res
+                        },
+                        Option::None(_) => {
+                            assert(false, 'Get end_ele_0 is failed');
+                            0
+                        },
+            };
+            let starts: Span<usize> = array![sli.get(0,0).unwrap(),end_ele_0].span();
+            let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
+            let axes: Option<Span<usize>> = Option::None(());
+            let steps: Option<Span<usize>> = Option::None(());
+            let mut sub_t: Tensor<u32> = tensor.slice(starts, ends, axes, steps);
+            let mut len = sub_t.shape.len();
+            splited_t.append(sub_t);
+            i += 1;
+    },
+    Option::None(_) => { break; }
+    };
+};
 
     
-    loop {
-        if (i>=split_length.len()) {
-            break;
-        }
-        let spl: usize = *split_length.at(i);
-       
-        sli.set(axis, 0, pos);
-        pos += spl; 
-        sli.set(axis, 1, pos);
-        
+    let mut seq_result = SequenceTrait::sequence_construct(splited_t);
 
-        let end_ele_0 = match sli.get(1, 0) {
-                    Option::Some(res) => {
-                        res
-                    },
-                    Option::None(_) => {
-                        assert(false, 'Get end_ele_0 is failed');
-                        0
-                    },
-        };
-        let end_ele_1 = match sli.get(1, 1) {
-                    Option::Some(res) => {
-                        res
-                    },
-                    Option::None(_) => {
-                        assert(false, 'Get end_ele_0 is failed');
-                        0
-                    },
-        };
-        let starts: Span<usize> = array![sli.get(0,0).unwrap(),end_ele_0].span();
-        let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
-        let axes: Option<Span<usize>> = Option::None(());
-        let steps: Option<Span<usize>> = Option::None(());
-        let mut sub_t: Tensor<T> = (self).slice(starts, ends, axes, steps); 
-        'koko'.print();
-        let mut len = sub_t.shape.len();
-        // let mut final_result = SequenceTrait::sequence_construct(tensors: array![sub_t]);
-        splited_t.append(sub_t);
-        'opopo'.print();
-        i += 1;
-
+    let keepdims = match split {
+        Option::Some(value) => {
+            true
+        },
+        Option::None => false,
     };
 
-    
-    let mut final_result = SequenceTrait::sequence_construct(splited_t);
-    // let mut final_result = splited_t;
-
-
-
-    if keepdims ==0  && split_defined == false { 
-        let mut splited_t2: Array<Tensor<T>> = array![];
-        'jiji'.print();
+    if has_split == false && keepdims == false { 
+        let mut res: Array<Tensor<T>> = array![];
         let mut i: usize = 0;
         loop {
-        if (i>=(final_result).len()) {
-            break;
-        }
-        // let mut splited_t: Array<Tensor<T>> = array![];
-        let mut tmp = final_result.at(i);
-        let mut tensor_with_squeeze = tmp.squeeze(axes: Option::None(()));
-        splited_t2.append(tensor_with_squeeze);
-        i+=1;
- 
+        match seq_result.pop_front() {
+            Option::Some(item) => { 
+                let mut reshaped_tensor = item.squeeze(axes: Option::None(()));
+                res.append(reshaped_tensor);
+                i+=1;
+            },
+            Option::None(_) => { break; }
+        };
     };
-     final_result = SequenceTrait::sequence_construct(splited_t2);
-     // final_result = splited_t2;
-
-    // let tensor1:Tensor<T>  = TensorTrait::new(shape: array![2, 2].span(), data: array![0, 1, 2, 3].span());
-    // let tensor2:Tensor<T>  = TensorTrait::new(shape: array![2, 2].span(), data: array![4, 5, 6, 7].span());
-    // let result22: Array<Tensor<T>> = SequenceTrait::<T>::sequence_construct(splited_t2);
-
+     seq_result = SequenceTrait::sequence_construct(res);
     
     };
 
-    return final_result;
-    // return reuslt22;
+    return seq_result;
 
-
-    }
-
+}
