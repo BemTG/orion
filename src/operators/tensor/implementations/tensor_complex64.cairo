@@ -4,7 +4,7 @@ use core::option::OptionTrait;
 use core::traits::{TryInto, Into};
 
 use orion::operators::sequence::SequenceTrait;
-use orion::operators::sequence::implementations::sequence_complex64::COMPLEX64Sequence;
+// use orion::operators::sequence::implementations::sequence_complex64::COMPLEX64Sequence;
 
 use orion::numbers::fixed_point::core::FixedTrait;
 use orion::operators::tensor::core::{
@@ -504,8 +504,8 @@ impl Complex64Tensor of TensorTrait<complex64> {
      fn split_to_sequence(
         self: @Tensor<complex64>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool> 
     ) -> Array<Tensor<complex64>> {
-        // panic(array!['not supported!'])
-        manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
+        panic(array!['not supported!'])
+        // manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
     }
 
 
