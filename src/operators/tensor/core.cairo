@@ -5162,11 +5162,18 @@ trait TensorTrait<T> {
     fn split(
         self: @Tensor<T>, axis: usize, num_outputs: Option<usize>, spl: Option<Tensor<usize>>
     ) -> Array<Tensor<T>>;
-
-
-    fn splittosequence(
-        self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
-    ) -> Array<Tensor<T>> ;
+    /// # tensor.split_to_sequence
+    ///
+    /// ```rust 
+    ///    fn split_to_sequence(self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
+    ///   ) -> Array<Tensor<T>>;
+    /// ```
+    ///
+    /// Splits a tensor into a sequence of tensors, along the specified ‘axis’
+    fn split_to_sequence(
+        self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
+    ) -> Array<Tensor<T>>;
+    ///
 }
 
 
