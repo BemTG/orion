@@ -503,8 +503,10 @@ impl Complex64Tensor of TensorTrait<complex64> {
      fn split_to_sequence(
         self: @Tensor<complex64>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool> 
     ) -> Array<Tensor<complex64>> {
-        panic(array!['not supported!'])
+        // panic(array!['not supported!'])
+        manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
     }
+
 
     fn resize(
         self: @Tensor<complex64>,
