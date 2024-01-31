@@ -1,3 +1,3 @@
 mod unique;
 mod split;
-mod splittosequence; 
+mod split_to_sequence; 
