@@ -80,7 +80,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
     else if split.unwrap().shape.len()==0 {
         let mut dim = *(*self).shape.at(axis);
         let length = split.unwrap().data.at(0);
-        let mut n = *dim/*length;
+        let mut n = dim/*length;
         let mut i: usize = 0;
         loop {
             if i>=n {
@@ -90,7 +90,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
             i += 1;
         };
         
-        let mut left = *dim - *length * n;
+        let mut left = dim - *length * n;
 
         if left > 0 {
             split_length.append(left);    
@@ -116,11 +116,11 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
     let mut pos: usize = 0;
     let mut i = 0;
 
-    let mut tmp_tensor = *(*self);
+    let mut tmp_tensor = (*self);
     loop {
         match tmp_tensor.shape.pop_front() {
             Option::Some(item) => { 
-                let s: usize = *item;
+                let s: usize = item;
                 sli.set(i,0,0); 
                 sli.set(i,1,s); 
                 i += 1;
