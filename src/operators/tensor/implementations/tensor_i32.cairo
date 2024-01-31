@@ -545,10 +545,10 @@ impl I32Tensor of TensorTrait<i32> {
         manipulation::split::split(self, axis, num_outputs, spl)
     }
 
-    fn splittosequence(
-        self: @Tensor<i32>, split: Option<Tensor<usize>>, axis:usize, keepdims:usize 
+    fn split_to_sequence(
+        self: @Tensor<i32>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool>
     ) -> Array<Tensor<i32>> {
-        manipulation::splittosequence::splittosequence(self, split, axis, keepdims)
+        manipulation::split_to_sequence::split_to_sequence(self, split, axis, keepdims)
     }
 }
 
