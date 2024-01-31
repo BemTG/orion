@@ -162,7 +162,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
             let ends: Span<usize> = array![ sli.get(0,1).unwrap(), end_ele_1].span();
             let axes: Option<Span<usize>> = Option::None(());
             let steps: Option<Span<usize>> = Option::None(());
-            let mut sub_t: Tensor<T> = tensor.slice(starts, ends, axes, steps);
+            let mut sub_t: Tensor<T> = self.slice(starts, ends, axes, steps);
             let mut len = sub_t.shape.len();
             splited_t.append(sub_t);
             i += 1;
