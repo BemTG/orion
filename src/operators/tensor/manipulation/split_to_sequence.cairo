@@ -64,6 +64,10 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
         Option::None => false,
     };
 
+    let rank = (*self).shape.len();
+    // assert(axis < rank && axis > -rank, 'axis out of dimensions');
+    assert(axis < rank, 'axis out of dimensions');
+
 
     let mut split_length: Array<usize> = array![];
     let mut i: usize = 0;
