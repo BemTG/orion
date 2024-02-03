@@ -68,7 +68,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
     // assert(axis < rank && axis > -rank, 'axis out of dimensions');
     assert(axis < rank, 'axis out of dimensions');
 
-    let split_shape_len = split.unwrap().shape.len()
+    let split_shape_len = split.unwrap().shape.len();
     assert(split_shape_len <= 2, 'split shape is invalid');
 
 
