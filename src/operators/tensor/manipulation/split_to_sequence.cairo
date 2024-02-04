@@ -9,7 +9,6 @@ use orion::operators::tensor::{Tensor, TensorTrait, U32Tensor};
 use core::array::{ArrayTrait, SpanTrait};
 use core::option::OptionTrait;
 use orion::operators::matrix::{MutMatrixTrait, MutMatrix, MutMatrixImpl};
-use core::option::OptionTrait;
 use orion::operators::sequence::SequenceTrait;
 
 
