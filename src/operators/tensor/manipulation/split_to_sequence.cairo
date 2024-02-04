@@ -14,10 +14,6 @@ use orion::operators::sequence::SequenceTrait;
 
 
 
-// use orion::operators::tensor::{
-     FP16x16Tensor, U32TensorAdd, FP16x16TensorSub, FP16x16TensorAdd,
-    FP16x16TensorDiv, FP16x16TensorMul
-};
 
 
 
