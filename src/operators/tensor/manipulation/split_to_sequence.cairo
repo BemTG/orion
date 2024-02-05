@@ -115,7 +115,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
             pos += spl; 
             sli.set(axis, 1, pos);
             
-            let end_ele_0 = match sli.get(1,0) {
+            let end_ele_0 = match sli.get(axis,0) {
                         Option::Some(res) => {
                             res
                         },
@@ -124,7 +124,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
                             0
                         },
             };
-            let end_ele_1 = match sli.get(1, 1) {
+            let end_ele_1 = match sli.get(axis, 1) {
                         Option::Some(res) => {
                             res
                         },
