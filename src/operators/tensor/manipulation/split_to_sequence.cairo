@@ -108,6 +108,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
 
     loop {
     let mut i: usize = 0;
+    let mut ele:u32 = 1;
     match split_length.pop_front() {
     Option::Some(item) => { 
             let mut spl: usize = item;
@@ -115,9 +116,11 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
             pos += spl; 
             sli.set(axis, 1, pos);
 
-            if rank > 1 {
-            
-            let last_ele_0 = match sli.get(1,0) {
+            if rank < 2{
+            ele = axis
+            }
+
+             let last_ele_0 = match sli.get(ele,0) {
                         Option::Some(res) => {
                             res
                         },
@@ -126,7 +129,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
                             0
                         },
             };
-            let last_ele_1 = match sli.get(1, 1) {
+            let last_ele_1 = match sli.get(ele, 1) {
                         Option::Some(res) => {
                             res
                         },
@@ -134,32 +137,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
                             assert(false, 'Failed to retrieve last_ele_1 value.');
                             0
                         },
-            };}
-            if rank < 2{
-
-            let last_ele_0 = match sli.get(axis,0) {
-                            Option::Some(res) => {
-                                res
-                            },
-                            Option::None(_) => {
-                                assert(false, 'Failed to retrieve last_ele_0 value.');
-                                0
-                            },
-                };
-            let last_ele_1 = match sli.get(axis, 1) {
-                            Option::Some(res) => {
-                                res
-                            },
-                            Option::None(_) => {
-                                assert(false, 'Failed to retrieve last_ele_1 value.');
-                                0
-                            },
-                };
-
-            }
-
-                
-
+            };
 
     
             let starts: Span<usize> = array![sli.get(0,0).unwrap(),last_ele_0].span();
