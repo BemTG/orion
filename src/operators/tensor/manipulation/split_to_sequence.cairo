@@ -108,7 +108,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
 
     loop {
     let mut i: usize = 0;
-    let mut ele:u32 = 1;
+    let mut ele:usize = 1;
     match split_length.pop_front() {
     Option::Some(item) => { 
             let mut spl: usize = item;
