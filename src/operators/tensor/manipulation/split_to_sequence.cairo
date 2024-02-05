@@ -125,7 +125,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
                             res
                         },
                         Option::None(_) => {
-                            assert(false, 'Failed to retrieve last_ele_0 value.');
+                            assert(false, 'Failed to fetch last_ele_0.');
                             0
                         },
             };
@@ -134,7 +134,7 @@ self: @Tensor<T>, split: Option<Tensor<usize>>, axis:usize, keepdims:Option<bool
                             res
                         },
                         Option::None(_) => {
-                            assert(false, 'Failed to retrieve last_ele_1 value.');
+                            assert(false, 'Failed to fetch last_ele_1.');
                             0
                         },
             };
