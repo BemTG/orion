@@ -345,12 +345,13 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
 
         let broadcasted_dim = u32_max(dim1, dim2);
         result.append(broadcasted_dim);
-        (result.len()).print();
-        (*result.at(0)).print();
+        
       
         
         
     };
+    (result.len()).print();
+    (*result.at(0)).print();
 
     return result.span();
 }
