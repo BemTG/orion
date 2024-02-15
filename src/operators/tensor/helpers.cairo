@@ -253,33 +253,47 @@ fn find_axis(mut axes: Span<usize>, target_axis: usize) -> usize {
 /// # Returns
 /// * A Span of usize representing the broadcasted shape.
 fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usize> {
-    check_compatibility(shape1, shape2);
-    let mut result: Array<usize> = ArrayTrait::new();
 
-    loop {
-        let mut dim1 = 1;
-        let mut dim2 = 1;
+    if shape1.len() != shape2.len() {
 
-        match shape1.pop_front() {
-            Option::Some(item) => { dim1 = *item; },
-            Option::None => { if shape1.len() == 0 && shape2.len() == 0 {
-                break ();
-            }; }
-        };
+        let max_shape = u32_max(shape1.len(), shape2.len());
+        let mut expanded_min_shape: Array<usize> = ArrayTrait::new();
+        let shape_diff = max_shape.len() - min_shape.len();
 
-        match shape2.pop_front() {
-            Option::Some(item) => { dim2 = *item; },
-            Option::None => { if shape1.len() == 0 && shape2.len() == 0 {
-                break ();
-            }; }
-        };
+        let mut i: usize = 0;
+            loop {
+                if i >= shape_diff {
+                    break;
+                }
+                expanded_min_shape.append(1);
+                i += 1;
+            };
 
-        let broadcasted_dim = u32_max(dim1, dim2);
-        result.append(broadcasted_dim);
-    };
+        if shape1.len() != max_shape{
 
-    return result.span();
-}
+            let mut i: usize = 0;
+            loop {
+                if i >= shape1.len() {
+                    break;
+                }
+                expanded_min_shape.append(shape1.at(i));
+                i += 1;
+            };
+            shape1 = expanded_min_shape.span();
+        }
+        else{
+            let mut i: usize = 0;
+            loop {
+                if i >= shape2.len() {
+                    break;
+                }
+                expanded_min_shape.append(shape2.at(i));
+                i += 1;
+            };
+            shape2 = expanded_min_shape.span();
+        }
+
+    }
 
 
 /// Substitute a value in a shape at a given index
