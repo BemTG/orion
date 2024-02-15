@@ -224,7 +224,7 @@ fn mul<
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = ArrayTrait::new();
 
-    self.len().print();
+    *(*self.shape.len()).print();;
 
     'next func'.print();
     'broadcast_shape'.print();
