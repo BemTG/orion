@@ -227,6 +227,8 @@ fn mul<
     'next func'.print();
     'broadcast_shape'.print();
     (broadcasted_shape.len()).print();
+    (broadcasted_shape.at(0)).print();
+    (broadcasted_shape.at(1)).print();
     
 
     let num_elements = len_from_shape(broadcasted_shape);
