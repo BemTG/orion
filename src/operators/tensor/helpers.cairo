@@ -352,6 +352,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
     };
     (result.len()).print();
     (*result.at(0)).print();
+    (*result.at(1)).print();
 
     return result.span();
 }
