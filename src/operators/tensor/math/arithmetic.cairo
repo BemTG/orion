@@ -227,8 +227,8 @@ fn mul<
     'next func'.print();
     'broadcast_shape'.print();
     (broadcasted_shape.len()).print();
-    (broadcasted_shape.at(0)).print();
-    (broadcasted_shape.at(1)).print();
+    (*broadcasted_shape.at(0)).print();
+    (*broadcasted_shape.at(1)).print();
     
 
     let num_elements = len_from_shape(broadcasted_shape);
@@ -240,6 +240,8 @@ fn mul<
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
         'indices broad'.print();
         indices_broadcasted.len().print();
+    (*indices_broadcasted.at(0)).print();
+    (*indices_broadcasted.at(1)).print();
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
