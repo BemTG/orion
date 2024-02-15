@@ -229,6 +229,13 @@ fn mul<
     (broadcasted_shape.len()).print();
     (*broadcasted_shape.at(0)).print();
     (*broadcasted_shape.at(1)).print();
+
+    if self.shape.len() < broadcasted_shape.len()  {
+        self.reshape(broadcasted_shape)
+        }
+    if other.shape.len() < broadcasted_shape.len()  {
+        other.reshape(broadcasted_shape)
+        }
     
 
     let num_elements = len_from_shape(broadcasted_shape);
@@ -243,12 +250,6 @@ fn mul<
     (*indices_broadcasted.at(0)).print();
     (*indices_broadcasted.at(1)).print();
 
-        if *self.shape.len() < broadcasted_shape.len()  {
-        self.reshape(broadcasted_shape.span())
-        }
-        if *other.shape.len() < broadcasted_shape.len()  {
-        other.reshape(broadcasted_shape.span())
-        }
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
