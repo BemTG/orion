@@ -253,12 +253,13 @@ fn find_axis(mut axes: Span<usize>, target_axis: usize) -> usize {
 /// # Returns
 /// * A Span of usize representing the broadcasted shape.
 fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usize> {
-
+    
     if shape1.len() != shape2.len() {
-
         let max_shape = u32_max(shape1.len(), shape2.len());
+        let min_shape = u32_min(shape1.len(), shape2.len());
         let mut expanded_min_shape: Array<usize> = ArrayTrait::new();
-        let shape_diff = max_shape.len() - min_shape.len();
+
+        let shape_diff = max_shape - min_shape;
 
         let mut i: usize = 0;
             loop {
@@ -276,7 +277,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
                 if i >= shape1.len() {
                     break;
                 }
-                expanded_min_shape.append(shape1.at(i));
+                expanded_min_shape.append(*shape1.at(i));
                 i += 1;
             };
             shape1 = expanded_min_shape.span();
@@ -287,13 +288,41 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
                 if i >= shape2.len() {
                     break;
                 }
-                expanded_min_shape.append(shape2.at(i));
+                expanded_min_shape.append(*shape2.at(i));
                 i += 1;
             };
             shape2 = expanded_min_shape.span();
         }
 
     }
+
+    check_compatibility(shape1, shape2);
+    let mut result: Array<usize> = ArrayTrait::new();
+
+    loop {
+        let mut dim1 = 1;
+        let mut dim2 = 1;
+
+        match shape1.pop_front() {
+            Option::Some(item) => { dim1 = *item; },
+            Option::None => { if shape1.len() == 0 && shape2.len() == 0 {
+                break ();
+            }; }
+        };
+
+        match shape2.pop_front() {
+            Option::Some(item) => { dim2 = *item; },
+            Option::None => { if shape1.len() == 0 && shape2.len() == 0 {
+                break ();
+            }; }
+        };
+
+        let broadcasted_dim = u32_max(dim1, dim2);
+        result.append(broadcasted_dim);
+    };
+
+    return result.span();
+}
 
 
 /// Substitute a value in a shape at a given index
