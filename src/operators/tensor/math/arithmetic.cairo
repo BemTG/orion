@@ -222,11 +222,20 @@ fn mul<
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = ArrayTrait::new();
 
+    'next func'.print();
+    'broadcast_shape'.print();
+    broadcasted_shape.shape.len().print();
+    
+
     let num_elements = len_from_shape(broadcasted_shape);
+    'len elements'.print();
+    num_elements.print();
 
     let mut n: usize = 0;
     loop {
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
+        'indices broad'.print();
+        indices_broadcasted.len().print();
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
