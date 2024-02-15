@@ -5,6 +5,7 @@ use core::option::OptionTrait;
 use alexandria_data_structures::array_ext::ArrayTraitExt;
 
 use orion::utils::u32_max;
+use orion::utils::u32_min;
 use orion::operators::tensor::{core::{Tensor, TensorTrait, stride}, BoolTensor};
 
 /// Calculates the number of elements in a tensor given its shape.
