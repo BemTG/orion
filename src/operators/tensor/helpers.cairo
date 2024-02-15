@@ -315,8 +315,14 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
     'final check'.print();
     shape1.len().print();
     shape2.len().print();
+    'the actual shape'.print();
+    (*shape1.data.at(0)).print();
+    (*shape1.data.at(1)).print();
+    (*shape2.data.at(0)).print();
+    (*shape2.data.at(1)).print();
 
     check_compatibility(shape1, shape2);
+    'check point 1'.print();
     let mut result: Array<usize> = ArrayTrait::new();
 
     loop {
@@ -339,6 +345,11 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
 
         let broadcasted_dim = u32_max(dim1, dim2);
         result.append(broadcasted_dim);
+        (result.shape.len()).print();
+        (*result.data.at(0)).print();
+        (*result.data.at(1)).print();
+        
+        
     };
 
     return result.span();
