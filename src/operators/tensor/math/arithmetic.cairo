@@ -233,7 +233,7 @@ fn mul<
     (*broadcasted_shape.at(1)).print();
 
     //  if (*self.shape).len() < broadcasted_shape.len()  {
-        self.reshape(broadcasted_shape)
+        self.reshape(broadcasted_shape);
         // }
      // if (*other.shape).len() < broadcasted_shape.len()  {
         //  other.reshape(broadcasted_shape)
