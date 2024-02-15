@@ -256,11 +256,17 @@ fn find_axis(mut axes: Span<usize>, target_axis: usize) -> usize {
 fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usize> {
     
     if shape1.len() != shape2.len() {
+
+        'original_shape1 2'.print();
+        shape1.len().print();
+        shape2.len().print();
         let max_shape = u32_max(shape1.len(), shape2.len());
         let min_shape = u32_min(shape1.len(), shape2.len());
         let mut expanded_min_shape: Array<usize> = ArrayTrait::new();
 
         let shape_diff = max_shape - min_shape;
+        'the shape diff'.print();
+        shape_diff.print();
 
         let mut i: usize = 0;
             loop {
@@ -270,6 +276,8 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
                 expanded_min_shape.append(1);
                 i += 1;
             };
+
+        expanded_min_shape.len().print();
 
         if shape1.len() != max_shape{
 
@@ -282,6 +290,9 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
                 i += 1;
             };
             shape1 = expanded_min_shape.span();
+            'new_shape2'.print();
+            shape1.len().print();
+    
         }
         else{
             let mut i: usize = 0;
@@ -293,9 +304,15 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
                 i += 1;
             };
             shape2 = expanded_min_shape.span();
+            'new_shape2'.print();
+            shape2.len().print();
         }
 
     }
+
+    'final check'.print();
+    shape1.len().print();
+    shape2.len().print();
 
     check_compatibility(shape1, shape2);
     let mut result: Array<usize> = ArrayTrait::new();
