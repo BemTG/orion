@@ -2,6 +2,8 @@ use core::option::OptionTrait;
 use core::traits::TryInto;
 use core::array::ArrayTrait;
 use core::array::SpanTrait;
+use core::debug::PrintTrait;
+
 
 use orion::operators::tensor::helpers::broadcast_shape;
 
@@ -224,7 +226,7 @@ fn mul<
 
     'next func'.print();
     'broadcast_shape'.print();
-    broadcasted_shape.shape.len().print();
+    (broadcasted_shape.len()).print();
     
 
     let num_elements = len_from_shape(broadcasted_shape);
