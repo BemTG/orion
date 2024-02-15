@@ -243,11 +243,11 @@ fn mul<
     (*indices_broadcasted.at(0)).print();
     (*indices_broadcasted.at(1)).print();
 
-        if self.shape.len() < indices_broadcasted.len()  {
-        *self.shape = broadcasted_shape;
+        if *self.shape.len() < broadcasted_shape.len()  {
+        *self.reshape(broadcasted_shape.span())
         }
-        if other.shape.len() < indices_broadcasted.len()  {
-        *other.shape = broadcasted_shape;
+        if *other.shape.len() < broadcasted_shape.len()  {
+        *other.reshape(broadcasted_shape.span())
         }
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
