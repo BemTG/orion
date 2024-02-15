@@ -2,6 +2,8 @@ use core::array::ArrayTrait;
 use core::array::SpanTrait;
 use core::option::OptionTrait;
 
+use core::debug::PrintTrait;
+
 use alexandria_data_structures::array_ext::ArrayTraitExt;
 
 use orion::utils::u32_max;
