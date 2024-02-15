@@ -232,12 +232,13 @@ fn mul<
     (*broadcasted_shape.at(0)).print();
     (*broadcasted_shape.at(1)).print();
 
-     if (*self.shape).len() < broadcasted_shape.len()  {
+    //  if (*self.shape).len() < broadcasted_shape.len()  {
         self.reshape(broadcasted_shape)
-        }
-     if (*other.shape).len() < broadcasted_shape.len()  {
-         other.reshape(broadcasted_shape)
-         }
+        // }
+     // if (*other.shape).len() < broadcasted_shape.len()  {
+        //  other.reshape(broadcasted_shape)
+         // }
+        'pass'.print();
     
 
     let num_elements = len_from_shape(broadcasted_shape);
