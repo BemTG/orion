@@ -399,7 +399,7 @@ fn expand_leading_dims(
                 expanded_min_shape.append(*shape1.at(i));
                 i += 1;
             };
-            final_shape = expanded_min_shape.span();
+            final_shape = expanded_min_shape;
             'new_shape2'.print();
             shape1.len().print();
     
@@ -413,7 +413,7 @@ fn expand_leading_dims(
                 expanded_min_shape.append(*shape2.at(i));
                 i += 1;
             };
-            final_shape = expanded_min_shape.span();
+            final_shape = expanded_min_shape;
             'new_shape2'.print();
             shape2.len().print();
         }
