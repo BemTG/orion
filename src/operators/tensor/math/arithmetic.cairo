@@ -219,7 +219,7 @@ fn saturated_sub<
 fn mul<
     T, impl TTensor: TensorTrait<T>, impl TMul: Mul<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
 >(
-    mut self: @Tensor<T>, other: @Tensor<T>
+    ref self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
     'yh nex func'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
@@ -244,7 +244,7 @@ fn mul<
 
     // (*self).reshape(new_dim.span());
     // self = (self.reshape(array![1, 3].span()));
-    self = (*(*self).reshape(new_dim.span()));
+    self = (self.reshape(array![1, 3].span()));
     'the new tensor shape'.print();
     ((*self.shape).len()).print();
     (*(*self.shape).at(0)).print();
