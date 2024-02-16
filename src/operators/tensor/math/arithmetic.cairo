@@ -233,7 +233,8 @@ fn mul<
     (*broadcasted_shape.at(1)).print();
 
     //  if (*self.shape).len() < broadcasted_shape.len()  {
-        self.reshape(broadcasted_shape);
+        new_dim = expand_leading_dims(self.shape, other.shape)
+        self.reshape(new_dim);
         // }
      // if (*other.shape).len() < broadcasted_shape.len()  {
         //  other.reshape(broadcasted_shape)
