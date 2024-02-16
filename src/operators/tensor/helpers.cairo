@@ -357,6 +357,19 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
     return result.span();
 }
 
+fn expand_shapes(t1: Tensor, t2: Tensor) -> (Tensor, Tensor) {
+  // Determine which tensor has fewer dimensions
+  let (smaller, larger) = if t1.shape.len() < t2.shape.len() {
+    (t1, t2)
+  } else {
+    (t2, t1)
+  };
+
+  
+ 
+ return (smaller, larger);
+
+}
 
 fn expand_leading_dims(
     mut shape1: Span<usize>, mut shape2: Span<usize>
