@@ -7,9 +7,7 @@ use core::debug::PrintTrait;
 use orion::operators::tensor::implementations::tensor_u32::{
     U32TensorAdd, U32TensorSub, U32TensorMul, U32TensorDiv, U32TensorPartialEq,
 };
-use orion::operators::tensor::{
-    TensorTrait, Tensor, I8Tensor, I32Tensor, U32Tensor, FP16x16Tensor, BoolTensor
-};
+
 
 use orion::operators::tensor::helpers::broadcast_shape;
 
