@@ -243,7 +243,8 @@ fn mul<
     (*new_dim.at(1)).print();
 
     // (*self).reshape(new_dim.span());
-    self = (self.reshape(array![1, 3].span()));
+    // self = (self.reshape(array![1, 3].span()));
+    self = (*self).reshape(new_dim.span());
     'the new tensor shape'.print();
     ((*self.shape).len()).print();
     (*(*self.shape).at(0)).print();
