@@ -221,13 +221,14 @@ fn mul<
 >(
     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
+    'yh nex func'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = ArrayTrait::new();
 
-    (*other.shape).len().print();
+    ((*other.shape).len()).print();
     'the smaller shape'.print();
-    (*self.shape).len().print();
-    (*self.shape).at(0).print();
+    ((*self.shape).len()).print();
+    ((*self.shape).at(0)).print();
 
     'next func'.print();
     'broadcast_shape'.print();
@@ -235,22 +236,19 @@ fn mul<
     (*broadcasted_shape.at(0)).print();
     (*broadcasted_shape.at(1)).print();
 
-    //  if (*self.shape).len() < broadcasted_shape.len()  {
-        let mut new_dim = expand_leading_dims(*self.shape, *other.shape);
-        'the new dim'.print();
-        (new_dim.len()).print();
-        (*new_dim.at(0)).print();
-        (*new_dim.at(1)).print();
-        self.reshape(new_dim.span());
-        'the new tensor shape'.print();
-         (*self.shape).len().print();
-         (*self.shape).at(0).print();
-         (*self.shape).at(1).print();
-        // }
-     // if (*other.shape).len() < broadcasted_shape.len()  {
-        //  other.reshape(broadcasted_shape)
-         // }
-        'pass'.print();
+    let mut new_dim = expand_leading_dims(*self.shape, *other.shape);
+    'the new dim'.print();
+    (new_dim.len()).print();
+    (*new_dim.at(0)).print();
+    (*new_dim.at(1)).print();
+
+    self.reshape(new_dim.span());
+    'the new tensor shape'.print();
+    ((*self.shape).len()).print();
+    ((*self.shape).at(0)).print();
+    ((*self.shape).at(1)).print();
+       
+    'pass'.print();
     
 
     let num_elements = len_from_shape(broadcasted_shape);
@@ -262,8 +260,8 @@ fn mul<
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
         'indices broad'.print();
         indices_broadcasted.len().print();
-    (*indices_broadcasted.at(0)).print();
-    (*indices_broadcasted.at(1)).print();
+        (*indices_broadcasted.at(0)).print();
+        (*indices_broadcasted.at(1)).print();
 
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
