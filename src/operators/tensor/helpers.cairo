@@ -367,7 +367,7 @@ fn expand_leading_dims(
 
    if shape1.len() != shape2.len() {
 
-        'original_shape1 2'.print();
+        'original_shape_1_2'.print();
         shape1.len().print();
         shape2.len().print();
         let max_shape = u32_max(shape1.len(), shape2.len());
@@ -400,8 +400,8 @@ fn expand_leading_dims(
                 i += 1;
             };
             final_shape = expanded_min_shape;
-            'new_shape2'.print();
-            shape1.len().print();
+            'final_shape'.print();
+            final_shape.len().print();
     
         }
         else{
@@ -414,8 +414,8 @@ fn expand_leading_dims(
                 i += 1;
             };
             final_shape = expanded_min_shape;
-            'new_shape2'.print();
-            shape2.len().print();
+            'final_shape'.print();
+            final_shape.len().print();
         }
 
     }
