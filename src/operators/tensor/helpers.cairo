@@ -357,7 +357,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
     return result.span();
 }
 
-fn expand_shapes<T, +Copy<T>, +Drop<T>, +TensorTrait<T>,>(t1: @Tensor<T> , t2: @Tensor<T> ) -> Tensor<T> {
+fn expand_shapes<T, +Copy<T>, +Drop<T>, +TensorTrait<T>,>(t1: Tensor<T> , t2: Tensor<T> ) -> Tensor<T> {
   // Determine which tensor has fewer dimensions
  
  return t1;
