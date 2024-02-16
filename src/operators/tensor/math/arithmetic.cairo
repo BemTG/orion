@@ -227,62 +227,9 @@ fn mul<
 ) -> Tensor<T> {
     'yh nex func'.print();
     let self = TensorTrait::<u32>::new(shape: array![2,3].span(), data: array![0, 1, 2,3,4,5].span());
-    let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
-    let mut result = ArrayTrait::new();
-
-    ((*other.shape).len()).print();
-    'the smaller shape'.print();
-    ((*self.shape).len()).print();
-    (*(*self.shape).at(0)).print();
-
-    'next func'.print();
-    'broadcast_shape'.print();
-    (broadcasted_shape.len()).print();
-    (*broadcasted_shape.at(0)).print();
-    (*broadcasted_shape.at(1)).print();
-
-    let mut new_dim = expand_leading_dims(*self.shape, *other.shape);
-    'the new dim'.print();
-    (new_dim.len()).print();
-    (*new_dim.at(0)).print();
-    (*new_dim.at(1)).print();
-
-    // (*self).reshape(new_dim.span());
-    // self = (self.reshape(array![1, 3].span()));
-    self = (self.reshape(array![1, 3].span()));
-    'the new tensor shape'.print();
-    ((*self.shape).len()).print();
-    (*(*self.shape).at(0)).print();
-    // ((self.shape).at(1)).print();
-       
-    'pass'.print();
-    
-
-    let num_elements = len_from_shape(broadcasted_shape);
-    'len elements'.print();
-    num_elements.print();
-
-    let mut n: usize = 0;
-    loop {
-        let indices_broadcasted = unravel_index(n, broadcasted_shape);
-        'indices broad'.print();
-        indices_broadcasted.len().print();
-        (*indices_broadcasted.at(0)).print();
-        (*indices_broadcasted.at(1)).print();
 
 
-        let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
-        let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
-
-        result.append(*(*self.data)[indices_self] * *(*other.data)[indices_other]);
-
-        n += 1;
-        if n == num_elements {
-            break ();
-        };
-    };
-
-    return TensorTrait::<T>::new(broadcasted_shape, result.span());
+    return self;
 }
 
 fn mul_by_scalar<
