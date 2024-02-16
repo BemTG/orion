@@ -360,7 +360,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
 
 fn expand_leading_dims(
     mut shape1: Span<usize>, mut shape2: Span<usize>
-) ->  Span<usize> {
+) ->  Array<usize> {
 
     let mut final_shape: Array<usize> = ArrayTrait::new();
 
