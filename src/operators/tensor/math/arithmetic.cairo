@@ -12,7 +12,7 @@ use orion::operators::tensor::implementations::tensor_u32::{
 use orion::operators::tensor::helpers::broadcast_shape;
 use orion::numbers::NumberTrait;
 use orion::operators::tensor::core::{Tensor, TensorTrait, unravel_index,};
-use orion::operators::tensor::helpers::{broadcast_index_mapping, len_from_shape, expand_leading_dims };
+use orion::operators::tensor::helpers::{broadcast_index_mapping, len_from_shape, expand_leading_dims, expand_shapes };
 use orion::utils::saturate;
 
 fn add<
@@ -224,7 +224,7 @@ fn mul<
 >(
      self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
-    let (self, other) = expand_shapes(self, other);
+    let self = expand_shapes(self, other);
     'yh nex func'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = ArrayTrait::new();
