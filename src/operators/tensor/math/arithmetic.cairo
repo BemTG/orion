@@ -4,6 +4,12 @@ use core::array::ArrayTrait;
 use core::array::SpanTrait;
 use core::debug::PrintTrait;
 
+use orion::operators::tensor::implementations::tensor_u32::{
+    U32TensorAdd, U32TensorSub, U32TensorMul, U32TensorDiv, U32TensorPartialEq,
+};
+use orion::operators::tensor::{
+    TensorTrait, Tensor, I8Tensor, I32Tensor, U32Tensor, FP16x16Tensor, BoolTensor
+};
 
 use orion::operators::tensor::helpers::broadcast_shape;
 
@@ -219,9 +225,10 @@ fn saturated_sub<
 fn mul<
     T, impl TTensor: TensorTrait<T>, impl TMul: Mul<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
 >(
-    ref self: @Tensor<T>, other: @Tensor<T>
+     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
     'yh nex func'.print();
+    let self = TensorTrait::<u32>::new(shape: array![2,3].span(), data: array![0, 1, 2,3,4,5].span());
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = ArrayTrait::new();
 
