@@ -239,14 +239,14 @@ fn mul<
     let mut new_dim = expand_leading_dims(*self.shape, *other.shape);
     'the new dim'.print();
     (new_dim.len()).print();
-    (*new_dim.at(0)).print();
-    (*new_dim.at(1)).print();
+    // (*new_dim.at(0)).print();
+    // (*new_dim.at(1)).print();
 
     self.reshape(new_dim.span());
     'the new tensor shape'.print();
-    ((*self.shape).len()).print();
-    ((self.shape).at(0)).print();
-    ((self.shape).at(1)).print();
+    ((self.shape).len()).print();
+    //((self.shape).at(0)).print();
+    // ((self.shape).at(1)).print();
        
     'pass'.print();
     
