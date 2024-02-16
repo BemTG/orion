@@ -227,8 +227,8 @@ fn mul<
 
     ((*other.shape).len()).print();
     'the smaller shape'.print();
-    ((self.shape).len()).print();
-    ((self.shape).at(0)).print();
+    ((*self.shape).len()).print();
+    //((*self.shape).at(0)).print();
 
     'next func'.print();
     'broadcast_shape'.print();
@@ -244,7 +244,7 @@ fn mul<
 
     self.reshape(new_dim.span());
     'the new tensor shape'.print();
-    ((self.shape).len()).print();
+    ((*self.shape).len()).print();
     //((self.shape).at(0)).print();
     // ((self.shape).at(1)).print();
        
