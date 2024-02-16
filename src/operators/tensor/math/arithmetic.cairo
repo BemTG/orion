@@ -224,7 +224,7 @@ fn mul<
     T, impl TTensor: TensorTrait<T>, impl TMul: Mul<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
 >(
      self: @Tensor<T>, other: @Tensor<T>
-) -> Tensor<T> {
+) -> Tensor<u32> {
     'yh nex func'.print();
     let self = TensorTrait::<u32>::new(shape: array![2,3].span(), data: array![0, 1, 2,3,4,5].span());
 
