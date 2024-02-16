@@ -9,7 +9,7 @@ use orion::operators::tensor::helpers::broadcast_shape;
 
 use orion::numbers::NumberTrait;
 use orion::operators::tensor::core::{Tensor, TensorTrait, unravel_index,};
-use orion::operators::tensor::helpers::{broadcast_index_mapping, len_from_shape,};
+use orion::operators::tensor::helpers::{broadcast_index_mapping, len_from_shape, expand_leading_dims };
 use orion::utils::saturate;
 
 fn add<
