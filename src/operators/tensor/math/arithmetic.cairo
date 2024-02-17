@@ -227,7 +227,7 @@ fn mul<
     let mut expand = expand_shapes(self, other);
     let mut vv  = expand.reshape(target_shape: array![1, 3].span());
 
-    self = vv;
+    self = *vv;
 
     
     'yh nex func'.print();
