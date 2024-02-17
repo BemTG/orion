@@ -222,7 +222,7 @@ fn saturated_sub<
 fn mul<
     T, impl TTensor: TensorTrait<T>, impl TMul: Mul<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
 >(
-     self: @Tensor<T>, other: @Tensor<T>
+    mut self: @Tensor<T>, mut other: @Tensor<T>
 ) -> Tensor<T> {
     let mut expand = expand_shapes(ref self, ref other);
     let mut vv  = expand.reshape(target_shape: array![1, 3].span());
