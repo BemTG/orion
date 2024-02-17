@@ -224,7 +224,7 @@ fn mul<
 >(
      self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
-    let self = expand_shapes(*self, *other);
+    let self = expand_shapes(self, other);
     'yh nex func'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = ArrayTrait::new();
