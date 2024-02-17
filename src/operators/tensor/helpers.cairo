@@ -360,7 +360,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
 fn expand_shapes<T, +Copy<T>, +Drop<T>, +TensorTrait<T>,>( ref t1: @Tensor<T> , ref t2: @Tensor<T> ) -> Tensor<T> {
   // Determine which tensor has fewer dimensions
  
- return t1;
+ return *t1;
 
 }
 
