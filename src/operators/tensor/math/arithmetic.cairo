@@ -225,7 +225,7 @@ fn mul<
      self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
     let mut self = expand_shapes(self, other);
-    self  = (*self).reshape(target_shape: array![1, 3].span());
+    self  = (*(*self.reshape(target_shape: array![1, 3].span())));
     
     'yh nex func'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
