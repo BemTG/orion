@@ -227,6 +227,8 @@ fn mul<
     let mut expand = expand_shapes(self, other);
     let mut vv  = expand.reshape(target_shape: array![1, 3].span());
 
+    self = vv;
+
     
     'yh nex func'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
