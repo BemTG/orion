@@ -225,7 +225,7 @@ fn mul<
      self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
     let mut expand = expand_shapes(self, other);
-    let mut vv  = *expand.reshape(target_shape: array![1, 3].span());
+    let mut vv  = expand.reshape(target_shape: array![1, 3].span());
 
     
     'yh nex func'.print();
