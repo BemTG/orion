@@ -471,6 +471,16 @@ impl FP8x23WTensor of TensorTrait<FP8x23W> {
         math::layer_normalization::layer_normalization(self, scale, B, axis, epsilon, stash_type)
     }
 
+    fn groupnormalization(
+        self: @Tensor<FP8x23W>,
+        num_groups: usize,
+        scale: @Tensor<FP8x23W>,
+        bias: @Tensor<FP8x23W>,
+        epsilon: Option<FP8x23W>,
+    ) -> Tensor<FP8x23W> {
+        math::groupnormalization::groupnormalization(self, num_groups, scale, bias, epsilon)
+    }
+
     fn resize(
         self: @Tensor<FP8x23W>,
         roi: Option<Tensor<FP8x23W>>,

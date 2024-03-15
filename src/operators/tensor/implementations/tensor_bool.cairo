@@ -459,6 +459,17 @@ impl BoolTensor of TensorTrait<bool> {
         panic(array!['not supported!'])
     }
 
+    fn groupnormalization(
+        self: @Tensor<bool>,
+        num_groups: usize,
+        scale: @Tensor<bool>,
+        bias: @Tensor<bool>,
+        epsilon: Option<bool>,
+    ) -> Tensor<bool> {
+        panic(array!['not supported!'])
+    }
+
+
     fn resize(
         self: @Tensor<bool>,
         roi: Option<Tensor<bool>>,

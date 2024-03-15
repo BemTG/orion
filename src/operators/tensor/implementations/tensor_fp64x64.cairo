@@ -516,6 +516,16 @@ impl FP64x64Tensor of TensorTrait<FP64x64> {
         math::layer_normalization::layer_normalization(self, scale, B, axis, epsilon, stash_type)
     }
 
+    fn groupnormalization(
+        self: @Tensor<FP64x64>,
+        num_groups: usize,
+        scale: @Tensor<FP64x64>,
+        bias: @Tensor<FP64x64>,
+        epsilon: Option<FP64x64>,
+    ) -> Tensor<FP64x64> {
+        math::groupnormalization::groupnormalization(self, num_groups, scale, bias, epsilon)
+    }
+
     fn resize(
         self: @Tensor<FP64x64>,
         roi: Option<Tensor<FP64x64>>,
