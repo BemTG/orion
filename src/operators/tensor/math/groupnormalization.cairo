@@ -110,6 +110,7 @@ fn groupnormalization<T,
 
     if bool_tensor == true {
         // clip values to min_std_val to avoid possible division by zero errors
+        'some zero found'.print();
         let mut a: usize = 500;
         let mut min_std_val = NumberTrait::<T, MAG>::half() / NumberTrait::<T, MAG>::new_unscaled(a.into(), false); 
         std = std.clip(min: Option::Some((min_std_val)), max: Option::None(()), );
