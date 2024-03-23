@@ -5136,6 +5136,14 @@ trait TensorTrait<T> {
     /// ```
     ///
     fn compress(self: @Tensor<T>, condition: Tensor<usize>, axis: Option<usize>) -> Tensor<T>;
+    ///
+    /// the demo
+    fn instance_normalization(
+        self: @Tensor<T>,
+        scale: @Tensor<T>,
+        bias: @Tensor<T>,
+        epsilon: Option<T>,
+    ) -> Tensor<T> ;
     /// # tensor.layer_normalization
     ///
     /// ```rust 
