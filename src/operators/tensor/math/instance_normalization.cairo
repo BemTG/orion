@@ -36,7 +36,7 @@ fn instance_normalization<T,
     epsilon: Option<T>,) -> Tensor<T> {
 
 
-    let dim_x = (*x).shape.len();
+    let dim_x = (*self).shape.len();
     let zero = NumberTrait::zero() ;  
 
     let mut epsilon = match epsilon {
@@ -54,13 +54,13 @@ fn instance_normalization<T,
         i += 1;
     };
 
-    let mut mean = self.reduce_mean( axes: Option::Some(axes.span()),
+    let mut mean = self.reduce_mean( axes: Option::Some(axis.span()),
     keepdims: Option::Some((true)),
     noop_with_empty_axes: Option::None(()));
 
     let x_diff = x_reshaped - mean;
     let x_diff_squared = x_diff * x_diff;
-    let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axes.span()),keepdims: Option::Some((true)),noop_with_empty_axes: Option::None(()));
+    let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axis.span()),keepdims: Option::Some((true)),noop_with_empty_axes: Option::None(()));
 
 
     let mut dim_ones: Array<usize> = array![];
