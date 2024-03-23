@@ -58,7 +58,7 @@ fn instance_normalization<T,
     keepdims: Option::Some((true)),
     noop_with_empty_axes: Option::None(()));
 
-    let x_diff = self - mean;
+    let x_diff = self - *mean;
     let x_diff_squared = x_diff * x_diff;
     let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axis.span()),keepdims: Option::Some((true)),noop_with_empty_axes: Option::None(()));
 
@@ -126,12 +126,12 @@ fn instance_normalization<T,
         std = std.clip(min: Option::Some((min_std_val)), max: Option::None(()), );
     };
 
-    let mut x_normalized = x_diff / std;
+    let mut x_normalized = x_diff / *std;
 
     // expanding the the dims accordingly to complete arthmetic ops for tensors of different shapes
     let mut expanded_new_scale_shape: Array<usize> = array![];
-    if new_scale_shape.len() != x_normalized.shape.len() {
-        let shape_diff = x_normalized.shape.len() - new_scale_shape.len();
+    if new_scale_shape.len() != *x_normalized.shape.len() {
+        let shape_diff = *x_normalized.shape.len() - new_scale_shape.len();
         let mut i: usize = 0;
         loop {
             if i >= shape_diff {
@@ -158,5 +158,5 @@ fn instance_normalization<T,
         bias = bias.reshape(target_shape: expanded_new_bias_shape.span());
     }
 
-    return x_normalized * scale + bias;
+    return x_normalized * *scale + *bias;
 }
