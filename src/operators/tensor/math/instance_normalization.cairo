@@ -65,6 +65,10 @@ fn instance_normalization<T,
                                 keepdims: Option::Some((true)),
                                 noop_with_empty_axes: Option::None(()));
 
+    'the var'.print();
+    (*variance.data.at(0)).print();
+    (*variance.data.at(1)).print();
+
 
     let mut dim_ones: Array<usize> = array![];
     let mut i: usize = 0;
