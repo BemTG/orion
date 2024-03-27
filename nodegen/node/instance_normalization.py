@@ -3,7 +3,7 @@ from nodegen.node import RunAll
 from ..helpers import make_test, to_fp, Tensor, Dtype, FixedImpl
 
 
-def _instancenorm_test_mode(x, s, bias, epsilon=0):  # type: ignore
+def _instancenorm_test_mode(x, s, bias, epsilon=1e-5):  # type: ignore
     dims_x = len(x.shape)
     axis = tuple(range(2, dims_x))
     mean = np.mean(x, axis=axis, keepdims=True)
