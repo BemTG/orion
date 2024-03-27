@@ -55,13 +55,15 @@ fn instance_normalization<T,
         i += 1;
     };
 
-    let mut noop_with_empty_axes = Option::Some((true));
+    let mut noop_with_empty_axes = Option::Some((false));
+    let mut axis_input = Option::Some(axis.span());
 
     
 
     if axis.len() == 0 {
         
-        noop_with_empty_axes = Option::Some((false));
+        axis_input = Option::None(());
+        noop_with_empty_axes = Option::Some((true));
         'nooptrue'.print();
     }
 
@@ -71,7 +73,7 @@ fn instance_normalization<T,
     (axis.len()).print();
     'the axis'.print();
 
-    let mut mean = self.reduce_mean( axes: Option::Some(axis.span()),
+    let mut mean = self.reduce_mean( axes: axis_input, 
     keepdims: Option::Some((true)),
     noop_with_empty_axes: noop_with_empty_axes );
 
