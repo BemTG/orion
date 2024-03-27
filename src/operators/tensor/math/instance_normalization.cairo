@@ -46,14 +46,17 @@ fn instance_normalization<T,
     };
 
     let mut axis: Array<usize> = array![];
-    let mut i: usize = 2;
-    loop {
-        if (i >= dim_x) {
-            break;
-        }
-        axis.append(i);
-        i += 1;
-    };
+    axis.append(0);
+    // let mut i: usize = 2;
+    // loop {
+    //     if (i >= dim_x) {
+    //         break;
+    //     }
+    //     axis.append(i);
+    //     i += 1;
+    // };
+
+
 
     'axis len'.print();
     (axis.len()).print();
