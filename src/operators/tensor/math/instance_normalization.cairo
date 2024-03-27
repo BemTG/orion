@@ -59,6 +59,11 @@ fn instance_normalization<T,
     keepdims: Option::Some((true)),
     noop_with_empty_axes: Option::None(()));
 
+    'mean len'.print();
+    (*mean.data.len()).print();
+    'the mean'.print();
+    (*mean.data.at(0)).print();
+
     let x = (*self);
     let x_diff =  x - mean;
     let x_diff_squared = x_diff * x_diff;
@@ -66,9 +71,10 @@ fn instance_normalization<T,
                                 keepdims: Option::Some((true)),
                                 noop_with_empty_axes: Option::None(()));
 
+    'var len'.print();
+    (*variance.data.len()).print();
     'the var'.print();
     (*variance.data.at(0)).print();
-    (*variance.data.at(1)).print();
 
 
     let mut dim_ones: Array<usize> = array![];
@@ -129,6 +135,7 @@ fn instance_normalization<T,
 
     if bool_tensor == true {
         // clip values to min_std_val to avoid possible division by zero errors
+        'zeros encounterd'.print();
         let mut a: usize = 500;
         let mut min_std_val = NumberTrait::<T, MAG>::half() / NumberTrait::<T, MAG>::new_unscaled(a.into(), false); 
         std = std.clip(min: Option::Some((min_std_val)), max: Option::None(()), );
