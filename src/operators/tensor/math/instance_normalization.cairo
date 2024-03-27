@@ -88,7 +88,7 @@ fn instance_normalization<T,
     let x = (*self);
     let x_diff =  x - mean;
     let x_diff_squared = x_diff * x_diff;
-    let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axis.span()),
+    let mut variance = x_diff_squared.reduce_mean(axes: axis_input,
                                 keepdims: Option::Some((true)),
                                 noop_with_empty_axes: noop_with_empty_axes);
 
