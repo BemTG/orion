@@ -58,49 +58,22 @@ fn instance_normalization<T,
     let mut noop_with_empty_axes = Option::Some((false));
     let mut axis_input = Option::Some(axis.span());
 
-    
-
     if axis.len() == 0 {
-        
         axis_input = Option::None(());
         noop_with_empty_axes = Option::Some((true));
-        'nooptrue'.print();
     }
-
-
-
-    'axis len'.print();
-    (axis.len()).print();
-    'the axis'.print();
 
     let mut mean = self.reduce_mean( axes: axis_input, 
     keepdims: Option::Some((true)),
     noop_with_empty_axes: noop_with_empty_axes );
 
-    'mean len'.print();
-    (mean.data.len()).print();
-    'the mean'.print();
-    (*mean.data.at(0)).print();
-    (*mean.data.at(1)).print();
-    (*mean.data.at(2)).print();
-    (*mean.data.at(3)).print();
 
-    let x = (*self);
-    let x_diff =  x - mean;
+   
+    let x_diff =  (*self) - mean;
     let x_diff_squared = x_diff * x_diff;
     let mut variance = x_diff_squared.reduce_mean(axes: axis_input,
                                 keepdims: Option::Some((true)),
                                 noop_with_empty_axes: noop_with_empty_axes);
-
-    'var len'.print();
-    (variance.data.len()).print();
-    'the var'.print();
-    (*variance.data.at(0)).print();
-    (*variance.data.at(1)).print();
-    (*variance.data.at(2)).print();
-    (*variance.data.at(3)).print();
-
-
 
     let mut dim_ones: Array<usize> = array![];
     let mut i: usize = 0;
