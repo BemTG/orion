@@ -60,7 +60,7 @@ fn instance_normalization<T,
 
     
 
-    if axis.at(0) == axis.len() {
+    if *axis.at(0) == axis.len() {
         
         noop_with_empty_axes = Option::Some((true));
         'nooptrue'.print();
