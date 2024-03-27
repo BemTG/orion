@@ -60,7 +60,7 @@ fn instance_normalization<T,
     noop_with_empty_axes: Option::None(()));
 
     'mean len'.print();
-    (*mean.data.len()).print();
+    (mean.data.len()).print();
     'the mean'.print();
     (*mean.data.at(0)).print();
 
@@ -72,7 +72,7 @@ fn instance_normalization<T,
                                 noop_with_empty_axes: Option::None(()));
 
     'var len'.print();
-    (*variance.data.len()).print();
+    (variance.data.len()).print();
     'the var'.print();
     (*variance.data.at(0)).print();
 
