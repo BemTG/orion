@@ -58,7 +58,9 @@ fn instance_normalization<T,
 
     let mut noop_with_empty_axes = Option::Some((false));
 
-    if axis.at(0) == zero {
+    
+
+    if axis.at(0) == axis.len() {
         
         noop_with_empty_axes = Option::Some((true));
         'nooptrue'.print();
