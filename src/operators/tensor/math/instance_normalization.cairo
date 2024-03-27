@@ -55,10 +55,12 @@ fn instance_normalization<T,
         i += 1;
     };
 
-    let mut noop_with_empty_axes = Option::Some(false);
+    let mut noop_with_empty_axes = Option::Some((false));
 
     if axis.len() == 0 {
-        noop_with_empty_axes = Option::Some(true);
+        
+        noop_with_empty_axes = Option::Some((true));
+        'nooptrue'.print();
     }
 
 
