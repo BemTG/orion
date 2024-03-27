@@ -46,7 +46,6 @@ fn instance_normalization<T,
     };
 
     let mut axis: Array<usize> = array![];
-    axis.append(0);
     let mut i: usize = 2;
     loop {
         if (i >= dim_x) {
