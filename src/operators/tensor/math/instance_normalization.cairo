@@ -70,6 +70,9 @@ fn instance_normalization<T,
     (mean.data.len()).print();
     'the mean'.print();
     (*mean.data.at(0)).print();
+    (*mean.data.at(1)).print();
+    (*mean.data.at(2)).print();
+    (*mean.data.at(3)).print();
 
     let x = (*self);
     let x_diff =  x - mean;
@@ -82,6 +85,10 @@ fn instance_normalization<T,
     (variance.data.len()).print();
     'the var'.print();
     (*variance.data.at(0)).print();
+    (*variance.data.at(1)).print();
+    (*variance.data.at(2)).print();
+    (*variance.data.at(3)).print();
+
 
 
     let mut dim_ones: Array<usize> = array![];
