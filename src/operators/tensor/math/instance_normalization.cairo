@@ -58,9 +58,12 @@ fn instance_normalization<T,
     keepdims: Option::Some((true)),
     noop_with_empty_axes: Option::None(()));
 
-    let x_diff =  (*self) - mean;
+    let x = (*self);
+    let x_diff =  x - mean;
     let x_diff_squared = x_diff * x_diff;
-    let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axis.span()),keepdims: Option::Some((true)),noop_with_empty_axes: Option::None(()));
+    let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axis.span()),
+                                keepdims: Option::Some((true)),
+                                noop_with_empty_axes: Option::None(()));
 
 
     let mut dim_ones: Array<usize> = array![];
@@ -89,8 +92,8 @@ fn instance_normalization<T,
  
     // bias and scale should have same shape
     let mut scale = scale.reshape(target_shape: new_scale_shape.span());
-    let new_bias_shape = new_scale_shape.clone(); 
-    let mut bias = bias.reshape(target_shape: new_bias_shape.span()); // since bias and scale have same shape
+    // let new_bias_shape = new_scale_shape.clone(); 
+    let mut bias = bias.reshape(target_shape: new_scale_shape.span()); // since bias and scale have same shape
 
 
     // adjust shape of epsilon tensor to match the shape of variance tensor
