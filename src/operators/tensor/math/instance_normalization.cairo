@@ -56,9 +56,9 @@ fn instance_normalization<T,
     };
 
     'axis len'.print();
-    (axis.data.len()).print();
+    (axis.len()).print();
     'the axis'.print();
-    (*axis.data.at(0)).print();
+    (*axis.at(0)).print();
 
     let mut mean = self.reduce_mean( axes: Option::Some(axis.span()),
     keepdims: Option::Some((true)),
