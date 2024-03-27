@@ -58,7 +58,7 @@ fn instance_normalization<T,
 
     let mut noop_with_empty_axes = Option::Some(false);
 
-    if axis.shape.len() == zero{
+    if axis.len() == zero{
         noop_with_empty_axes = Option::Some(true);
     }
 
@@ -70,7 +70,7 @@ fn instance_normalization<T,
 
     let mut mean = self.reduce_mean( axes: Option::Some(axis.span()),
     keepdims: Option::Some((true)),
-    noop_with_empty_axes: Option::None(()));
+    noop_with_empty_axes: noop_with_empty_axes );
 
     'mean len'.print();
     (mean.data.len()).print();
@@ -85,7 +85,7 @@ fn instance_normalization<T,
     let x_diff_squared = x_diff * x_diff;
     let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axis.span()),
                                 keepdims: Option::Some((true)),
-                                noop_with_empty_axes: Option::None(()));
+                                noop_with_empty_axes: noop_with_empty_axes);
 
     'var len'.print();
     (variance.data.len()).print();
