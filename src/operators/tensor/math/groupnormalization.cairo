@@ -77,10 +77,18 @@ fn groupnormalization<T,
         i += 1;
     };
 
-    let mut mean = x_reshaped.reduce_mean(axes: Option::Some(axes.span()),keepdims: Option::Some((true)),noop_with_empty_axes: Option::None(()));
+    let mut noop_with_empty_axes = Option::Some((false));
+    let mut axis_input = Option::Some(axes.span());
+
+    if axes.len() == 0 {
+        axis_input = Option::None(());
+        noop_with_empty_axes = Option::Some((true));
+    }
+
+    let mut mean = x_reshaped.reduce_mean(axes: axis_input ,keepdims: Option::Some((true)),noop_with_empty_axes: noop_with_empty_axes );
     let x_diff = x_reshaped - mean;
     let x_diff_squared = x_diff * x_diff;
-    let mut variance = x_diff_squared.reduce_mean(axes: Option::Some(axes.span()),keepdims: Option::Some((true)),noop_with_empty_axes: Option::None(()));
+    let mut variance = x_diff_squared.reduce_mean(axes: axis_input, keepdims: Option::Some((true)),noop_with_empty_axes: noop_with_empty_axes );
 
     // adjust shape of epsilon tensor to match the shape of variance tensor
     let mut epsilon = TensorTrait::new(shape: array![].span(), data: array![epsilon].span());

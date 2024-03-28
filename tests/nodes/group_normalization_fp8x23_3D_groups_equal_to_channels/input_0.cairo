@@ -10,17 +10,17 @@ fn input_0() -> Tensor<FP8x23> {
     shape.append(2);
 
     let mut data = ArrayTrait::new();
-    data.append(FP8x23 { mag: 9304191, sign: true });
-    data.append(FP8x23 { mag: 7854164, sign: false });
-    data.append(FP8x23 { mag: 9466705, sign: true });
-    data.append(FP8x23 { mag: 2422423, sign: false });
-    data.append(FP8x23 { mag: 124628, sign: true });
-    data.append(FP8x23 { mag: 5811350, sign: true });
-    data.append(FP8x23 { mag: 10531881, sign: true });
-    data.append(FP8x23 { mag: 4442804, sign: true });
-    data.append(FP8x23 { mag: 11993747, sign: true });
-    data.append(FP8x23 { mag: 6757016, sign: true });
-    data.append(FP8x23 { mag: 2867337, sign: false });
-    data.append(FP8x23 { mag: 13341804, sign: true });
+    data.append(FP8x23 { mag: 5626782, sign: false });
+    data.append(FP8x23 { mag: 10675713, sign: true });
+    data.append(FP8x23 { mag: 3412050, sign: true });
+    data.append(FP8x23 { mag: 6169912, sign: false });
+    data.append(FP8x23 { mag: 3999904, sign: false });
+    data.append(FP8x23 { mag: 4713845, sign: true });
+    data.append(FP8x23 { mag: 15047346, sign: false });
+    data.append(FP8x23 { mag: 5422235, sign: true });
+    data.append(FP8x23 { mag: 2148993, sign: true });
+    data.append(FP8x23 { mag: 5372099, sign: true });
+    data.append(FP8x23 { mag: 3125494, sign: true });
+    data.append(FP8x23 { mag: 8289249, sign: true });
     TensorTrait::new(shape.span(), data.span())
 }

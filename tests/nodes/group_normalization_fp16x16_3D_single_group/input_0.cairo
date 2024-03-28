@@ -10,17 +10,17 @@ fn input_0() -> Tensor<FP16x16> {
     shape.append(2);
 
     let mut data = ArrayTrait::new();
-    data.append(FP16x16 { mag: 58322, sign: false });
-    data.append(FP16x16 { mag: 93549, sign: false });
-    data.append(FP16x16 { mag: 103768, sign: true });
-    data.append(FP16x16 { mag: 94246, sign: false });
-    data.append(FP16x16 { mag: 35972, sign: false });
-    data.append(FP16x16 { mag: 65978, sign: false });
-    data.append(FP16x16 { mag: 131601, sign: true });
-    data.append(FP16x16 { mag: 58507, sign: true });
-    data.append(FP16x16 { mag: 108792, sign: false });
-    data.append(FP16x16 { mag: 108186, sign: true });
-    data.append(FP16x16 { mag: 69145, sign: true });
-    data.append(FP16x16 { mag: 45538, sign: false });
+    data.append(FP16x16 { mag: 14540, sign: false });
+    data.append(FP16x16 { mag: 77028, sign: false });
+    data.append(FP16x16 { mag: 116353, sign: true });
+    data.append(FP16x16 { mag: 56299, sign: true });
+    data.append(FP16x16 { mag: 86776, sign: false });
+    data.append(FP16x16 { mag: 55196, sign: false });
+    data.append(FP16x16 { mag: 7329, sign: false });
+    data.append(FP16x16 { mag: 96594, sign: true });
+    data.append(FP16x16 { mag: 10951, sign: true });
+    data.append(FP16x16 { mag: 72231, sign: true });
+    data.append(FP16x16 { mag: 87020, sign: true });
+    data.append(FP16x16 { mag: 168377, sign: false });
     TensorTrait::new(shape.span(), data.span())
 }
