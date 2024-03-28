@@ -1062,3 +1062,8 @@ mod instance_normalization_fp8x23_4D_epsilon;
 mod instance_normalization_fp8x23_3D;
 mod instance_normalization_fp8x23_3D_epsilon;
 mod instance_normalization_fp8x23_2D_epsilon;
+mod instance_normalization_fp16x16_4D_single_batch;
+mod instance_normalization_fp16x16_3D_single_batch;
+mod instance_normalization_fp16x16_2D_single_batch;
+mod instance_normalization_fp8x23_4D_single_batch;
+mod instance_normalization_fp8x23_3D_single_batch;

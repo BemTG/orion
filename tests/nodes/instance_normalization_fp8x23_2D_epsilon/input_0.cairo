@@ -5,15 +5,14 @@ use orion::numbers::{FixedTrait, FP8x23};
 
 fn input_0() -> Tensor<FP8x23> {
     let mut shape = ArrayTrait::<usize>::new();
-    shape.append(2);
-    shape.append(3);
+    shape.append(1);
+    shape.append(5);
 
     let mut data = ArrayTrait::new();
-    data.append(FP8x23 { mag: 694065, sign: true });
-    data.append(FP8x23 { mag: 9005771, sign: true });
-    data.append(FP8x23 { mag: 10431446, sign: false });
-    data.append(FP8x23 { mag: 2989875, sign: false });
-    data.append(FP8x23 { mag: 8096813, sign: false });
-    data.append(FP8x23 { mag: 951846, sign: true });
+    data.append(FP8x23 { mag: 2515591, sign: false });
+    data.append(FP8x23 { mag: 9580341, sign: true });
+    data.append(FP8x23 { mag: 810277, sign: false });
+    data.append(FP8x23 { mag: 10864025, sign: false });
+    data.append(FP8x23 { mag: 6870120, sign: true });
     TensorTrait::new(shape.span(), data.span())
 }

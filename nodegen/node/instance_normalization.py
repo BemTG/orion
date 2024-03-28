@@ -38,7 +38,7 @@ class Instance_normalization(RunAll):
             b = 2
             c = 3
             h = 4
-            w = 5
+            w = 4
             epsilon = 1e-1
             x = np.random.randn(b, c, h, w).astype(np.float32)
             scale = np.random.randn(c).astype(np.float32)
@@ -57,8 +57,8 @@ class Instance_normalization(RunAll):
         def instance_normalization_fp16x16_4D_single_batch(): 
             b = 1
             c = 3
-            h = 4
-            w = 6
+            h = 3
+            w = 5
             epsilon = 1e-1
             x = np.random.randn(b, c, h, w).astype(np.float32)
             scale = np.random.randn(c).astype(np.float32)
@@ -76,8 +76,8 @@ class Instance_normalization(RunAll):
 
         def instance_normalization_fp16x16_3D(): 
             b = 4
-            c = 2
-            n1 = 6
+            c = 3
+            n1 = 4
             x = np.random.randn(b, c, n1).astype(np.float32)
             scale = np.random.randn(c).astype(np.float32)
             bias = np.random.randn(c).astype(np.float32)
@@ -95,7 +95,7 @@ class Instance_normalization(RunAll):
         def instance_normalization_fp16x16_3D_epsilon(): 
             b = 2
             c = 5
-            n1 = 6
+            n1 = 4
             epsilon = 1e-1
             x = np.random.randn(b, c, n1,).astype(np.float32)
             scale = np.random.randn(c).astype(np.float32)
@@ -238,6 +238,28 @@ class Instance_normalization(RunAll):
             name = "instance_normalization_fp8x23_4D_epsilon"
             make_test([_x, _scale, _bias,], _y, f"input_0.instance_normalization( @input_1 , @input_2 , Option::Some( FixedTrait::new(838860, false)) )", name)
 
+
+
+        def instance_normalization_fp8x23_4D_single_batch(): 
+            b = 1
+            c = 3
+            h = 4
+            w = 5
+            epsilon =  1e-1
+            x = np.random.randn(b, c, h, w).astype(np.float32)
+            scale = np.random.randn(c).astype(np.float32)
+            bias = np.random.randn(c).astype(np.float32)
+            y = _instancenorm_test_mode(x, scale, bias, epsilon).astype(np.float32)
+            
+            _x = Tensor(Dtype.FP8x23, x.shape, to_fp(x.flatten(), FixedImpl.FP8x23))
+            _scale = Tensor(Dtype.FP8x23, scale.shape, to_fp(scale.flatten(), FixedImpl.FP8x23))
+            _bias =  Tensor(Dtype.FP8x23, bias.shape, to_fp(bias.flatten(), FixedImpl.FP8x23))
+            _y = Tensor(Dtype.FP8x23, y.shape, to_fp(y.flatten(), FixedImpl.FP8x23))
+            
+            name = "instance_normalization_fp8x23_4D_single_batch"
+            make_test([_x, _scale, _bias,], _y, f"input_0.instance_normalization( @input_1 , @input_2 , Option::Some( FixedTrait::new(838860, false)) )", name)
+
+        
    
         def instance_normalization_fp8x23_3D():
             b = 2
@@ -275,7 +297,23 @@ class Instance_normalization(RunAll):
             name = "instance_normalization_fp8x23_3D_epsilon"
             make_test([_x, _scale, _bias,], _y, f"input_0.instance_normalization( @input_1 , @input_2 , Option::Some( FixedTrait::new(838860, false)) )", name)
     
-    
+
+        def instance_normalization_fp8x23_3D_single_batch():
+            b = 1
+            c = 4
+            n1 = 5
+            x = np.random.randn( b, c, n1).astype(np.float32)
+            scale = np.random.randn(c).astype(np.float32)
+            bias = np.random.randn(c).astype(np.float32)
+            y = _instancenorm_test_mode(x, scale, bias).astype(np.float32)
+            
+            _x = Tensor(Dtype.FP8x23, x.shape, to_fp(x.flatten(), FixedImpl.FP8x23))
+            _scale = Tensor(Dtype.FP8x23, scale.shape, to_fp(scale.flatten(), FixedImpl.FP8x23))
+            _bias =  Tensor(Dtype.FP8x23, bias.shape, to_fp(bias.flatten(), FixedImpl.FP8x23))
+            _y = Tensor(Dtype.FP8x23, y.shape, to_fp(y.flatten(), FixedImpl.FP8x23))
+            
+            name = "instance_normalization_fp8x23_3D_single_batch"
+            make_test([_x, _scale, _bias,], _y, f"input_0.instance_normalization( @input_1 , @input_2 , Option::None(()))", name)
 
         def instance_normalization_fp8x23_2D():
             b = 5
@@ -311,7 +349,26 @@ class Instance_normalization(RunAll):
             name = "instance_normalization_fp8x23_2D_epsilon"
             make_test([_x, _scale, _bias,], _y, f"input_0.instance_normalization( @input_1 , @input_2 , Option::Some( FixedTrait::new(838860, false)) )", name)
     
-    
+
+
+        def instance_normalization_fp8x23_2D_single_batch():
+            b = 1
+            c = 5
+            epsilon = 1e-1
+            x = np.random.randn( b, c,).astype(np.float32)
+            scale = np.random.randn(c).astype(np.float32)
+            bias = np.random.randn(c).astype(np.float32)
+            y = _instancenorm_test_mode(x, scale, bias, epsilon).astype(np.float32)
+            
+            _x = Tensor(Dtype.FP8x23, x.shape, to_fp(x.flatten(), FixedImpl.FP8x23))
+            _scale = Tensor(Dtype.FP8x23, scale.shape, to_fp(scale.flatten(), FixedImpl.FP8x23))
+            _bias =  Tensor(Dtype.FP8x23, bias.shape, to_fp(bias.flatten(), FixedImpl.FP8x23))
+            _y = Tensor(Dtype.FP8x23, y.shape, to_fp(y.flatten(), FixedImpl.FP8x23))
+            
+            name = "instance_normalization_fp8x23_2D_epsilon"
+            make_test([_x, _scale, _bias,], _y, f"input_0.instance_normalization( @input_1 , @input_2 , Option::Some( FixedTrait::new(838860, false)) )", name)
+
+        
     
         instance_normalization_fp8x23_4D()    
         instance_normalization_fp8x23_4D_epsilon()
