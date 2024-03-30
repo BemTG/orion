@@ -119,19 +119,19 @@ fn instance_normalization<T,
     epsilon = epsilon.reshape(target_shape: epsilon_shape.span());
     let mut std = (variance + epsilon).sqrt();
 
-    let mut bool_tensor = false;
+    let mut zero_vals_in_tensor = false;
     let mut i: usize = 0;
     loop {
         if (i >= std.data.len()) {
             break;
         }
         if *std.data.at(i) == zero {
-            bool_tensor = true;
+            zero_vals_in_tensor = true;
         }
         i += 1;
     };
 
-    if bool_tensor == true {
+    if zero_vals_in_tensor == true {
         // clip values to min_std_val to avoid possible division by zero errors
         let mut a: usize = 500;
         let mut min_std_val = NumberTrait::<T, MAG>::half() / NumberTrait::<T, MAG>::new_unscaled(a.into(), false); 
