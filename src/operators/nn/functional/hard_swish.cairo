@@ -1,28 +1,6 @@
 use orion::numbers::fixed_point::core::FixedTrait;
-use orion::numbers::{NumberTrait, I32IntoU32, U32IntoI32};
+use orion::numbers::NumberTrait;
 use orion::operators::tensor::core::{Tensor, TensorTrait};
-
-use core::option::OptionTrait;
-use core::traits::TryInto;
-use orion::numbers::{FP16x16, FP16x16Impl, FP32x32, FP32x32Impl};
-use orion::operators::tensor::{
-    I8Tensor, I32Tensor, U32Tensor, FP16x16Tensor, BoolTensor
-};
-use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
-use orion::operators::tensor::helpers::{reduce_output_shape, len_from_shape, combine_indices};
-use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div_downcast};
-
-use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
-
-use orion::numbers::fixed_point::implementations::fp16x16::core::{
-    HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul,
-    FP16x16MulEq, FP16x16TryIntoU128, FP16x16PartialEq, FP16x16PartialOrd, FP16x16SubEq, FP16x16Neg,
-    FP16x16Div, FP16x16IntoFelt252,
-};
-
-// use orion::operators::tensor::core::Tensor;
-use orion::operators::nn::core::NNTrait;
-use orion::operators::nn::functional;
 
 fn hard_swish<
 T,
@@ -34,9 +12,8 @@ MAG,
 +Div<T>,
 +Copy<T>,
 +Drop<T>,
-impl TMul: Mul<T>,
-// impl TTensorAdd: Add<Tensor<T>>,
-impl TTensorMul: Mul<Tensor<T>>,
++Mul<T>,
++ Mul<Tensor<T>>,
 +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
@@ -60,10 +37,7 @@ impl TTensorMul: Mul<Tensor<T>>,
         };
     };
 
-
-     let result = x_cloned * x_cloned ;
-
-     return result;
+     return x_cloned * TensorTrait::new(x.shape, data_result.span());
 
 }
 
