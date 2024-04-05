@@ -24,7 +24,7 @@ fn hard_swish<
     +Drop<T>,
     impl TMul: Mul<T>,
     impl TTensorAdd: Add<Tensor<T>>,
-    impl TTensorMul: Mul<Tensor<T>>,
+    // impl TTensorMul: Mul<Tensor<T>>,
     +Into<usize, MAG>,
     >(
     mut x: Tensor<T>
@@ -48,7 +48,7 @@ fn hard_swish<
     };
 
 
-     let result = x_cloned ;
+     let result = x_cloned + x_cloned ;
 
      return result;
 
