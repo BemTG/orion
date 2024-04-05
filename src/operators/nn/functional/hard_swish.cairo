@@ -1,5 +1,5 @@
 use orion::numbers::fixed_point::core::FixedTrait;
-use orion::numbers::NumberTrait;
+use orion::numbers::{NumberTrait, I32IntoU32, U32IntoI32};
 use orion::operators::tensor::core::{Tensor, TensorTrait};
 
 fn hard_swish<
@@ -13,6 +13,7 @@ fn hard_swish<
     impl TDiv: Div<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
+    +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
 ) -> Tensor<T> {
