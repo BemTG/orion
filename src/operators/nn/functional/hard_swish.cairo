@@ -33,7 +33,8 @@ use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, 
 //     mut x: Tensor<T>
 // ) -> Tensor<T> // {
 
-fn hard_swish<T,  NumberTrait<T, MAG>, +TensorTrait<T>, +PartialOrd<T>,  +Add<T>,  +Div<T> , +Copy<T>, +Drop<T>, +Mul<T>, +Add<Tensor<T>>, +Mul<Tensor<T>>, +Into<usize, MAG>, MAG>(
+fn hard_swish<T, MAG, NumberTrait<T, MAG>, +TensorTrait<T>, +PartialOrd<T>,  
++Add<T>,  +Div<T> , +Copy<T>, +Drop<T>, +Mul<T>, +Add<Tensor<T>>, +Mul<Tensor<T>>, +Into<usize, MAG>,>(
     mut x: Tensor<T>
 ) -> Tensor<T> {
     let x_cloned = x.clone();
