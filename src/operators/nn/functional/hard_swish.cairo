@@ -47,7 +47,7 @@ fn hard_swish<
     };
 
 
-     let result = x_cloned ;
+     let result = x_cloned * x_cloned ;
 
      return result;
 
