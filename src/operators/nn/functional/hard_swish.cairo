@@ -13,7 +13,7 @@ fn hard_swish<
     impl TDiv: Div<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
-    // impl TTensorMul: Mul<Tensor<T>>,
+    impl TTensorMul: Mul<Tensor<T>>,
     +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
@@ -36,9 +36,8 @@ fn hard_swish<
         };
     };
 
-    let result  = (TensorTrait::new(x.shape, data_result.span()) + TensorTrait::new(x.shape, data_result.span())).into() ;
 
-    return result
+     (TensorTrait::new(x.shape, data_result.span()) * TensorTrait::new(x.shape, data_result.span())).into() ;
 
 }
 
