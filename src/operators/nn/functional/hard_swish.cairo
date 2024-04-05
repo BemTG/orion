@@ -12,6 +12,8 @@ use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
 use orion::operators::tensor::helpers::{reduce_output_shape, len_from_shape, combine_indices};
 use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div_downcast};
 
+use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
+
 fn hard_swish<
     T,
     MAG,
@@ -23,8 +25,8 @@ fn hard_swish<
     +Copy<T>,
     +Drop<T>,
     impl TMul: Mul<T>,
-    // impl TTensorAdd: Add<Tensor<T>>,
-    // impl TTensorMul: Mul<Tensor<T>>,
+    impl TTensorAdd: Add<Tensor<T>>,
+    impl TTensorMul: Mul<Tensor<T>>,
     +Into<usize, MAG>,
     >(
     mut x: Tensor<T>
@@ -48,7 +50,7 @@ fn hard_swish<
     };
 
 
-     let result = x_cloned + x_cloned ;
+     let result = x_cloned * x_cloned ;
 
      return result;
 
