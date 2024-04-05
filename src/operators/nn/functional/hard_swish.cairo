@@ -19,7 +19,6 @@ fn hard_swish<
     +TensorTrait<T>,
     +PartialOrd<T>,
     +Add<T>,
-    +Mul<T>,
     +Div<T>,
     +Copy<T>,
     +Drop<T>,
