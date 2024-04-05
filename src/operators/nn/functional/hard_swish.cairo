@@ -15,7 +15,7 @@ use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div
 use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
 
 use orion::numbers::fixed_point::implementations::fp16x16::core::{
-    HALF, ONE, MAX, FP16x16, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul,
+    HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul,
     FP16x16MulEq, FP16x16TryIntoU128, FP16x16PartialEq, FP16x16PartialOrd, FP16x16SubEq, FP16x16Neg,
     FP16x16Div, FP16x16IntoFelt252,
 };
@@ -23,7 +23,6 @@ use orion::numbers::fixed_point::implementations::fp16x16::core::{
 // use orion::operators::tensor::core::Tensor;
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
-core::traits::Mul;
 
 fn hard_swish<
 T,
@@ -62,7 +61,7 @@ impl TMul: Mul<T>,
     };
 
 
-     let result = x_cloned + x_cloned ;
+     let result = x_cloned * x_cloned ;
 
      return result;
 
