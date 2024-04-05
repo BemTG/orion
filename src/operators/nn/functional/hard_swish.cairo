@@ -17,6 +17,7 @@ fn hard_swish<
 >(
     mut x: Tensor<T>
 ) -> Tensor<T> {
+    let x_cloned = x.clone();
     let mut data_result: Array<T> = array![];
 
     let a:usize = 6;
