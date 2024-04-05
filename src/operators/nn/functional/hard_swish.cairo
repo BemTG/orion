@@ -16,7 +16,7 @@ fn hard_swish<
     impl TDiv: Div<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
-    impl TTensorMul: Mul<Tensor<T>>,
+    +Mul<Tensor<T>>,
     +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
