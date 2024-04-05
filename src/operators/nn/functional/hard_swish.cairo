@@ -47,7 +47,7 @@ fn hard_swish<
 
      let result = TensorTrait::new(x.shape, data_result.span()).into() * TensorTrait::new(x.shape, data_result.span()).into() ;
 
-     return result
+     return result;
 
 }
 
