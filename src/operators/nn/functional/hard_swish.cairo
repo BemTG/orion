@@ -23,6 +23,7 @@ use orion::numbers::fixed_point::implementations::fp16x16::core::{
 // use orion::operators::tensor::core::Tensor;
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
+core::traits::Mul;
 
 fn hard_swish<
 T,
