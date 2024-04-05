@@ -36,6 +36,7 @@ fn hard_swish<
         };
     };
 
-    TensorTrait::new(x.shape, data_result.span()) + TensorTrait::new(x.shape, data_result.span())
+    x_cloned.data * data_result     // TensorTrait::new(x.shape, data_result.span())
+
 }
 
