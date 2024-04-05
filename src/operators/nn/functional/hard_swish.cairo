@@ -13,17 +13,17 @@ use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
 fn hard_swish<
     T,
     MAG,
-    impl TNumber: NumberTrait<T, MAG>,
-    impl TTensor: TensorTrait<T>,
-    impl TPartialOrd: PartialOrd<T>,
-    impl TAdd: Add<T>,
-    impl TMul: Mul<T>,
-    impl TDiv: Div<T>,
-    impl TCopy: Copy<T>,
-    impl TDrop: Drop<T>,
+    +NumberTrait<T, MAG>,
+    +TensorTrait<T>,
+    +PartialOrd<T>,
+    +Add<T>,
+    +Mul<T>,
+    +Div<T>,
+    +Copy<T>,
+    +Drop<T>,
     +Mul<Tensor<T>>,
     +Into<usize, MAG>,
->(
+    >(
     mut x: Tensor<T>
 ) -> Tensor<T> {
     let x_cloned = x.clone();
