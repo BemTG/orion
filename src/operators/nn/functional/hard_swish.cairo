@@ -19,7 +19,7 @@ fn hard_swish<
     let mut data_result: Array<T> = array![];
 
     let a:usize = 6;
-    let alpha = NumberTrait::<T, MAG>::one() / NumberTrait::<T, MAG>::unscaled(a.into(), false);
+    let alpha = NumberTrait::<T, MAG>::one() / NumberTrait::<T, MAG>::new_unscaled(a.into(), false);
     let beta = NumberTrait::<T, MAG>::half();
 
     loop {
