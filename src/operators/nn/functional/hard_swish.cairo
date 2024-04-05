@@ -1,9 +1,14 @@
 use orion::numbers::fixed_point::core::FixedTrait;
 use orion::numbers::{NumberTrait, I32IntoU32, U32IntoI32};
 use orion::operators::tensor::core::{Tensor, TensorTrait};
-use orion::operators::tensor::implementations::tensor_fp16x16::{
-    FP16x16TensorAdd, FP16x16TensorSub, FP16x16TensorMul, FP16x16TensorDiv, FP16x16TensorPartialEq,
+
+use core::option::OptionTrait;
+use core::traits::TryInto;
+use orion::numbers::{FP16x16, FP16x16Impl, FP32x32, FP32x32Impl};
+use orion::operators::tensor::{
+    I8Tensor, I32Tensor, U32Tensor, FP16x16Tensor, BoolTensor
 };
+use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
 
 fn hard_swish<
     T,
