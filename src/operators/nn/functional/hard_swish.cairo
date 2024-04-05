@@ -34,9 +34,9 @@ MAG,
 +Div<T>,
 +Copy<T>,
 +Drop<T>,
-impl TMul: Mul<T>,
+// impl TMul: Mul<T>,
 // impl TTensorAdd: Add<Tensor<T>>,
-// impl TTensorMul: Mul<Tensor<T>>,
+impl TTensorMul: Mul<Tensor<T>>,
 +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
