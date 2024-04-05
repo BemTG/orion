@@ -24,7 +24,7 @@ fn hard_swish<
     loop {
         match x.data.pop_front() {
             Option::Some(item) => {
-                let temp = (*item) * (*alpha) + (*beta);
+                let temp = (*item) * alpha + beta;
                 let result = temp.min(NumberTrait::one()).max(NumberTrait::zero());
                 data_result.append(result);
             },
