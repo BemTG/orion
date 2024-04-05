@@ -57,7 +57,7 @@ impl TTensorMul: Mul<Tensor<T>>,
     };
 
 
-     let result = x_cloned * x_cloned ;
+     let result = (x_cloned * x_cloned).into() ;
 
      return result;
 
