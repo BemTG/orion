@@ -60,7 +60,7 @@ impl FP16x16NN of NNTrait<FP16x16> {
     }
 
     fn hard_swish(tensor: @Tensor<FP16x16>) -> Tensor<FP16x16> {
-        functional::hard_swish::hard_swish(tensor)
+        functional::hard_swish::hard_swish(*tensor)
     }
 
     fn depth_to_space(

@@ -572,7 +572,7 @@ trait NNTrait<T> {
     /// ```
     ///
     fn hard_sigmoid(tensor: @Tensor<T>, alpha: @T, beta: @T) -> Tensor<T>;
-/// # NNTrait::hard_sigmoid
+    /// # NNTrait::hard_sigmoid
     ///
     /// ```rust 
     ///    fn hard_sigmoid(tensor: @Tensor<T>, alpha: @T, beta: @T) -> Tensor<T>;
