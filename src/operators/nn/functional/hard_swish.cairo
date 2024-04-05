@@ -18,8 +18,8 @@ fn hard_swish<
 ) -> Tensor<T> {
     let mut data_result: Array<T> = array![];
 
-    let alpha = NumberTrait::one();
-    let beta = NumberTrait::one();
+    let alpha = NumberTrait::<T, MAG>::one();
+    let beta = NumberTrait::<T, MAG>::one();
 
     loop {
         match x.data.pop_front() {
