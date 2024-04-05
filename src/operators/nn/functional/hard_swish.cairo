@@ -14,42 +14,30 @@ use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div
 
 use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
 
-
-// fn hard_swish<
-// T,
-// MAG,
-// +NumberTrait<T, MAG>,
-// +TensorTrait<T>,
-// +PartialOrd<T>,
-// +Add<T>,
-// +Div<T>,
-// +Copy<T>,
-// +Drop<T>,
-// impl TMul: Mul<T>,
-// impl TTensorAdd: Add<Tensor<T>>,
-// impl TTensorMul: Mul<Tensor<T>>,
-// +Into<usize, MAG>,
-// >(
-//     mut x: Tensor<T>
-// ) -> Tensor<T> // {
+use orion::numbers::fixed_point::implementations::fp16x16::core::{
+    HALF, ONE, MAX, FP16x16, FP16x16Impl, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul,
+    FP16x16MulEq, FP16x16TryIntoU128, FP16x16PartialEq, FP16x16PartialOrd, FP16x16SubEq, FP16x16Neg,
+    FP16x16Div, FP16x16IntoFelt252, FixedTrait
+};
 
 fn hard_swish<
 T,
-MAG, 
-+NumberTrait<T, MAG>, 
-+TensorTrait<T>, 
-+PartialOrd<T>,  
-+Add<T>,  
-+Div<T>, 
-+Copy<T>, 
-+Drop<T>, 
-+Mul<T>, 
-+Add<Tensor<T>>, 
-+Mul<Tensor<T>>, 
+MAG,
++NumberTrait<T, MAG>,
++TensorTrait<T>,
++PartialOrd<T>,
++Add<T>,
++Div<T>,
++Copy<T>,
++Drop<T>,
+impl TMul: Mul<T>,
+impl TTensorAdd: Add<Tensor<T>>,
+impl TTensorMul: Mul<Tensor<T>>,
 +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
-) -> Tensor<T> {
+) -> Tensor<T>  {
+
     let x_cloned = x.clone();
     let mut data_result: Array<T> = array![];
 
