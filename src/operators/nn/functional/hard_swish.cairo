@@ -14,7 +14,7 @@ fn hard_swish<
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
 >(
-    mut x: Tensor<T>, alpha: @T, beta: @T
+    mut x: Tensor<T>
 ) -> Tensor<T> {
     let mut data_result: Array<T> = array![];
 
