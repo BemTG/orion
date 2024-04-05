@@ -24,6 +24,7 @@ fn hard_swish<
     +Drop<T>,
     impl TMul: Mul<T>,
     impl TTensorAdd: Add<Tensor<T>>,
+    impl TTensorMul: Mul<Tensor<T>>,
     +Into<usize, MAG>,
     >(
     mut x: Tensor<T>
