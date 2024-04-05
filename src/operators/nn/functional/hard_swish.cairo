@@ -36,8 +36,8 @@ MAG,
 +Copy<T>,
 +Drop<T>,
 impl TMul: Mul<T>,
-impl TTensorAdd: Add<Tensor<T>>,
-impl TTensorMul: Mul<Tensor<T>>,
+// impl TTensorAdd: Add<Tensor<T>>,
+// impl TTensorMul: Mul<Tensor<T>>,
 +Into<usize, MAG>,
 >(
     mut x: Tensor<T>
@@ -62,7 +62,7 @@ impl TTensorMul: Mul<Tensor<T>>,
     };
 
 
-     let result = (x_cloned * x_cloned).into() ;
+     let result = x_cloned + x_cloned ;
 
      return result;
 
