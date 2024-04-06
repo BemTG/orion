@@ -18,6 +18,7 @@ use orion::operators::tensor::core::Tensor;
 /// col2im - Rearranges column blocks back into a multidimensional image
 /// conv_transpose - Performs the convolution transpose of the input data tensor and weight tensor.
 /// conv - Performs the convolution of the input data tensor and weight tensor.
+/// hard_swish - Applies the Hard Swish function to an n-dimensional input tensor.
 trait NNTrait<T> {
     /// # NNTrait::relu
     ///
@@ -572,13 +573,13 @@ trait NNTrait<T> {
     /// ```
     ///
     fn hard_sigmoid(tensor: @Tensor<T>, alpha: @T, beta: @T) -> Tensor<T>;
-    /// # NNTrait::hard_sigmoid
+    /// # NNTrait::hard_swish
     ///
     /// ```rust 
-    ///    fn hard_sigmoid(tensor: @Tensor<T>, alpha: @T, beta: @T) -> Tensor<T>;
+    ///    fn hard_swish(tensor: @Tensor<T>) -> Tensor<T>;
     /// ```
     ///
-    /// Applies the HardSigmoid function to an n-dimensional input tensor.
+    /// Applies the HardSwish function to an n-dimensional input tensor.
     /// 
     /// $$
     /// \text{HardSigmoid}(x_i) = \text{max}(0, \text{min}(alpha * x + beta, 1))
@@ -587,8 +588,6 @@ trait NNTrait<T> {
     /// ## Args
     ///
     /// * `tensor`(`@Tensor<T>`) - The input tensor.
-    /// * `alpha`(`@T`) - value of alpha.
-    /// * `beta`(`@T`) - value of beta.
     ///
     /// ## Returns
     ///
@@ -607,23 +606,29 @@ trait NNTrait<T> {
     /// use orion::operators::nn::{NNTrait, FP8x23NN};
     /// use orion::numbers::{FP16x16, FixedTrait};
     /// 
-    /// fn hard_sigmoid_example() -> Tensor<FP16x16> {
+    /// fn hard_swish_example() -> Tensor<FP16x16> {
     ///     let tensor = TensorTrait::<FP16x16>::new(
-    ///         shape: array![2, 2].span(),
+    ///         shape: array![2, 2, 2].span(),
     ///         data: array![
-    ///             FixedTrait::new(0, false),
+    ///             FixedTrait::new(87989, true),
     ///             FixedTrait::new(13107, false),
-    ///             FixedTrait::new(32768, false),
+    ///             FixedTrait::new(32768, true),
     ///             FixedTrait::new(65536, false),
+    ///             FixedTrait::new(89090, true),
+    ///             FixedTrait::new(13107, false),
+    ///             FixedTrait::new(38988, true),
+    ///             FixedTrait::new(78990, false),
     ///         ]
     ///             .span(),
     ///     );
-    ///     let alpha = FixedTrait::new(13107, false);
-    ///     let beta = FixedTrait::new(32768, false);
     /// 
-    ///     return NNTrait::hard_sigmoid(@tensor, @alpha, @beta);
+    ///     return NNTrait::hard_swish(@tensor);
     /// }
-    /// >>> [[32768, 35389],[39321, 45875]]
+    /// >>> [[[-0.37089539,  0.10665894],
+    ///       [-0.20832825,  0.66665649]],
+    /// 
+    ///      [[-0.37171936,  0.10665894],
+    ///       [-0.23846436,  0.84474182]]]
     /// ```
     ///
     fn hard_swish(tensor: @Tensor<T>) -> Tensor<T>;
