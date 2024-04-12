@@ -17,23 +17,23 @@ fn modulo<
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
 >(
-    mut a: Tensor<T>, mut b: Tensor<T>, fmod: Option<bool> 
+    self: @Tensor<T>, mut b: @Tensor<T>, fmod: Option<bool> 
 ) -> Tensor<T> {
     match fmod {
             Option::Some(value) => { 
 
                 if value == true {
-                return fmod(x, y);
+                return fmod(self, b);
                 }
                 else if value == false {
-                return modop(x, y);
+                return modop(self, b);
                 } 
                 else {
                 core::panic_with_felt252('invalid fmod') 
                 }
                 
                 },
-            Option::None => { return modop(x, y); }
+            Option::None => { return modop(self, b); }
         }
 }
 

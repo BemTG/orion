@@ -1611,7 +1611,7 @@ trait TensorTrait<T> {
     /// // [0,0.8414...,0.9092...]
     /// ```
     ///
-    fn modulo(mut a: @Tensor<FP16x16>, mut b: @Tensor<FP16x16>, fmod: Option<bool> ) -> Tensor<FP16x16> 
+    fn modulo(mut self: @Tensor<FP16x16>, mut b: @Tensor<FP16x16>, fmod: Option<bool> ) -> Tensor<FP16x16> 
     /// #tensor.cos
     ///
     /// ```rust
