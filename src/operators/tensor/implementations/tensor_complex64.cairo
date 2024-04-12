@@ -158,6 +158,10 @@ impl Complex64Tensor of TensorTrait<complex64> {
         math::sin::sin(*self)
     }
 
+    fn modulo(mut a: @Tensor<complex64>, mut b: @Tensor<complex64>, fmod: Option<bool> ) -> Tensor<complex64> {
+        math::modulo::modulo(a, b, fmod)
+    }
+
     fn cos(self: @Tensor<complex64>) -> Tensor<complex64> {
         math::cos::cos(*self)
     }

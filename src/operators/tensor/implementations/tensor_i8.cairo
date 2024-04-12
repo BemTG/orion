@@ -147,6 +147,10 @@ impl I8Tensor of TensorTrait<i8> {
         panic(array!['not supported!'])
     }
 
+    fn modulo(mut a: @Tensor<i8>, mut b: @Tensor<i8>, fmod: Option<bool> ) -> Tensor<i8> {
+        panic(array!['not supported!'])
+    }
+
     fn cos(self: @Tensor<i8>) -> Tensor<i8> {
         panic(array!['not supported!'])
     }

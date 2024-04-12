@@ -149,6 +149,10 @@ impl FP32x32Tensor of TensorTrait<FP32x32> {
         math::sin::sin(*self)
     }
 
+    fn modulo(mut a: @Tensor<FP32x32>, mut b: @Tensor<FP32x32>, fmod: Option<bool> ) -> Tensor<FP32x32> {
+        math::modulo::modulo(a, b, fmod)
+    }
+
     fn cos(self: @Tensor<FP32x32>) -> Tensor<FP32x32> {
         math::cos::cos(*self)
     }

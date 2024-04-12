@@ -141,6 +141,10 @@ impl BoolTensor of TensorTrait<bool> {
         panic(array!['not supported!'])
     }
 
+    fn modulo(mut a: @Tensor<bool>, mut b: @Tensor<bool>, fmod: Option<bool> ) -> Tensor<bool> {
+        panic(array!['not supported!'])
+    }
+
     fn cos(self: @Tensor<bool>) -> Tensor<bool> {
         panic(array!['not supported!'])
     }

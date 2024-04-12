@@ -168,6 +168,10 @@ impl U32Tensor of TensorTrait<u32> {
         panic(array!['not supported!'])
     }
 
+    fn modulo(mut a: @Tensor<u32>, mut b: @Tensor<u32>, fmod: Option<bool> ) -> Tensor<u32> {
+        panic(array!['not supported!'])
+    }
+
     fn tanh(self: @Tensor<u32>) -> Tensor<u32> {
         panic(array!['not supported!'])
     }

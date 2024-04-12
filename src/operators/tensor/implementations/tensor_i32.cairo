@@ -150,6 +150,10 @@ impl I32Tensor of TensorTrait<i32> {
         panic(array!['not supported!'])
     }
 
+    fn modulo(mut a: @Tensor<i32>, mut b: @Tensor<i32>, fmod: Option<bool> ) -> Tensor<i32> {
+        panic(array!['not supported!'])
+    }
+
     fn cos(self: @Tensor<i32>) -> Tensor<i32> {
         panic(array!['not supported!'])
     }
