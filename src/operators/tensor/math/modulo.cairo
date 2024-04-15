@@ -38,7 +38,7 @@ fn modulo<
             Option::Some(value) => { 
 
                 if value == true {
-                let x = @x.abs();
+                let x = @self.abs();
                 let b = @b.abs();
                 }
                 else if value == false {
