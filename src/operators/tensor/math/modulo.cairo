@@ -38,14 +38,18 @@ fn modulo<
             Option::Some(value) => { 
 
                 if value == true {
-                     let x = @x.abs();
-                     let b = @b.abs();
+                let x = @x.abs();
+                let b = @b.abs();
                 }
                 else if value == false {
-                    let  x = self;
-                    let  b = b;
-                
+                let  x = self;
+                let  b = b;
+                } 
+                else {
+                core::panic_with_felt252('invalid fmod') 
                 }
+                
+                },
             Option::None => { 
                 let  x = self;
                 let  b = b; }
