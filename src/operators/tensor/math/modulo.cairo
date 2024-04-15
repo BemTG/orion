@@ -25,29 +25,27 @@ fn modulo<
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
-    let mut x = self;
-    let mut b = b;
+    let mut dividend = self;
+    let mut divisor = b;
 
     match fmod {
             Option::Some(value) => { 
-
                 if value == true {
-                  x = @self.abs();
-                  b = @b.abs();
+                  dividend = @self.abs();
+                  divisor = @b.abs();
                 }
-                
-                if value != false && value != true {
+                else if value != false && value != true {
                 core::panic_with_felt252('invalid fmod') 
                 }
                 
                 },
             Option::None => { 
-                x = self;
-                b = b;
+                dividend = self;
+                divisor = b;
                  }
         }
 
-    let mut vals =  *x / *b;
+    let mut quot =  *dividend / *divisor;
 
     let mut data_result : Array<T> = array![];
 
@@ -66,11 +64,11 @@ fn modulo<
     let flr = TensorTrait::<T>::new(*self.shape, data_result.span());
 
 
-    let mut result = *x - flr * *b;
+    let mut result = *dividend - flr * *divisor;
 
     if fmod.is_some() && fmod.unwrap() == true {
 
-        result = result * x.sign();
+        result = result * dividend.sign();
 
 
     }  
