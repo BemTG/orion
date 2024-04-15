@@ -1,8 +1,9 @@
-use orion::operators::tensor::core::{Tensor, TensorTrait};
+use orion::operators::tensor::core::{Tensor, TensorTrait, U32Tensor};
 use orion::numbers::NumberTrait;
 use core::array::{ArrayTrait, SpanTrait};
 use orion::numbers::fixed_point::core::FixedTrait;
 use orion::numbers::{FP16x16, FP16x16Impl};
+use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 
 use orion::operators::tensor::core::{stride};
 use orion::operators::tensor::{FP16x16Tensor, U32Tensor,};
