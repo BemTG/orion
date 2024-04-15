@@ -34,19 +34,15 @@ fn modulo<
     //     let b = b.clone();
     // }
 
+    let mut x = self.clone();
+    let mut b = b.clone();
+
     match fmod {
             Option::Some(value) => { 
 
                 if value == true {
-                    let x = self.abs();
-                    let b = b.abs();
-                }
-                else if value == false {
-                let x = self.clone();
-                let b = b.clone();
-                } 
-                else {
-                core::panic_with_felt252('invalid fmod') 
+                     x = self.abs();
+                     b = b.abs();
                 }
                 
                 },
