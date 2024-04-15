@@ -149,8 +149,8 @@ impl FP32x32Tensor of TensorTrait<FP32x32> {
         math::sin::sin(*self)
     }
 
-    fn modulo( self: @Tensor<FP32x32>,  b: @Tensor<FP32x32>, fmod: Option<bool> ) -> Tensor<FP32x32> {
-        math::modulo::modulo(self, b, fmod)
+    fn modulo( self: @Tensor<FP32x32>,  divisor: @Tensor<FP32x32>, fmod: Option<bool> ) -> Tensor<FP32x32> {
+        math::modulo::modulo(self, divisor, fmod)
     }
 
     fn cos(self: @Tensor<FP32x32>) -> Tensor<FP32x32> {

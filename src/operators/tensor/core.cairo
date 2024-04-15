@@ -1611,7 +1611,7 @@ trait TensorTrait<T> {
     /// // [0,0.8414...,0.9092...]
     /// ```
     ///
-    fn modulo( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) -> Tensor<T> ;
+    fn modulo( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) -> Tensor<T> ;
     /// #tensor.cos
     ///
     /// ```rust

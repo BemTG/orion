@@ -23,16 +23,16 @@ fn modulo<
     impl TTensorMul: Mul<Tensor<T>>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
->( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
+>( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     let mut dividend = self;
-    let mut divisor = b;
+    let mut divisor = divisor;
 
     match fmod {
             Option::Some(value) => { 
                 if value == true {
                   dividend = @self.abs();
-                  divisor = @b.abs();
+                  divisor = @divisor.abs();
                 }
                 else if value != false && value != true {
                 core::panic_with_felt252('invalid fmod') 
@@ -41,7 +41,7 @@ fn modulo<
                 },
             Option::None => { 
                 dividend = self;
-                divisor = b;
+                divisor = divisor;
                  }
         }
 

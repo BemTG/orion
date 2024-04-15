@@ -168,7 +168,7 @@ impl U32Tensor of TensorTrait<u32> {
         panic(array!['not supported!'])
     }
 
-    fn modulo( self: @Tensor<u32>,  b: @Tensor<u32>, fmod: Option<bool> ) -> Tensor<u32> {
+    fn modulo( self: @Tensor<u32>,  divisor: @Tensor<u32>, fmod: Option<bool> ) -> Tensor<u32> {
         panic(array!['not supported!'])
     }
 

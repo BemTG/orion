@@ -152,8 +152,8 @@ impl FP8x23WTensor of TensorTrait<FP8x23W> {
         math::sin::sin(*self)
     }
 
-    fn modulo( self: @Tensor<FP8x23W>,  b: @Tensor<FP8x23W>, fmod: Option<bool> ) -> Tensor<FP8x23W> {
-        math::modulo::modulo(self, b, fmod)
+    fn modulo( self: @Tensor<FP8x23W>,  divisor: @Tensor<FP8x23W>, fmod: Option<bool> ) -> Tensor<FP8x23W> {
+        math::modulo::modulo(self, divisor, fmod)
     }
 
     fn cos(self: @Tensor<FP8x23W>) -> Tensor<FP8x23W> {

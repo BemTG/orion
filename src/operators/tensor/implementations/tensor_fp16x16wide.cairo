@@ -162,8 +162,8 @@ impl FP16x16WTensor of TensorTrait<FP16x16W> {
         math::sin::sin(*self)
     }
 
-    fn modulo( self: @Tensor<FP16x16W>,  b: @Tensor<FP16x16W>, fmod: Option<bool> ) -> Tensor<FP16x16W> {
-        math::modulo::modulo(self, b, fmod)
+    fn modulo( self: @Tensor<FP16x16W>,  divisor: @Tensor<FP16x16W>, fmod: Option<bool> ) -> Tensor<FP16x16W> {
+        math::modulo::modulo(self, divisor, fmod)
     }
 
     fn cos(self: @Tensor<FP16x16W>) -> Tensor<FP16x16W> {
