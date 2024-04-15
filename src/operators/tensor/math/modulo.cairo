@@ -1,4 +1,4 @@
-use orion::operators::tensor::core::{Tensor, TensorTrait, U32Tensor};
+use orion::operators::tensor::core::{Tensor, TensorTrait};
 use orion::numbers::NumberTrait;
 use core::array::{ArrayTrait, SpanTrait};
 use orion::numbers::fixed_point::core::FixedTrait;
