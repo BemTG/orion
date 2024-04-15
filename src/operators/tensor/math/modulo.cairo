@@ -69,7 +69,7 @@ fn modulo<
 
     let mut result = x - flr * b;
 
-    if fmod != None && fmod.unwrap() == true {
+    if fmod != Option::None && fmod.unwrap() == true {
 
         result = result * x.sign();
 
