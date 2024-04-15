@@ -22,7 +22,7 @@ fn modulo<
     impl TTensorDiv: Div<Tensor<T>>,
     impl TTensorMul: Mul<Tensor<T>>,
     impl TPartialOrd: PartialOrd<T>,
-    impl TAddEq: AddEq<T>,
+    // impl TAddEq: AddEq<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
@@ -38,7 +38,7 @@ fn modulo<
                   b = @b.abs();
                 }
                 
-                if value != false &&  value != true {
+                if value != false && value != true {
                 core::panic_with_felt252('invalid fmod') 
                 }
                 
