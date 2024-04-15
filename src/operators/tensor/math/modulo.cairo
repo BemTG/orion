@@ -13,14 +13,14 @@ use orion::operators::vec::{NullableVec, NullableVecImpl};
 fn modulo<
     T,
     MAG,
-    impl TTensor: TensorTrait<T>,
+    impl FTensor: TensorTrait<T>,
     impl TNumber: NumberTrait<T, MAG>,
     impl TTensorAdd: Add<Tensor<T>>,
     impl TTensorSub: Sub<Tensor<T>>,
     impl TTensorDiv: Div<Tensor<T>>,
     impl TTensorMul: Mul<Tensor<T>>,
-    impl TCopy: Copy<T>,
-    impl TDrop: Drop<T>,
+    impl FCopy: Copy<T>,
+    impl FDrop: Drop<T>
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     let mut dividend = self;
