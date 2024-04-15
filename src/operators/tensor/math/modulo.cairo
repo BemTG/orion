@@ -45,7 +45,7 @@ fn modulo<
                     let  x = self;
                     let  b = b;
                 
-                },
+                }
             Option::None => { 
                 let  x = self;
                 let  b = b; }
