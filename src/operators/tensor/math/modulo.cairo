@@ -45,15 +45,15 @@ fn modulo<
                  }
         }
 
-    let mut quot =  *dividend / *divisor;
+    let mut quotient =  *dividend / *divisor;
 
-    let mut data_result : Array<T> = array![];
+    let mut res_data : Array<T> = array![];
 
     loop {
-        match vals.data.pop_front() {  
-            Option::Some(item) => {
-                let mut temp = NumberTrait::floor(*item);
-                data_result.append(temp);
+        match quotient.data.pop_front() {  
+            Option::Some(val) => {
+                let mut temp = NumberTrait::floor(*val);
+                res_data.append(temp);
             },
             Option::None(_) => {
                 break;
@@ -61,10 +61,10 @@ fn modulo<
         };
     };
 
-    let flr = TensorTrait::<T>::new(*self.shape, data_result.span());
+    let floored_quotients = TensorTrait::<T>::new(*self.shape, data_result.span());
 
 
-    let mut result = *dividend - flr * *divisor;
+    let mut result = *dividend - floored_quotients * *divisor;
 
     if fmod.is_some() && fmod.unwrap() == true {
 
@@ -73,5 +73,5 @@ fn modulo<
 
     }  
 
-    return result;
+    result;
 }
