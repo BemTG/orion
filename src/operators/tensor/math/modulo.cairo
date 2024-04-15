@@ -42,7 +42,7 @@ fn modulo<
                   b = @b.abs();
                 }
                 
-                if value != false  {
+                if value != false ||  value != true {
                 core::panic_with_felt252('invalid fmod') 
                 }
                 
