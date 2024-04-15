@@ -38,8 +38,8 @@ fn modulo<
             Option::Some(value) => { 
 
                 if value == true {
-                     x = *x.abs();
-                     b = *b.abs();
+                     x = (x).abs();
+                     b = (b).abs();
                 }
                 
                 },
