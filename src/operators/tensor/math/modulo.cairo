@@ -21,8 +21,6 @@ fn modulo<
     impl TTensorSub: Sub<Tensor<T>>,
     impl TTensorDiv: Div<Tensor<T>>,
     impl TTensorMul: Mul<Tensor<T>>,
-    impl TPartialOrd: PartialOrd<T>,
-    // impl TAddEq: AddEq<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
