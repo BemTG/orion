@@ -38,17 +38,15 @@ fn modulo<
             Option::Some(value) => { 
 
                 if value == true {
-                     x = self.abs();
-                     b = b.abs();
+                     x = *x.abs();
+                     b = *b.abs();
                 }
                 
                 },
-            Option::None => { 
-                let x = self.clone();
-                let b = b.clone(); }
+            Option::None => {  }
         }
 
-    let mut vals =  x / b;
+    let mut vals =  *x / b;
 
     let mut data_result : Array<T> = array![];
 
