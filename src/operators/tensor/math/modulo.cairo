@@ -10,8 +10,6 @@ use orion::operators::vec::{NullableVec, NullableVecImpl};
 
 
 /// Cf: TensorTrait::Mod docstring
-
-
 fn modulo<
     T,
     MAG,
@@ -63,14 +61,11 @@ fn modulo<
 
     let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
 
-
     let mut result = *dividend - floored_quotients * *divisor;
 
     if fmod.is_some() && fmod.unwrap() == true {
 
         result = result * dividend.sign();
-
-
     }  
 
     return result;
