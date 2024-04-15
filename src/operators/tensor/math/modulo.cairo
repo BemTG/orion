@@ -31,8 +31,8 @@ fn modulo<
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
-    let mut x = self.clone();
-    let mut b = b.clone();
+    let mut x = self;
+    let mut b = b;
 
     match fmod {
             Option::Some(value) => { 
