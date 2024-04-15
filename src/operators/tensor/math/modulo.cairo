@@ -2,7 +2,11 @@ use orion::operators::tensor::core::{Tensor, TensorTrait};
 use orion::numbers::NumberTrait;
 use core::array::{ArrayTrait, SpanTrait};
 use orion::numbers::fixed_point::core::FixedTrait;
-use orion::numbers::{FP16x16, FP16x16Impl, FixedTrait};
+use orion::numbers::{FP16x16, FP16x16Impl};
+
+use orion::operators::tensor::core::{stride};
+use orion::operators::tensor::{FP16x16Tensor, U32Tensor,};
+use orion::operators::vec::{NullableVec, NullableVecImpl};
 
 
 /// Cf: TensorTrait::Mod docstring
