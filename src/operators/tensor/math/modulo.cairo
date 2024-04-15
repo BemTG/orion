@@ -38,14 +38,11 @@ fn modulo<
             Option::Some(value) => { 
 
                 if value == true {
-                x = @self.abs();
-                 b = @b.abs();
+                  x = @self.abs();
+                  b = @b.abs();
                 }
-                else if value == false {
-                  x = self;
-                  b = b;
-                } 
-                else {
+                
+                else if value != false or true {
                 core::panic_with_felt252('invalid fmod') 
                 }
                 
@@ -77,7 +74,7 @@ fn modulo<
 
     let mut result = *x - flr * *b;
 
-    if fmod != Option::None && fmod.unwrap() == true {
+    if fmod.is_some() && fmod.unwrap() == true {
 
         result = result * x.sign();
 
