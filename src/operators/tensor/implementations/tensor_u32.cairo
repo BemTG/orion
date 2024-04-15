@@ -169,7 +169,7 @@ impl U32Tensor of TensorTrait<u32> {
     }
 
     fn modulo( self: @Tensor<u32>,  divisor: @Tensor<u32>, fmod: Option<bool> ) -> Tensor<u32> {
-        panic(array!['not supported!'])
+        math::modulo::modulo(self, divisor, fmod)
     }
 
     fn tanh(self: @Tensor<u32>) -> Tensor<u32> {
