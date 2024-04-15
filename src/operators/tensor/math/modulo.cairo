@@ -31,14 +31,6 @@ fn modulo<
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
-    // if fmod.unwrap() == true {
-    //     let x = self.abs();
-    //     let b = b.abs();
-    // } else {
-    //     let x = self.clone();
-    //     let b = b.clone();
-    // }
-
     let mut x = self.clone();
     let mut b = b.clone();
 
@@ -77,7 +69,7 @@ fn modulo<
 
     let mut result = x - flr * b;
 
-    if fmod.unwrap() == true {
+    if fmod != None && fmod.unwrap() == true {
 
         result = result * x.sign();
 
