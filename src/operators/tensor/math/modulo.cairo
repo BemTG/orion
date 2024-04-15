@@ -26,13 +26,34 @@ fn modulo<
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
-    if fmod.unwrap() == true {
-        let x = self.abs();
-        let b = b.abs();
-    } else {
-        let x = self.clone();
-        let b = b.clone();
-    }
+    // if fmod.unwrap() == true {
+    //     let x = self.abs();
+    //     let b = b.abs();
+    // } else {
+    //     let x = self.clone();
+    //     let b = b.clone();
+    // }
+
+    match fmod {
+            Option::Some(value) => { 
+
+                if value == true {
+                    let x = self.abs();
+                    let b = b.abs();
+                }
+                else if value == false {
+                let x = self.clone();
+                let b = b.clone();
+                } 
+                else {
+                core::panic_with_felt252('invalid fmod') 
+                }
+                
+                },
+            Option::None => { 
+                let x = self.clone();
+                let b = b.clone(); }
+        }
 
     let mut vals =  x / b;
 
