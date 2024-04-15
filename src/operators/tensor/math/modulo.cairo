@@ -14,11 +14,11 @@ fn modulo<
     T,
     MAG,
     impl FTensor: TensorTrait<T>,
-    impl TNumber: NumberTrait<T, MAG>,
-    impl TTensorAdd: Add<Tensor<T>>,
-    impl TTensorSub: Sub<Tensor<T>>,
-    impl TTensorDiv: Div<Tensor<T>>,
-    impl TTensorMul: Mul<Tensor<T>>,
+    impl FNumber: NumberTrait<T, MAG>,
+    impl FTensorAdd: Add<Tensor<T>>,
+    impl FTensorSub: Sub<Tensor<T>>,
+    impl FTensorDiv: Div<Tensor<T>>,
+    impl FTensorMul: Mul<Tensor<T>>,
     impl FCopy: Copy<T>,
     impl FDrop: Drop<T>
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
