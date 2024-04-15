@@ -61,7 +61,7 @@ fn modulo<
         };
     };
 
-    let floored_quotients = TensorTrait::<T>::new(*self.shape, data_result.span());
+    let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
 
 
     let mut result = *dividend - floored_quotients * *divisor;
