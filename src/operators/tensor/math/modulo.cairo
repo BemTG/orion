@@ -2,6 +2,7 @@ use orion::operators::tensor::core::{Tensor, TensorTrait};
 use orion::numbers::NumberTrait;
 use core::array::{ArrayTrait, SpanTrait};
 use orion::numbers::fixed_point::core::FixedTrait;
+use orion::numbers::{FP16x16, FP16x16Impl, FixedTrait};
 
 
 /// Cf: TensorTrait::Mod docstring
@@ -67,7 +68,7 @@ fn modulo<
         };
     };
 
-    let flr = TensorTrait::<T, MAG>::new(x.shape, data_result.span());
+    let flr = TensorTrait::<T>::new(x.shape, data_result.span());
 
 
     let mut result = x - flr * b;

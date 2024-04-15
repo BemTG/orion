@@ -159,7 +159,7 @@ impl Complex64Tensor of TensorTrait<complex64> {
     }
 
     fn modulo( self: @Tensor<complex64>,  b: @Tensor<complex64>, fmod: Option<bool> ) -> Tensor<complex64> {
-        math::modulo::modulo(self, b, fmod)
+        panic(array!['not supported!'])
     }
 
     fn cos(self: @Tensor<complex64>) -> Tensor<complex64> {
