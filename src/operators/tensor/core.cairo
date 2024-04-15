@@ -1563,7 +1563,7 @@ trait TensorTrait<T> {
     /// ```
     ///
     fn sin(self: @Tensor<T>) -> Tensor<T>;
-   `/// #tensor.modulo
+    /// #tensor.modulo
     ///
     /// ```rust
     ///     fn sin(self: @Tensor<T>) -> Tensor<T>;
@@ -1611,7 +1611,7 @@ trait TensorTrait<T> {
     /// // [0,0.8414...,0.9092...]
     /// ```
     ///
-    fn modulo(mut self: @Tensor<T>, mut b: @Tensor<T>, fmod: Option<bool> ) -> Tensor<T> ;
+    fn modulo( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) -> Tensor<T> ;
     /// #tensor.cos
     ///
     /// ```rust

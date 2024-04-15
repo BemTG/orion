@@ -27,12 +27,13 @@ fn modulo<
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     if fmod.unwrap() == true {
-         let x = self.abs();
-         let b = b.abs();
+        let x = self.abs();
+        let b = b.abs();
     } else {
         let x = self.clone();
         let b = b.clone();
     }
+
     let mut vals =  x / b;
 
     let mut data_result : Array<T> = array![];
