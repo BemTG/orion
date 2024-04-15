@@ -31,19 +31,19 @@ fn modulo<
     impl TDrop: Drop<T>,
 >( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
-    // let mut x = self;
-    // let mut b = b;
+    let mut x = self;
+    let mut b = b;
 
     match fmod {
             Option::Some(value) => { 
 
                 if value == true {
-                let x = @self.abs();
-                let b = @b.abs();
+                x = @self.abs();
+                 b = @b.abs();
                 }
                 else if value == false {
-                let  x = self;
-                let  b = b;
+                  x = self;
+                  b = b;
                 } 
                 else {
                 core::panic_with_felt252('invalid fmod') 
@@ -51,8 +51,9 @@ fn modulo<
                 
                 },
             Option::None => { 
-                let  x = self;
-                let  b = b; }
+                x = self;
+                b = b;
+                 }
         }
 
     let mut vals =  *x / *b;
