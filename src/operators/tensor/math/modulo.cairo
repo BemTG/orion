@@ -62,7 +62,7 @@ fn modulo<
         };
     };
 
-    let flr = TensorTrait::<T>::new(self.shape, data_result.span());
+    let flr = TensorTrait::<T>::new(*self.shape, data_result.span());
 
 
     let mut result = *x - flr * *b;
