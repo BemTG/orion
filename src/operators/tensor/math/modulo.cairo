@@ -63,7 +63,7 @@ fn modulo<
     loop {
         match vals.data.pop_front() {  
             Option::Some(item) => {
-                let mut temp = FixedTrait::<T, MAG>::floor(*item);
+                let mut temp = NumberTrait::floor(*item);
                 data_result.append(temp);
             },
             Option::None(_) => {
