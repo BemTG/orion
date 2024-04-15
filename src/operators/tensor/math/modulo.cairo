@@ -24,13 +24,16 @@ fn modulo<
     impl TAddEq: AddEq<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
->(mut self: Tensor<T>, mut b: Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
+>( self: @Tensor<T>,  b: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     if fmod.unwrap() == true {
-         self = self.abs();
-         b = b.abs();
-    } 
-    let mut vals =  self / b;
+         let x = self.abs();
+         let b = b.abs();
+    } else {
+        let x = self.clone();
+        let b = b.clone();
+    }
+    let mut vals =  x / b;
 
     let mut data_result : Array<T> = array![];
 
@@ -46,14 +49,14 @@ fn modulo<
         };
     };
 
-    let flr = TensorTrait::<T, MAG>::new(self.shape, data_result.span());
+    let flr = TensorTrait::<T, MAG>::new(x.shape, data_result.span());
 
 
-    let mut result = self - flr * b;
+    let mut result = x - flr * b;
 
     if fmod.unwrap() == true {
 
-        result = result * self.sign();
+        result = result * x.sign();
 
 
     }  
