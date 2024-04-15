@@ -149,7 +149,7 @@ impl FP64x64Tensor of TensorTrait<FP64x64> {
         math::sin::sin(*self)
     }
 
-    fn modulo(mut self: @Tensor<FP64x64>, mut b: @Tensor<FP64x64>, fmod: Option<bool> ) -> Tensor<FP64x64> {
+    fn modulo( self: @Tensor<FP64x64>,  b: @Tensor<FP64x64>, fmod: Option<bool> ) -> Tensor<FP64x64> {
         math::modulo::modulo(self, b, fmod)
     }
 

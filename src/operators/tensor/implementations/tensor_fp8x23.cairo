@@ -149,7 +149,7 @@ impl FP8x23Tensor of TensorTrait<FP8x23> {
         math::sin::sin(*self)
     }
 
-    fn modulo(mut self: @Tensor<FP8x23>, mut b: @Tensor<FP8x23>, fmod: Option<bool> ) -> Tensor<FP8x23> {
+    fn modulo( self: @Tensor<FP8x23>,  b: @Tensor<FP8x23>, fmod: Option<bool> ) -> Tensor<FP8x23> {
         math::modulo::modulo(self, b, fmod)
     }
 

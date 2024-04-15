@@ -158,7 +158,7 @@ impl Complex64Tensor of TensorTrait<complex64> {
         math::sin::sin(*self)
     }
 
-    fn modulo(mut self: @Tensor<complex64>, mut b: @Tensor<complex64>, fmod: Option<bool> ) -> Tensor<complex64> {
+    fn modulo( self: @Tensor<complex64>,  b: @Tensor<complex64>, fmod: Option<bool> ) -> Tensor<complex64> {
         math::modulo::modulo(self, b, fmod)
     }
 
