@@ -46,7 +46,7 @@ fn modulo<
             Option::None => {  }
         }
 
-    let mut vals =  *x / b;
+    let mut vals =  *x / *b;
 
     let mut data_result : Array<T> = array![];
 
@@ -62,10 +62,10 @@ fn modulo<
         };
     };
 
-    let flr = TensorTrait::<T>::new(x.shape, data_result.span());
+    let flr = TensorTrait::<T>::new(@x.shape, data_result.span());
 
 
-    let mut result = x - flr * b;
+    let mut result = *x - flr * *b;
 
     if fmod != Option::None && fmod.unwrap() == true {
 
