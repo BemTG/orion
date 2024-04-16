@@ -11,10 +11,6 @@ use orion::operators::tensor::implementations::{
     tensor_u32::U32Tensor, tensor_i8::I8Tensor, tensor_bool::BoolTensor
 };
 
-use orion::operators::tensor::implementations::tensor_i32::{
-    I32Tensor, I32TensorAdd, I32TensorSub, I32TensorMul, I32TensorDiv, I32TensorPartialEq,
-    TensorI8IntoTensorI32
-};
 
 impl I32Tensor of TensorTrait<i32> {
     fn new(shape: Span<usize>, data: Span<i32>) -> Tensor<i32> {
