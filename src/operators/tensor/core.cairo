@@ -9,6 +9,11 @@ use alexandria_data_structures::array_ext::{SpanTraitExt};
 use orion::operators::tensor::helpers::{len_from_shape, check_shape};
 use orion::numbers::{NumberTrait, I32IntoU32, U32IntoI32};
 
+use orion::operators::tensor::implementations::tensor_i32::{
+    I32Tensor, I32TensorAdd, I32TensorSub, I32TensorMul, I32TensorDiv, I32TensorPartialEq,
+    TensorI8IntoTensorI32
+};
+
 #[derive(Copy, Drop)]
 struct Tensor<T> {
     shape: Span<usize>,
