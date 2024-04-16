@@ -4,6 +4,10 @@ use core::array::{ArrayTrait, SpanTrait};
 use orion::numbers::fixed_point::core::FixedTrait;
 use orion::numbers::{FP16x16, FP16x16Impl};
 use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
+use orion::operators::tensor::implementations::tensor_i32::{
+    I32Tensor, I32TensorAdd, I32TensorSub, I32TensorMul, I32TensorDiv, I32TensorPartialEq,
+    TensorI8IntoTensorI32
+};
 
 use orion::operators::tensor::core::{stride};
 use orion::operators::tensor::{FP16x16Tensor, U32Tensor,};
