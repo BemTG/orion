@@ -39,8 +39,7 @@ fn modulo<
                 }
                 else if value != false && value != true {
                 core::panic_with_felt252('invalid fmod') 
-                }
-                
+                }         
                 },
             Option::None => { 
                 dividend = self;
