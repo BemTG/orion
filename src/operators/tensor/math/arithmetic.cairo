@@ -328,14 +328,14 @@ fn rem<
     let mut n: usize = 0;
     while n != num_elements {
 
-        let mut res = *self.data.at(i) % *other.data.at(i)
+        let mut res = *self.data.at(i) % other.data.at(i)
 
         result.append(res);
 
         n += 1;
     };
 
-    TensorTrait::<T>::new(self.shape, result.span())
+    TensorTrait::<T>::new(*self.shape, result.span())
 }
 
 
