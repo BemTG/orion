@@ -148,7 +148,8 @@ impl I8Tensor of TensorTrait<i8> {
     }
 
     fn modulo( self: @Tensor<i8>,  divisor: @Tensor<i8>, fmod: Option<bool> ) -> Tensor<i8> {
-        math::modulo::modulo(self, divisor, fmod)
+        // math::modulo::modulo(self, divisor, fmod)
+        panic(array!['not supported!'])
     }
 
     fn cos(self: @Tensor<i8>) -> Tensor<i8> {
