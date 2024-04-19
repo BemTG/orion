@@ -627,7 +627,7 @@ impl U32TensorRem of Rem<Tensor<u32>> {
     ///
     /// # Returns
     /// * A `Tensor<u32>` instance representing the result of the element-wise division.
-    fn div(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
+    fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
         math::arithmetic::rem(@lhs, @rhs)
     }
 }
