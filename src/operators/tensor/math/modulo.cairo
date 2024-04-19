@@ -73,7 +73,7 @@ fn modulo<
     //     result = result * dividend.sign();
     // }  
 
-    let mut result =  self ;  // *dividend % *divisor ;
+    let mut result =  *self ;  // *dividend % *divisor ;
 
-    return *result;
+    return result;
 }
