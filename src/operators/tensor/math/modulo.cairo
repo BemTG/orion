@@ -75,5 +75,5 @@ fn modulo<
 
     let mut result =  self ;  // *dividend % *divisor ;
 
-    return result;
+    return *result;
 }
