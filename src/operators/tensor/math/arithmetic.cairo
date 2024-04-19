@@ -328,7 +328,7 @@ fn rem<
     let mut n: usize = 0;
     while n != num_elements {
 
-        let mut res = *self.data.at(i) % other.data.at(i)
+        let mut res = *self.data.at(n) % other.data.at(n)
 
         result.append(res);
 
