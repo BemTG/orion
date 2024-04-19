@@ -317,7 +317,7 @@ fn div<
 }
 
 fn rem<
-    T, impl TTensor: TensorTrait<T>, impl TMul: Div<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>, +Rem<T>,
+    T, impl TTensor: TensorTrait<T>, impl TMul: Div<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
 >(
     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
