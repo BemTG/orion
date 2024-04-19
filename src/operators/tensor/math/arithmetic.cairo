@@ -323,12 +323,12 @@ fn rem<
 ) -> Tensor<T> {
     let mut result = array![];
 
-    let num_elements = *self.data.len();
+    let num_elements = (*self).shape.len();
 
     let mut n: usize = 0;
     while n != num_elements {
 
-        let mut res = self.data.at(n) % other.data.at(n);
+        let mut res = (*self).data.at(n) % other.data.at(n);
 
         result.append(res);
 
