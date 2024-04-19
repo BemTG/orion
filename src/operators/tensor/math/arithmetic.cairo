@@ -316,6 +316,29 @@ fn div<
     TensorTrait::<T>::new(broadcasted_shape, result.span())
 }
 
+fn rem<
+    T, impl TTensor: TensorTrait<T>, impl TMul: Div<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>, +Rem
+>(
+    self: @Tensor<T>, other: @Tensor<T>
+) -> Tensor<T> {
+    let mut result = array![];
+
+    let num_elements = self.data.len();
+
+    let mut n: usize = 0;
+    while n != num_elements {
+
+        let mut res = self.data.at(i) % other.data.at(i)
+
+        result.append(res);
+
+        n += 1;
+    };
+
+    TensorTrait::<T>::new(self.shape, result.span())
+}
+
+
 fn div_by_scalar<
     T,
     MAG,
