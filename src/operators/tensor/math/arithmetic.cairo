@@ -317,7 +317,7 @@ fn div<
 }
 
 fn rem<
-    T, impl TTensor: TensorTrait<T>, impl TMul: Div<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>, +Rem
+    T, impl TTensor: TensorTrait<T>, impl TMul: Div<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>, +Rem<T>,
 >(
     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
@@ -328,7 +328,7 @@ fn rem<
     let mut n: usize = 0;
     while n != num_elements {
 
-        let mut res = (*self).data.at(n) % other.data.at(n);
+        let mut res = (*self).data.at(n) % (*other).data.at(n);
 
         result.append(res);
 
