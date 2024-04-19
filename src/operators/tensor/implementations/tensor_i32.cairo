@@ -152,7 +152,8 @@ impl I32Tensor of TensorTrait<i32> {
     }
 
     fn modulo( self: @Tensor<i32>,  divisor: @Tensor<i32>, fmod: Option<bool> ) -> Tensor<i32> {
-        math::modulo::modulo(self, divisor, fmod)
+        // math::modulo::modulo(self, divisor, fmod)
+        panic(array!['not supported!'])
     }
 
     fn cos(self: @Tensor<i32>) -> Tensor<i32> {

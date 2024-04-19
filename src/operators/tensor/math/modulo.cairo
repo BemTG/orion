@@ -25,7 +25,7 @@ fn modulo<
     +Div<Tensor<T>>,
     +Mul<Tensor<T>>,
     +Copy<T>,
-    +Drop<T>
+    +Drop<T>,
     +Rem<T>,
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
