@@ -48,30 +48,32 @@ fn modulo<
                  }
         }
 
-    let mut quotient =  *dividend / *divisor;
+    // let mut quotient =  *dividend / *divisor;
 
-    let mut res_data : Array<T> = array![];
+    // let mut res_data : Array<T> = array![];
 
-    // loop {
-    //     match quotient.data.pop_front() {  
-    //         Option::Some(val) => {
-    //             let mut temp = NumberTrait::floor(*val);
-    //             res_data.append(temp);
-    //         },
-    //         Option::None(_) => {
-    //             break;
-    //         }
-    //     };
-    // };
+    // // loop {
+    // //     match quotient.data.pop_front() {  
+    // //         Option::Some(val) => {
+    // //             let mut temp = NumberTrait::floor(*val);
+    // //             res_data.append(temp);
+    // //         },
+    // //         Option::None(_) => {
+    // //             break;
+    // //         }
+    // //     };
+    // // };
 
-    let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
+    // let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
 
-    let mut result = *dividend - quotient * *divisor;  // floored_quotients
+    // let mut result = *dividend - quotient * *divisor;  // floored_quotients
 
-    if fmod.is_some() && fmod.unwrap() == true {
+    // if fmod.is_some() && fmod.unwrap() == true {
 
-        result = result * dividend.sign();
-    }  
+    //     result = result * dividend.sign();
+    // }  
+
+    let mut result = dividend % divisor ;
 
     return result;
 }
