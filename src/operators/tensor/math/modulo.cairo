@@ -18,14 +18,15 @@ use orion::operators::vec::{NullableVec, NullableVecImpl};
 fn modulo<
     T,
     MAG,
-    impl FTensor: TensorTrait<T>,
-    impl FNumber: NumberTrait<T, MAG>,
-    impl FTensorAdd: Add<Tensor<T>>,
-    impl FTensorSub: Sub<Tensor<T>>,
-    impl FTensorDiv: Div<Tensor<T>>,
-    impl FTensorMul: Mul<Tensor<T>>,
-    impl FCopy: Copy<T>,
-    impl FDrop: Drop<T>
+    +TensorTrait<T>,
+    +NumberTrait<T, MAG>,
+    +Add<Tensor<T>>,
+    +Sub<Tensor<T>>,
+    +Div<Tensor<T>>,
+    +Mul<Tensor<T>>,
+    +Copy<T>,
+    +Drop<T>
+    +Rem<T>,
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     let mut dividend = self;
@@ -51,21 +52,21 @@ fn modulo<
 
     let mut res_data : Array<T> = array![];
 
-    loop {
-        match quotient.data.pop_front() {  
-            Option::Some(val) => {
-                let mut temp = NumberTrait::floor(*val);
-                res_data.append(temp);
-            },
-            Option::None(_) => {
-                break;
-            }
-        };
-    };
+    // loop {
+    //     match quotient.data.pop_front() {  
+    //         Option::Some(val) => {
+    //             let mut temp = NumberTrait::floor(*val);
+    //             res_data.append(temp);
+    //         },
+    //         Option::None(_) => {
+    //             break;
+    //         }
+    //     };
+    // };
 
     let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
 
-    let mut result = *dividend - floored_quotients * *divisor;
+    let mut result = *dividend - quotient * *divisor;  // floored_quotients
 
     if fmod.is_some() && fmod.unwrap() == true {
 
