@@ -340,7 +340,7 @@ fn rem<
 
         let mut res = *((*self).data.at(n)) % *((*other).data.at(n));
 
-        result.append(*res);
+        result.append(res);
 
         n += 1;
     };
