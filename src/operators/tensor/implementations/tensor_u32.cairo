@@ -37,9 +37,9 @@ impl U32Tensor of TensorTrait<u32> {
         math::arithmetic::div(@lhs, @rhs)
     }
 
-    fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
-        math::arithmetic::rem(@lhs, @rhs)
-    }
+    // fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
+    //     math::arithmetic::rem(@lhs, @rhs)
+    // }
 
     fn min_in_tensor(self: @Tensor<u32>) -> u32 {
         math::min_in_tensor::min_in_tensor::<u32, u32>(*self.data)
