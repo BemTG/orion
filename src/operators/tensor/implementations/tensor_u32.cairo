@@ -621,20 +621,20 @@ impl U32TensorDiv of Div<Tensor<u32>> {
     }
 }
 
-/// Implements division for `Tensor<u32>` using the `Div` trait.
-impl U32TensorRem of Rem<Tensor<u32>> {
-    /// Divides two `Tensor<u32>` instances element-wise.
-    ///
-    /// # Arguments
-    /// * `lhs` - The first tensor.
-    /// * `rhs` - The second tensor.
-    ///
-    /// # Returns
-    /// * A `Tensor<u32>` instance representing the result of the element-wise division.
-    fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
-        math::arithmetic::rem(@lhs, @rhs)
-    }
-}
+// /// Implements division for `Tensor<u32>` using the `Div` trait.
+// impl U32TensorRem of Rem<Tensor<u32>> {
+//     /// Divides two `Tensor<u32>` instances element-wise.
+//     ///
+//     /// # Arguments
+//     /// * `lhs` - The first tensor.
+//     /// * `rhs` - The second tensor.
+//     ///
+//     /// # Returns
+//     /// * A `Tensor<u32>` instance representing the result of the element-wise division.
+//     fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
+//         math::arithmetic::rem(@lhs, @rhs)
+//     }
+// }
 
 
 /// Implements partial equal for two `Tensor<u32>` using the `PartialEq` trait.
