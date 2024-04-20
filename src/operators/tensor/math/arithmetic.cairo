@@ -317,7 +317,17 @@ fn div<
 }
 
 fn rem<
-    T,  MAG, +NumberTrait<T, MAG>, +TensorTrait<T>, +Div<T>, +<T>, +Drop<T>, +Rem<T>,
+    T,
+    MAG,
+    +TensorTrait<T>,
+    +NumberTrait<T, MAG>,
+    +Add<Tensor<T>>,
+    +Sub<Tensor<T>>,
+    +Div<Tensor<T>>,
+    +Mul<Tensor<T>>,
+    +Copy<T>,
+    +Drop<T>,
+    +Rem<T>,
 >(
     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
