@@ -7,6 +7,10 @@ use orion::operators::tensor::core::{
 use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
 use orion::numbers::{NumberTrait};
 use orion::operators::tensor::implementations::{tensor_i8::I8Tensor, tensor_bool::BoolTensor};
+use orion::operators::tensor::implementations::tensor_u32::{
+    U32TensorAdd, U32TensorSub, U32TensorMul, U32TensorDiv, U32TensorPartialEq, U32TensorRem
+};
+
 
 impl U32Tensor of TensorTrait<u32> {
     fn new(shape: Span<usize>, data: Span<u32>) -> Tensor<u32> {
@@ -37,7 +41,7 @@ impl U32Tensor of TensorTrait<u32> {
         math::arithmetic::div(@lhs, @rhs)
     }
 
-    fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
+    fn rem(self: Tensor<u32>, other: Tensor<u32>) -> Tensor<u32> {
         math::arithmetic::rem(@self, @other)
     }
 
