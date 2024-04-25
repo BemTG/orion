@@ -399,10 +399,10 @@ impl FP8x23Neg of Neg<FP8x23> {
     }
 }
 
-impl FP8x23Rem of Rem<FP8x23> {
-    #[inline(always)]
-    fn rem(lhs: FP8x23, rhs: FP8x23) -> FP8x23 {
-        core_math::rem(lhs, rhs)
+
+impl FP8x23Mod of Mod<FP8x23> {
+    fn modulo(lhs: FP8x23, rhs: FP8x23) -> FP8x23 {
+        core_math::modulo(lhs, rhs)
     }
 }
 
