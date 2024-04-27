@@ -7,6 +7,7 @@ use orion::numbers::{FP16x16, FP16x16Impl};
 use orion::operators::tensor::core::{stride};
 use orion::operators::tensor::{FP16x16Tensor, U32Tensor,};
 use orion::operators::vec::{NullableVec, NullableVecImpl};
+use core::debug::PrintTrait;
 
 
 /// Cf: TensorTrait::Mod docstring
@@ -23,7 +24,6 @@ fn modulo<
     +Copy<T>,
     +Drop<T>,
     +Rem<T>,
-    +PrintTrait<T>,
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     let mut dividend = self;
