@@ -68,8 +68,9 @@ fn modulo<
     };
 
     'check4'.print();
-
+    if res_data.len() != 0 {
     let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
+    }
 
     'check5'.print();
 
