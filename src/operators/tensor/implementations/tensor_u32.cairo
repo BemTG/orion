@@ -38,10 +38,6 @@ impl U32Tensor of TensorTrait<u32> {
         math::arithmetic::div(@lhs, @rhs)
     }
 
-    fn rem(self: Tensor<u32>, other: Tensor<u32>) -> Tensor<u32> {
-        math::arithmetic::rem(@self, @other)
-    }
-
     fn min_in_tensor(self: @Tensor<u32>) -> u32 {
         math::min_in_tensor::min_in_tensor::<u32, u32>(*self.data)
     }
@@ -625,22 +621,6 @@ impl U32TensorDiv of Div<Tensor<u32>> {
         math::arithmetic::div(@lhs, @rhs)
     }
 }
-
-/// Implements remainder for `Tensor<u32>` using the `Rem` trait.
-impl U32TensorRem of Rem<Tensor<u32>> {
-    /// Divides two `Tensor<u32>` instances element-wise.
-    ///
-    /// # Arguments
-    /// * `lhs` - The first tensor.
-    /// * `rhs` - The second tensor.
-    ///
-    /// # Returns
-    /// * A `Tensor<u32>` instance representing the result of the element-wise division.
-    fn rem(lhs: Tensor<u32>, rhs: Tensor<u32>) -> Tensor<u32> {
-        math::arithmetic::rem(@self, @other)
-    }
-}
-
 
 /// Implements partial equal for two `Tensor<u32>` using the `PartialEq` trait.
 impl U32TensorPartialEq of PartialEq<Tensor<u32>> {

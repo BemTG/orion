@@ -399,13 +399,6 @@ impl FP8x23Neg of Neg<FP8x23> {
     }
 }
 
-
-impl FP8x23Mod of Mod<FP8x23> {
-    fn modulo(lhs: FP8x23, rhs: FP8x23) -> FP8x23 {
-        core_math::modulo(lhs, rhs)
-    }
-}
-
 /// INTERNAL
 fn _i32_into_fp(x: FP8x23) -> i32 {
     // i32 { mag: x.mag / ONE, sign: x.sign }

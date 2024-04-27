@@ -248,15 +248,6 @@ fn pow_int(a: FP8x23, b: u32, sign: bool) -> FP8x23 {
     x * y
 }
 
-fn modulo(a: FP8x23, b: FP8x23) -> FP8x23 {
-    let (div, rem) = integer::u32_safe_divmod(a.mag, b.mag);
-
-    let modulo = a.mag - div * b.mag;
-
-    return FixedTrait::new_unscaled(modulo, false);
-}
-
-
 fn round(a: FP8x23) -> FP8x23 {
     let (div, rem) = integer::u32_safe_divmod(a.mag, integer::u32_as_non_zero(ONE));
 
