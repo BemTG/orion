@@ -45,7 +45,9 @@ fn modulo<
                  }
         }
 
+    'check1'.print();
     let mut quotient =  *dividend / *divisor;
+     'check2'.print();
 
     let mut res_data : Array<T> = array![];
 
@@ -54,6 +56,7 @@ fn modulo<
             Option::Some(val) => {
 
                 if *val % NumberTrait::<T>::one()  != NumberTrait::<T>::zero() {
+                'check3'.print();
                 let mut temp = NumberTrait::floor(*val);
                 res_data.append(temp);}
             },
@@ -62,6 +65,8 @@ fn modulo<
             }
         };
     };
+
+    'check4'.print();
 
     let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
 
