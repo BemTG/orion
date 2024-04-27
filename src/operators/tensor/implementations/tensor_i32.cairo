@@ -172,6 +172,10 @@ impl I32Tensor of TensorTrait<i32> {
         panic(array!['not supported!'])
     }
 
+    fn modulo( self: @Tensor<i32>,  divisor: @Tensor<i32>, fmod: Option<bool> ) -> Tensor<i32> {
+        math::modulo::modulo(self, divisor, fmod)
+    }
+
     fn tanh(self: @Tensor<i32>) -> Tensor<i32> {
         panic(array!['not supported!'])
     }

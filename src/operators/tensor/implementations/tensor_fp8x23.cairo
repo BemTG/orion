@@ -171,6 +171,10 @@ impl FP8x23Tensor of TensorTrait<FP8x23> {
         math::sinh::sinh(*self)
     }
 
+    fn modulo( self: @Tensor<FP8x23>,  divisor: @Tensor<FP8x23>, fmod: Option<bool> ) -> Tensor<FP8x23> {
+        math::modulo::modulo(self, divisor, fmod)
+    }
+
     fn tanh(self: @Tensor<FP8x23>) -> Tensor<FP8x23> {
         math::tanh::tanh(*self)
     }

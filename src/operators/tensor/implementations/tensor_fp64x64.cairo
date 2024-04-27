@@ -171,6 +171,10 @@ impl FP64x64Tensor of TensorTrait<FP64x64> {
         math::sinh::sinh(*self)
     }
 
+    fn modulo( self: @Tensor<FP64x64>,  divisor: @Tensor<FP64x64>, fmod: Option<bool> ) -> Tensor<FP64x64> {
+        math::modulo::modulo(self, divisor, fmod)
+    }
+
     fn tanh(self: @Tensor<FP64x64>) -> Tensor<FP64x64> {
         math::tanh::tanh(*self)
     }

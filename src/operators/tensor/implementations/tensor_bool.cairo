@@ -137,6 +137,10 @@ impl BoolTensor of TensorTrait<bool> {
         panic(array!['not supported!'])
     }
 
+    fn modulo( self: @Tensor<bool>,  divisor: @Tensor<bool>, fmod: Option<bool> ) -> Tensor<bool> {
+        panic(array!['not supported!'])
+    }
+
     fn sin(self: @Tensor<bool>) -> Tensor<bool> {
         panic(array!['not supported!'])
     }

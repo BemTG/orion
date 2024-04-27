@@ -184,6 +184,10 @@ impl FP16x16WTensor of TensorTrait<FP16x16W> {
         math::sinh::sinh(*self)
     }
 
+    fn modulo( self: @Tensor<FP16x16W>,  divisor: @Tensor<FP16x16W>, fmod: Option<bool> ) -> Tensor<FP16x16W> {
+        math::modulo::modulo(self, divisor, fmod)
+    }
+
     fn tanh(self: @Tensor<FP16x16W>) -> Tensor<FP16x16W> {
         math::tanh::tanh(*self)
     }
