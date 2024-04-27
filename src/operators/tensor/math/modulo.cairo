@@ -22,7 +22,8 @@ fn modulo<
     +PartialEq<T>,
     +Copy<T>,
     +Drop<T>,
-    +Rem<T>
+    +Rem<T>,
+    +PrintTrait<T>,
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     let mut dividend = self;
