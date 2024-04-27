@@ -71,12 +71,18 @@ fn modulo<
 
     let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
 
+    'check5'.print();
+
     let mut result = *dividend - floored_quotients * *divisor;
+
+    'check6'.print();
 
     if fmod.is_some() && fmod.unwrap() == true {
 
         result = result * dividend.sign();
+        'check7'.print();
     }  
+    
 
     return result;
 }
