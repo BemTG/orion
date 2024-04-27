@@ -29,6 +29,8 @@ fn modulo<
     let mut dividend = self;
     let mut divisor = divisor;
 
+    let mut integers = false;
+
     match fmod {
             Option::Some(value) => { 
                 if value == true {
@@ -48,7 +50,6 @@ fn modulo<
 
     'check1'.print();
     let mut quotient =  *dividend / *divisor;
-    ((quotient.data).len()).print();
      'check2'.print();
 
     let mut res_data : Array<T> = array![];
@@ -60,7 +61,9 @@ fn modulo<
                 if *val % NumberTrait::<T>::one()  != NumberTrait::<T>::zero() {
                 'check3'.print();
                 let mut temp = NumberTrait::floor(*val);
-                res_data.append(temp);} else{
+                integers = true;
+                res_data.append(temp);} 
+                else{
                     res_data.append(*val);
                 }
             },
@@ -70,24 +73,15 @@ fn modulo<
         };
     };
 
-    // 'check4'.print();
-    // if res_data.len() != 0 {
-    //     'check4b'.print();
-    // quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
-    // }
-
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
 
     'check5'.print();
-    ((*dividend.data).len()).print();
-    ((*divisor.data).len()).print();
-    ((quotient.data).len()).print();
 
     let mut result = *dividend - quotient * *divisor;
 
     'check6'.print();
 
-    if fmod.is_some() && fmod.unwrap() == true {
+    if fmod.is_some() && fmod.unwrap() && integers == true {
 
         result = result * dividend.sign();
         'check7'.print();
