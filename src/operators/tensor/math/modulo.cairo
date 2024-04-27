@@ -48,6 +48,7 @@ fn modulo<
 
     'check1'.print();
     let mut quotient =  *dividend / *divisor;
+    ((quotient.data).len()).print();
      'check2'.print();
 
     let mut res_data : Array<T> = array![];
