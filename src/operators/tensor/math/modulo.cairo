@@ -69,13 +69,14 @@ fn modulo<
 
     'check4'.print();
     if res_data.len() != 0 {
+        'check4b'.print();
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
     }
 
     'check5'.print();
     ((*dividend.data).len()).print();
     ((*divisor.data).len()).print();
-    ((*quotient.data).len()).print();
+    ((quotient.data).len()).print();
 
     let mut result = *dividend - quotient * *divisor;
 
