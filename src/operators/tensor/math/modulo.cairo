@@ -13,14 +13,15 @@ use orion::operators::vec::{NullableVec, NullableVecImpl};
 fn modulo<
     T,
     MAG,
-    impl FTensor: TensorTrait<T>,
-    impl FNumber: NumberTrait<T, MAG>,
-    impl FTensorAdd: Add<Tensor<T>>,
-    impl FTensorSub: Sub<Tensor<T>>,
-    impl FTensorDiv: Div<Tensor<T>>,
-    impl FTensorMul: Mul<Tensor<T>>,
-    impl FCopy: Copy<T>,
-    impl FDrop: Drop<T>
+    +TensorTrait<T>,
+    +NumberTrait<T, MAG>,
+    +Add<Tensor<T>>,
+    +Sub<Tensor<T>>,
+    +Div<Tensor<T>>,
+    +Mul<Tensor<T>>,
+    +Copy<T>,
+    +Drop<T>,
+    +Rem<T>
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
     let mut dividend = self;
@@ -51,7 +52,7 @@ fn modulo<
         match quotient.data.pop_front() {  
             Option::Some(val) => {
 
-                if val % @NumberTrait::<T>::one()  != @NumberTrait::<T>::zero() {
+                if val % NumberTrait::<T>::one()  != NumberTrait::<T>::zero() {
                 let mut temp = NumberTrait::floor(*val);
                 res_data.append(temp);}
             },
