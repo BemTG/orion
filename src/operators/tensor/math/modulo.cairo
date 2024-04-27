@@ -73,9 +73,10 @@ fn modulo<
     }
 
     'check5'.print();
-    (dividend.len()).print();
-    (divisor.len()).print();
-    (quotient.len()).print();
+    (*dividend.data.at(0)).print();
+    // (dividend.len()).print();
+    // (divisor.len()).print();
+    // (quotient.len()).print();
 
     let mut result = *dividend - quotient * *divisor;
 
