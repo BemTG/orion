@@ -50,9 +50,8 @@ fn modulo<
     loop {
         match quotient.data.pop_front() {  
             Option::Some(val) => {
-                if val % 1 != 0{
-
                 
+                if val % NumberTrait::one()  != NumberTrait::zero() {
                 let mut temp = NumberTrait::floor(*val);
                 res_data.append(temp);}
             },
