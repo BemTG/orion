@@ -353,6 +353,10 @@ impl U32Tensor of TensorTrait<u32> {
         math::round::round(*self)
     }
 
+    fn floor(self: @Tensor<u32>) -> Tensor<u32> {
+        math::floor::floor(*self)
+    }
+
     fn reduce_l1(self: @Tensor<u32>, axis: usize, keepdims: bool) -> Tensor<u32> {
         math::reduce_l1::reduce_l1(self, axis, keepdims)
     }
