@@ -29,7 +29,7 @@ fn modulo<
     let mut dividend = self;
     let mut divisor = divisor;
 
-    let mut integers = false;
+    let mut fixedpointnumbers = false;
 
     match fmod {
             Option::Some(value) => { 
@@ -48,9 +48,7 @@ fn modulo<
                  }
         }
 
-    'check1'.print();
     let mut quotient =  *dividend / *divisor;
-     'check2'.print();
 
     let mut res_data : Array<T> = array![];
 
@@ -59,9 +57,8 @@ fn modulo<
             Option::Some(val) => {
 
                 if *val % NumberTrait::<T>::one()  != NumberTrait::<T>::zero() {
-                'check3'.print();
                 let mut temp = NumberTrait::floor(*val);
-                integers = true;
+                fixedpointnumbers = true;
                 res_data.append(temp);} 
                 else{
                     res_data.append(*val);
@@ -75,16 +72,10 @@ fn modulo<
 
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
 
-    'check5'.print();
-
     let mut result = *dividend - quotient * *divisor;
 
-    'check6'.print();
-
-    if fmod.is_some() && fmod.unwrap() && integers == true {
-
+    if fmod.is_some() && fmod.unwrap() && fixedpointnumbers == true {
         result = result * dividend.sign();
-        'check7'.print();
     }  
     
 
