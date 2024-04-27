@@ -60,7 +60,9 @@ fn modulo<
                 if *val % NumberTrait::<T>::one()  != NumberTrait::<T>::zero() {
                 'check3'.print();
                 let mut temp = NumberTrait::floor(*val);
-                res_data.append(temp);}
+                res_data.append(temp);} else{
+                    res_data.append(*val);
+                }
             },
             Option::None(_) => {
                 break;
@@ -68,11 +70,13 @@ fn modulo<
         };
     };
 
-    'check4'.print();
-    if res_data.len() != 0 {
-        'check4b'.print();
+    // 'check4'.print();
+    // if res_data.len() != 0 {
+    //     'check4b'.print();
+    // quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
+    // }
+
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
-    }
 
     'check5'.print();
     ((*dividend.data).len()).print();
