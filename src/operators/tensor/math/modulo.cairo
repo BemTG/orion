@@ -69,12 +69,12 @@ fn modulo<
 
     'check4'.print();
     if res_data.len() != 0 {
-    let floored_quotients = TensorTrait::<T>::new(*self.shape, res_data.span());
+    let quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
     }
 
     'check5'.print();
 
-    let mut result = *dividend - floored_quotients * *divisor;
+    let mut result = *dividend - quotient * *divisor;
 
     'check6'.print();
 
