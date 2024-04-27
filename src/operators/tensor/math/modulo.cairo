@@ -19,6 +19,7 @@ fn modulo<
     +Sub<Tensor<T>>,
     +Div<Tensor<T>>,
     +Mul<Tensor<T>>,
+    +PartialEq<T>,
     +Copy<T>,
     +Drop<T>,
     +Rem<T>
