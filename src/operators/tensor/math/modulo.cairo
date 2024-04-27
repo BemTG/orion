@@ -73,7 +73,7 @@ fn modulo<
     }
 
     'check5'.print();
-    (*dividend.data.at(0)).print();
+    (*dividend.data.len()).print();
     // (dividend.len()).print();
     // (divisor.len()).print();
     // (quotient.len()).print();
