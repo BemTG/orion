@@ -29,10 +29,27 @@ fn modulo<
     let mut dividend = self;
     let mut divisor = divisor;
 
-     let (dividend, divisor) = match fmod {
-        Option::Some(value) => (@self.abs(), @divisor.abs()),
-        _ => (self, divisor),
-        };
+    //  let (dividend, divisor) = match fmod {
+    //     Option::Some(value) => (@self.abs(), @divisor.abs()),
+    //     _ => (self, divisor),
+    //     };
+
+    match fmod {
+        Option::Some(value) => { 
+            if value == true {
+                dividend = @self.abs();
+                divisor = @divisor.abs();
+            }
+            else if value != false && value != true {
+            core::panic_with_felt252('invalid fmod') 
+            }
+            
+            },
+        Option::None => { 
+            dividend = self;
+            divisor = divisor;
+                }
+    }
 
     let mut quotient =  *dividend / *divisor;
 
