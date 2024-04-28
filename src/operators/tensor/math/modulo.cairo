@@ -30,7 +30,7 @@ fn modulo<
     let mut divisor = divisor;
 
     let (dividend, divisor) = match fmod {
-        Option::Some(value) => (@self.abs(), @divisor.abs()),
+        Option::Some(value) => if value ==true {(@self.abs(), @divisor.abs())},
         _ => (self, divisor),
         };
 
