@@ -29,27 +29,10 @@ fn modulo<
     let mut dividend = self;
     let mut divisor = divisor;
 
-    let dividend, divisor = match fmod {
-        Option::Some(value) => @self.abs(), @divisor.abs(),
-        _ => self, divisor,
+    let (dividend, divisor) = match fmod {
+        Option::Some(value) => (@self.abs(), @divisor.abs()),
+        _ => (self, divisor),
         };
-
-    // match fmod {
-    //         Option::Some(value) => { 
-    //             if value == true {
-    //               dividend = @self.abs();
-    //               divisor = @divisor.abs();
-    //             }
-    //             else if value != false && value != true {
-    //             core::panic_with_felt252('invalid fmod') 
-    //             }
-                
-    //             },
-    //         Option::None => { 
-    //             dividend = self;
-    //             divisor = divisor;
-    //              }
-    //     }
 
     let mut quotient =  *dividend / *divisor;
 
@@ -74,11 +57,11 @@ fn modulo<
 
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
 
-    let mut result = *dividend - quotient * *divisor;
+    let mut remainder = *dividend - quotient * *divisor;
 
     if fmod.is_some() && fmod.unwrap() {
-        result = result * dividend.sign();
+        remainder = remainder * dividend.sign();
     }  
     
-    return result;
+    return remainder;
 }
