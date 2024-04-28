@@ -29,24 +29,28 @@ fn modulo<
     let mut dividend = self;
     let mut divisor = divisor;
 
-    let mut fixedpointnumbers = false;
+    let (mut dividend, mut divisor) = match fmod {
+    Some(true) => (self.abs(), divisor.abs()),
+    Some(false) | None => (self, divisor),
+    _ => core::panic_with_felt252('invalid fmod'),
+};
 
-    match fmod {
-            Option::Some(value) => { 
-                if value == true {
-                  dividend = @self.abs();
-                  divisor = @divisor.abs();
-                }
-                else if value != false && value != true {
-                core::panic_with_felt252('invalid fmod') 
-                }
+    // match fmod {
+    //         Option::Some(value) => { 
+    //             if value == true {
+    //               dividend = @self.abs();
+    //               divisor = @divisor.abs();
+    //             }
+    //             else if value != false && value != true {
+    //             core::panic_with_felt252('invalid fmod') 
+    //             }
                 
-                },
-            Option::None => { 
-                dividend = self;
-                divisor = divisor;
-                 }
-        }
+    //             },
+    //         Option::None => { 
+    //             dividend = self;
+    //             divisor = divisor;
+    //              }
+    //     }
 
     let mut quotient =  *dividend / *divisor;
 
@@ -58,7 +62,6 @@ fn modulo<
 
                 if *val % NumberTrait::<T>::one()  != NumberTrait::<T>::zero() {
                 let mut temp = NumberTrait::floor(*val);
-                fixedpointnumbers = true;
                 res_data.append(temp);} 
                 else{
                     res_data.append(*val);
@@ -74,10 +77,9 @@ fn modulo<
 
     let mut result = *dividend - quotient * *divisor;
 
-    if fmod.is_some() && fmod.unwrap() && fixedpointnumbers == true {
+    if fmod.is_some() && fmod.unwrap() {
         result = result * dividend.sign();
     }  
     
-
     return result;
 }
