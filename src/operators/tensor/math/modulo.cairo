@@ -29,9 +29,9 @@ fn modulo<
     let mut dividend = self;
     let mut divisor = divisor;
 
-    let (dividend, divisor) = match fmod {
-        Option::Some(value) => (@self.abs(), @divisor.abs()),
-        _ => (self, divisor),
+    let dividend, divisor = match fmod {
+        Option::Some(value) => @self.abs(), @divisor.abs(),
+        _ => self, divisor,
         };
 
     // match fmod {
