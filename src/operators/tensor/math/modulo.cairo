@@ -71,7 +71,7 @@ fn modulo<
 
     let mut remainder = *dividend - quotient * *divisor;
 
-    if fmod.is_some() && fmod.unwrap() {
+    if fmod.is_some() && fmod.unwrap() == true {
         remainder = remainder * dividend.sign();
     }  
     
