@@ -38,7 +38,7 @@ fn modulo<
         Option::None => {}
     }
 
-    let mut quotient =  *dividend / *divisor;
+    let mut quotient =  dividend / divisor;
 
     let mut res_data : Array<T> = array![];
 
@@ -61,7 +61,7 @@ fn modulo<
 
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
 
-    let mut remainder = *dividend - quotient * *divisor;
+    let mut remainder = dividend - quotient * divisor;
 
     if fmod.is_some() && fmod.unwrap() == true {
         remainder = remainder * self.sign();
