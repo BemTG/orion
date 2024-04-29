@@ -32,10 +32,10 @@ fn modulo<
     match fmod {
         Option::Some(value) => { 
             if value == true {
-                dividend = @self.abs();
-                divisor = @divisor.abs();
+                dividend = self.abs();
+                divisor = divisor.abs();
             }},
-        Option::None => {};
+        Option::None => {}
     }
 
     let mut quotient =  *dividend / *divisor;
