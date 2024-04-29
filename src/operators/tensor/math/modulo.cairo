@@ -26,29 +26,16 @@ fn modulo<
     +Rem<T>,
 >( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) ->  Tensor<T> {
 
-    let mut dividend = self;
-    let mut divisor = divisor;
-
-    //  let (dividend, divisor) = match fmod {
-    //     Option::Some(value) => (@self.abs(), @divisor.abs()),
-    //     _ => (self, divisor),
-    //     };
+    let mut dividend = self.clone();
+    let mut divisor = divisor.clone();
 
     match fmod {
         Option::Some(value) => { 
             if value == true {
                 dividend = @self.abs();
                 divisor = @divisor.abs();
-            }
-            else if value != false && value != true {
-            core::panic_with_felt252('invalid fmod') 
-            }
-            
-            },
-        Option::None => { 
-            dividend = self;
-            divisor = divisor;
-                }
+            }},
+        Option::None => {};
     }
 
     let mut quotient =  *dividend / *divisor;
