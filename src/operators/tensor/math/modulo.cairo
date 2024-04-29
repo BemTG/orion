@@ -31,10 +31,10 @@ fn modulo<
 
     match fmod {
         Option::Some(value) => { 
-            // if value == true {
+            if value == true {
                 dividend = self.abs();
                 divisor = divisor.abs();
-            // }
+            }
             },
         Option::None => {}
     }
