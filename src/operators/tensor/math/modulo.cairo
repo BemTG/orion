@@ -31,17 +31,17 @@ fn modulo<
 
     match fmod {
         Option::Some(value) => { 
-            if value == true {
+            // if value == true {
                 dividend = self.abs();
                 divisor = divisor.abs();
-            }},
+            // }
+            },
         Option::None => {}
     }
 
     let mut quotient =  dividend / divisor;
 
     let mut res_data : Array<T> = array![];
-
     loop {
         match quotient.data.pop_front() {  
             Option::Some(val) => {
