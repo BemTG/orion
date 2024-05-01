@@ -11,12 +11,12 @@ use orion::operators::tensor::{FP16x16Tensor, FP16x16TensorAdd};
 
 #[test]
 #[available_gas(2000000000)]
-fn test_fp16x16_int_mod_broadcast() {
+fn test_fp16x16_mod_int_negative_signs() {
     let input_0 = input_0::input_0();
     let input_1 = input_1::input_1();
     let z_0 = output_0::output_0();
 
-    let y_0 = input_0.modulo( @input_1 , Option::None(()) );
+    let y_0 = input_0.modulo( @input_1 , Option::Some(false ));
 
     assert_eq(y_0, z_0);
 }

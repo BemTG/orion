@@ -40,6 +40,8 @@ fn modulo<
 
     let mut quotient = dividend / divisor;
 
+    'check quo'.print();
+
     let mut res_data : Array<T> = array![];
     loop {
         match quotient.data.pop_front() {
@@ -57,7 +59,11 @@ fn modulo<
         }
     };
 
+    'check quo2'.print();
+
     quotient = TensorTrait::<T>::new(*self.shape, res_data.span());
+
+    'check quo3'.print();
 
     let mut remainder = dividend - quotient * divisor;
 
