@@ -28,6 +28,8 @@ fn modulo<
     let mut dividend = self.clone();
     let mut divisor = divisor.clone();
 
+    'check0'.print();
+
     match fmod {
         Option::Some(item) => {
             if item == true {
@@ -37,6 +39,8 @@ fn modulo<
         },
         Option::None => {},
     }
+
+    'check1'.print();
 
     let mut quotient = dividend / divisor;
 
