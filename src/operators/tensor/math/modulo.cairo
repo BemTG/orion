@@ -42,7 +42,7 @@ fn modulo<
 
     'check1'.print();
 
-    let mut expanded_new_shape: Array<i32> = array![];
+    let mut expanded_new_shape: Array<usize> = array![];
     if dividend.shape.len() != divisor.shape.len() {
     let shape_diff = (dividend.shape.len() - divisor.shape.len()).abs();
     let mut i: usize = 0;
@@ -59,7 +59,7 @@ fn modulo<
     divisor.shape.len().print();
 
     if dividend.shape.len() < divisor.shape.len() {
-        let mut i: i32 = 0;
+        let mut i: usize = 0;
         loop {
             if i >= dividend.shape.len() {
                 break;
@@ -77,13 +77,13 @@ fn modulo<
             i += 1;
         };
 
-        dividend = dividend.reshape(expanded_new_shape.span(), false);
+        dividend = TensorTrait::<T>::new(expanded_new_shape.span(),  dividend.data);
         
 
     }
 
     if dividend.shape.len() > divisor.shape.len() {
-        let mut i: i32 = 0;
+        let mut i: usize = 0;
         loop {
             if i >= divisor.shape.len() {
                 break;
@@ -101,7 +101,7 @@ fn modulo<
             i += 1;
         };
         
-        divisor = divisor.reshape(expanded_new_shape.span(), false);
+        divisor = TensorTrait::<T>::new(expanded_new_shape.span(),  divisor.data);
 
     }
 
