@@ -55,13 +55,13 @@ fn modulo<
     };
 
     if dividend.shape.len() < divisor.shape.len() {
-        dividend = dividend.reshape(expanded_new_shape.span());
+        dividend = dividend.reshape(expanded_new_shape.span(), false);
         
 
     }
 
     if dividend.shape.len() > divisor.shape.len() {
-        divisor = divisor.reshape(expanded_new_shape.span());
+        divisor = divisor.reshape(expanded_new_shape.span(), false);
         
 
     }
