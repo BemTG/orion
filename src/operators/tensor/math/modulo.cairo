@@ -54,6 +54,10 @@ fn modulo<
         i += 1;
     };
 
+    'not_same'.print();
+    dividend.shape.len().print();
+    divisor.shape.len().print();
+
     if dividend.shape.len() < divisor.shape.len() {
         dividend = dividend.reshape(expanded_new_shape.span(), false);
         
