@@ -42,6 +42,32 @@ fn modulo<
 
     'check1'.print();
 
+    let mut expanded_new_shape: Array<usize> = array![];
+    if dividend.shape.len() != divisor.shape.len() {
+    let shape_diff = (dividend.shape.len() - divisor.len()).abs();
+    let mut i: usize = 0;
+    loop {
+        if i >= shape_diff {
+            break;
+        }
+        expanded_new_shape.append(1);
+        i += 1;
+    };
+
+    if dividend.shape.len() < divisor.shape.len() {
+        dividend = dividend.reshape(expanded_new_shape.span());
+        
+
+    }
+
+    if dividend.shape.len() > divisor.shape.len() {
+        divisor = divisor.reshape(expanded_new_shape.span());
+        
+
+    }
+
+    }
+
     let mut quotient = dividend / divisor;
 
     'check quo'.print();
