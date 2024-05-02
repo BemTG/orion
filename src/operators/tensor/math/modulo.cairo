@@ -59,7 +59,7 @@ fn modulo<
     divisor.shape.len().print();
 
     if dividend.shape.len() < divisor.shape.len() {
-        let mut i: i32 = 0;
+        let mut i: usize = 0;
         loop {
             if i >= dividend.shape.len() {
                 break;
@@ -68,7 +68,7 @@ fn modulo<
             i += 1;
         };
 
-        let mut i: i32 = 0;
+        let mut i: usize = 0;
         loop {
             if i >= shape_diff {
                 break;
@@ -83,7 +83,7 @@ fn modulo<
     }
 
     if dividend.shape.len() > divisor.shape.len() {
-        let mut i: i32 = 0;
+        let mut i: usize = 0;
         loop {
             if i >= divisor.shape.len() {
                 break;
@@ -92,7 +92,7 @@ fn modulo<
             i += 1;
         };
 
-        let mut i: i32 = 0;
+        let mut i: usize = 0;
         loop {
             if i >= shape_diff {
                 break;
