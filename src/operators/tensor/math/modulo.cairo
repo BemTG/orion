@@ -54,6 +54,8 @@ fn modulo<
         i += 1;
     };
 
+    expanded_new_shape.append(1);
+
     'not_same'.print();
     dividend.shape.len().print();
     divisor.shape.len().print();
