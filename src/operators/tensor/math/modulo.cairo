@@ -54,21 +54,54 @@ fn modulo<
         i += 1;
     };
 
-    expanded_new_shape.append(1);
-
     'not_same'.print();
     dividend.shape.len().print();
     divisor.shape.len().print();
 
     if dividend.shape.len() < divisor.shape.len() {
+        let mut i: usize = 0;
+        loop {
+            if i >= dividend.shape.len() {
+                break;
+            }
+            expanded_new_shape.append(dividend.shape.at(i));
+            i += 1;
+        };
+
+        let mut i: usize = 0;
+        loop {
+            if i >= shape_diff {
+                break;
+            }
+            expanded_new_shape.append(1);
+            i += 1;
+        };
+
         dividend = dividend.reshape(expanded_new_shape.span(), false);
         
 
     }
 
     if dividend.shape.len() > divisor.shape.len() {
-        divisor = divisor.reshape(expanded_new_shape.span(), false);
+        let mut i: usize = 0;
+        loop {
+            if i >= divisor.shape.len() {
+                break;
+            }
+            expanded_new_shape.append(divisor.shape.at(i));
+            i += 1;
+        };
+
+        let mut i: usize = 0;
+        loop {
+            if i >= shape_diff {
+                break;
+            }
+            expanded_new_shape.append(1);
+            i += 1;
+        };
         
+        divisor = divisor.reshape(expanded_new_shape.span(), false);
 
     }
 
