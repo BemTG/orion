@@ -42,7 +42,7 @@ fn modulo<
 
     'check1'.print();
 
-    let mut expanded_new_shape: Array<usize> = array![];
+    let mut expanded_new_shape: Array<i32> = array![];
     if dividend.shape.len() != divisor.shape.len() {
     let shape_diff = (dividend.shape.len() - divisor.shape.len()).abs();
     let mut i: usize = 0;
