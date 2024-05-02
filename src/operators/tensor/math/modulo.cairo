@@ -70,6 +70,10 @@ fn modulo<
 
     }
 
+    'fixed'.print();
+    dividend.shape.len().print();
+    divisor.shape.len().print();
+
     }
 
     let mut quotient = dividend / divisor;
