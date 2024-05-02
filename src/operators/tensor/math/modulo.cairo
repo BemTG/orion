@@ -64,7 +64,7 @@ fn modulo<
             if i >= dividend.shape.len() {
                 break;
             }
-            expanded_new_shape.append(dividend.shape.at(i));
+            expanded_new_shape.append(*dividend.shape.at(i));
             i += 1;
         };
 
@@ -88,7 +88,7 @@ fn modulo<
             if i >= divisor.shape.len() {
                 break;
             }
-            expanded_new_shape.append(divisor.shape.at(i ));
+            expanded_new_shape.append(*divisor.shape.at(i ));
             i += 1;
         };
 
