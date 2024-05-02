@@ -44,7 +44,7 @@ fn modulo<
 
     let mut expanded_new_shape: Array<usize> = array![];
     if dividend.shape.len() != divisor.shape.len() {
-    let shape_diff = (dividend.shape.len() - divisor.len()).abs();
+    let shape_diff = (dividend.shape.len() - divisor.shape.len()).abs();
     let mut i: usize = 0;
     loop {
         if i >= shape_diff {
