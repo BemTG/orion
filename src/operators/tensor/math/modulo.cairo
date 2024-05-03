@@ -72,9 +72,7 @@ fn modulo<
         dividend = TensorTrait::<T>::new(expanded_new_shape.span(),  dividend.data);
         
 
-    }
-
-    if dividend.shape.len() > divisor.shape.len() {
+    } else {
         let mut i: usize = 0;
         loop {
             if i >= divisor.shape.len() {
