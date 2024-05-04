@@ -331,8 +331,10 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
         result.append(broadcasted_dim);
         broadcasted_dim.print();
     };
-    result.reverse().span();
     'passed broadcast_shape'.print();
+    result.reverse().span()
+    'done'.print()
+    
 }
 
 /// Substitute a value in a shape at a given index
