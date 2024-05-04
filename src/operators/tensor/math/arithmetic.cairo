@@ -215,7 +215,7 @@ fn mul<
     'mulprocess check1'.print(); 
     let mut n: usize = 0;
     while n != num_elements {
-        (*broadcasted_shape.at(n)).print();
+        // (*broadcasted_shape.at(n)).print();
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
