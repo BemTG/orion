@@ -2,6 +2,8 @@ use orion::numbers::NumberTrait;
 use orion::operators::tensor::core::{Tensor, TensorTrait, unravel_index,};
 use orion::operators::tensor::helpers::{broadcast_shape, broadcast_index_mapping, len_from_shape,};
 use orion::utils::saturate;
+use core::debug::PrintTrait;
+
 
 fn add<
     T, impl TTensor: TensorTrait<T>, impl TAdd: Add<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
