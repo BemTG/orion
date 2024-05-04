@@ -214,8 +214,8 @@ fn mul<
     'the broadcast shape'.print();
     (*broadcasted_shape.at(0)).print();
     (*broadcasted_shape.at(1)).print();
-    (*broadcasted_shape.at(2)).print();
-    (*broadcasted_shape.at(3)).print();
+    // (*broadcasted_shape.at(2)).print();
+    // (*broadcasted_shape.at(3)).print();
 
    
     'mulprocess check1'.print(); 
@@ -223,6 +223,7 @@ fn mul<
     while n != num_elements {
         // (*broadcasted_shape.at(n)).print();
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
+        'mulprocess check2'.print(); 
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
