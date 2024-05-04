@@ -200,12 +200,13 @@ fn mul<
 >(
     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
+     'mul process'.print();
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = array![];
 
     let num_elements = len_from_shape(broadcasted_shape);
 
-    'mul process'.print();
+   
 
     let mut n: usize = 0;
     while n != num_elements {
