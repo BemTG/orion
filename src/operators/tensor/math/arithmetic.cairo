@@ -225,6 +225,9 @@ fn mul<
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
         'mulprocess check2'.print(); 
 
+        'indices_broadcasted'.print();
+        indices_broadcasted.len().print();
+
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
         'mulprocess check3'.print();
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
