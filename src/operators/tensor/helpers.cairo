@@ -2,6 +2,7 @@ use alexandria_data_structures::array_ext::ArrayTraitExt;
 
 use orion::utils::u32_max;
 use orion::operators::tensor::{core::{Tensor, TensorTrait, stride}, BoolTensor};
+use core::debug::PrintTrait;
 
 /// Calculates the number of elements in a tensor given its shape.
 ///
@@ -59,13 +60,13 @@ fn check_compatibility(mut shape_1: Span<usize>, mut shape_2: Span<usize>) {
         let dim_1 = if iter_1 > 0 {
             *shape_1[iter_1 - 1]
         } else {
-            1
+            1;
             'assuming_dim_1'.print();
         };
         let dim_2 = if iter_2 > 0 {
             *shape_2[iter_2 - 1]
         } else {
-            1
+            1;
             'assuming_dim_1'.print();
         };
 
