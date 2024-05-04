@@ -331,9 +331,9 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
         result.append(broadcasted_dim);
         broadcasted_dim.print();
     };
-    'passed broadcast_shape'.print();
-    result.reverse().span()
-    'done'.print()
+    // 'passed broadcast_shape'.print();
+    result.span();
+    // 'done'.print()
     
 }
 
