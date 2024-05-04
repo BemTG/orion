@@ -226,7 +226,9 @@ fn mul<
         'mulprocess check2'.print(); 
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
+        'mulprocess check3'.print();
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
+        'mulprocess check4'.print();
 
         result.append(*(*self.data)[indices_self] * *(*other.data)[indices_other]);
 
