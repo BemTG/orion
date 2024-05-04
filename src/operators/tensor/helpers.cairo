@@ -80,6 +80,8 @@ fn check_compatibility(mut shape_1: Span<usize>, mut shape_2: Span<usize>) {
         if iter_2 > 0 {
             iter_2 -= 1;
         }
+
+        'comp check done'.print();
     }
 }
 
