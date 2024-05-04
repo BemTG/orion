@@ -58,8 +58,7 @@ fn check_compatibility(mut shape_1: Span<usize>, mut shape_2: Span<usize>) {
     while iter_1 > 0 || iter_2 > 0 {
         // Get the current dimension for each shape, defaulting to 1 if we've run out of dimensions
         let dim_1 = if iter_1 > 0 {
-            *shape_1[iter_1 - 1];
-            'no_exp'.print();
+            *shape_1[iter_1 - 1]
         } else {
             1
         };
