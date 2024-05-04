@@ -8,11 +8,11 @@ fn input_0() -> Tensor<FP8x23> {
     shape.append(6);
 
     let mut data = ArrayTrait::new();
-    data.append(FP8x23 { mag: 65831776, sign: true });
-    data.append(FP8x23 { mag: 69913376, sign: false });
-    data.append(FP8x23 { mag: 79817040, sign: false });
-    data.append(FP8x23 { mag: 79545464, sign: false });
-    data.append(FP8x23 { mag: 68305112, sign: true });
-    data.append(FP8x23 { mag: 24939230, sign: false });
+    data.append(FP8x23 { mag: 68979496, sign: true });
+    data.append(FP8x23 { mag: 79914952, sign: true });
+    data.append(FP8x23 { mag: 46710444, sign: false });
+    data.append(FP8x23 { mag: 1568096, sign: false });
+    data.append(FP8x23 { mag: 74351168, sign: false });
+    data.append(FP8x23 { mag: 46496588, sign: false });
     TensorTrait::new(shape.span(), data.span())
 }

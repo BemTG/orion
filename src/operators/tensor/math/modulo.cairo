@@ -42,64 +42,64 @@ fn modulo<
 
     'check1'.print();
 
-    let mut expanded_new_shape: Array<usize> = array![];
-    if dividend.shape.len() != divisor.shape.len() {
-    let shape_diff = (dividend.shape.len() - divisor.shape.len()).abs();
+    // let mut expanded_new_shape: Array<usize> = array![];
+    // if dividend.shape.len() != divisor.shape.len() {
+    // let shape_diff = (dividend.shape.len() - divisor.shape.len()).abs();
 
-    'not_same'.print();
-    dividend.shape.len().print();
-    divisor.shape.len().print();
+    // 'not_same'.print();
+    // dividend.shape.len().print();
+    // divisor.shape.len().print();
 
-    if dividend.shape.len() < divisor.shape.len() {
-        let mut i: usize = 0;
-        loop {
-            if i >= dividend.shape.len() {
-                break;
-            }
-            expanded_new_shape.append(*dividend.shape.at(i));
-            i += 1;
-        };
+    // if dividend.shape.len() < divisor.shape.len() {
+    //     let mut i: usize = 0;
+    //     loop {
+    //         if i >= dividend.shape.len() {
+    //             break;
+    //         }
+    //         expanded_new_shape.append(*dividend.shape.at(i));
+    //         i += 1;
+    //     };
 
-        let mut i: usize = 0;
-        loop {
-            if i >= shape_diff {
-                break;
-            }
-            expanded_new_shape.append(1);
-            i += 1;
-        };
+    //     let mut i: usize = 0;
+    //     loop {
+    //         if i >= shape_diff {
+    //             break;
+    //         }
+    //         expanded_new_shape.append(1);
+    //         i += 1;
+    //     };
 
-        dividend = TensorTrait::<T>::new(expanded_new_shape.span(),  dividend.data);
+    //     dividend = TensorTrait::<T>::new(expanded_new_shape.span(),  dividend.data);
         
 
-    } else {
-        let mut i: usize = 0;
-        loop {
-            if i >= divisor.shape.len() {
-                break;
-            }
-            expanded_new_shape.append(*divisor.shape.at(i ));
-            i += 1;
-        };
+    // } else {
+    //     let mut i: usize = 0;
+    //     loop {
+    //         if i >= divisor.shape.len() {
+    //             break;
+    //         }
+    //         expanded_new_shape.append(*divisor.shape.at(i ));
+    //         i += 1;
+    //     };
 
-        let mut i: usize = 0;
-        loop {
-            if i >= shape_diff {
-                break;
-            }
-            expanded_new_shape.append(1);
-            i += 1;
-        };
+    //     let mut i: usize = 0;
+    //     loop {
+    //         if i >= shape_diff {
+    //             break;
+    //         }
+    //         expanded_new_shape.append(1);
+    //         i += 1;
+    //     };
         
-        divisor = TensorTrait::<T>::new(expanded_new_shape.span(),  divisor.data);
+    //     divisor = TensorTrait::<T>::new(expanded_new_shape.span(),  divisor.data);
 
-    }
+    // }
 
-    'fixed'.print();
-    dividend.shape.len().print();
-    divisor.shape.len().print();
+    // 'fixed'.print();
+    // dividend.shape.len().print();
+    // divisor.shape.len().print();
 
-    }
+    // }
 
     let mut quotient = dividend / divisor;
 

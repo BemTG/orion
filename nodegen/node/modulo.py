@@ -93,7 +93,7 @@ class Modulo(RunAll):
 
         def fp8x23_int_mod_broadcast():
             x = np.arange(0, 30).reshape([3, 2, 5]).astype(np.int32)
-            y = np.array([7]).astype(np.int32)
+            y = np.array(7).astype(np.int32)
             z = np.mod(x, y)
             fmod_ = None
 
@@ -210,7 +210,7 @@ class Modulo(RunAll):
 
         def fp16x16_int_mod_broadcast():
             x = np.arange(0, 30).reshape([3, 2, 5]).astype(np.int32)
-            y = np.array([7]).astype(np.int32)
+            y = np.array(7).astype(np.int32)
             z = np.mod(x, y)
             fmod_ = None
 
@@ -262,7 +262,7 @@ class Modulo(RunAll):
 
         def uint32_mod_broadcast():
             x = np.arange(0, 30).reshape([3, 2, 5]).astype(np.int32)
-            y = np.array([7]).astype(np.int32)
+            y = np.array(7).astype(np.int32)
             z = np.mod(x, y)
             fmod_ = None
 

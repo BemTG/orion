@@ -4,10 +4,10 @@ mod output_0;
 
 
 use orion::operators::tensor::{TensorTrait, Tensor};
-use orion::operators::tensor::U32TensorPartialEq;
 use orion::operators::tensor::{U32Tensor, U32TensorAdd};
-use core::array::{ArrayTrait, SpanTrait};
 use orion::utils::{assert_eq, assert_seq_eq};
+use orion::operators::tensor::U32TensorPartialEq;
+use core::array::{ArrayTrait, SpanTrait};
 
 #[test]
 #[available_gas(2000000000)]
