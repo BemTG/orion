@@ -230,6 +230,12 @@ fn mul<
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
         'mulprocess check4'.print();
 
+        'indices_self'.print();
+        indices_self.print();
+
+        'indices_other'.print();
+        indices_other.print();
+
         result.append(*(*self.data)[indices_self] * *(*other.data)[indices_other]);
 
         n += 1;
