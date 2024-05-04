@@ -333,7 +333,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
     };
     // 'passed broadcast_shape'.print();
     result.reverse().span()
-    // 'done'.print()
+    'done'.print()
     
 }
 
