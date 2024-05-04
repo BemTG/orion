@@ -316,10 +316,11 @@ fn find_axis(mut axes: Span<usize>, target_axis: usize) -> usize {
 /// * A Span of usize representing the broadcasted shape.
 fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usize> {
     check_compatibility(shape1, shape2);
-    'broadcasting shape'.print();
+    'passed compatibility'.print();
     let mut result: Array<usize> = array![];
 
     while !shape1.is_empty() || !shape2.is_empty() {
+        'broadcasting process'.print();
         let dim1 = *shape1.pop_back().unwrap_or(@1);
         let dim2 = *shape2.pop_back().unwrap_or(@1);
 
