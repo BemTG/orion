@@ -208,6 +208,9 @@ fn mul<
 
     let num_elements = len_from_shape(broadcasted_shape);
 
+    'ele_size'.print();
+    num_elements.print();
+
    
     'mulprocess check1'.print(); 
     let mut n: usize = 0;
