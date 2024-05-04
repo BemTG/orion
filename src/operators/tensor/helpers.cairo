@@ -332,6 +332,7 @@ fn broadcast_shape(mut shape1: Span<usize>, mut shape2: Span<usize>) -> Span<usi
         broadcasted_dim.print();
     };
     'passed broadcast_shape'.print();
+    result.reverse().len().print();
     result.reverse().span()
     
 }
