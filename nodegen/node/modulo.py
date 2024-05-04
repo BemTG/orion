@@ -106,7 +106,7 @@ class Modulo(RunAll):
 
         def fp8x23_float_mod_broadcast():
             x = np.arange(0, 30).reshape([3, 2, 5]).astype(np.float32)
-            y = np.array([7]).astype(np.float32)
+            y = np.array(7).astype(np.float32)
             z = np.fmod(x, y)
             fmod_ = "true"
 
@@ -223,7 +223,7 @@ class Modulo(RunAll):
 
         def fp16x16_float_mod_broadcast():
             x = np.arange(0, 30).reshape([3, 2, 5]).astype(np.float32)
-            y = np.array([7]).astype(np.float32)
+            y = np.array(7).astype(np.float32)
             z = np.fmod(x, y)
             fmod_ = "true"
 

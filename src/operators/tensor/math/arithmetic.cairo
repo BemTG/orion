@@ -205,6 +205,8 @@ fn mul<
 
     let num_elements = len_from_shape(broadcasted_shape);
 
+    'mul process'.print();
+
     let mut n: usize = 0;
     while n != num_elements {
         let indices_broadcasted = unravel_index(n, broadcasted_shape);
