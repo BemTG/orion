@@ -12,6 +12,7 @@ use orion::operators::tensor::implementations::{
 use orion::numbers::fixed_point::implementations::fp16x16::math::trig::PI;
 
 use orion::numbers::fixed_point::implementations::fp16x16wide::core::FP16x16W;
+use core::debug::PrintTrait;
 
 
 impl FP16x16Tensor of TensorTrait<FP16x16> {
@@ -691,6 +692,7 @@ impl FP16x16TensorMul of Mul<Tensor<FP16x16>> {
     /// # Returns
     /// * A `Tensor<FP16x16>` instance representing the result of the element-wise multiplication.
     fn mul(lhs: Tensor<FP16x16>, rhs: Tensor<FP16x16>) -> Tensor<FP16x16> {
+        'mul process'.print();
         math::arithmetic::mul(@lhs, @rhs)
     }
 }
