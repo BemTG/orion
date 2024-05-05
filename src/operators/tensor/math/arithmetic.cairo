@@ -238,6 +238,7 @@ fn mul<
         (*other.shape).len().print();
         'other shape val'.print();
         (*(*other.shape).at(0)).print();
+        (*(*other.shape).at(1)).print();
 
         'indices_self'.print();
         indices_self.print();
