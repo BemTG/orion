@@ -233,7 +233,10 @@ fn mul<
         (*indices_broadcasted.at(0)).print();
         (*indices_broadcasted.at(1)).print();
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
-        'mulprocess check4'.print();
+        'the other shape_shape'.print();
+        'other shape len'.print();
+        other.shape.len();
+        (*other.shape.at(0)).print();
 
         'indices_self'.print();
         indices_self.print();
