@@ -208,12 +208,12 @@ fn mul<
 
     let num_elements = len_from_shape(broadcasted_shape);
 
-    'ele_size'.print();
-    num_elements.print();
+    // 'ele_size'.print();
+    // num_elements.print();
 
-    'the broadcast shape'.print();
-    (*broadcasted_shape.at(0)).print();
-    (*broadcasted_shape.at(1)).print();
+    // 'the broadcast shape'.print();
+    // (*broadcasted_shape.at(0)).print();
+    // (*broadcasted_shape.at(1)).print();
     // (*broadcasted_shape.at(2)).print();
     // (*broadcasted_shape.at(3)).print();
 
@@ -235,17 +235,17 @@ fn mul<
         // (*indices_broadcasted.at(2)).print();
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
         'the other shape_shape'.print();
-        'other shape len'.print();
+        // 'other shape len'.print();
         (*other.shape).len().print();
         // 'other shape val'.print();
         // (*(*other.shape).at(0)).print();
         // (*(*other.shape).at(1)).print();
 
-        'indices_self'.print();
-        indices_self.print();
+        // 'indices_self'.print();
+        // indices_self.print();
 
-        'indices_other'.print();
-        indices_other.print();
+        // 'indices_other'.print();
+        // indices_other.print();
 
         result.append(*(*self.data)[indices_self] * *(*other.data)[indices_other]);
 
