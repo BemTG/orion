@@ -235,8 +235,8 @@ fn mul<
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
         'the other shape_shape'.print();
         'other shape len'.print();
-        *(*other.shape).len();
-        ((*other.shape).at(0)).print();
+        *(other.shape).len();
+        *((*other.shape).at(0)).print();
 
         'indices_self'.print();
         indices_self.print();
