@@ -107,6 +107,7 @@ fn broadcast_index_mapping(mut shape: Span<usize>, mut indices: Span<usize>) -> 
 
 
 fn broadcast_index_mapping_equal_shape(mut shape: Span<usize>, mut indices: Span<usize>) -> usize {
+    'equal_shape'.print();
     let mut result = 0_usize;
     let mut stride = stride(shape);
 
@@ -129,6 +130,7 @@ fn broadcast_index_mapping_equal_shape(mut shape: Span<usize>, mut indices: Span
 fn broadcast_index_mapping_non_equal_shape(
     mut shape: Span<usize>, mut indices: Span<usize>
 ) -> usize {
+    'non_equal_shape'.print();
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
 
