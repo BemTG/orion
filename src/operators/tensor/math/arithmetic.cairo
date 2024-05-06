@@ -211,11 +211,11 @@ fn mul<
     'ele_size'.print();
     num_elements.print();
 
-    // 'the broadcast shape'.print();
-    // (*broadcasted_shape.at(0)).print();
-    // (*broadcasted_shape.at(1)).print();
-    // (*broadcasted_shape.at(2)).print();
-    // (*broadcasted_shape.at(3)).print();
+    'the broadcast shape ----'.print();
+    (*broadcasted_shape.at(0)).print();
+    (*broadcasted_shape.at(1)).print();
+    (*broadcasted_shape.at(2)).print();
+    (*broadcasted_shape.at(3)).print();
 
    
     // 'mulprocess check1'.print(); 
