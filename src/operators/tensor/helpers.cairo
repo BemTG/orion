@@ -134,6 +134,9 @@ fn broadcast_index_mapping_non_equal_shape(
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
 
+    'the stride'.print();
+    stride.print();
+
     // Calculate the offset to align indices with the rightmost dimensions of the shape
     let mut offset = if shape.len() > indices.len() {
         shape.len() - indices.len()
