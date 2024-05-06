@@ -214,8 +214,8 @@ fn mul<
     'the broadcast shape ----'.print();
     (*broadcasted_shape.at(0)).print();
     (*broadcasted_shape.at(1)).print();
-    (*broadcasted_shape.at(2)).print();
-    (*broadcasted_shape.at(3)).print();
+    // (*broadcasted_shape.at(2)).print();
+    // (*broadcasted_shape.at(3)).print();
 
    
     // 'mulprocess check1'.print(); 
@@ -228,11 +228,13 @@ fn mul<
         'indices_broadcasted_len'.print();
         indices_broadcasted.len().print();
 
+        'indices_broadcasted check+++'.print();
+        (*indices_broadcasted.at(0)).print();
+        (*indices_broadcasted.at(1)).print();
+        (*indices_broadcasted.at(2)).print();
+
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
-        // 'mulprocess check3'.print();
-        // (*indices_broadcasted.at(0)).print();
-        // (*indices_broadcasted.at(1)).print();
-        // (*indices_broadcasted.at(2)).print();
+        
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
         'the other shape_shape'.print();
         // 'other shape len'.print();
