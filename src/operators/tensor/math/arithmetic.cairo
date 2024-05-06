@@ -231,7 +231,7 @@ fn mul<
         'indices_broadcasted check+++'.print();
         (*indices_broadcasted.at(0)).print();
         (*indices_broadcasted.at(1)).print();
-        (*indices_broadcasted.at(2)).print();
+        // (*indices_broadcasted.at(2)).print();
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
         
