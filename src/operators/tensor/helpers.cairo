@@ -167,6 +167,12 @@ fn broadcast_index_mapping_non_equal_shape(
                         .unwrap_or(@0) // Use actual index value or 0 if indices are exhausted
                 };
 
+                'index val'.print();
+                index_val.print();
+
+                'stride val'.print();
+                (*stride_val).print();
+
                 let index = index_val * *stride_val;
                 result += index;
 
