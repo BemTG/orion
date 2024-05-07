@@ -127,33 +127,95 @@ fn broadcast_index_mapping_equal_shape(mut shape: Span<usize>, mut indices: Span
     result
 }
 
+// fn broadcast_index_mapping_non_equal_shape(
+//     mut shape: Span<usize>, mut indices: Span<usize>
+// ) -> usize {
+//     'non_equal_shape'.print();
+//     // if shape.len() == 1 {
+//     //     shape.pop_front();
+//     // };
+
+// //     if shape.len() == 1 &&  indices.len() > 1{
+// //   match shape.pop_back() {
+// //             Option::Some(_) => {},
+// //     Option::None => { }
+// //   }
+// // }
+    
+//     let mut result = 0_usize;
+//     let mut stride = stride(shape.clone());
+
+//     // 'shape_len_len--'.print();
+//     // shape.len().print();
+
+//     // 'indices_len_len--'.print();
+//     // indices.len().print();
+
+//     // 'the stride'.print();
+//     // stride.len().print();
+//     // (*stride.at(0)).print();
+
+//     // Calculate the offset to align indices with the rightmost dimensions of the shape
+//     let mut offset = if shape.len() > indices.len() {
+//         shape.len() - indices.len()
+//     } else {
+//         0
+//     };
+
+    
+
+//     // 'offset val'.print();
+//     // offset.print();
+
+//     loop {
+//         match shape.pop_back() {
+//             Option::Some(_) => {
+//                 let stride_val = stride
+//                     .pop_back()
+//                     .unwrap_or(@1); // Default stride for non-existent dimensions is 1
+
+//                 // Calculate the index, using 0 for dimensions beyond the length of indices
+//                 let index_val = if offset > 0 {
+//                     'ka'.print();
+//                     offset -= 1; // Decrement offset until we align indices with the shape
+//                     0 // Use 0 for indices beyond the length of the indices span
+//                 } else {
+//                     'ki'.print();
+//                     *indices
+//                         .pop_back()
+//                         .unwrap_or(@0) // Use actual index value or 0 if indices are exhausted
+//                 };
+
+//                 'index val'.print();
+//                 index_val.print();
+
+//                 'stride val'.print();
+//                 (*stride_val).print();
+
+//                 let index = index_val * *stride_val;
+//                 result += index;
+
+//                 'index val'.print();
+//                 index_val.print();
+
+//                 'stride val'.print();
+//                 (*stride_val).print();
+
+//                 'result val'.print();
+//                 result.print();
+//             },
+//             Option::None => { break; }
+//         };
+//     };
+
+//     result
+// }
+
 fn broadcast_index_mapping_non_equal_shape(
     mut shape: Span<usize>, mut indices: Span<usize>
 ) -> usize {
-    'non_equal_shape'.print();
-    // if shape.len() == 1 {
-    //     shape.pop_front();
-    // };
-
-    if shape.len() == 1 &&  indices.len() > 1{
-  match shape.pop_back() {
-            Option::Some(_) => {},
-    Option::None => { }
-  }
-}
-    
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
-
-    'shape_len_len--'.print();
-    shape.len().print();
-
-    'indices_len_len--'.print();
-    indices.len().print();
-
-    'the stride'.print();
-    stride.len().print();
-    // (*stride.at(0)).print();
 
     // Calculate the offset to align indices with the rightmost dimensions of the shape
     let mut offset = if shape.len() > indices.len() {
@@ -161,11 +223,6 @@ fn broadcast_index_mapping_non_equal_shape(
     } else {
         0
     };
-
-    
-
-    'offset val'.print();
-    offset.print();
 
     loop {
         match shape.pop_back() {
@@ -176,33 +233,16 @@ fn broadcast_index_mapping_non_equal_shape(
 
                 // Calculate the index, using 0 for dimensions beyond the length of indices
                 let index_val = if offset > 0 {
-                    'ka'.print();
                     offset -= 1; // Decrement offset until we align indices with the shape
                     0 // Use 0 for indices beyond the length of the indices span
                 } else {
-                    'ki'.print();
                     *indices
                         .pop_back()
                         .unwrap_or(@0) // Use actual index value or 0 if indices are exhausted
                 };
 
-                'index val'.print();
-                index_val.print();
-
-                'stride val'.print();
-                (*stride_val).print();
-
                 let index = index_val * *stride_val;
                 result += index;
-
-                'index val'.print();
-                index_val.print();
-
-                'stride val'.print();
-                (*stride_val).print();
-
-                'result val'.print();
-                result.print();
             },
             Option::None => { break; }
         };
