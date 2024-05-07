@@ -131,7 +131,7 @@ fn broadcast_index_mapping_non_equal_shape(
 ) -> usize {
 
 
-    if shape.len() == 1  && shape[0] == 1 && indices.len() > 1 {
+    if shape.len() == 1  && shape.at(0) == 1 && indices.len() > 1 {
         shape.append(1);
         }
 
