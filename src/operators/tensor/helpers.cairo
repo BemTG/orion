@@ -157,9 +157,11 @@ fn broadcast_index_mapping_non_equal_shape(
 
                 // Calculate the index, using 0 for dimensions beyond the length of indices
                 let index_val = if offset > 0 {
+                    'ka'.print();
                     offset -= 1; // Decrement offset until we align indices with the shape
                     0 // Use 0 for indices beyond the length of the indices span
                 } else {
+                    'ki'.print();
                     *indices
                         .pop_back()
                         .unwrap_or(@0) // Use actual index value or 0 if indices are exhausted
