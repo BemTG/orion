@@ -164,7 +164,7 @@ fn broadcast_index_mapping_non_equal_shape(
                     'ki'.print();
                     *indices
                         .pop_back()
-                        .unwrap_or(@0) // Use actual index value or 0 if indices are exhausted
+                        .unwrap_or(@1) // Use actual index value or 0 if indices are exhausted
                 };
 
                 'index val'.print();
