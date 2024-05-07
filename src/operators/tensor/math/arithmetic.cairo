@@ -200,7 +200,6 @@ fn mul<
 >(
     self: @Tensor<T>, other: @Tensor<T>
 ) -> Tensor<T> {
-     'mulprocess'.print(); 
     let broadcasted_shape = broadcast_shape(*self.shape, *other.shape);
     let mut result = array![];
 
