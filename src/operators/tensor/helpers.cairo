@@ -129,6 +129,12 @@ fn broadcast_index_mapping_equal_shape(mut shape: Span<usize>, mut indices: Span
 fn broadcast_index_mapping_non_equal_shape(
     mut shape: Span<usize>, mut indices: Span<usize>
 ) -> usize {
+
+
+    if shape.len() == 1  && shape[0] == 1 && indices.len() > 1 {
+        shape.append(1);
+        }
+
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
 
