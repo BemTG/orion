@@ -165,6 +165,12 @@ fn broadcast_index_mapping_non_equal_shape(
                 let index = index_val * *stride_val;
                 result += index;
 
+                'index val'.print();
+                index_val.print();
+
+                'stride val'.print();
+                stride_val.print();
+
                 'result val'.print();
                 result.print();
             },
