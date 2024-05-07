@@ -145,6 +145,9 @@ fn broadcast_index_mapping_non_equal_shape(
         0
     };
 
+    'offset val'.print();
+    (*offset).print();
+
     loop {
         match shape.pop_back() {
             Option::Some(_) => {
