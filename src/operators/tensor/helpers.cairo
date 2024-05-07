@@ -134,6 +134,14 @@ fn broadcast_index_mapping_non_equal_shape(
     if shape.len() == 1 {
         shape.pop_front();
     };
+
+    if shape.len() == 1 {
+  match shape.pop_front() {
+    Some(_) => {}, 
+    None => {  }
+  }
+}
+    
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
 
