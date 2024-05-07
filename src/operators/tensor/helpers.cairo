@@ -151,6 +151,10 @@ fn broadcast_index_mapping_non_equal_shape(
         0
     };
 
+    if shape.len() == 1 {
+        shape.pop_front();
+    }
+
     'offset val'.print();
     offset.print();
 
