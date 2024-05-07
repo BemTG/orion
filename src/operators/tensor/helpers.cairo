@@ -146,7 +146,7 @@ fn broadcast_index_mapping_non_equal_shape(
     };
 
     'offset val'.print();
-    (*offset).print();
+    offset.print();
 
     loop {
         match shape.pop_back() {
