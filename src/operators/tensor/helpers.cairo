@@ -135,7 +135,7 @@ fn broadcast_index_mapping_non_equal_shape(
     //     shape.pop_front();
     // };
 
-    if shape.len() == 1 {
+    if shape.len() == 1 &&  indices.len() > 1{
   match shape.pop_back() {
             Option::Some(_) => {},
     Option::None => { }
