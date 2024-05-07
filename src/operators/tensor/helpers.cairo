@@ -169,7 +169,7 @@ fn broadcast_index_mapping_non_equal_shape(
                 index_val.print();
 
                 'stride val'.print();
-                *stride_val.print();
+                (*stride_val).print();
 
                 'result val'.print();
                 result.print();
