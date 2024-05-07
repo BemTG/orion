@@ -2,8 +2,6 @@ use orion::numbers::NumberTrait;
 use orion::operators::tensor::core::{Tensor, TensorTrait, unravel_index,};
 use orion::operators::tensor::helpers::{broadcast_shape, broadcast_index_mapping, len_from_shape,};
 use orion::utils::saturate;
-use core::debug::PrintTrait;
-
 
 fn add<
     T, impl TTensor: TensorTrait<T>, impl TAdd: Add<T>, impl TCopy: Copy<T>, impl TDrop: Drop<T>
@@ -208,46 +206,14 @@ fn mul<
 
     let num_elements = len_from_shape(broadcasted_shape);
 
-    'ele_size'.print();
-    num_elements.print();
-
-    'the broadcast shape ----'.print();
-    (*broadcasted_shape.at(0)).print();
-    (*broadcasted_shape.at(1)).print();
-    // (*broadcasted_shape.at(2)).print();
-    // (*broadcasted_shape.at(3)).print();
-
    
-    // 'mulprocess check1'.print(); 
+
     let mut n: usize = 0;
     while n != num_elements {
-        // (*broadcasted_shape.at(n)).print();
-        let indices_broadcasted = unravel_index(n , broadcasted_shape);
-        // 'mulprocess check2'.print(); 
-
-        'indices_broadcasted_len'.print();
-        indices_broadcasted.len().print();
-
-        'indices_broadcasted check+++'.print();
-        (*indices_broadcasted.at(0)).print();
-        (*indices_broadcasted.at(1)).print();
-        // (*indices_broadcasted.at(2)).print();
+        let indices_broadcasted = unravel_index(n, broadcasted_shape);
 
         let indices_self = broadcast_index_mapping(*self.shape, indices_broadcasted);
-        
         let indices_other = broadcast_index_mapping(*other.shape, indices_broadcasted);
-        'the other shape_shape'.print();
-        // 'other shape len'.print();
-        (*other.shape).len().print();
-        // 'other shape val'.print();
-        // (*(*other.shape).at(0)).print();
-        // (*(*other.shape).at(1)).print();
-
-        // 'indices_self'.print();
-        // indices_self.print();
-
-        // 'indices_other'.print();
-        // indices_other.print();
 
         result.append(*(*self.data)[indices_self] * *(*other.data)[indices_other]);
 
