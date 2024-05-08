@@ -47,7 +47,7 @@ fn gemm<
     }
 
     match C {
-        Option::Some(c) => { mul_by_scalar(@A.matmul(@B), alpha) + (@c * beta) },
+        Option::Some(c) => { mul_by_scalar(@A.matmul(@B), alpha) + mul_by_scalar(@c, beta) },
         Option::None(_) => { mul_by_scalar(@A.matmul(@B), alpha) }
     }
 }
