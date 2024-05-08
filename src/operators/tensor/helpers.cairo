@@ -129,27 +129,14 @@ fn broadcast_index_mapping_equal_shape(mut shape: Span<usize>, mut indices: Span
 fn broadcast_index_mapping_non_equal_shape(
     mut shape: Span<usize>, mut indices: Span<usize>
 ) -> usize {
-
-
-    // if shape.len() == 1  && indices.len() > 1 {
-    //     shape.pop_front();
-    //     }
-
-    let mut one :u32 = 1;
-
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
 
     // Calculate the offset to align indices with the rightmost dimensions of the shape
     let mut offset = if shape.len() > indices.len() {
-        'offset is'.print();
         shape.len() - indices.len()
-    } else if shape.len() == 1 && shape.at(0) == @one {
-    indices.len() - 1 }
-    else {
-        'offset is zero'.print();
+    } else {
         0
-
     };
 
     loop {

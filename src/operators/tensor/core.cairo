@@ -1566,49 +1566,79 @@ trait TensorTrait<T> {
     /// #tensor.modulo
     ///
     /// ```rust
-    ///     fn sin(self: @Tensor<T>) -> Tensor<T>;
+    ///     fn modulo(self: @Tensor<T>, divisor: @Tensor<T>, fmod: Option<bool>) -> Tensor<T>;
     /// ```
     ///
-    /// Computes the sine of all elements of the input tensor.
+    /// Computes element-wise modulo operation between two tensors with float modulo supported.
     /// 
     /// ## Args
     ///
-    /// * `self`(`@Tensor<T>`) - The input tensor.
-    ///
+    /// * `self` (`@Tensor<T>`): The dividend tensor.
+    /// * `other` (`@Tensor<T>`): The divisor tensor.
+    /// * `fmod` (`Option<bool>`): Optional attribute controlling the modulo behavior.
     ///
     /// ## Returns
     ///
-    /// A new `Tensor<T>` of the same shape as the input tensor with 
-    /// the sine value of all elements in the input tensor.
+    /// A new `Tensor<T>` containing the element-wise modulo of the input tensors.
     ///
-    /// ## Type Constraints
     ///
-    /// Constrain input and output types to fixed point tensors.
+    /// ## Examples:
     ///
-    /// ## Example
+    /// Case 1: Integer modulo (default behavior)
     ///
     /// ```rust
     /// use core::array::{ArrayTrait, SpanTrait};
+    /// use orion::operators::tensor::{TensorTrait, Tensor};
+    /// use orion::operators::tensor::{U32Tensor, U32TensorAdd};
+    /// use orion::numbers::NumberTrait;
     /// 
-    /// use orion::operators::tensor::{TensorTrait, Tensor, FP8x23Tensor};
-    /// use orion::numbers::{FP8x23, FixedTrait};
     /// 
-    /// fn sin_example() -> Tensor<FP8x23> {
-    ///     let tensor = TensorTrait::<FP8x23>::new(
-    ///         shape: array![3].span(),
-    ///         data: array![
-    ///             FixedTrait::new_unscaled(0, false),
-    ///             FixedTrait::new_unscaled(1, false),
-    ///             FixedTrait::new_unscaled(2, false)
-    ///         ]
-    ///             .span(),
-    ///     );
-    /// 
-    ///     return tensor.sin();
+    /// fn mod_int_example() -> Tensor<i32> {
+    ///     let dividend = TensorTrait::<u32>::new(shape: [2, 3].span(), data: [5, 7, 2, 4, 10, 3].span());
+    ///     let divisor = TensorTrait::<u32>::new(shape: [2].span(), data: [2, 3].span());
+    ///
+    ///     return dividend.modulo(other: divisor, fmod: Option::None(()));
     /// }
-    /// >>> [0,7058770,7627740]
-    /// // The fixed point representation of
-    /// // [0,0.8414...,0.9092...]
+    /// >>> [[1, 1, 0], [-2, 1, 0]]
+    ///
+    /// Case 2: Float modulo
+    ///
+    /// ```rust
+    /// use core::array::{ArrayTrait, SpanTrait};
+    /// use orion::operators::tensor::{TensorTrait, Tensor};
+    /// use orion::operators::tensor::{FP16x16Tensor, FP16x16TensorAdd};
+    /// use orion::numbers::{FixedTrait, FP16x16};
+    ///
+    /// fn fmod_example() -> Tensor<FP16x16> {
+    ///
+    ///     let mut shape = ArrayTrait::<usize>::new();
+    ///     shape.append(6);
+    ///     let mut data = ArrayTrait::new();
+    ///     data.append(FP16x16 { mag: 466182, sign: false });
+    ///     data.append(FP16x16 { mag: 309008, sign: true });
+    ///     data.append(FP16x16 { mag: 529990, sign: true });
+    ///     data.append(FP16x16 { mag: 603028, sign: true });
+    ///     data.append(FP16x16 { mag: 607566, sign: true });
+    ///     data.append(FP16x16 { mag: 279123, sign: false });
+    ///
+    ///     let dividend = TensorTrait::new(shape.span(), data.span())
+    ///
+    ///     let mut shape = ArrayTrait::<usize>::new();
+    ///     shape.append(6);
+    ///     let mut data = ArrayTrait::new();
+    ///     data.append(FP16x16 { mag: 182730, sign: false });
+    ///     data.append(FP16x16 { mag: 74626, sign: true });
+    ///     data.append(FP16x16 { mag: 423899, sign: false });
+    ///     data.append(FP16x16 { mag: 385356, sign: true });
+    ///     data.append(FP16x16 { mag: 640775, sign: false });
+    ///     data.append(FP16x16 { mag: 195802, sign: false });
+    ///
+    ///     let divisor = TensorTrait::new(shape.span(), data.span())
+    ///
+    ///     return dividend.modulo(other: divisor, fmod: Option::Some(true));
+    /// }
+    ///
+    /// >>> [[1.5, 1.2, -0.3], [0.8, -0.1, 1.7]]
     /// ```
     ///
     fn modulo( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) -> Tensor<T> ;
