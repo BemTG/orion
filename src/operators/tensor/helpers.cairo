@@ -135,6 +135,8 @@ fn broadcast_index_mapping_non_equal_shape(
     //     shape.pop_front();
     //     }
 
+    let mut one :u32 = 1;
+
     let mut result = 0_usize;
     let mut stride = stride(shape.clone());
 
@@ -142,7 +144,7 @@ fn broadcast_index_mapping_non_equal_shape(
     let mut offset = if shape.len() > indices.len() {
         'offset is'.print();
         shape.len() - indices.len()
-    } else if shape.len() == 1 && shape.at(0) == 1{
+    } else if shape.len() == 1 && shape.at(0) == one {
     indices.len() - 1 }
     else {
         'offset is zero'.print();
