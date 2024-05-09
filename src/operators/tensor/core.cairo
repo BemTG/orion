@@ -1592,14 +1592,13 @@ trait TensorTrait<T> {
     /// use orion::operators::tensor::{U32Tensor, U32TensorAdd};
     /// use orion::numbers::NumberTrait;
     /// 
-    /// 
     /// fn mod_int_example() -> Tensor<i32> {
-    ///     let dividend = TensorTrait::<u32>::new(shape: [2, 3].span(), data: [5, 7, 2, 4, 10, 3].span());
-    ///     let divisor = TensorTrait::<u32>::new(shape: [2].span(), data: [2, 3].span());
+    ///     let dividend = TensorTrait::<u32>::new(shape: array![2, 3].span(), data: array![5, 7, 2, 4, 10, 3].span());
+    ///     let divisor = TensorTrait::<u32>::new(shape: array![1,3].span(), data: array![2, 3, 4].span());
     ///
-    ///     return dividend.modulo(other: divisor, fmod: Option::None(()));
+    ///     return dividend.modulo(other: @divisor, fmod: Option::None(()));
     /// }
-    /// >>> [[1, 1, 0], [-2, 1, 0]]
+    /// >>> [[1, 1, 2], [0, 1, 3]]
     ///
     /// Case 2: Float modulo
     ///
@@ -1612,7 +1611,8 @@ trait TensorTrait<T> {
     /// fn fmod_example() -> Tensor<FP16x16> {
     ///
     ///     let mut shape = ArrayTrait::<usize>::new();
-    ///     shape.append(6);
+    ///     shape.append(2);
+    ///     shape.append(3);
     ///     let mut data = ArrayTrait::new();
     ///     data.append(FP16x16 { mag: 466182, sign: false });
     ///     data.append(FP16x16 { mag: 309008, sign: true });
@@ -1624,21 +1624,19 @@ trait TensorTrait<T> {
     ///     let dividend = TensorTrait::new(shape.span(), data.span())
     ///
     ///     let mut shape = ArrayTrait::<usize>::new();
-    ///     shape.append(6);
+    ///     shape.append(1);
+    ///     shape.append(3);
     ///     let mut data = ArrayTrait::new();
     ///     data.append(FP16x16 { mag: 182730, sign: false });
     ///     data.append(FP16x16 { mag: 74626, sign: true });
     ///     data.append(FP16x16 { mag: 423899, sign: false });
-    ///     data.append(FP16x16 { mag: 385356, sign: true });
-    ///     data.append(FP16x16 { mag: 640775, sign: false });
-    ///     data.append(FP16x16 { mag: 195802, sign: false });
     ///
     ///     let divisor = TensorTrait::new(shape.span(), data.span())
     ///
     ///     return dividend.modulo(other: divisor, fmod: Option::Some(true));
     /// }
     ///
-    /// >>> [[1.5, 1.2, -0.3], [0.8, -0.1, 1.7]]
+    /// >>> [[1.5369, 0.1603 , 1.6188], [0.8368, 0.1611, 4.2591]]
     /// ```
     ///
     fn modulo( self: @Tensor<T>,  divisor: @Tensor<T>, fmod: Option<bool> ) -> Tensor<T> ;
