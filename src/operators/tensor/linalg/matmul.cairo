@@ -19,7 +19,7 @@ fn matmul<
     let self_ndim = (self_shape).len();
     let other_ndim = (other_shape).len();
 
-    assert(self_ndim <= 2 || other_ndim <= 2, 'supports only 1D and 2D matmul');
+    assert(self_ndim <= 3 || other_ndim <= 3, 'supports only 1D and 2D matmul');
 
     //! Case: Both tensors are 1-dimensional
     if self_ndim == 1 && other_ndim == 1 {
@@ -109,33 +109,53 @@ fn matrix_multiply<
 >(
     mat1: Span<T>, mat1_shape: Span<usize>, mat2: Span<T>, mat2_shape: Span<usize>
 ) -> Tensor<T> {
-    let m = *mat1_shape[0];
-    let n = *mat1_shape[1];
-    let p = *mat2_shape[1];
+    let mat1_ndim = mat1_shape.len();
+    let mat2_ndim = mat2_shape.len();
+
+    assert(mat1_ndim <= 3 && mat2_ndim <= 3, 'supports only 2D and 3D matrix multiplication');
+
+    let (m, n, p, q) = if mat1_ndim == 3 && mat2_ndim == 3 {
+        let l = *mat1_shape[0];
+        let m = *mat1_shape[1];
+        let n = *mat1_shape[2];
+        let p = *mat2_shape[1];
+        let q = *mat2_shape[2];
+        (l, m, n, p, q)
+    } else {
+        let m = *mat1_shape[0];
+        let n = *mat1_shape[1];
+        let p = *mat2_shape[1];
+        (1, m, n, p, 1)
+    };
 
     let mut result_data: Array<T> = array![];
-    let mut result_shape: Array<usize> = array![m, p];
-
-    let mut i = 0_usize;
-    while i != m {
-        let mut j = 0_usize;
-        while j != p {
-            let mut sum: T = NumberTrait::zero();
-            let mut k = 0_usize;
-            while k != n {
-                let mat1_index = i * n + k;
-                let mat2_index = k * p + j;
-                sum += *mat1[mat1_index] * *mat2[mat2_index];
-
-                k += 1;
-            };
-
-            result_data.append(sum);
-            j += 1;
-        };
-
-        i += 1;
+    let mut result_shape: Array<usize> = if mat1_ndim == 3 && mat2_ndim == 3 {
+        array![l, m, q]
+    } else {
+        array![m, p]
     };
+
+    let mut l = 0_usize;
+    while l != l {
+        let mut i = 0_usize;
+        while i != m {
+            let mut j = 0_usize;
+            while j != q {
+                let mut sum: T = NumberTrait::zero();
+                let mut k = 0_usize;
+                while k != n {
+                    let mat1_index = if mat1_ndim == 3 { l * m * n + i * n + k } else { i * n + k };
+                    let mat2_index = if mat2_ndim == 3 { k * p * q + p * j } else { k * p + j };
+                    sum += *mat1[mat1_index] * *mat2[mat2_index];
+                    k += 1;
+                }
+                result_data.append(sum);
+                j += 1;
+            }
+            i += 1;
+        }
+        l += 1;
+    }
 
     TensorTrait::new(result_shape.span(), result_data.span())
 }
@@ -160,7 +180,7 @@ fn matrix_multiply<
 fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
     let ndim = shape.len();
 
-    if ndim == 1 && is_first_tensor {
+    if ndim == 1 || ndim == 2 && is_first_tensor {
         // Prepend 1 to shape if it's 1-dimensional
         let mut shape_adjusted = ArrayTrait::new();
         shape_adjusted.append(1);
@@ -173,7 +193,7 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Sp
         };
 
         return shape_adjusted.span();
-    } else if ndim == 1 && !is_first_tensor {
+    } else if ndim == 1 || ndim == 2  && !is_first_tensor {
         // Append 1 to shape if it's 1-dimensional
         let mut shape_adjusted = ArrayTrait::new();
 
