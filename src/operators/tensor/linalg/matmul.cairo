@@ -1,5 +1,6 @@
 use orion::numbers::NumberTrait;
 use orion::operators::tensor::core::{Tensor, TensorTrait};
+use core::debug::PrintTrait;
 
 /// Cf: TensorTrait::matmul docstring
 fn matmul<
@@ -48,10 +49,12 @@ fn matmul<
      //! Case: Both tensors are 3-dimensional
     let self_shape = prepare_shape_for_matmul(self_shape, true);
     let other_shape = prepare_shape_for_matmul(other_shape, false);
+    'check1'.print();
 
     let result = matrix_multiply_3d(*self.data, self_shape, *other.data, other_shape);
-
+    'check2'.print();
     let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+    'check3'.print();
 
     return  TensorTrait::new(result_shape, result.data);
 
