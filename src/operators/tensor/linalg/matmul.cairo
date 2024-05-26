@@ -232,7 +232,8 @@ fn matrix_multiply_3d<
 ///
 /// # Returns
 /// * A span representing the adjusted shape of the tensor.
-fn prepare_shape_for_matmul(mut shape: Span<usize>, other_shape: Span<usize>) -> Span<usize> {
+
+fn prepare_shape_for_matmul(mut shape: Span<usize>, mut other_shape: Span<usize>) -> Span<usize> {
     let ndim = shape.len();
     let other_ndim = other_shape.len();
 
@@ -244,18 +245,18 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, other_shape: Span<usize>) ->
         while i < other_ndim - ndim {
             shape_adjusted.append(1);
             i += 1;
-        }
+        };
 
         loop {
             match shape.pop_front() {
                 Option::Some(item) => {
                     shape_adjusted.append(*item);
-                }
+                };
                 Option::None => {
                     break;
                 }
             };
-        }
+        };
 
         return shape_adjusted.span();
     } else if ndim > other_ndim {
@@ -266,18 +267,18 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, other_shape: Span<usize>) ->
         while i < ndim - other_ndim {
             other_shape_adjusted.append(1);
             i += 1;
-        }
+        };
 
         loop {
             match other_shape.pop_front() {
                 Option::Some(item) => {
                     other_shape_adjusted.append(*item);
-                }
+                };
                 Option::None => {
                     break;
                 }
             };
-        }
+        };
 
         return other_shape_adjusted.span();
     }
