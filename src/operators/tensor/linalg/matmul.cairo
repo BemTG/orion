@@ -34,7 +34,7 @@ fn matmul<
     };
 
      //! Case: if one tensors is 2-dimensional
-    if self_ndim == 2 || other_ndim == 2  && self_ndim != 3 && other_ndim != 3 {
+    if (self_ndim == 2 && other_ndim <= 2) || (self_ndim <= 2 && other_ndim == 2) && (&& self_ndim != 3 && other_ndim != 3) {
     let self_shape = prepare_shape_for_matmul(self_shape, true);
     let other_shape = prepare_shape_for_matmul(other_shape, false);
 
@@ -235,31 +235,18 @@ fn matrix_multiply_3d<
 fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
     let ndim = shape.len();
 
-    if ndim == 1 || ndim == 2 && is_first_tensor {
-        // Prepend 1 to shape if it's 1-dimensional
-        let mut shape_adjusted = ArrayTrait::new();
-        shape_adjusted.append(1);
-
-        loop {
-            match shape.pop_front() {
-                Option::Some(item) => { shape_adjusted.append(*item); },
-                Option::None => { break; }
-            };
-        };
-
-        return shape_adjusted.span();
-    } else if ndim == 1 || ndim == 2  && !is_first_tensor {
-        // Append 1 to shape if it's 1-dimensional
+    if ndim == 1 {
         let mut shape_adjusted = ArrayTrait::new();
 
-        loop {
-            match shape.pop_front() {
-                Option::Some(item) => { shape_adjusted.append(*item) },
-                Option::None => { break; }
-            };
-        };
-
-        shape_adjusted.append(1);
+        if is_first_tensor {
+            // Prepend 1 to shape if it's the first tensor
+            shape_adjusted.append(1);
+            shape_adjusted.append(*shape[0]);
+        } else {
+            // Append 1 to shape if it's the second tensor
+            shape_adjusted.append(*shape[0]);
+            shape_adjusted.append(1);
+        }
 
         return shape_adjusted.span();
     }
@@ -285,6 +272,11 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Sp
 fn adjust_output_shape_after_matmul(
     mut output_shape: Span<usize>, self_dim: usize, other_dim: usize
 ) -> Span<usize> {
+    if self_dim == 1 && other_dim == 1 {
+        // If both input tensors were 1-dimensional, reduce the output shape to a scalar (1D tensor)
+        return array![1].span();
+    }
+
     // If self_shape was 1-dimensional, remove the prepended 1 from the output_shape.
     if self_dim == 1 {
         let _ = output_shape.pop_front().unwrap();
