@@ -53,7 +53,7 @@ fn matmul<
 
     let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
 
-    return TensorTrait::new(result_shape, result.data);
+    TensorTrait::new(result_shape, result.data);
 
     }
 
