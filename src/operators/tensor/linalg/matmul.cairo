@@ -158,7 +158,6 @@ fn matrix_multiply<
     TensorTrait::new(result_shape.span(), result_data.span())
 }
 
-
 /// matrix multiply 3d
 fn matrix_multiply_3d<
     T,
@@ -175,6 +174,7 @@ fn matrix_multiply_3d<
     'shape_len'.print();
     mat1_shape.len().print();
     mat2_shape.len().print();
+
     let l = *mat1_shape[0];
     let m = *mat1_shape[1];
     let n = *mat1_shape[2];
@@ -199,7 +199,7 @@ fn matrix_multiply_3d<
                 let mut k = 0_usize;
                 while k != n {
                     let mat1_index = l_idx * m * n + i * n + k;
-                    let mat2_index = k * p * q + j * p;
+                    let mat2_index = k * p + j;
                     sum += *mat1[mat1_index] * *mat2[mat2_index];
                     k += 1;
                 };
