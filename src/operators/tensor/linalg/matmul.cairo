@@ -34,7 +34,7 @@ fn matmul<
     };
 
      //! Case: if one tensors is 2-dimensional
-    if (self_ndim == 2 && other_ndim <= 2) || (self_ndim <= 2 && other_ndim == 2) && (&& self_ndim != 3 && other_ndim != 3) {
+    if (self_ndim == 2 && other_ndim <= 2) || (self_ndim <= 2 && other_ndim == 2) &&  (self_ndim != 3 && other_ndim != 3) {
     let self_shape = prepare_shape_for_matmul(self_shape, true);
     let other_shape = prepare_shape_for_matmul(other_shape, false);
 
