@@ -55,7 +55,7 @@ fn matmul<
 
     return TensorTrait::new(result_shape, result.data);
 
-    };
+    }
 
 
 /// Computes the dot product of two 1-dimensional i32 tensors.
