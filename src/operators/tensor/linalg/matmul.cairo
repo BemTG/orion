@@ -34,16 +34,15 @@ fn matmul<
     };
 
      //! Case: if one tensors is 2-dimensional
-    if (self_ndim == 2 && other_ndim <= 2) || (self_ndim <= 2 && other_ndim == 2) &&  (self_ndim != 3 && other_ndim != 3) {
-    let self_shape = prepare_shape_for_matmul(self_shape, true);
-    let other_shape = prepare_shape_for_matmul(other_shape, false);
+    if (self_ndim == 2 && other_ndim <= 2) || (self_ndim <= 2 && other_ndim == 2) {
+        let self_shape = prepare_shape_for_matmul(self_shape, true);
+        let other_shape = prepare_shape_for_matmul(other_shape, false);
 
-    let result = matrix_multiply(*self.data, self_shape, *other.data, other_shape);
+        let result = matrix_multiply(*self.data, self_shape, *other.data, other_shape);
 
-    let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+        let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
 
-    return TensorTrait::new(result_shape, result.data);
-
+        return TensorTrait::new(result_shape, result.data);
     };
 
      //! Case: Both tensors are 3-dimensional
@@ -232,58 +231,30 @@ fn matrix_multiply_3d<
 ///
 /// # Returns
 /// * A span representing the adjusted shape of the tensor.
-
-fn prepare_shape_for_matmul(mut shape: Span<usize>, mut other_shape: Span<usize>) -> Span<usize> {
+fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
     let ndim = shape.len();
-    let other_ndim = other_shape.len();
 
-    if ndim < other_ndim {
-        // Broadcasting self shape to match the dimensionality of other shape
+    if ndim == 1 {
+        // If the tensor is 1D, reshape it to 2D
         let mut shape_adjusted = ArrayTrait::new();
-        let mut i = 0;
-
-        while i < other_ndim - ndim {
+        if is_first_tensor {
             shape_adjusted.append(1);
-            i += 1;
-        };
-
-        loop {
-            match shape.pop_front() {
-                Option::Some(item) => {
-                    shape_adjusted.append(*item);
-                };
-                Option::None => {
-                    break;
-                }
-            };
-        };
-
+            shape_adjusted.append(*shape[0]);
+        } else {
+            shape_adjusted.append(*shape[0]);
+            shape_adjusted.append(1);
+        }
         return shape_adjusted.span();
-    } else if ndim > other_ndim {
-        // Broadcasting other shape to match the dimensionality of self shape
-        let mut other_shape_adjusted = ArrayTrait::new();
-        let mut i = 0;
-
-        while i < ndim - other_ndim {
-            other_shape_adjusted.append(1);
-            i += 1;
-        };
-
-        loop {
-            match other_shape.pop_front() {
-                Option::Some(item) => {
-                    other_shape_adjusted.append(*item);
-                };
-                Option::None => {
-                    break;
-                }
-            };
-        };
-
-        return other_shape_adjusted.span();
+    } else if ndim == 2 {
+        // If the tensor is 2D, no need for broadcasting
+        return shape;
+    } else if ndim == 3 {
+        // If the tensor is 3D, no need for broadcasting
+        return shape;
+    } else {
+        // Unsupported dimensionality
+        panic!("Unsupported");
     }
-
-    shape
 }
 
 /// Adjusts the output shape of the matrix multiplication result based on the
@@ -304,7 +275,7 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, mut other_shape: Span<usize>
 fn adjust_output_shape_after_matmul(
     mut output_shape: Span<usize>, self_dim: usize, other_dim: usize
 ) -> Span<usize> {
-    if self_dim == 1 && other_dim == 1 {
+   if self_dim == 1 && other_dim == 1 {
         // If both input tensors were 1-dimensional, reduce the output shape to a scalar (1D tensor)
         return array![1].span();
     }
