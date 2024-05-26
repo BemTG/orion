@@ -173,6 +173,9 @@ fn matrix_multiply_3d<
 >(
     mat1: Span<T>, mat1_shape: Span<usize>, mat2: Span<T>, mat2_shape: Span<usize>
 ) -> Tensor<T> {
+    'shape_len'.print();
+    mat1_shape.len().print();
+    mat2_shape.len().print();
     let l = *mat1_shape[0];
     let m = *mat1_shape[1];
     let n = *mat1_shape[2];
