@@ -179,6 +179,11 @@ fn matrix_multiply_3d<
     let p = *mat2_shape[1];
     let q = *mat2_shape[2];
 
+    'output_shape'.print();
+    l.print();
+    m.print();
+    q.print();
+
     let mut result_data: Array<T> = array![];
     let mut result_shape: Array<usize> = array![l, m, q];
 
