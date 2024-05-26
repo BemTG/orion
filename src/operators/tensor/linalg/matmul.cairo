@@ -231,12 +231,10 @@ fn matrix_multiply_3d<
 ///
 /// # Returns
 /// * A span representing the adjusted shape of the tensor.
-
-
 fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
     let ndim = shape.len();
 
-    if ndim == 1 || ndim == 2 && is_first_tensor {
+    if ndim == 1 && is_first_tensor {
         // Prepend 1 to shape if it's 1-dimensional
         let mut shape_adjusted = ArrayTrait::new();
         shape_adjusted.append(1);
@@ -249,7 +247,7 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Sp
         };
 
         return shape_adjusted.span();
-    } else if ndim == 1 || ndim == 2 && !is_first_tensor {
+    } else if ndim == 1 && !is_first_tensor {
         // Append 1 to shape if it's 1-dimensional
         let mut shape_adjusted = ArrayTrait::new();
 
