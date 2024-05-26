@@ -231,30 +231,41 @@ fn matrix_multiply_3d<
 ///
 /// # Returns
 /// * A span representing the adjusted shape of the tensor.
+
+
 fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
     let ndim = shape.len();
 
-    if ndim == 1 {
-        // If the tensor is 1D, reshape it to 2D
+    if ndim == 1 || ndim == 2 && is_first_tensor {
+        // Prepend 1 to shape if it's 1-dimensional
         let mut shape_adjusted = ArrayTrait::new();
-        if is_first_tensor {
-            shape_adjusted.append(1);
-            shape_adjusted.append(*shape[0]);
-        } else {
-            shape_adjusted.append(*shape[0]);
-            shape_adjusted.append(1);
-        }
+        shape_adjusted.append(1);
+
+        loop {
+            match shape.pop_front() {
+                Option::Some(item) => { shape_adjusted.append(*item); },
+                Option::None => { break; }
+            };
+        };
+
         return shape_adjusted.span();
-    } else if ndim == 2 {
-        // If the tensor is 2D, no need for broadcasting
-        return shape;
-    } else if ndim == 3 {
-        // If the tensor is 3D, no need for broadcasting
-        return shape;
-    } else {
-        // Unsupported dimensionality
-        panic!("Unsupported");
+    } else if ndim == 1 || ndim == 2 && !is_first_tensor {
+        // Append 1 to shape if it's 1-dimensional
+        let mut shape_adjusted = ArrayTrait::new();
+
+        loop {
+            match shape.pop_front() {
+                Option::Some(item) => { shape_adjusted.append(*item) },
+                Option::None => { break; }
+            };
+        };
+
+        shape_adjusted.append(1);
+
+        return shape_adjusted.span();
     }
+
+    shape
 }
 
 /// Adjusts the output shape of the matrix multiplication result based on the
