@@ -232,23 +232,54 @@ fn matrix_multiply_3d<
 ///
 /// # Returns
 /// * A span representing the adjusted shape of the tensor.
-fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
+fn prepare_shape_for_matmul(mut shape: Span<usize>, other_shape: Span<usize>) -> Span<usize> {
     let ndim = shape.len();
+    let other_ndim = other_shape.len();
 
-    if ndim == 1 {
+    if ndim < other_ndim {
+        // Broadcasting self shape to match the dimensionality of other shape
         let mut shape_adjusted = ArrayTrait::new();
+        let mut i = 0;
 
-        if is_first_tensor {
-            // Prepend 1 to shape if it's the first tensor
+        while i < other_ndim - ndim {
             shape_adjusted.append(1);
-            shape_adjusted.append(*shape[0]);
-        } else {
-            // Append 1 to shape if it's the second tensor
-            shape_adjusted.append(*shape[0]);
-            shape_adjusted.append(1);
+            i += 1;
+        }
+
+        loop {
+            match shape.pop_front() {
+                Option::Some(item) => {
+                    shape_adjusted.append(*item);
+                }
+                Option::None => {
+                    break;
+                }
+            };
         }
 
         return shape_adjusted.span();
+    } else if ndim > other_ndim {
+        // Broadcasting other shape to match the dimensionality of self shape
+        let mut other_shape_adjusted = ArrayTrait::new();
+        let mut i = 0;
+
+        while i < ndim - other_ndim {
+            other_shape_adjusted.append(1);
+            i += 1;
+        }
+
+        loop {
+            match other_shape.pop_front() {
+                Option::Some(item) => {
+                    other_shape_adjusted.append(*item);
+                }
+                Option::None => {
+                    break;
+                }
+            };
+        }
+
+        return other_shape_adjusted.span();
     }
 
     shape
