@@ -30,10 +30,10 @@ fn matmul<
         result_data.append(dot); 
 
         return TensorTrait::new(result_shape.span(), result_data.span());
-    }
+    };
 
      //! Case: if one tensors is 2-dimensional
-    if self_ndim == 2 || other_ndim == 2 {
+    if self_ndim == 2 || other_ndim == 2  && self_ndim != 3 && other_ndim != 3 {
     let self_shape = prepare_shape_for_matmul(self_shape, true);
     let other_shape = prepare_shape_for_matmul(other_shape, false);
 
@@ -41,12 +41,11 @@ fn matmul<
 
     let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
 
-    return TensorTrait::new(result_shape, result.data)
+    return TensorTrait::new(result_shape, result.data);
 
-    }
+    };
 
-     //! Case: Both tensors are 1-dimensional
-    if self_ndim == 3 || other_ndim == 3 {
+     //! Case: Both tensors are 3-dimensional
     let self_shape = prepare_shape_for_matmul(self_shape, true);
     let other_shape = prepare_shape_for_matmul(other_shape, false);
 
@@ -54,10 +53,10 @@ fn matmul<
 
     let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
 
-    return TensorTrait::new(result_shape, result.data)
+    return TensorTrait::new(result_shape, result.data);
 
-    }
-}
+    };
+
 
 /// Computes the dot product of two 1-dimensional i32 tensors.
 ///
@@ -193,14 +192,14 @@ fn matrix_multiply_3d<
                     let mat2_index = k * p * q + j * p;
                     sum += *mat1[mat1_index] * *mat2[mat2_index];
                     k += 1;
-                }
+                };
                 result_data.append(sum);
                 j += 1;
-            }
+            };
             i += 1;
-        }
+        };
         l_idx += 1;
-    }
+    };
 
     TensorTrait::new(result_shape.span(), result_data.span())
 }
