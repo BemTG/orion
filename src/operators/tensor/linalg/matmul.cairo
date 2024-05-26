@@ -272,23 +272,40 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Sp
 ///
 /// # Returns
 /// * A span representing the adjusted output shape of the matrix multiplication result.
-fn adjust_output_shape_after_matmul(
-    mut output_shape: Span<usize>, self_dim: usize, other_dim: usize
-) -> Span<usize> {
-   if self_dim == 1 && other_dim == 1 {
-        // If both input tensors were 1-dimensional, reduce the output shape to a scalar (1D tensor)
-        return array![1].span();
+
+
+fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Span<usize> {
+    let ndim = shape.len();
+
+    if ndim == 1 || ndim == 2 && is_first_tensor {
+        // Prepend 1 to shape if it's 1-dimensional
+        let mut shape_adjusted = ArrayTrait::new();
+        shape_adjusted.append(1);
+
+        loop {
+            match shape.pop_front() {
+                Option::Some(item) => { shape_adjusted.append(*item); },
+                Option::None => { break; }
+            };
+        };
+
+        return shape_adjusted.span();
+    } else if ndim == 1 || ndim == 2 && !is_first_tensor {
+        // Append 1 to shape if it's 1-dimensional
+        let mut shape_adjusted = ArrayTrait::new();
+
+        loop {
+            match shape.pop_front() {
+                Option::Some(item) => { shape_adjusted.append(*item) },
+                Option::None => { break; }
+            };
+        };
+
+        shape_adjusted.append(1);
+
+        return shape_adjusted.span();
     }
 
-    // If self_shape was 1-dimensional, remove the prepended 1 from the output_shape.
-    if self_dim == 1 {
-        let _ = output_shape.pop_front().unwrap();
-    }
-
-    // If other_shape was 1-dimensional, remove the appended 1 from the output_shape.
-    if other_dim == 1 {
-        let _ = output_shape.pop_back().unwrap();
-    }
-
-    output_shape
+    shape
 }
+
