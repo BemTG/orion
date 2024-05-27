@@ -40,9 +40,9 @@ fn matmul<
 
         let result = matrix_multiply(*self.data, self_shape, *other.data, other_shape);
 
-        let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+        // let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
 
-        return TensorTrait::new(result_shape, result.data);
+        return result;
     };
 
      //! Case: Both tensors are 3-dimensional
