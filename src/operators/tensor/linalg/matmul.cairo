@@ -181,6 +181,8 @@ fn matrix_multiply_3d<
     let p = *mat2_shape[1];
     let q = *mat2_shape[2];
 
+    assert(n == p , 'shape incompatible');
+
     'output_shape'.print();
     l.print();
     m.print();
