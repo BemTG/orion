@@ -40,9 +40,9 @@ fn matmul<
 
         let result = matrix_multiply(*self.data, self_shape, *other.data, other_shape);
 
-        // let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+        let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
 
-        return result;
+        return TensorTrait::new(result_shape, result.data);
     };
 
      //! Case: Both tensors are 3-dimensional
@@ -52,10 +52,10 @@ fn matmul<
 
     let result = matrix_multiply_3d(*self.data, self_shape, *other.data, other_shape);
     'check2'.print();
-    let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+    // let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
     'check3'.print();
 
-    return  TensorTrait::new(result_shape, result.data);
+    return  result;
 
     }
 
