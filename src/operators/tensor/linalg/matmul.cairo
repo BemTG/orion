@@ -46,13 +46,13 @@ fn matmul<
     };
 
      //! Case: Both tensors are 3-dimensional
-    let self_shape = prepare_shape_for_matmul(self_shape, true);
-    let other_shape = prepare_shape_for_matmul(other_shape, false);
+    let self_shape = prepare_shape_for_matmul_3d(self_shape);
+    let other_shape = prepare_shape_for_matmul_3d(other_shape);
     'check1'.print();
 
     let result = matrix_multiply_3d(*self.data, self_shape, *other.data, other_shape);
     'check2'.print();
-    let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+    // let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
     'check3'.print();
 
     return  TensorTrait::new(result_shape, result.data);
@@ -264,6 +264,35 @@ fn prepare_shape_for_matmul(mut shape: Span<usize>, is_first_tensor: bool) -> Sp
     }
 
     shape
+}
+
+// prepare 3d shape
+fn prepare_shape_for_matmul_3d(mut shape: Span<usize>) -> Span<usize> {
+    let ndim = shape.len();
+    let diff = 3 - ndim;
+
+    let mut shape_adjusted = ArrayTrait::new();
+
+    if ndim == 2 || ndim==1 {
+        // Prepend 1 to shape if it's 1-dimensional
+        let mut i = 0;
+        while i != diff {
+            shape_adjusted.append( 1);
+            i+=1
+        };
+
+        loop {
+            match shape.pop_front() {
+                Option::Some(item) => { shape_adjusted.append(*item); },
+                Option::None => { break; }
+            };
+        };
+
+        return shape_adjusted.span();
+};
+
+shape
+
 }
 
 /// Adjusts the output shape of the matrix multiplication result based on the
