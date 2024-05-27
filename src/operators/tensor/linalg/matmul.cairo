@@ -52,7 +52,7 @@ fn matmul<
 
     let result = matrix_multiply_3d(*self.data, self_shape, *other.data, other_shape);
     'check2'.print();
-    // let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
+    let result_shape = adjust_output_shape_after_matmul(result.shape, self_ndim, other_ndim);
     'check3'.print();
 
     return  TensorTrait::new(result_shape, result.data);
