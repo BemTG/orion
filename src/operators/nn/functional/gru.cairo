@@ -141,7 +141,7 @@ fn gru<
     let mut layout = layout;
     let mut linear_before_reset = linear_before_reset;
 
-    if num_directions == 1 {
+    if num_directions == NumberTrait::<usize>::one() {
         let R = R.squeeze(axes: Option::None(()));
         let W = W.squeeze(axes: Option::None(()));
 
@@ -317,11 +317,11 @@ fn step<
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
         let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
-        let h_default = g((X_segment.at(i).matmul(@w_h_tranposed))
+        let h_default = g((@X_segment.at(i).matmul(@w_h_tranposed))
             + ((r * *H_t).matmul(@r_h_tranposed))
             + w_bh + r_bh);
 
-        let h_linear = g((X_segment.at(i).matmul(@w_h_tranposed))
+        let h_linear = g((@X_segment.at(i).matmul(@w_h_tranposed))
             + (r * (H_t.matmul(@r_h_tranposed) + r_bh))
             + w_bh);
 
@@ -336,7 +336,7 @@ fn step<
             data: array![NumberTrait::<T>::one()].span(),
         );
 
-        H = ((one - z) * h + z * *H_t);
+        H = ((one - @z) * h + @z * *H_t);
 
         h_list.append(*H);
         H_t = H;
