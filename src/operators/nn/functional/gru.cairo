@@ -336,7 +336,7 @@ fn step<
             data: array![NumberTrait::<T>::one()].span(),
         );
 
-        H = ((one - @z) * h + @z * *H_t);
+        H = ((one - z) * h + z * H_t);
 
         h_list.append(*H);
         H_t = H;
@@ -494,11 +494,11 @@ fn split_tensor<
 
     assert!(*dim_size % num_outputs == 0, "Dimension size must be divisible");
 
-    let slice_size = dim_size / num_outputs;
+    let slice_size = @dim_size / @num_outputs;
     let mut slices = ArrayTrait::new();
 
     let mut start = 0;
-    while start < *dim_size {
+    while start < @dim_size {
         let mut starts = ArrayTrait::new();
         let mut ends = ArrayTrait::new();
 
