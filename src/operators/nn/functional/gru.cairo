@@ -201,7 +201,7 @@ fn gru<
             };
 
              h_0 = TensorTrait::<T>::new(
-                shape: array![batch_size, hidden_size.unwrap()].span(),
+                shape: array![*batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
         };
