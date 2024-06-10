@@ -822,20 +822,20 @@ trait NNTrait<T> {
     /// 
     ///
     fn gru(
-        mut X: @Tensor<T>,
-        mut W: @Tensor<T>,
-        mut R: @Tensor<T>,
-        mut B: Option<Tensor<T>>,
-        mut sequence_length: Option<Tensor<T>>,
+         X: @Tensor<T>,
+         W: @Tensor<T>,
+         R: @Tensor<T>,
+         B: Option<Tensor<T>>,
+         sequence_length: Option<Tensor<T>>,
         initial_h: Option<Tensor<T>>,
         activation_alpha: Option<Array<Tensor<T>>>,
         activation_beta: Option<Array<Tensor<T>>>,
         activations: Option<orion::operators::nn::functional::gru::ACTIVATIONS>,  
         clip: Option<T>,
         direction: Option<orion::operators::nn::functional::gru::DIRECTIONS>,
-        mut hidden_size: Option<usize>,
-        mut layout: Option<usize>,
-        mut linear_before_reset: Option<usize>,
+         hidden_size: Option<usize>,
+         layout: Option<usize>,
+         linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<T>>;
     /// # NNTrait::conv
