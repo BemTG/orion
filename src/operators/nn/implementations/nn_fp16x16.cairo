@@ -161,7 +161,8 @@ impl FP16x16NN of NNTrait<FP16x16> {
         mut linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<FP16x16>> {
-        functional::gru::gru(X, W, R, B, sequence_length, initial_h, activation_alpha, activation_beta, activations, direction, hidden_size, 
+        functional::gru::gru(X, W, R, B, sequence_length, initial_h, activation_alpha, activation_beta, activations, clip, direction, hidden_size, 
         layout, linear_before_reset, n_outputs)
     }
 }
+
