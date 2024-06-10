@@ -108,20 +108,20 @@ fn gru<
     +Neg<T>,
     +SubEq<T>,
 >(
-    mut X: @Tensor<T>,
-    mut W: @Tensor<T>,
-    mut R: @Tensor<T>,
-    mut B: Option<Tensor<T>>,
-    mut sequence_length: Option<Tensor<T>>,
+     X: @Tensor<T>,
+     W: @Tensor<T>,
+     R: @Tensor<T>,
+     B: Option<Tensor<T>>,
+     sequence_length: Option<Tensor<T>>,
     initial_h: Option<Tensor<T>>,
     activation_alpha: Option<Array<Tensor<T>>>,
     activation_beta: Option<Array<Tensor<T>>>,
     activations: Option<ACTIVATIONS>,
     clip: Option<T>,
     direction: Option<DIRECTIONS>,
-    mut hidden_size: Option<usize>,
-    mut layout: Option<usize>,
-    mut linear_before_reset: Option<usize>,
+     hidden_size: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
 ) -> Array<Tensor<T>> {
     let num_directions = W.shape.at(0);
@@ -129,6 +129,16 @@ fn gru<
     let mut H_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let mut b = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let number_of_gates: usize = 3;
+
+    let mut X = X;
+    let mut W = W;
+    let mut R = R;
+    let mut B = B;
+    let mut sequence_length = sequence_length;
+    let mut initial_h = initial_h;
+    let mut hidden_size = hidden_size;
+    let mut layout = layout;
+    let mut linear_before_reset = linear_before_reset;
 
     if *num_directions == 1 {
         let R = R.squeeze(axes: Option::None(()));
@@ -328,7 +338,7 @@ fn step<
         h_list.append(H);
         H_t = H;
         i += 1;
-    }
+    };
  
     let concatenated = if h_list.len() > 1 {
         concat_tensor_array(h_list)
@@ -389,7 +399,7 @@ fn concat_tensor_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +Copy<T>, 
             axis: 0,
         );
         i += 1;
-    }
+    };
 
     concatenated_tensor
 }
@@ -419,7 +429,7 @@ fn f<
             },
             Option::None => { break; }
         }
-    }
+    };
 
     TensorTrait::new((*x).shape, data_result.span())
 }
@@ -433,7 +443,7 @@ fn g<
     +Drop<T>,
     +Tanh<T>,
 >(
-    x: @Tensor<T>
+    mut x: @Tensor<T>
 ) -> Tensor<T> {
     x.tanh()
 }
@@ -445,7 +455,7 @@ fn reverse_axes(x: Span<usize>) -> Span<usize> {
             Option::Some(item) => { result.append(*item) },
             Option::None => { break; }
         }
-    }
+    };
     result.span()
 }
 
@@ -494,7 +504,7 @@ fn split_tensor<
                 ends.append(*shape.at(i));
             }
             i += 1;
-        }
+        };
 
         let slice = tensor.slice(
             starts: starts.span(),
