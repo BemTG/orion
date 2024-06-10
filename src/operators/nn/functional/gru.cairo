@@ -474,12 +474,13 @@ fn split_tensor<
     +NumberTrait<T, MAG>,
     +Copy<T>,
     +Drop<T>,
+    +Rem<T>,
 >(
     tensor: @Tensor<T>,
     num_outputs: usize,
     axis: usize,
 ) -> Array<Tensor<T>> {
-    let mut tensor = if (tensor.shape).len() < 2 {
+    let mut tensor = if *(tensor.shape).len() < 2 {
         TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
             data: (*tensor).data
@@ -491,9 +492,9 @@ fn split_tensor<
     let shape = tensor.shape;
     let dim_size = shape.at(axis);
 
-    assert!(dim_size % @num_outputs == 0, "Dimension size must be divisible by the number of outputs");
+    assert!(dim_size % num_outputs == 0, "Dimension size must be divisible");
 
-    let slice_size = dim_size / @num_outputs;
+    let slice_size = dim_size / num_outputs;
     let mut slices = ArrayTrait::new();
 
     let mut start = 0;
