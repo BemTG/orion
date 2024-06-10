@@ -124,7 +124,7 @@ fn gru<
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
 ) -> Array<Tensor<T>> {
-    let num_directions = W.shape.at(0);
+    let num_directions = (*W.shape).at(0);
     let mut h_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let mut H_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let mut b = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
@@ -140,7 +140,7 @@ fn gru<
     let mut layout = layout;
     let mut linear_before_reset = linear_before_reset;
 
-    if *num_directions == 1 {
+    if num_directions == 1 {
         let R = R.squeeze(axes: Option::None(()));
         let W = W.squeeze(axes: Option::None(()));
 
@@ -163,12 +163,12 @@ fn gru<
         };
 
         let hidden_size = Option::Some(*R.shape.at(R.shape.len() - 1));
-        let batch_size = X.shape.at(1);
+        let batch_size = (*X.shape).at(1);
 
-        let X = if layout.is_none() || layout.unwrap() == 0 {
+        let X = if *(*layout).is_none() || layout.unwrap() == 0 {
             @X
         } else {
-            TensorTrait::<T>::transpose(@X, array![1, 0, 2].span())
+            TensorTrait::<T>::transpose(X, array![1, 0, 2].span())
         };
 
         let b = if B.is_some() {
@@ -192,7 +192,7 @@ fn gru<
             initial_h.unwrap()
         } else {
             let mut h_data_vals = array![];
-            let h_data_len = *batch_size * hidden_size.unwrap();
+            let h_data_len = batch_size * hidden_size.unwrap();
             let mut i = 0;
             while i < h_data_len {
                 h_data_vals.append(NumberTrait::<T>::zero());
@@ -200,7 +200,7 @@ fn gru<
             };
 
             TensorTrait::<T>::new(
-                shape: array![*batch_size, hidden_size.unwrap()].span(),
+                shape: array![batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
         };
@@ -209,7 +209,7 @@ fn gru<
         H_0 = h_0;
     }
 
-    let result = step(X, W, R, B.unwrap(), H_0, *num_directions, linear_before_reset, layout);
+    let result = step(X, W, R, @B.unwrap(), @H_0, num_directions, linear_before_reset, layout);
 
     if n_outputs.unwrap() == 1 {
         return array![*result.at(0)];
@@ -269,17 +269,17 @@ fn step<
     let mut h_list: Array<Tensor<T>> = array![];
 
     let (w_z, w_r, w_h) = {
-        let w_split = split_tensor(@W, 3, 0);
+        let w_split = split_tensor(W, 3, 0);
         (*w_split.at(0), *w_split.at(1), *w_split.at(2))
     };
     
     let (r_z, r_r, r_h) = {
-        let r_split = split_tensor(@R, 3, 0);
+        let r_split = split_tensor(R, 3, 0);
         (*r_split.at(0), *r_split.at(1), *r_split.at(2))
     };
 
     let (w_bz, w_br, w_bh, r_bz, r_br, r_bh) = {
-        let b_split = split_tensor(@B, 6, 0);
+        let b_split = split_tensor(B, 6, 0);
         (*b_split.at(0), *b_split.at(1), *b_split.at(2),
          *b_split.at(3), *b_split.at(4), *b_split.at(5))
     };
@@ -296,7 +296,7 @@ fn step<
     let mut H_t = H_0;
     let mut H = H_0;
 
-    let X_segment = split_tensor(X, *X.shape.at(0), 0);
+    let X_segment = split_tensor(X, (*X.shape).at(0), 0);
     let mut i = 0;
     while i < X_segment.len() {
         let gates = (X_segment.at(i).unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
@@ -304,15 +304,15 @@ fn step<
             + gates_b);
 
         let (z, r) = {
-            let gates_split = split_tensor(gates, 2, gates.shape.len() - 1);
+            let gates_split = split_tensor(@gates, 2, gates.shape.len() - 1);
             (*gates_split.at(0), *gates_split.at(1))
         };
 
         let z = f(@z);
         let r = f(@r);
         
-        let w_h_tranposed = w_h.transpose(axes: reverse_axes(*w_h.shape));
-        let r_h_tranposed = r_h.transpose(axes: reverse_axes(*r_h.shape));
+        let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
+        let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
         let h_default = g(X_segment.at(i).matmul(@w_h_tranposed)
             + (r * H_t).matmul(@r_h_tranposed)
@@ -335,7 +335,7 @@ fn step<
 
         H = (one - z) * h + z * H_t;
 
-        h_list.append(H);
+        h_list.append(*H);
         H_t = H;
         i += 1;
     };
@@ -404,35 +404,40 @@ fn concat_tensor_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +Copy<T>, 
     concatenated_tensor
 }
 
+
+
 fn f<
     T,
     MAG,
-    +TensorTrait<T>,
-    +NumberTrait<T, MAG>,
-    +Copy<T>,
-    +Drop<T>,
-    +Neg<T>,
-    +Add<T>,
-    +Mul<T>,
-    +Div<T>,
-    +Exp<T>,
+    impl TNumber: NumberTrait<T, MAG>,
+    impl TTensor: TensorTrait<T>,
+    impl TPartialOrd: PartialOrd<T>,
+    impl TAdd: Add<T>,
+    impl TMul: Mul<T>,
+    impl TDiv: Div<T>,
+    impl TCopy: Copy<T>,
+    impl TDrop: Drop<T>,
 >(
-    x: @Tensor<T>
+    mut z: Tensor<T>
 ) -> Tensor<T> {
     let mut data_result: Array<T> = array![];
 
     loop {
-        match (*x).data.pop_front() {
+        match z.data.pop_front() {
             Option::Some(item) => {
-                let result = NumberTrait::<T>::one() / (NumberTrait::<T>::one() + NumberTrait::<T>::exp(*item * NumberTrait::<T>::neg_one()));
+                let result = NumberTrait::one()
+                    / (NumberTrait::one() + (*item * NumberTrait::neg_one()).exp());
                 data_result.append(result);
             },
             Option::None => { break; }
-        }
+        };
     };
 
-    TensorTrait::new((*x).shape, data_result.span())
+    TensorTrait::new(z.shape, data_result.span())
 }
+
+
+
 
 fn g<
     T,
@@ -441,14 +446,13 @@ fn g<
     +NumberTrait<T, MAG>,
     +Copy<T>,
     +Drop<T>,
-    +Tanh<T>,
 >(
     mut x: @Tensor<T>
 ) -> Tensor<T> {
     x.tanh()
 }
 
-fn reverse_axes(x: Span<usize>) -> Span<usize> {
+fn reverse_axes(mut x: Span<usize>) -> Span<usize> {
     let mut result = array![];
     loop {
         match x.pop_back() {
@@ -472,7 +476,7 @@ fn split_tensor<
     num_outputs: usize,
     axis: usize,
 ) -> Array<Tensor<T>> {
-    let mut tensor = if (*tensor).shape.len() < 2 {
+    let mut tensor = if (tensor.shape).len() < 2 {
         TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
             data: (*tensor).data
@@ -481,8 +485,8 @@ fn split_tensor<
         @tensor
     };
 
-    let shape = (*tensor).shape;
-    let dim_size = *shape.at(axis);
+    let shape = tensor.shape;
+    let dim_size = shape.at(axis);
 
     assert!(dim_size % num_outputs == 0, "Dimension size must be divisible by the number of outputs");
 
@@ -501,7 +505,7 @@ fn split_tensor<
                 ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(*shape.at(i));
+                ends.append(shape.at(i));
             }
             i += 1;
         };
@@ -515,7 +519,7 @@ fn split_tensor<
 
         slices.append(slice.squeeze(axes: Option::None(())));
         start += slice_size;
-    }
+    };
 
     slices
 }
