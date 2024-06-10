@@ -137,7 +137,7 @@ fn gru<
     let mut B = B;
     let mut sequence_length = sequence_length;
     let mut initial_h = initial_h;
-    let mut hidden_size = hidden_size;
+    // let mut hidden_size = hidden_size;
     let mut layout = layout;
     let mut linear_before_reset = linear_before_reset;
 
@@ -201,7 +201,7 @@ fn gru<
             };
 
             TensorTrait::<T>::new(
-                shape: array![batch_size, @hidden_size.unwrap()].span(),
+                shape: array![batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
         };
