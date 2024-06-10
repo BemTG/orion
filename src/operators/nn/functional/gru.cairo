@@ -163,7 +163,7 @@ fn gru<
         if layout.is_none() || layout.unwrap() == NumberTrait::<usize>::zero() {
             X = X
         } else {
-            X = TensorTrait::<T>::transpose(@X, array![1, 0, 2].span())
+            X = @(TensorTrait::<T>::transpose(X, array![1, 0, 2].span()))
         };
 
         if B.is_some() {
