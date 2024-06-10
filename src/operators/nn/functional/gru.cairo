@@ -145,35 +145,29 @@ fn gru<
         let R = R.squeeze(axes: Option::None(()));
         let W = W.squeeze(axes: Option::None(()));
 
-        let B = if B.is_some() {
-            Option::Some(B.unwrap().squeeze(axes: Option::None(())))
-        } else {
-            B
+        if B.is_some() {
+            B = Option::Some(B.unwrap().squeeze(axes: Option::None(())))
         };
 
-        let sequence_length = if sequence_length.is_some() {
-            Option::Some(sequence_length.unwrap().squeeze(axes: Option::None(())))
-        } else {
-            sequence_length
+        if sequence_length.is_some() {
+            sequence_length = Option::Some(sequence_length.unwrap().squeeze(axes: Option::None(())))
         };
 
-        let initial_h = if initial_h.is_some() {
-            Option::Some(initial_h.unwrap().squeeze(axes: Option::None(())))
-        } else {
-            initial_h
+        if initial_h.is_some() {
+           initial_h =  Option::Some(initial_h.unwrap().squeeze(axes: Option::None(())))
         };
 
         let hidden_size = Option::Some(*R.shape.at(R.shape.len() - 1));
         let batch_size = (*X.shape).at(1);
 
-        let X = if *layout.is_none() || layout.unwrap() == 0 {
-            @X
+        if layout.is_none() || layout.unwrap() == NumberTrait::<usize>::zero() {
+            X = X
         } else {
-            TensorTrait::<T>::transpose(X, array![1, 0, 2].span())
+            X = TensorTrait::<T>::transpose(X, array![1, 0, 2].span())
         };
 
-        let b = if B.is_some() {
-            B.unwrap()
+        if B.is_some() {
+            b = B.unwrap();
         } else {
             let mut b_data_vals = array![];
             let b_data_len = 2 * number_of_gates * hidden_size.unwrap();
@@ -183,7 +177,7 @@ fn gru<
                 i += 1;
             };
 
-            TensorTrait::<T>::new(
+            b = TensorTrait::<T>::new(
                 shape: array![2 * number_of_gates * hidden_size.unwrap()].span(),
                 data: b_data_vals.span()
             )
@@ -206,13 +200,15 @@ fn gru<
             )
         };
 
-        let B = Option::Some(b);
+        B = Option::Some(b);
         H_0 = h_0;
+    }else{
+        core::panic_with_felt252('Unsupported value') 
     }
 
     let result = step(X, W, R, @B.unwrap(), @H_0, *num_directions, linear_before_reset, layout);
 
-    if n_outputs.unwrap() == 1 {
+    if n_outputs.unwrap() == NumberTrait::<usize>::one() {
         return array![*result.at(0)];
     } else {
         return result;
