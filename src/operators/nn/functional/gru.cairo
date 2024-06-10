@@ -141,7 +141,7 @@ fn gru<
     let mut layout = layout;
     let mut linear_before_reset = linear_before_reset;
 
-    if num_directions == NumberTrait::<usize>::one() {
+    if *num_directions == NumberTrait::<usize>::one() {
         let R = R.squeeze(axes: Option::None(()));
         let W = W.squeeze(axes: Option::None(()));
 
