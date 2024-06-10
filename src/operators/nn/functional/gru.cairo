@@ -192,7 +192,7 @@ fn gru<
             initial_h.unwrap()
         } else {
             let mut h_data_vals = array![];
-            let h_data_len = batch_size * @hidden_size.unwrap();
+            let h_data_len = batch_size * hidden_size.unwrap();
             let mut i = 0;
             while i < h_data_len {
                 h_data_vals.append(NumberTrait::<T>::zero());
@@ -309,19 +309,19 @@ fn step<
             (*gates_split.at(0), *gates_split.at(1))
         };
 
-        let z = f(*z);
-        let r = f(*r);
+        let z = f(z);
+        let r = f(r);
         
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
         let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
         let h_default = g(@(X_segment.at(i).matmul(@w_h_tranposed))
-            + (r * *H_t).matmul(@r_h_tranposed)
-            + w_bh + r_bh);
+            + @((r * *H_t).matmul(@r_h_tranposed))
+            + @w_bh + @r_bh);
 
         let h_linear = g(@(X_segment.at(i).matmul(@w_h_tranposed))
-            + (r * (H_t.matmul(@r_h_tranposed) + r_bh))
-            + w_bh);
+            + @(r * (H_t.matmul(@r_h_tranposed) + @r_bh))
+            + @w_bh);
 
         let h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
             h_linear
@@ -334,7 +334,7 @@ fn step<
             data: array![NumberTrait::<T>::one()].span(),
         );
 
-        H = (one - z) * h + z * *H_t;
+        H = @((one - z) * h + z * *H_t);
 
         h_list.append(*H);
         H_t = H;
@@ -477,7 +477,7 @@ fn split_tensor<
     num_outputs: usize,
     axis: usize,
 ) -> Array<Tensor<T>> {
-    let mut tensor = if (*tensor.shape).len() < 2 {
+    let mut tensor = if *(*tensor.shape).len() < 2 {
         TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
             data: (*tensor).data
@@ -506,7 +506,7 @@ fn split_tensor<
                 ends.append(*start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(*shape.at(i));
+                ends.append(shape.at(i));
             }
             i += 1;
         };
