@@ -818,6 +818,26 @@ trait NNTrait<T> {
         transB: bool
     ) -> Tensor<T>;
     ///
+    /// # NNTrait::gru
+    /// 
+    ///
+    fn gru(
+        mut X: @Tensor<T>,
+        mut W: @Tensor<T>,
+        mut R: @Tensor<T>,
+        mut B: Option<Tensor<T>>,
+        mut sequence_length: Option<Tensor<T>>,
+        initial_h: Option<Tensor<T>>,
+        activation_alpha: Option<Array<Tensor<T>>>,
+        activation_beta: Option<Array<Tensor<T>>>,
+        activations: Option<ACTIVATIONS>,
+        clip: Option<T>,
+        direction: Option<DIRECTIONS>,
+        mut hidden_size: Option<usize>,
+        mut layout: Option<usize>,
+        mut linear_before_reset: Option<usize>,
+        n_outputs: Option<usize>
+    ) -> Array<Tensor<T>>;
     /// # NNTrait::conv
     /// 
     /// ```rust

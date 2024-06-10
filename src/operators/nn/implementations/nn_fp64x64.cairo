@@ -137,4 +137,24 @@ impl FP64x64NN of NNTrait<FP64x64> {
     ) -> Tensor<FP64x64> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn gru(
+         mut X: @Tensor<FP64x64>,
+        mut W: @Tensor<FP64x64>,
+        mut R: @Tensor<FP64x64>,
+        mut B: Option<Tensor<FP64x64>>,
+        mut sequence_length: Option<Tensor<FP64x64>>,
+        initial_h: Option<Tensor<FP64x64>>,
+        activation_alpha: Option<Array<Tensor<FP64x64>>>,
+        activation_beta: Option<Array<Tensor<FP64x64>>>,
+        activations: Option<ACTIVATIONS>,
+        clip: Option<FP64x64>,
+        direction: Option<DIRECTIONS>,
+        mut hidden_size: Option<usize>,
+        mut layout: Option<usize>,
+        mut linear_before_reset: Option<usize>,
+        n_outputs: Option<usize>
+    ) -> Array<Tensor<FP64x64>> {
+        panic(array!['not supported!'])
+    }
 }

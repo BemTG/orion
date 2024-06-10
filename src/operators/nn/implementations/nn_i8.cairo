@@ -130,4 +130,24 @@ impl I8NN of NNTrait<i8> {
     ) -> Tensor<i8> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn gru(
+         mut X: @Tensor<i8>,
+        mut W: @Tensor<i8>,
+        mut R: @Tensor<i8>,
+        mut B: Option<Tensor<i8>>,
+        mut sequence_length: Option<Tensor<i8>>,
+        initial_h: Option<Tensor<i8>>,
+        activation_alpha: Option<Array<Tensor<i8>>>,
+        activation_beta: Option<Array<Tensor<i8>>>,
+        activations: Option<ACTIVATIONS>,
+        clip: Option<i8>,
+        direction: Option<DIRECTIONS>,
+        mut hidden_size: Option<usize>,
+        mut layout: Option<usize>,
+        mut linear_before_reset: Option<usize>,
+        n_outputs: Option<usize>
+    ) -> Array<Tensor<i8>> {
+        panic(array!['not supported!'])
+    }
 }
