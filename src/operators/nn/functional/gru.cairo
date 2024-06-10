@@ -189,8 +189,8 @@ fn gru<
             )
         };
 
-        let h_0 = if initial_h.is_some() {
-            initial_h.unwrap()
+        if initial_h.is_some() {
+             h_0 = initial_h.unwrap()
         } else {
             let mut h_data_vals = array![];
             let h_data_len = *batch_size * hidden_size.unwrap();
@@ -200,7 +200,7 @@ fn gru<
                 i += 1;
             };
 
-            TensorTrait::<T>::new(
+             h_0 = TensorTrait::<T>::new(
                 shape: array![batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
