@@ -165,7 +165,7 @@ fn gru<
         let hidden_size = Option::Some(*R.shape.at(R.shape.len() - 1));
         let batch_size = (*X.shape).at(1);
 
-        let X = if *(*layout).is_none() || layout.unwrap() == 0 {
+        let X = if *layout.is_none() || layout.unwrap() == 0 {
             @X
         } else {
             TensorTrait::<T>::transpose(X, array![1, 0, 2].span())
@@ -192,7 +192,7 @@ fn gru<
             initial_h.unwrap()
         } else {
             let mut h_data_vals = array![];
-            let h_data_len = batch_size * hidden_size.unwrap();
+            let h_data_len = batch_size * @hidden_size.unwrap();
             let mut i = 0;
             while i < h_data_len {
                 h_data_vals.append(NumberTrait::<T>::zero());
@@ -200,7 +200,7 @@ fn gru<
             };
 
             TensorTrait::<T>::new(
-                shape: array![batch_size, hidden_size.unwrap()].span(),
+                shape: array![batch_size, @hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
         };
@@ -209,7 +209,7 @@ fn gru<
         H_0 = h_0;
     }
 
-    let result = step(X, W, R, @B.unwrap(), @H_0, num_directions, linear_before_reset, layout);
+    let result = step(X, W, R, @B.unwrap(), @H_0, *num_directions, linear_before_reset, layout);
 
     if n_outputs.unwrap() == 1 {
         return array![*result.at(0)];
@@ -238,6 +238,7 @@ fn step<
     +Rem<T>,
     +Neg<T>,
     +SubEq<T>,
+    +Add<Tensor<T>>,
 >(
     X: @Tensor<T>,
     W: @Tensor<T>,
@@ -296,7 +297,7 @@ fn step<
     let mut H_t = H_0;
     let mut H = H_0;
 
-    let X_segment = split_tensor(X, (*X.shape).at(0), 0);
+    let X_segment = split_tensor(X, *(*X.shape).at(0), 0);
     let mut i = 0;
     while i < X_segment.len() {
         let gates = (X_segment.at(i).unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
@@ -308,17 +309,17 @@ fn step<
             (*gates_split.at(0), *gates_split.at(1))
         };
 
-        let z = f(@z);
-        let r = f(@r);
+        let z = f(*z);
+        let r = f(*r);
         
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
         let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
-        let h_default = g(X_segment.at(i).matmul(@w_h_tranposed)
-            + (r * H_t).matmul(@r_h_tranposed)
+        let h_default = g(@(X_segment.at(i).matmul(@w_h_tranposed))
+            + (r * *H_t).matmul(@r_h_tranposed)
             + w_bh + r_bh);
 
-        let h_linear = g(X_segment.at(i).matmul(@w_h_tranposed)
+        let h_linear = g(@(X_segment.at(i).matmul(@w_h_tranposed))
             + (r * (H_t.matmul(@r_h_tranposed) + r_bh))
             + w_bh);
 
@@ -333,7 +334,7 @@ fn step<
             data: array![NumberTrait::<T>::one()].span(),
         );
 
-        H = (one - z) * h + z * H_t;
+        H = (one - z) * h + z * *H_t;
 
         h_list.append(*H);
         H_t = H;
@@ -476,7 +477,7 @@ fn split_tensor<
     num_outputs: usize,
     axis: usize,
 ) -> Array<Tensor<T>> {
-    let mut tensor = if (tensor.shape).len() < 2 {
+    let mut tensor = if (*tensor.shape).len() < 2 {
         TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
             data: (*tensor).data
@@ -488,9 +489,9 @@ fn split_tensor<
     let shape = tensor.shape;
     let dim_size = shape.at(axis);
 
-    assert!(dim_size % num_outputs == 0, "Dimension size must be divisible by the number of outputs");
+    assert!(dim_size % @num_outputs == 0, "Dimension size must be divisible by the number of outputs");
 
-    let slice_size = dim_size / num_outputs;
+    let slice_size = dim_size / @num_outputs;
     let mut slices = ArrayTrait::new();
 
     let mut start = 0;
@@ -501,11 +502,11 @@ fn split_tensor<
         let mut i = 0;
         while i != shape.len() {
             if i == axis {
-                starts.append(start);
-                ends.append(start + slice_size);
+                starts.append(*start);
+                ends.append(*start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(shape.at(i));
+                ends.append(*shape.at(i));
             }
             i += 1;
         };
