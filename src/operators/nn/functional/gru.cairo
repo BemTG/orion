@@ -1,14 +1,14 @@
 use core::debug::PrintTrait;
 
-// use orion::numbers::NumberTrait;
+use orion::numbers::NumberTrait;
 
-// use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
+use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
 
 
 
 // use core::traits::TryInto;
 // use core::option::OptionTrait;
-// use core::traits::Into;
+use core::traits::Into;
 
 
 use orion::operators::tensor::implementations::tensor_fp16x16::{
@@ -19,15 +19,15 @@ use orion::operators::tensor::implementations::tensor_u32::{
     U32TensorAdd, U32TensorSub, U32TensorMul, U32TensorDiv, U32TensorPartialEq,
 };
 
-use orion::operators::nn::{FP8x23NN, FP16x16NN};
+// use orion::operators::nn::{FP8x23NN, FP16x16NN};
 use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 
 
-use orion::numbers::fixed_point::implementations::fp16x16::core::{
-    HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul, FP16x16MulEq,
-    FP16x16TryIntoU128, FP16x16PartialEq, FP16x16PartialOrd, FP16x16SubEq, FP16x16Neg, FP16x16Div,
-    FP16x16IntoFelt252,
-};
+// use orion::numbers::fixed_point::implementations::fp16x16::core::{
+//     HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul, FP16x16MulEq,
+//     FP16x16TryIntoU128, FP16x16PartialEq, FP16x16PartialOrd, FP16x16SubEq, FP16x16Neg, FP16x16Div,
+//     FP16x16IntoFelt252,
+// };
 
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
