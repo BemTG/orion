@@ -2,32 +2,17 @@ use core::debug::PrintTrait;
 
 use orion::numbers::NumberTrait;
 
-/// Cf: NNTrait::gru docstring
-
-
 use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
 use orion::numbers::{FP16x16, FP16x16Impl, FP8x23};
-// use orion::operators::tensor::FP16x16TensorPartialEq;
 use core::array::{ArrayTrait, SpanTrait};
-// use orion::operators::tensor::FP16x16Tensor;
 use orion::operators::tensor::FP8x23Tensor;
 use orion::utils::{assert_eq, assert_seq_eq};
 use orion::operators::tensor::core::{unravel_index};
 
-// use orion::operators::tensor::implementations::tensor_i32::{
-//     I32Tensor, I32TensorAdd, I32TensorSub, I32TensorMul, I32TensorDiv, I32TensorPartialEq,
-//     TensorI8IntoTensorI32
-// };
 
 use core::traits::TryInto;
 use core::option::OptionTrait;
 use core::traits::Into;
-
-
-
-// use orion::numbers::fixed_point::implementations::fp16x16::math::lut;
-// use core::integer;
-
 
 
 use orion::operators::tensor::implementations::tensor_fp16x16::{
@@ -39,17 +24,14 @@ use orion::operators::tensor::implementations::tensor_u32::{
 };
 
 use orion::operators::nn::{FP8x23NN, FP16x16NN};
-use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
+// use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 
-use orion::numbers::fixed_point::core::FixedTrait;
+// use orion::numbers::fixed_point::core::FixedTrait;
 
-use orion::numbers::{FP32x32, FP32x32Impl};
+// use orion::numbers::{FP32x32, FP32x32Impl};
 
-use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
-// use orion::operators::tensor::helpers::{reduce_output_shape, len_from_shape, combine_indices};
-// use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div_downcast};
-
-use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
+// use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
+// use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
 
 use orion::numbers::fixed_point::implementations::fp16x16::core::{
     HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul, FP16x16MulEq,
@@ -60,19 +42,6 @@ use orion::numbers::fixed_point::implementations::fp16x16::core::{
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
 
-
-// use core::serde::Serde;
-
-// use alexandria_data_structures::array_ext::{SpanTraitExt};
-
-// use orion::operators::tensor::helpers::{check_shape, broadcast_index_mapping};
-
-
-// use alexandria_data_structures::array_ext::ArrayTraitExt;
-
-// use orion::operators::tensor::{core::{stride}, BoolTensor};
-
-// use orion::operators::tensor::helpers::{broadcast_shape,};
 
 
 
