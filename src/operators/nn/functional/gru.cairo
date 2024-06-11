@@ -490,7 +490,7 @@ fn split_tensor<
 
     assert!(*dim_size % num_outputs == 0, "Dimension size must be divisible");
 
-    let slice_size = dim_size / @num_outputs;
+    let slice_size = dim_size / num_outputs;
     let mut slices = ArrayTrait::new();
 
     let mut start = 0;
