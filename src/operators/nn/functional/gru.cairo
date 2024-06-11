@@ -486,7 +486,7 @@ fn split_tensor<
     };
 
     let shape = tensor.shape;
-    let dim_size = *shape.at(axis);
+    let dim_size = *(shape).at(axis);
 
     assert!(dim_size % num_outputs == 0, "Dimension size must be divisible");
 
@@ -499,13 +499,13 @@ fn split_tensor<
         let mut ends = ArrayTrait::new();
 
         let mut i = 0;
-        while i != *shape.len() {
+        while i != *(shape).len() {
             if i == axis {
                 starts.append(start);
                 ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(*shape.at(i));
+                ends.append(*(shape).at(i));
             }
             i += 1;
         };
