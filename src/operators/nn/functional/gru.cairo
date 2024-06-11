@@ -341,7 +341,7 @@ fn step<
 
         let s1 = ((one - z) * h);
         let s2 = (z * *H_t);
-        H =  s1 + @s2 ;
+        H =  s1 + s2 ;
 
         h_list.append(*H);
         H_t = H;
