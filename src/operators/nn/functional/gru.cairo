@@ -1,18 +1,14 @@
 use core::debug::PrintTrait;
 
-use orion::numbers::NumberTrait;
+// use orion::numbers::NumberTrait;
 
-use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
-// use orion::numbers::{FP16x16, FP16x16Impl, FP8x23};
-// use core::array::{ArrayTrait, SpanTrait};
-// use orion::operators::tensor::FP8x23Tensor;
-// use orion::utils::{assert_eq, assert_seq_eq};
-// use orion::operators::tensor::core::{unravel_index};
+// use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
 
 
-use core::traits::TryInto;
-use core::option::OptionTrait;
-use core::traits::Into;
+
+// use core::traits::TryInto;
+// use core::option::OptionTrait;
+// use core::traits::Into;
 
 
 use orion::operators::tensor::implementations::tensor_fp16x16::{
