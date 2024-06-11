@@ -9,7 +9,7 @@ use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
 use orion::numbers::{FP16x16, FP16x16Impl, FP8x23};
 // use orion::operators::tensor::FP16x16TensorPartialEq;
 use core::array::{ArrayTrait, SpanTrait};
-use orion::operators::tensor::FP16x16Tensor;
+// use orion::operators::tensor::FP16x16Tensor;
 use orion::operators::tensor::FP8x23Tensor;
 use orion::utils::{assert_eq, assert_seq_eq};
 use orion::operators::tensor::core::{unravel_index};
