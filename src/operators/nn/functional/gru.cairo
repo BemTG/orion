@@ -247,10 +247,10 @@ fn step<
     linear_before_reset: Option<usize>,
     layout: Option<usize>,
 ) -> Array<Tensor<T>> {
-    let seq_length = (*X).shape.at(0);
-    let rank = (*X).shape.len();
-    let hidden_size = (*H_0).shape.at((*H_0).shape.len() - 1);
-    let batch_size = (*X).shape.at(1);               
+    let seq_length = (*X.shape).at(0);
+    let rank = (*X.shape).len();
+    let hidden_size = (*H_0.shape).at((*H_0.shape).len() - 1);
+    let batch_size = (*X.shape).at(1);               
 
     let mut y_data_vals = array![];
     let y_data_vals_len = *seq_length * num_directions * *batch_size * *hidden_size;
@@ -297,18 +297,18 @@ fn step<
 
     let X_segment = split_tensor(X, *(*X.shape).at(0), 0);
     let mut i = 0;
-    while i < X_segment.len() {
+    while i < (X_segment).len() {
         let gates = (X_segment.at(i).unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
             + H_t.matmul(@gates_r_transposed).unsqueeze(axes: array![0].span())
             + gates_b);
 
-        let (z, r) = {
+        let (mut z, mut r) = {
             let gates_split = split_tensor(@gates, 2, gates.shape.len() - 1);
             (*gates_split.at(0), *gates_split.at(1))
         };
 
-        let z = f(z);
-        let r = f(r);
+        z = f(z);
+        r = f(r);
         
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
         let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
@@ -321,7 +321,7 @@ fn step<
             + (r * (H_t.matmul(@r_h_tranposed) + r_bh))
             + w_bh);
 
-        let h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
+        let mut h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
             h_linear
         } else {
             h_default
