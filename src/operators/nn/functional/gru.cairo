@@ -317,12 +317,14 @@ fn step<
         let h1 = X_segment.at(i).matmul(@w_h_tranposed);
         let h2 = (r * *H_t).matmul(@r_h_tranposed);
 
-        let h_default = g(h1 + h2 + w_bh + r_bh);
+        let h1_val = h1 + h2 + w_bh + r_bh;
+        let h_default = g(@h1_val);
 
         let h11 = X_segment.at(i).matmul(@w_h_tranposed);
         let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
 
-        let h_linear = g( h11 + h12 + w_bh);
+        let h2_val = h11 + h12 + w_bh;
+        let h_linear = g( @h2_val);
 
         let mut h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
             h_linear
@@ -335,7 +337,9 @@ fn step<
             data: array![NumberTrait::<T>::one()].span(),
         );
 
-        H = ((one - z) * h + z * H_t);
+        let s1 = ((one - z) * h);
+        let s2 = (z * H_t);
+        H =  s1 + s2 ;
 
         h_list.append(*H);
         H_t = H;
