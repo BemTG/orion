@@ -339,9 +339,8 @@ fn step<
             data: array![NumberTrait::<T>::one()].span(),
         );
 
-        let s1 = ((one - z) * h);
-        let s2 = (z * *H_t);
-        H =  s1 + s2 ;
+        let s = ((one - z) * h) + (z * *H_t);
+        H =  @s ;
 
         h_list.append(*H);
         H_t = H;
