@@ -563,7 +563,7 @@ fn split_tensor<
     let dim_size = (*tensor.shape).at(axis);   
 
     'dimsize'.print();
-    dim_size.print();
+    *dim_size.print();
     'numoutput'.print();
     num_outputs.print();
 
