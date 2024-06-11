@@ -3,11 +3,11 @@ use core::debug::PrintTrait;
 use orion::numbers::NumberTrait;
 
 use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
-use orion::numbers::{FP16x16, FP16x16Impl, FP8x23};
-use core::array::{ArrayTrait, SpanTrait};
-use orion::operators::tensor::FP8x23Tensor;
-use orion::utils::{assert_eq, assert_seq_eq};
-use orion::operators::tensor::core::{unravel_index};
+// use orion::numbers::{FP16x16, FP16x16Impl, FP8x23};
+// use core::array::{ArrayTrait, SpanTrait};
+// use orion::operators::tensor::FP8x23Tensor;
+// use orion::utils::{assert_eq, assert_seq_eq};
+// use orion::operators::tensor::core::{unravel_index};
 
 
 use core::traits::TryInto;
@@ -26,12 +26,6 @@ use orion::operators::tensor::implementations::tensor_u32::{
 use orion::operators::nn::{FP8x23NN, FP16x16NN};
 use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 
-// use orion::numbers::fixed_point::core::FixedTrait;
-
-// use orion::numbers::{FP32x32, FP32x32Impl};
-
-// use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
-// use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
 
 use orion::numbers::fixed_point::implementations::fp16x16::core::{
     HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul, FP16x16MulEq,
