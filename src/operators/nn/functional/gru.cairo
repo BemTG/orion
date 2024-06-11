@@ -236,7 +236,7 @@ fn step<
     +Neg<T>,
     +SubEq<T>,
     +Add<Tensor<T>>,
-    // +Mul<Tensor<T>>,
+    +Mul<Tensor<T>>,
 >(
     X: @Tensor<T>,
     W: @Tensor<T>,
@@ -319,7 +319,7 @@ fn step<
         let h_default = g(h1 + h2 + w_bh + r_bh);
 
         let h11 = X_segment.at(i).matmul(@w_h_tranposed);
-        let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh)
+        let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
 
         let h_linear = g( h11 + h12 + w_bh);
 
