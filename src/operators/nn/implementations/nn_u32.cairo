@@ -142,7 +142,7 @@ impl U32NN of NNTrait<u32> {
         activation_beta: Option<Array<Tensor<u32>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<u32>,
-        direction: Option<functional::gru::DIRECTIONS>,
+        direction: Option<functional::gru::DIRECTION>,
         mut hidden_size: Option<usize>,
         mut layout: Option<usize>,
         mut linear_before_reset: Option<usize>,

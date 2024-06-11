@@ -155,14 +155,14 @@ impl FP16x16NN of NNTrait<FP16x16> {
         activation_beta: Option<Array<Tensor<FP16x16>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<FP16x16>,
-        direction: Option<functional::gru::DIRECTIONS>,
+        direction: Option<functional::gru::DIRECTION>,
         mut hidden_size: Option<usize>,
         mut layout: Option<usize>,
         mut linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<FP16x16>> {
-        functional::gru::gru(X, W, R, B, sequence_length, initial_h, activation_alpha, activation_beta, activations, clip, direction, hidden_size, 
-        layout, linear_before_reset, n_outputs)
+        functional::gru::gru(X, W, R, B, sequence_length, initial_h, activation_alpha, activation_beta, 
+        activations, clip, direction, hidden_size, layout, linear_before_reset, n_outputs)
     }
 }
 

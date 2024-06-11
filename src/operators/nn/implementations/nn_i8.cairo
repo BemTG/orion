@@ -142,7 +142,7 @@ impl I8NN of NNTrait<i8> {
         activation_beta: Option<Array<Tensor<i8>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<i8>,
-        direction: Option<functional::gru::DIRECTIONS>,
+        direction: Option<functional::gru::DIRECTION>,
         mut hidden_size: Option<usize>,
         mut layout: Option<usize>,
         mut linear_before_reset: Option<usize>,

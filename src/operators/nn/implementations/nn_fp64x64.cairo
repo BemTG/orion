@@ -149,7 +149,7 @@ impl FP64x64NN of NNTrait<FP64x64> {
         activation_beta: Option<Array<Tensor<FP64x64>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<FP64x64>,
-        direction: Option<functional::gru::DIRECTIONS>,
+        direction: Option<functional::gru::DIRECTION>,
         mut hidden_size: Option<usize>,
         mut layout: Option<usize>,
         mut linear_before_reset: Option<usize>,

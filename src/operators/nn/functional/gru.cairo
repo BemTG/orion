@@ -80,7 +80,7 @@ enum ACTIVATIONS {
 }
 
 #[derive(Copy, Drop)]
-enum DIRECTIONS {
+enum DIRECTION {
     FORWARD,
     REVERSE,
     BIDIRECTIONAL,
@@ -121,7 +121,7 @@ fn gru<
     activation_beta: Option<Array<Tensor<T>>>,
     activations: Option<ACTIVATIONS>,
     clip: Option<T>,
-    direction: Option<DIRECTIONS>,
+    direction: Option<DIRECTION>,
      hidden_size: Option<usize>,
      layout: Option<usize>,
      linear_before_reset: Option<usize>,

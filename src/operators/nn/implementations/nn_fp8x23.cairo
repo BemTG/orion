@@ -151,7 +151,7 @@ impl FP8x23NN of NNTrait<FP8x23> {
         activation_beta: Option<Array<Tensor<FP8x23>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<FP8x23>,
-        direction: Option<functional::gru::DIRECTIONS>,
+        direction: Option<functional::gru::DIRECTION>,
         mut hidden_size: Option<usize>,
         mut layout: Option<usize>,
         mut linear_before_reset: Option<usize>,
