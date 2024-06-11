@@ -155,8 +155,8 @@ fn gru<
 
     if *num_directions == NumberTrait::<usize>::one() {
         'checkp2'.print();
-        R = R.squeeze(axes: Option::None(()));
-        W = W.squeeze(axes: Option::None(()));
+        R = @R.squeeze(axes: Option::None(()));
+        W = @W.squeeze(axes: Option::None(()));
 
         'checkp3'.print();
         if B.is_some() {
@@ -173,7 +173,7 @@ fn gru<
 
         'checkp4'.print();
 
-        let hidden_size = Option::Some(*R.shape.at(R.shape.len() - 1));
+        let hidden_size = Option::Some((*R.shape).at((R.shape).len() - 1));
         let batch_size = (*X.shape).at(1);
 
         'checkp5'.print();
