@@ -476,19 +476,19 @@ fn split_tensor<
     num_outputs: usize,
     mut axis: usize,
 ) -> Array<Tensor<T>> {
-    if (tensor.shape).len() < NumberTrait::<usize>::one() + NumberTrait::<usize>::one()  {
-        tensor = TensorTrait::<T>::new(
+    if (*tensor.shape).len() < NumberTrait::<usize>::one() + NumberTrait::<usize>::one()  {
+        tensor = @TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
-            data: tensor.data
+            data: *tensor.data
         );
 
     axis =  NumberTrait::<usize>::one() ;
     };
 
     let shape = tensor.shape;
-    let dim_size = shape.at(axis);
+    let dim_size = *shape.at(axis);
 
-    assert!(*dim_size % num_outputs == 0, "Dimension size must be divisible");
+    assert!(dim_size % num_outputs == 0, "Dimension size must be divisible");
 
     let slice_size = dim_size / @num_outputs;
     let mut slices = ArrayTrait::new();
@@ -499,13 +499,13 @@ fn split_tensor<
         let mut ends = ArrayTrait::new();
 
         let mut i = 0;
-        while i != shape.len() {
+        while i != *shape.len() {
             if i == axis {
                 starts.append(start);
                 ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(shape.at(i));
+                ends.append(*shape.at(i));
             }
             i += 1;
         };
