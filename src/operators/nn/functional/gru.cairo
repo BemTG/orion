@@ -2,12 +2,6 @@ use core::debug::PrintTrait;
 use orion::numbers::NumberTrait;
 use orion::operators::tensor::{TensorTrait, Tensor, U32Tensor};
 use core::traits::Into;
-// use orion::operators::tensor::implementations::tensor_fp16x16::{
-//     FP16x16Tensor, FP16x16TensorDiv, FP16x16TensorAdd, FP16x16TensorSub, FP16x16TensorMul, FP16x16TensorPartialEq
-// };
-// use orion::operators::tensor::implementations::tensor_u32::{
-//     U32TensorAdd, U32TensorSub, U32TensorMul, U32TensorDiv, U32TensorPartialEq,
-// };
 use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
