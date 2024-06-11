@@ -76,7 +76,7 @@ fn gru<
     let mut B = B;
     let mut sequence_length = sequence_length;
     let mut initial_h = initial_h;
-    // let mut hidden_size = hidden_size;
+    let mut hidden_size = hidden_size;
     let mut layout = layout;
     let mut linear_before_reset = linear_before_reset;
 
@@ -102,7 +102,7 @@ fn gru<
 
         'checkp4'.print();
 
-        let hidden_size = Option::Some((*R.shape).at((*R.shape).len() - 1));
+        hidden_size = Option::Some((*R.shape).at((*R.shape).len() - 1));
         let batch_size = (*X.shape).at(1);
 
         'checkp5'.print();
