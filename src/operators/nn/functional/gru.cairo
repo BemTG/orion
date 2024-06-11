@@ -28,10 +28,11 @@ use core::traits::Into;
 use orion::numbers::fixed_point::implementations::fp16x16::math::lut;
 use core::integer;
 
-use orion::operators::tensor::implementations::tensor_fp16x16::{
-    FP16x16TensorAdd, FP16x16TensorSub, FP16x16TensorMul, FP16x16TensorDiv, FP16x16TensorPartialEq,
-};
 
+
+use orion::operators::tensor::implementations::tensor_fp16x16::{
+    FP16x16Tensor, FP16x16TensorDiv, FP16x16TensorAdd, FP16x16TensorSub, FP16x16TensorMul, FP16x16TensorPartialEq
+};
 
 use orion::operators::tensor::implementations::tensor_u32::{
     U32TensorAdd, U32TensorSub, U32TensorMul, U32TensorDiv, U32TensorPartialEq,
