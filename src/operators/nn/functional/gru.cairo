@@ -119,7 +119,7 @@ fn gru<
             b = B.unwrap();
         } else {
             let mut b_data_vals = array![];
-            let b_data_len = 2 * number_of_gates * *hidden_size.unwrap();
+            let b_data_len = 2 * number_of_gates * hidden_size.unwrap();
             let mut i = 0;
             while i < b_data_len {
                 b_data_vals.append(NumberTrait::<T>::zero());
@@ -127,7 +127,7 @@ fn gru<
             };
 
             b = TensorTrait::<T>::new(
-                shape: array![2 * number_of_gates * *hidden_size.unwrap()].span(),
+                shape: array![2 * number_of_gates * hidden_size.unwrap()].span(),
                 data: b_data_vals.span()
             )
         };
@@ -138,7 +138,7 @@ fn gru<
              h_0 = initial_h.unwrap()
         } else {
             let mut h_data_vals = array![];
-            let h_data_len = *batch_size * *hidden_size.unwrap();
+            let h_data_len = *batch_size * hidden_size.unwrap();
             let mut i = 0;
             while i < h_data_len {
                 h_data_vals.append(NumberTrait::<T>::zero());
@@ -146,7 +146,7 @@ fn gru<
             };
 
              h_0 = TensorTrait::<T>::new(
-                shape: array![*batch_size, *hidden_size.unwrap()].span(),
+                shape: array![*batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
         };
