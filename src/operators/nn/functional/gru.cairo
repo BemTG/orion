@@ -108,6 +108,7 @@ fn gru<
     +Neg<T>,
     +SubEq<T>,
     +Add<Tensor<T>>,
+     +Mul<Tensor<T>>,
 >(
      X: @Tensor<T>,
      W: @Tensor<T>,
