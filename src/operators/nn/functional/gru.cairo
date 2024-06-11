@@ -276,10 +276,14 @@ fn step<
     linear_before_reset: Option<usize>,
     layout: Option<usize>,
 ) -> Array<Tensor<T>> {
+
+    'checkp11'.print();
     let seq_length = (*X.shape).at(0);
     let rank = (*X.shape).len();
     let hidden_size = (*H_0.shape).at((*H_0.shape).len() - 1);
-    let batch_size = (*X.shape).at(1);               
+    let batch_size = (*X.shape).at(1); 
+
+    'checkp12'.print();
 
     let mut y_data_vals = array![];
     let y_data_vals_len = *seq_length * num_directions * *batch_size * *hidden_size;
@@ -289,10 +293,14 @@ fn step<
         i += 1;
     };
 
+    'checkp13'.print();
+
     let mut Y = TensorTrait::<T>::new(
         shape: array![*seq_length, num_directions, *batch_size, *hidden_size].span(),
         data: y_data_vals.span()
     );
+
+    'checkp14'.print();
 
     let mut h_list: Array<Tensor<T>> = array![];
 
@@ -300,6 +308,8 @@ fn step<
         let w_split = split_tensor(W, 3, 0);
         (*w_split.at(0), *w_split.at(1), *w_split.at(2))
     };
+
+    'checkp14b'.print();
     
     let (r_z, r_r, r_h) = {
         let r_split = split_tensor(R, 3, 0);
@@ -312,35 +322,49 @@ fn step<
          *b_split.at(3), *b_split.at(4), *b_split.at(5))
     };
 
+    'checkp15'.print();
+
     let gates_w = TensorTrait::<T>::concat(tensors: array![w_z, w_r].span(), axis: 0);
     let gates_r = TensorTrait::<T>::concat(tensors: array![r_z, r_r].span(), axis: 0);
     let gates_b1 = TensorTrait::<T>::concat(tensors: array![w_bz, w_br].span(), axis: 0);
     let gates_b2 = TensorTrait::<T>::concat(tensors: array![r_bz, r_br].span(), axis: 0);
     let gates_b = gates_b1 + gates_b2;
 
+    'checkp16'.print();
+
     let gates_w_transposed = gates_w.transpose(axes: reverse_axes(gates_w.shape));
     let gates_r_transposed = gates_r.transpose(axes: reverse_axes(gates_r.shape));
+
+    'checkp17'.print();
 
     let mut H_t = H_0;
     let mut H = H_0;
 
+    'checkp18'.print();
+
     let X_segment = split_tensor(X, *(*X.shape).at(0), 0);
+    'checkp19'.print();
     let mut i = 0;
     while i < (X_segment).len() {
+        'checkp20'.print();
         let gates = (X_segment.at(i).unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
             + H_t.matmul(@gates_r_transposed).unsqueeze(axes: array![0].span())
             + gates_b);
-
+        'checkp21'.print();
         let (mut z, mut r) = {
             let gates_split = split_tensor(@gates, 2, gates.shape.len() - 1);
             (*gates_split.at(0), *gates_split.at(1))
         };
 
+        'checkp22'.print();
         z = f(z);
         r = f(r);
         
+        'checkp23'.print();
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
         let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
+
+        'checkp24'.print();
 
         let h1 = X_segment.at(i).matmul(@w_h_tranposed);
         let h2 = (r * *H_t).matmul(@r_h_tranposed);
@@ -354,30 +378,42 @@ fn step<
         let h2_val = h11 + h12 + w_bh;
         let h_linear = g( @h2_val);
 
+        'checkp25'.print();
+
         let mut h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
             h_linear
         } else {
             h_default
         };
 
+        'checkp26'.print();
+
         let one = TensorTrait::<T>::new(
             shape: array![].span(),
             data: array![NumberTrait::<T>::one()].span(),
         );
 
+        'checkp27'.print();
+
         let s = ((one - z) * h) + (z * *H_t);
         H =  @s ;
+
+        'checkp28'.print();
 
         h_list.append(*H);
         H_t = H;
         i += 1;
     };
+
+    'checkp29'.print();
  
     let concatenated = if h_list.len() > 1 {
         concat_tensor_array(h_list)
     } else {
         *h_list.at(0)
     };
+
+    'checkp30'.print();
 
     let mut output: Array<Tensor<T>> = array![];
 
@@ -390,6 +426,8 @@ fn step<
 
         output.append(Y);
     }
+
+    'checkp31'.print();
 
     if layout.is_some() && layout.unwrap() == 0 || layout.is_none() {
         let mut Y_h = Y.slice(
