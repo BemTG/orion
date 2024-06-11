@@ -14,10 +14,10 @@ use orion::operators::tensor::FP8x23Tensor;
 use orion::utils::{assert_eq, assert_seq_eq};
 use orion::operators::tensor::core::{unravel_index};
 
-use orion::operators::tensor::implementations::tensor_i32::{
-    I32Tensor, I32TensorAdd, I32TensorSub, I32TensorMul, I32TensorDiv, I32TensorPartialEq,
-    TensorI8IntoTensorI32
-};
+// use orion::operators::tensor::implementations::tensor_i32::{
+//     I32Tensor, I32TensorAdd, I32TensorSub, I32TensorMul, I32TensorDiv, I32TensorPartialEq,
+//     TensorI8IntoTensorI32
+// };
 
 use core::traits::TryInto;
 use core::option::OptionTrait;
@@ -25,8 +25,8 @@ use core::traits::Into;
 
 
 
-use orion::numbers::fixed_point::implementations::fp16x16::math::lut;
-use core::integer;
+// use orion::numbers::fixed_point::implementations::fp16x16::math::lut;
+// use core::integer;
 
 
 
@@ -46,8 +46,8 @@ use orion::numbers::fixed_point::core::FixedTrait;
 use orion::numbers::{FP32x32, FP32x32Impl};
 
 use orion::operators::vec::{VecTrait, NullableVec, NullableVecImpl};
-use orion::operators::tensor::helpers::{reduce_output_shape, len_from_shape, combine_indices};
-use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div_downcast};
+// use orion::operators::tensor::helpers::{reduce_output_shape, len_from_shape, combine_indices};
+// use orion::operators::tensor::math::{reduce_sum::accumulate_sum, arithmetic::div_downcast};
 
 use orion::operators::tensor::{math, linalg, quantization, core as core_tensor, ml, manipulation};
 
@@ -61,24 +61,20 @@ use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
 
 
-use core::serde::Serde;
+// use core::serde::Serde;
 
-use alexandria_data_structures::array_ext::{SpanTraitExt};
+// use alexandria_data_structures::array_ext::{SpanTraitExt};
 
-use orion::operators::tensor::helpers::{check_shape, broadcast_index_mapping};
-
-
-use alexandria_data_structures::array_ext::ArrayTraitExt;
-
-use orion::operators::tensor::{core::{stride}, BoolTensor};
-
-use orion::operators::tensor::helpers::{broadcast_shape,};
+// use orion::operators::tensor::helpers::{check_shape, broadcast_index_mapping};
 
 
+// use alexandria_data_structures::array_ext::ArrayTraitExt;
 
-use orion::operators::tensor::implementations::tensor_fp16x16wide::{
-    FP16x16WTensor, FP16x16WTensorDiv, FP16x16WTensorAdd, FP16x16WTensorSub, FP16x16WTensorMul
-};
+// use orion::operators::tensor::{core::{stride}, BoolTensor};
+
+// use orion::operators::tensor::helpers::{broadcast_shape,};
+
+
 
 #[derive(Copy, Drop)]
 enum ACTIVATIONS {
