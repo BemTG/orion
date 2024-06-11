@@ -155,8 +155,8 @@ fn gru<
 
     if *num_directions == NumberTrait::<usize>::one() {
         'checkp2'.print();
-        let R = R.squeeze(axes: Option::None(()));
-        let W = W.squeeze(axes: Option::None(()));
+        R = R.squeeze(axes: Option::None(()));
+        W = W.squeeze(axes: Option::None(()));
 
         'checkp3'.print();
         if B.is_some() {
@@ -304,19 +304,19 @@ fn step<
 
     let mut h_list: Array<Tensor<T>> = array![];
 
-    let (w_z, w_r, w_h) = {
+    let ( mut w_z,mut  w_r, mut w_h) = {
         let w_split = split_tensor(W, 3, 0);
         (*w_split.at(0), *w_split.at(1), *w_split.at(2))
     };
 
     'checkp14b'.print();
     
-    let (r_z, r_r, r_h) = {
+    let (mut r_z, mut r_r, mut r_h) = {
         let r_split = split_tensor(R, 3, 0);
         (*r_split.at(0), *r_split.at(1), *r_split.at(2))
     };
 
-    let (w_bz, w_br, w_bh, r_bz, r_br, r_bh) = {
+    let (mut w_bz, mut w_br, mut w_bh, mut r_bz, mut r_br, mut r_bh) = {
         let b_split = split_tensor(B, 6, 0);
         (*b_split.at(0), *b_split.at(1), *b_split.at(2),
          *b_split.at(3), *b_split.at(4), *b_split.at(5))
