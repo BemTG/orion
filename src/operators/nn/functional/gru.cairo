@@ -494,7 +494,7 @@ fn split_tensor<
     let mut slices = ArrayTrait::new();
 
     let mut start = 0;
-    while start < dim_size {
+    while start < *dim_size {
         let mut starts = ArrayTrait::new();
         let mut ends = ArrayTrait::new();
 
@@ -505,7 +505,7 @@ fn split_tensor<
                 ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append((*tensor.shape).at(i));   
+                ends.append((*(*tensor.shape)).at(i));   
             }
             i += 1;
         };
