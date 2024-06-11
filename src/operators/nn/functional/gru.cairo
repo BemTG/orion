@@ -24,6 +24,7 @@ use core::option::OptionTrait;
 use core::traits::Into;
 
 
+
 use orion::numbers::fixed_point::implementations::fp16x16::math::lut;
 use core::integer;
 
@@ -71,6 +72,12 @@ use alexandria_data_structures::array_ext::ArrayTraitExt;
 use orion::operators::tensor::{core::{stride}, BoolTensor};
 
 use orion::operators::tensor::helpers::{broadcast_shape,};
+
+
+
+use orion::operators::tensor::implementations::tensor_fp16x16wide::{
+    FP16x16WTensor, FP16x16WTensorDiv, FP16x16WTensorAdd, FP16x16WTensorSub, FP16x16WTensorMul
+};
 
 #[derive(Copy, Drop)]
 enum ACTIVATIONS {
