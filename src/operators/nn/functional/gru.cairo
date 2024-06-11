@@ -472,17 +472,17 @@ fn split_tensor<
     +Drop<T>,
     +Rem<T>,
 >(
-    tensor: @Tensor<T>,
+    mut tensor: @Tensor<T>,
     num_outputs: usize,
-    axis: usize,
+    mut axis: usize,
 ) -> Array<Tensor<T>> {
-    let mut tensor = if *(tensor.shape).len() < 2 {
-        TensorTrait::<T>::new(
+    if (tensor.shape).len() < NumberTrait::<usize>::one() + NumberTrait::<usize>::one()  {
+        tensor = TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
-            data: (*tensor).data
-        )
-    } else {
-        @tensor
+            data: tensor.data
+        );
+
+    axis =  NumberTrait::<usize>::one() ;
     };
 
     let shape = tensor.shape;
@@ -501,21 +501,16 @@ fn split_tensor<
         let mut i = 0;
         while i != shape.len() {
             if i == axis {
-                starts.append(*start);
-                ends.append(*start + slice_size);
+                starts.append(start);
+                ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(@(shape.at(i)));
+                ends.append(shape.at(i));
             }
             i += 1;
         };
 
-        let slice = tensor.slice(
-            starts: starts.span(),
-            ends: ends.span(),
-            axes: Option::None(()),
-            steps: Option::None(())
-        );
+        let slice = tensor.slice(starts.span(), ends.span(), Option::None(()), Option::None(()));
 
         slices.append(slice.squeeze(axes: Option::None(())));
         start += slice_size;
