@@ -24,7 +24,7 @@ use orion::operators::tensor::implementations::tensor_u32::{
 };
 
 use orion::operators::nn::{FP8x23NN, FP16x16NN};
-// use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
+use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 
 // use orion::numbers::fixed_point::core::FixedTrait;
 
