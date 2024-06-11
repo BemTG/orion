@@ -313,13 +313,15 @@ fn step<
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
         let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
-        let h_default = g((@X_segment.at(i).matmul(@w_h_tranposed))
-            + ((r * *H_t).matmul(@r_h_tranposed))
-            + w_bh + r_bh);
+        let h1 = X_segment.at(i).matmul(@w_h_tranposed);
+        let h2 = (r * *H_t).matmul(@r_h_tranposed);
 
-        let h_linear = g((@X_segment.at(i).matmul(@w_h_tranposed))
-            + (r * (H_t.matmul(@r_h_tranposed) + r_bh))
-            + w_bh);
+        let h_default = g(h1 + h2 + w_bh + r_bh);
+
+        let h11 = X_segment.at(i).matmul(@w_h_tranposed);
+        let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh)
+
+        let h_linear = g( h11 + h12 + w_bh);
 
         let mut h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
             h_linear
@@ -485,8 +487,8 @@ fn split_tensor<
     axis =  NumberTrait::<usize>::one() ;
     };
 
-    let shape = tensor.shape;
-    let dim_size = (*tensor.shape).at(axis);   //  (*X.shape).at(0);
+    
+    let dim_size = (*tensor.shape).at(axis);   
 
     assert!(*dim_size % num_outputs == 0, "Dimension size must be divisible");
 
