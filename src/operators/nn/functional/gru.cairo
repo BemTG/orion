@@ -554,11 +554,18 @@ fn split_tensor<
             data: *tensor.data
         );
 
-    axis =  NumberTrait::<usize>::one() ;
+    axis =   1;
     };
 
     
+
+    
     let dim_size = (*tensor.shape).at(axis);   
+
+    'dimsize'.print();
+    dim_size.print();
+    'numoutput'.print();
+    num_outputs.print();
 
     assert!(*dim_size % num_outputs == 0, "Dimension size must be divisible");
 
