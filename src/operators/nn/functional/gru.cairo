@@ -237,6 +237,7 @@ fn step<
     +Neg<T>,
     +SubEq<T>,
     +Add<Tensor<T>>,
+    +Sub<Tensor<T>>,
     +Mul<Tensor<T>>,
 >(
     X: @Tensor<T>,
@@ -338,8 +339,8 @@ fn step<
         );
 
         let s1 = ((one - z) * h);
-        let s2 = (z * H_t);
-        H =  s1 + s2 ;
+        let s2 = (z * *H_t);
+        H =  @s1 + @s2 ;
 
         h_list.append(*H);
         H_t = H;
