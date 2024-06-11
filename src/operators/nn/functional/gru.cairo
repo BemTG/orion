@@ -151,10 +151,14 @@ fn gru<
     let mut layout = layout;
     let mut linear_before_reset = linear_before_reset;
 
+    'checkp1'.print();
+
     if *num_directions == NumberTrait::<usize>::one() {
+        'checkp2'.print();
         let R = R.squeeze(axes: Option::None(()));
         let W = W.squeeze(axes: Option::None(()));
 
+        'checkp3'.print();
         if B.is_some() {
             B = Option::Some(B.unwrap().squeeze(axes: Option::None(())))
         };
@@ -167,14 +171,20 @@ fn gru<
            initial_h =  Option::Some(initial_h.unwrap().squeeze(axes: Option::None(())))
         };
 
+        'checkp4'.print();
+
         let hidden_size = Option::Some(*R.shape.at(R.shape.len() - 1));
         let batch_size = (*X.shape).at(1);
+
+        'checkp5'.print();
 
         if layout.is_none() || layout.unwrap() == NumberTrait::<usize>::zero() {
             X = X
         } else {
             X = @(TensorTrait::<T>::transpose(X, array![1, 0, 2].span()))
         };
+
+        'checkp6'.print();
 
         if B.is_some() {
             b = B.unwrap();
@@ -193,6 +203,8 @@ fn gru<
             )
         };
 
+        'checkp7'.print();
+
         if initial_h.is_some() {
              h_0 = initial_h.unwrap()
         } else {
@@ -210,13 +222,19 @@ fn gru<
             )
         };
 
+        'checkp8'.print();
+
         B = Option::Some(b);
         H_0 = h_0;
     }else{
         core::panic_with_felt252('Unsupported value') 
     }
 
+    'checkp9'.print();
+
     let result = step(X, W, R, @B.unwrap(), @H_0, *num_directions, linear_before_reset, layout);
+
+    'checkp10'.print();
 
     if n_outputs.unwrap() == NumberTrait::<usize>::one() {
         return array![*result.at(0)];
