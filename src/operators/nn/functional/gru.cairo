@@ -505,7 +505,7 @@ fn split_tensor<
                 ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append((*(*tensor.shape)).at(i));   
+                ends.append(*(*tensor.shape).at(i));   
             }
             i += 1;
         };
