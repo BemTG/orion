@@ -153,7 +153,7 @@ fn gru<
 
         'checkp8'.print();
 
-        B = Option::Some(b);
+        let B = b;
         H_0 = h_0;
     }else{
         core::panic_with_felt252('Unsupported value') 
@@ -161,7 +161,8 @@ fn gru<
 
     'checkp9'.print();
 
-    let result = step(X, W, R, @B.unwrap(), @H_0, num_directions, linear_before_reset, layout);
+
+    let result = step(X, W, R, B, @H_0, num_directions, linear_before_reset, layout);
 
     'checkp10'.print();
 
