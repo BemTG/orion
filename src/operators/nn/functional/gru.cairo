@@ -48,7 +48,7 @@ fn gru<
     +Sub<Tensor<T>>,
      +Mul<Tensor<T>>,
 >(
-     X: @Tensor<T>,
+     mut X: @Tensor<T>,
      W: @Tensor<T>,
      R: @Tensor<T>,
      B: Option<Tensor<T>>,
