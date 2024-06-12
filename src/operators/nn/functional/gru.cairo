@@ -82,7 +82,7 @@ fn gru<
 
     'checkp1'.print();
 
-    if *num_directions == NumberTrait::<usize>::one() {
+    if num_directions == NumberTrait::<usize>::one() {
         'checkp2'.print();
         R = @R.squeeze(axes: Option::None(()));
         W = @W.squeeze(axes: Option::None(()));
@@ -161,7 +161,7 @@ fn gru<
 
     'checkp9'.print();
 
-    let result = step(X, W, R, @B.unwrap(), @H_0, *num_directions, linear_before_reset, layout);
+    let result = step(X, W, R, @B.unwrap(), @H_0, num_directions, linear_before_reset, layout);
 
     'checkp10'.print();
 
