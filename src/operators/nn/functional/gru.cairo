@@ -48,20 +48,20 @@ fn gru<
     +Sub<Tensor<T>>,
      +Mul<Tensor<T>>,
 >(
-     mut X: @Tensor<T>,
-     mut W: @Tensor<T>,
-     mut R: @Tensor<T>,
-     mut B: Option<Tensor<T>>,
-     mut sequence_length: Option<Tensor<T>>,
-    mut initial_h: Option<Tensor<T>>,
+     X: @Tensor<T>,
+     W: @Tensor<T>,
+     R: @Tensor<T>,
+     B: Option<Tensor<T>>,
+     sequence_length: Option<Tensor<T>>,
+    initial_h: Option<Tensor<T>>,
     activation_alpha: Option<Array<Tensor<T>>>,
     activation_beta: Option<Array<Tensor<T>>>,
     activations: Option<ACTIVATIONS>,
     clip: Option<T>,
     direction: Option<DIRECTION>,
-     mut hidden_size: Option<usize>,
-     mut layout: Option<usize>,
-     mut linear_before_reset: Option<usize>,
+     hidden_size: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
 ) -> Array<Tensor<T>> {
     let num_directions = *(*W).shape.at(0);
@@ -70,15 +70,15 @@ fn gru<
     let mut b = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let number_of_gates: usize = 3;
 
-    // let mut X = X;
-    // let mut W = W;
-    // let mut R = R;
-    // let mut B = B;
-    // let mut sequence_length = sequence_length;
-    // let mut initial_h = initial_h;
-    // let mut hidden_size = hidden_size;
-    // let mut layout = layout;
-    // let mut linear_before_reset = linear_before_reset;
+    let mut X = X;
+    let mut W = W;
+    let mut R = R;
+    let mut B = B;
+    let mut sequence_length = sequence_length;
+    let mut initial_h = initial_h;
+    let mut hidden_size = hidden_size;
+    let mut layout = layout;
+    let mut linear_before_reset = linear_before_reset;
 
     'checkp1'.print();
 
