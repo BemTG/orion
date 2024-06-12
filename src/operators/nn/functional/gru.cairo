@@ -103,14 +103,14 @@ fn gru<
         'checkp4'.print();
 
         hidden_size = Option::Some(*(*R).shape.at( (*R).shape.len() - 1 )); 
-        let batch_size = (*X.shape).at(1);
+        let batch_size = *(*X).shape.at[1];
 
         'checkp5'.print();
 
         if layout.is_none() || layout.unwrap() == NumberTrait::<usize>::zero() {
             X = X
         } else {
-            X = @(TensorTrait::<T>::transpose(X, array![1, 0, 2].span()))
+            X = @TensorTrait::<T>::transpose(X, array![1, 0, 2].span())
         };
 
         'checkp6'.print();
