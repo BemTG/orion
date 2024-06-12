@@ -102,7 +102,7 @@ fn gru<
 
         'checkp4'.print();
 
-        hidden_size = Option::Some(*(*R).shape.at( *(*R).shape).len() - 1 ); 
+        hidden_size = Option::Some(*(*R).shape.at( *(*R).shape.len() - 1 )); 
         let batch_size = (*X.shape).at(1);
 
         'checkp5'.print();
