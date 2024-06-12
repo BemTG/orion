@@ -64,7 +64,7 @@ fn gru<
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
 ) -> Array<Tensor<T>> {
-    let num_directions = (*W.shape).at(0);
+    let num_directions = *(*W).shape.at(0);
     let mut h_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let mut H_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
     let mut b = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
