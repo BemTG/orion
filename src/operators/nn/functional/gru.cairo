@@ -319,8 +319,8 @@ fn step<
 
         'checkp27'.print();
 
-        let s = ((one - z) * h) + (z * *H_t);
-        H =  @s ;
+        let mut H = ((one - z) * h) + (z * *H_t);
+        H =  @H ;
 
         'checkp28'.print();
 
