@@ -215,7 +215,7 @@ fn step<
     'checkp12'.print();
 
     let mut y_data_vals = array![];
-    let y_data_vals_len = *seq_length * num_directions * *batch_size * *hidden_size;
+    let y_data_vals_len = seq_length * num_directions * batch_size * hidden_size;
     let mut i = 0;
     while i < y_data_vals_len {
         y_data_vals.append(NumberTrait::<T>::zero());
@@ -225,7 +225,7 @@ fn step<
     'checkp13'.print();
 
     let mut Y = TensorTrait::<T>::new(
-        shape: array![*seq_length, num_directions, *batch_size, *hidden_size].span(),
+        shape: array![seq_length, num_directions, batch_size, hidden_size].span(),
         data: y_data_vals.span()
     );
 
@@ -235,7 +235,7 @@ fn step<
 
     let ( mut w_z,mut  w_r, mut w_h) = {
         let w_split = split_tensor(W, 3, 0);
-        (*w_split[0], *w_split.[1], *w_split[2])
+        (*w_split[0], *w_split[1], *w_split[2])
     };
 
     'checkp14b'.print();
