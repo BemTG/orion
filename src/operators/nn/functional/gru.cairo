@@ -295,8 +295,8 @@ fn step<
 
         'checkp24'.print();
 
-        let h1 = X_segment.at(i).matmul( @w_h.transpose(axes: reverse_axes(w_h.shape)) );
-        let h2 = (r * *H_t).matmul(@r_h.transpose(axes: reverse_axes(r_h.shape)));
+        let h1 = X_segment.at(i).matmul( @w_h_tranposed );
+        let h2 = (r * *H_t).matmul( @r_h_tranposed );
 
         let h1_val = h1 + h2 + w_bh + r_bh;
         let h_default = g(@h1_val);
