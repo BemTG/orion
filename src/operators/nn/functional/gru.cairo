@@ -65,9 +65,9 @@ fn gru<
     n_outputs: Option<usize>
 ) -> Array<Tensor<T>> {
     let num_directions = *(*W).shape[0];
-    let mut h_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
-    let mut H_0 = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
-    let mut b = TensorTrait::<T>::new(shape: array![].span(), data: array![NumberTrait::<T>::zero()].span());
+    let mut h_0 = TensorTrait::<T>::new (array![].span(), array![NumberTrait::<T>::zero()].span());
+    let mut H_0 = TensorTrait::<T>::new(array![].span(), array![NumberTrait::<T>::zero()].span());
+    let mut b = TensorTrait::<T>::new(array![].span(),  array![NumberTrait::<T>::zero()].span());
     let number_of_gates: usize = 3;
 
     let mut X = X;
@@ -102,7 +102,7 @@ fn gru<
 
         'checkp4'.print();
 
-        hidden_size = Option::Some(*(*R).shape.at( (*R).shape.len() - 1 )); 
+        hidden_size = Option::Some( *(*R).shape.at( (*R).shape.len() - 1 )); 
         let batch_size = *(*X).shape[1];
 
         'checkp5'.print();
@@ -135,7 +135,7 @@ fn gru<
         'checkp7'.print();
 
         if initial_h.is_some() {
-             h_0 = initial_h.unwrap()
+            h_0 = initial_h.unwrap()
         } else {
             let mut h_data_vals = array![];
             let h_data_len = batch_size * hidden_size.unwrap();
@@ -145,7 +145,7 @@ fn gru<
                 i += 1;
             };
 
-             h_0 = TensorTrait::<T>::new(
+            h_0 = TensorTrait::<T>::new(
                 shape: array![batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             )
@@ -154,14 +154,14 @@ fn gru<
         'checkp8'.print();
 
         B = Option::Some(b);
-        H_0 = @h_0;
+        H_0 = h_0;
     }else{
-        core::panic_with_felt252('Unsupported value') 
+        core::panic_with_felt252('Unsupported value for num_directions in gru') 
     }
 
     'checkp9'.print();
 
-    let result = step(X, W, R, @B.unwrap(), H_0, num_directions, linear_before_reset, layout);
+    let result = step(X, W, R, @B.unwrap(), @H_0, num_directions, linear_before_reset, layout);
 
     'checkp10'.print();
 
