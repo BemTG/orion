@@ -317,14 +317,14 @@ fn step<
 
         'checkp26'.print();
 
-        let one = TensorTrait::<T>::new(
-            shape: array![].span(),
-            data: array![NumberTrait::<T>::one()].span(),
-        );
+        // let one = TensorTrait::<T>::new(
+        //     shape: array![].span(),
+        //     data: array![NumberTrait::<T>::one()].span(),
+        // );
 
         'checkp27'.print();
 
-        let s = ((one - z) * h) + (z * *H_t);
+        let s = ((NumberTrait::<T>::one() - z) * h) + (z * *H_t);
         H =  @s ;
 
         'checkp28'.print();
