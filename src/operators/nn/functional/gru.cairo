@@ -207,10 +207,10 @@ fn step<
 ) -> Array<Tensor<T>> {
 
     'checkp11'.print();
-    let seq_length = (*X.shape).at(0);
-    let rank = (*X.shape).len();
-    let hidden_size = (*H_0.shape).at((*H_0.shape).len() - 1);
-    let batch_size = (*X.shape).at(1); 
+    let seq_length = *(*X).shape[0];
+    let rank = (*X).shape.len();
+    let hidden_size = *(*H_0).shape.at( (*H_0).shape.len() - 1 );
+    let batch_size = *(*X).shape[1]; 
 
     'checkp12'.print();
 
@@ -235,20 +235,20 @@ fn step<
 
     let ( mut w_z,mut  w_r, mut w_h) = {
         let w_split = split_tensor(W, 3, 0);
-        (*w_split.at(0), *w_split.at(1), *w_split.at(2))
+        (*w_split[0], *w_split.[1], *w_split[2])
     };
 
     'checkp14b'.print();
     
     let (mut r_z, mut r_r, mut r_h) = {
         let r_split = split_tensor(R, 3, 0);
-        (*r_split.at(0), *r_split.at(1), *r_split.at(2))
+        (*r_split[0], *r_split[1], *r_split[2])
     };
 
     let (mut w_bz, mut w_br, mut w_bh, mut r_bz, mut r_br, mut r_bh) = {
         let b_split = split_tensor(B, 6, 0);
-        (*b_split.at(0), *b_split.at(1), *b_split.at(2),
-         *b_split.at(3), *b_split.at(4), *b_split.at(5))
+        (*b_split[0], *b_split[1], *b_split[2],
+         *b_split[3], *b_split[4], *b_split[5])
     };
 
     'checkp15'.print();
@@ -282,7 +282,7 @@ fn step<
         'checkp21'.print();
         let (mut z, mut r) = {
             let gates_split = split_tensor(@gates, 2, gates.shape.len() - 1);
-            (*gates_split.at(0), *gates_split.at(1))
+            (*gates_split[0], *gates_split[1])
         };
 
         'checkp22'.print();
@@ -290,19 +290,19 @@ fn step<
         r = f(r);
         
         'checkp23'.print();
-        let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
-        let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
+        // let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
+        // let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
         'checkp24'.print();
 
-        let h1 = X_segment.at(i).matmul(@w_h_tranposed);
-        let h2 = (r * *H_t).matmul(@r_h_tranposed);
+        let h1 = X_segment.at(i).matmul( @w_h.transpose(axes: reverse_axes(w_h.shape)) );
+        let h2 = (r * *H_t).matmul( @r_h.transpose(axes: reverse_axes(r_h.shape)) );
 
         let h1_val = h1 + h2 + w_bh + r_bh;
         let h_default = g(@h1_val);
 
-        let h11 = X_segment.at(i).matmul(@w_h_tranposed);
-        let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
+        let h11 = X_segment.at(i).matmul(@w_h.transpose(axes: reverse_axes(w_h.shape)) );
+        let h12 = r * (H_t.matmul( @r_h.transpose(axes: reverse_axes(r_h.shape)) ) + r_bh);
 
         let h2_val = h11 + h12 + w_bh;
         let h_linear = g( @h2_val);
@@ -337,9 +337,9 @@ fn step<
     'checkp29'.print();
  
     let concatenated = if h_list.len() > 1 {
-        concat_tensor_array(h_list)
+        concat_tensors_in_array(h_list)
     } else {
-        *h_list.at(0)
+        *h_list[0]
     };
 
     'checkp30'.print();
@@ -384,7 +384,7 @@ fn step<
     output
 }
 
-fn concat_tensor_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +Copy<T>, +Drop<T>>(
+fn concat_tensors_in_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +Copy<T>, +Drop<T>>(
     tensor_list: Array<Tensor<T>>
 ) -> Tensor<T> {
     if tensor_list.len() == 1 {
