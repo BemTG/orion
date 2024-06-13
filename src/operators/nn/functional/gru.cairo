@@ -290,19 +290,19 @@ fn step<
         r = f(r);
         
         'checkp23'.print();
-        // let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
-        // let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
+        let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
+        let r_h_tranposed = r_h.transpose(axes: reverse_axes(r_h.shape));
 
         'checkp24'.print();
 
         let h1 = X_segment.at(i).matmul( @w_h.transpose(axes: reverse_axes(w_h.shape)) );
-        let h2 = (r * *H_t).matmul( @r_h.transpose(axes: reverse_axes(r_h.shape)) );
+        let h2 = (r * *H_t).matmul(@r_h.transpose(axes: reverse_axes(r_h.shape)));
 
         let h1_val = h1 + h2 + w_bh + r_bh;
         let h_default = g(@h1_val);
 
-        let h11 = X_segment.at(i).matmul(@w_h.transpose(axes: reverse_axes(w_h.shape)) );
-        let h12 = r * (H_t.matmul( @r_h.transpose(axes: reverse_axes(r_h.shape)) ) + r_bh);
+        let h11 = X_segment.at(i).matmul(@w_h_tranposed);
+        let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
 
         let h2_val = h11 + h12 + w_bh;
         let h_linear = g( @h2_val);
