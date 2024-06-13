@@ -295,17 +295,12 @@ fn step<
 
         'checkp24'.print();
 
-        // let h1 = X_segment.at(i).matmul( @w_h_tranposed );
-        // let h2 = (r * *H_t).matmul( @r_h_tranposed );
+        let mut h_default = X_segment.at(i).matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
+        h_default = g(@h_default);
 
-        let h1_val = X_segment.at(i).matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
-        let h_default = g(@h1_val);
 
-        // let h11 = X_segment.at(i).matmul(@w_h_tranposed);
-        // let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
-
-        let h2_val = X_segment.at(i).matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
-        let h_linear = g( @h2_val);
+        let mut h_linear = X_segment.at(i).matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
+        h_linear = g( @h_linear);
 
         'checkp25'.print();
 
