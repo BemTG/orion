@@ -295,16 +295,16 @@ fn step<
 
         'checkp24'.print();
 
-        let h1 = X_segment.at(i).matmul( @w_h_tranposed );
-        let h2 = (r * *H_t).matmul( @r_h_tranposed );
+        // let h1 = X_segment.at(i).matmul( @w_h_tranposed );
+        // let h2 = (r * *H_t).matmul( @r_h_tranposed );
 
-        let h1_val = h1 + h2 + w_bh + r_bh;
+        let h1_val = X_segment.at(i).matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
         let h_default = g(@h1_val);
 
-        let h11 = X_segment.at(i).matmul(@w_h_tranposed);
-        let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
+        // let h11 = X_segment.at(i).matmul(@w_h_tranposed);
+        // let h12 = r * (H_t.matmul(@r_h_tranposed) + r_bh);
 
-        let h2_val = h11 + h12 + w_bh;
+        let h2_val = X_segment.at(i).matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
         let h_linear = g( @h2_val);
 
         'checkp25'.print();
@@ -317,14 +317,14 @@ fn step<
 
         'checkp26'.print();
 
-        // let one = TensorTrait::<T>::new(
-        //     shape: array![].span(),
-        //     data: array![NumberTrait::<T>::one()].span(),
-        // );
+        let one = TensorTrait::<T>::new(
+            shape: array![].span(),
+            data: array![NumberTrait::<T>::one()].span(),
+        );
 
         'checkp27'.print();
 
-        let s = ((NumberTrait::<T>::one() - z) * h) + (z * *H_t);
+        let s = ((one - z) * h) + (z * *H_t);
         H =  @s ;
 
         'checkp28'.print();
