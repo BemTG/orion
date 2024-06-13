@@ -271,7 +271,7 @@ fn step<
 
     'checkp18'.print();
 
-    let X_segment = split_tensor(X, *(*X.shape).at(0), 0);
+    let X_segment = split_tensor(X, *(*X).shape[0], 0);
     'checkp19'.print();
     let mut i = 0;
     while i < (X_segment).len() {
