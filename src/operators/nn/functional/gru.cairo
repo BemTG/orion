@@ -102,7 +102,7 @@ fn gru<
 
         'checkp4'.print();
 
-        hidden_size = Option::Some( *(*R).shape.at( (*R).shape.len() - 1 )); 
+        hidden_size = Option::Some( *(*R).shape[ (*R).shape.len() - 1 ] ); 
         let batch_size = *(*X).shape[1];
 
         'checkp5'.print();
@@ -166,7 +166,7 @@ fn gru<
     'checkp10'.print();
 
     if n_outputs.unwrap() == NumberTrait::<usize>::one() {
-        return array![*result.at(0)];
+        return array![*result[0]];
     } else {
         return result;
     }
@@ -209,7 +209,7 @@ fn step<
     'checkp11'.print();
     let seq_length = *(*X).shape[0];
     let rank = (*X).shape.len();
-    let hidden_size = *(*H_0).shape.at( (*H_0).shape.len() - 1 );
+    let hidden_size = *(*H_0).shape[ (*H_0).shape.len() - 1 ] ;
     let batch_size = *(*X).shape[1]; 
 
     'checkp12'.print();
@@ -276,7 +276,7 @@ fn step<
     let mut i = 0;
     while i < (X_segment).len() {
         'checkp20'.print();
-        let gates = (X_segment.at(i).unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
+        let gates = (X_segment[i].unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
             + H_t.matmul(@gates_r_transposed).unsqueeze(axes: array![0].span())
             + gates_b);
         'checkp21'.print();
@@ -295,11 +295,11 @@ fn step<
 
         'checkp24'.print();
 
-        let mut h_default = X_segment.at(i).matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
+        let mut h_default = X_segment[i].matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
         h_default = g(@h_default);
 
 
-        let mut h_linear = X_segment.at(i).matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
+        let mut h_linear = X_segment[i].matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
         h_linear = g( @h_linear);
 
         'checkp25'.print();
@@ -319,7 +319,6 @@ fn step<
 
         'checkp27'.print();
 
-        // let mut H = ((one - z) * h) + (z * *H_t);
         H =  @(((one - z) * h) + (z * *H_t));
 
         'checkp28'.print();
@@ -343,8 +342,8 @@ fn step<
 
     if num_directions == 1 {
         Y = concatenated.reshape(
-            array![(*Y.shape.at(0)).into(), (*Y.shape.at(1)).into(), 
-                   (*Y.shape.at(2)).into(), (*Y.shape.at(3)).into()].span(),
+            array![(*Y.shape[0]).into(), (*Y.shape[1]).into(), 
+                   (*Y.shape[2]).into(), (*Y.shape[3]).into()].span(),
             false
         );
 
@@ -355,8 +354,8 @@ fn step<
 
     if layout.is_some() && layout.unwrap() == 0 || layout.is_none() {
         let mut Y_h = Y.slice(
-            starts: array![*Y.shape.at(0) - 1, 0, 0, 0].span(),
-            ends: array![*Y.shape.at(0), *Y.shape.at(1), *Y.shape.at(2), *Y.shape.at(3)].span(),
+            starts: array![*Y.shape[0] - 1, 0, 0, 0].span(),
+            ends: array![*Y.shape[0], *Y.shape[1], *Y.shape[2], *Y.shape[3]].span(),
             axes: Option::Some(array![0, 1, 2, 3].span()),
             steps: Option::None(())
         );
@@ -366,8 +365,8 @@ fn step<
     } else {
         Y = Y.transpose(axes: array![2, 0, 1, 3].span());
         let mut Y_h = Y.slice(
-            starts: array![0, 0, *Y.shape.at(2) - 1, 0].span(),
-            ends: array![*Y.shape.at(0), *Y.shape.at(1), *Y.shape.at(2), *Y.shape.at(3)].span(),
+            starts: array![0, 0, *Y.shape[2] - 1, 0].span(),
+            ends: array![*Y.shape[0], *Y.shape[1], *Y.shape[2], *Y.shape[3]].span(),
             axes: Option::Some(array![0, 1, 2, 3].span()),
             steps: Option::None(())
         );
@@ -383,14 +382,14 @@ fn concat_tensors_in_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +Copy<
     tensor_list: Array<Tensor<T>>
 ) -> Tensor<T> {
     if tensor_list.len() == 1 {
-        return *tensor_list.at(0);
+        return *tensor_list[0];
     }
 
-    let mut concatenated_tensor = *tensor_list.at(0);
+    let mut concatenated_tensor = *tensor_list[0];
     let mut i = 1;
     while tensor_list.len() > i {
         concatenated_tensor = TensorTrait::concat(
-            tensors: array![concatenated_tensor, *tensor_list.at(i)].span(),
+            tensors: array![concatenated_tensor, *tensor_list[i]].span(),
             axis: 0,
         );
         i += 1;
@@ -484,7 +483,7 @@ fn split_tensor<
     
 
     
-    let dim_size = (*tensor.shape).at(axis);   
+    let dim_size = *(*tensor).shape[axis];   
 
     'dimsize'.print();
     (*dim_size).print();
@@ -508,7 +507,7 @@ fn split_tensor<
                 ends.append(start + slice_size);
             } else {
                 starts.append(0);
-                ends.append(*(*tensor.shape).at(i));   
+                ends.append(*(*tensor).shape[i]);   
             }
             i += 1;
         };
