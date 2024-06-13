@@ -156,7 +156,7 @@ fn gru<
         B = Option::Some(b);
         H_0 = h_0;
     }else{
-        core::panic_with_felt252('Unsupported num_directions value') 
+        core::panic_with_felt252('Unsupported num_directions') 
     }
 
     'checkp9'.print();
