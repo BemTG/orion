@@ -139,20 +139,20 @@ impl FP64x64NN of NNTrait<FP64x64> {
     }
 
     fn gru(
-        mut X: @Tensor<FP64x64>,
-        mut W: @Tensor<FP64x64>,
-        mut R: @Tensor<FP64x64>,
-        mut B: Option<Tensor<FP64x64>>,
-        mut sequence_length: Option<Tensor<FP64x64>>,
+        X: @Tensor<FP64x64>,
+        W: @Tensor<FP64x64>,
+        R: @Tensor<FP64x64>,
+        B: Option<Tensor<FP64x64>>,
+        sequence_length: Option<Tensor<FP64x64>>,
         initial_h: Option<Tensor<FP64x64>>,
         activation_alpha: Option<Array<Tensor<FP64x64>>>,
         activation_beta: Option<Array<Tensor<FP64x64>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<FP64x64>,
         direction: Option<functional::gru::DIRECTION>,
-        mut hidden_size: Option<usize>,
-        mut layout: Option<usize>,
-        mut linear_before_reset: Option<usize>,
+        hidden_size: Option<usize>,
+        layout: Option<usize>,
+        linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<FP64x64>> {
         panic(array!['not supported!'])

@@ -132,20 +132,20 @@ impl I8NN of NNTrait<i8> {
     }
 
     fn gru(
-        mut X: @Tensor<i8>,
-        mut W: @Tensor<i8>,
-        mut R: @Tensor<i8>,
-        mut B: Option<Tensor<i8>>,
-        mut sequence_length: Option<Tensor<i8>>,
+        X: @Tensor<i8>,
+        W: @Tensor<i8>,
+        R: @Tensor<i8>,
+        B: Option<Tensor<i8>>,
+        sequence_length: Option<Tensor<i8>>,
         initial_h: Option<Tensor<i8>>,
         activation_alpha: Option<Array<Tensor<i8>>>,
         activation_beta: Option<Array<Tensor<i8>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<i8>,
         direction: Option<functional::gru::DIRECTION>,
-        mut hidden_size: Option<usize>,
-        mut layout: Option<usize>,
-        mut linear_before_reset: Option<usize>,
+        hidden_size: Option<usize>,
+        layout: Option<usize>,
+        linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<i8>> {
         panic(array!['not supported!'])   

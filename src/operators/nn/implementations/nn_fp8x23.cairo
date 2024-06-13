@@ -141,20 +141,20 @@ impl FP8x23NN of NNTrait<FP8x23> {
     }
 
     fn gru(
-        mut X: @Tensor<FP8x23>,
-        mut W: @Tensor<FP8x23>,
-        mut R: @Tensor<FP8x23>,
-        mut B: Option<Tensor<FP8x23>>,
-        mut sequence_length: Option<Tensor<FP8x23>>,
+        X: @Tensor<FP8x23>,
+        W: @Tensor<FP8x23>,
+        R: @Tensor<FP8x23>,
+        B: Option<Tensor<FP8x23>>,
+        sequence_length: Option<Tensor<FP8x23>>,
         initial_h: Option<Tensor<FP8x23>>,
         activation_alpha: Option<Array<Tensor<FP8x23>>>,
         activation_beta: Option<Array<Tensor<FP8x23>>>,
         activations: Option<functional::gru::ACTIVATIONS>,
         clip: Option<FP8x23>,
         direction: Option<functional::gru::DIRECTION>,
-        mut hidden_size: Option<usize>,
-        mut layout: Option<usize>,
-        mut linear_before_reset: Option<usize>,
+        hidden_size: Option<usize>,
+        layout: Option<usize>,
+        linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<FP8x23>> {
         panic(array!['not supported!'])
