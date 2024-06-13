@@ -472,7 +472,7 @@ fn split_tensor<
     mut axis: usize,
 ) -> Array<Tensor<T>> {
 
-    if (*tensor).shape.len() < NumberTrait::<usize>::two()  {
+    if (*tensor).shape.len() < 2  {
         tensor = @TensorTrait::<T>::new(
             shape: array![1, (*tensor).data.len()].span(),
             data: *tensor.data
