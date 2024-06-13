@@ -162,7 +162,7 @@ fn gru<
     'checkp9'.print();
 
 
-    let result = step(X, W, R, B, @H_0, num_directions, linear_before_reset, layout);
+    let result = step(X, W, R, @B, @H_0, num_directions, linear_before_reset, layout);
 
     'checkp10'.print();
 
