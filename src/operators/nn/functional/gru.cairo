@@ -84,8 +84,8 @@ fn gru<
 
     if num_directions == NumberTrait::<usize>::one() {
         'checkp2'.print();
-        R = @R.squeeze(axes: Option::None(()));
-        W = @W.squeeze(axes: Option::None(()));
+        R = *R.squeeze(axes: Option::None(()));
+        W = *W.squeeze(axes: Option::None(()));
 
         'checkp3'.print();
         if B.is_some() {
