@@ -310,21 +310,37 @@ fn step<
 
         'checkp24'.print();
 
-        let yy = X_segment[i].matmul( @w_h_tranposed ) ;
-        'checkp244'.print();
-        let vv = (r * *H_t).matmul( @r_h_tranposed ) ;
-        'checkp2444'.print();
-        let ff = w_bh + r_bh;
-        'checkp2445'.print();
+        // let yy = X_segment[i].matmul( @w_h_tranposed ) ;
+        // 'checkp244'.print();
+        // let vv = (r * *H_t).matmul( @r_h_tranposed ) ;
+        // 'checkp2444'.print();
+        // let ff = w_bh + r_bh;
+        // 'checkp2445'.print();
 
-        let mut h_default = X_segment[i].matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
-        h_default = g(h_default);
+        let dot_mul1 = X_split.at(i).matmul(@w_h_tranposed);
+        'issue2'.print ();
+        let dot_mul2 = (r * H_t).matmul(@r_h_tranposed);
 
-        'checkp25aa'.print();
-        let mut h_linear = X_segment[i].matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
-        h_linear = g( @h_linear);
+        'issue3'.print ();
 
-        'checkp25'.print();
+        let h_default = g( dot_mul1 + dot_mul2 + w_bh + r_bh);
+
+        'issue4'.print ();
+
+        let dot_mul3 = (H_t).matmul(@r_h_tranposed);
+
+
+        let h_linear = g(dot_mul1 + (r * (dot_mul3 + r_bh)) +  w_bh);
+
+
+        // let mut h_default = X_segment[i].matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
+        // h_default = g(@h_default);
+
+        // 'checkp25aa'.print();
+        // let mut h_linear = X_segment[i].matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
+        // h_linear = g( @h_linear);
+
+        // 'checkp25'.print();
 
         let mut h = if linear_before_reset.is_some() && linear_before_reset.unwrap() == 0 || linear_before_reset.is_none() {
             h_linear
