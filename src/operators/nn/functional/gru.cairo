@@ -287,7 +287,9 @@ fn step<
 
         'checkp22'.print();
         z = f(z);
+        'checkp22aa'.print();
         r = f(r);
+        'checkp22bb'.print();
         
         'checkp23'.print();
         let w_h_tranposed = w_h.transpose(axes: reverse_axes(w_h.shape));
