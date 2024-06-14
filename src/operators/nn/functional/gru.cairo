@@ -290,7 +290,6 @@ fn step<
         (z).shape.len().print();
         (*(z).shape[0]).print();
         (*(z).shape[1]).print();
-        (*(z).shape[2]).print();
 
         'the z shape'.print();
 
