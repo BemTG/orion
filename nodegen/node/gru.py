@@ -309,7 +309,7 @@ class Gru(RunAll):
         input_size = 2
         hidden_size = 6
         number_of_gates = 3
-        weight_scale = 0.2
+        weight_scale = 0.1
         layout = 1
 
         W = weight_scale * np.ones(
