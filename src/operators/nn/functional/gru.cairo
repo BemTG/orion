@@ -317,9 +317,9 @@ fn step<
         // let ff = w_bh + r_bh;
         // 'checkp2445'.print();
 
-        let dot_mul1 = X_split.at(i).matmul(@w_h_tranposed);
+        let dot_mul1 = X_segment.at(i).matmul(@w_h_tranposed);
         'issue2'.print ();
-        let dot_mul2 = (r * H_t).matmul(@r_h_tranposed);
+        let dot_mul2 = (r * @H_t).matmul(@r_h_tranposed);
 
         'issue3'.print ();
 
