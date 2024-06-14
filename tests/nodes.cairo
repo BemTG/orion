@@ -989,3 +989,4 @@ mod gru_fp16x16_default_params;
 mod gru_fp16x16_with_initial_bias;
 mod gru_fp16x16_with_batchwise_processing;
 mod gru_fp16x16_with_sequence_length;
+mod gru_fp16x16_varying_sequence_length;

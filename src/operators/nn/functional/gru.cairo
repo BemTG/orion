@@ -279,6 +279,8 @@ fn step<
         let gates = (X_segment[i].unsqueeze(axes: array![0].span()).matmul(@gates_w_transposed)
             + H_t.matmul(@gates_r_transposed).unsqueeze(axes: array![0].span())
             + gates_b);
+
+            
         'checkp21'.print();
         let (mut z, mut r) = {
             let gates_split = split_tensor(@gates, 2, gates.shape.len() - 1);

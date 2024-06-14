@@ -225,7 +225,7 @@ class Gru(RunAll):
 
 
     @staticmethod
-    def fp16x16_with_sequence_length(): 
+    def fp16x16_varying_sequence_length(): 
         X =  np.array(
             [
                 [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]],
@@ -238,14 +238,28 @@ class Gru(RunAll):
         number_of_gates = 3
 
 
-        W = np.round(0.5 * np.random.randn(1, number_of_gates * hidden_size, input_size).astype(np.float32),1)
+        # W = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, input_size)).astype(np.float32), 1)
+        # R = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, hidden_size)).astype(np.float32), 1)
+        # # Adding custom bias
+        # W_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float32),1)
+        # R_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float32),1)
+        # B = np.round(np.concatenate((W_B, R_B), axis=1),1)
 
-        R = np.round(0.5 * np.random.randn(1, number_of_gates * hidden_size, hidden_size).astype(np.float32),1)
+        weight_scale = 0.1
+        custom_bias = 0.1
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float32)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float32)
 
-        # Adding custom bias
-        W_B = np.random.randn(1, number_of_gates * hidden_size).astype(np.float32)
-        R_B = np.random.randn(1, number_of_gates * hidden_size).astype(np.float32)
-        B = np.round(0.5 * np.concatenate((W_B, R_B), axis=1),1)
+        W_B = custom_bias * np.ones((1, number_of_gates * hidden_size)).astype(
+            np.float32
+        )
+        R_B = np.zeros((1, number_of_gates * hidden_size)).astype(np.float32)
+        B = np.concatenate((W_B, R_B), axis=1)
+
        
 
         
@@ -266,7 +280,7 @@ class Gru(RunAll):
                 Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
                 ]
 
-        name = "gru_fp16x16_with_sequence_length" 
+        name = "gru_fp16x16_varying_sequence_length" 
         func_sig = "NNTrait::gru("
         func_sig += " @input_0,"
         func_sig += " @input_1,"
@@ -288,57 +302,57 @@ class Gru(RunAll):
         make_test([X, W, R, B], result, func_sig, name, Trait.NN)
 
 
-    # @staticmethod
-    # def fp16x16_with_batchwise_processing(): 
-    #     X = np.array([[[1.0, 2.0]], [[3.0, 4.0]], [[5.0, 6.0]]]).astype(np.float32)
+    @staticmethod
+    def fp16x16_with_batchwise_processing(): 
+        X = np.array([[[1.0, 2.0]], [[3.0, 4.0]], [[5.0, 6.0]]]).astype(np.float32)
         
-    #     input_size = 2
-    #     hidden_size = 6
-    #     number_of_gates = 3
-    #     weight_scale = 0.2
-    #     layout = 1
+        input_size = 2
+        hidden_size = 6
+        number_of_gates = 3
+        weight_scale = 0.2
+        layout = 1
 
-    #     W = weight_scale * np.ones(
-    #         (1, number_of_gates * hidden_size, input_size)
-    #     ).astype(np.float32)
-    #     R = weight_scale * np.ones(
-    #         (1, number_of_gates * hidden_size, hidden_size)
-    #     ).astype(np.float32)
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float32)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float32)
 
-    #     gru = GRUHelper(X=X, W=W, R=R, layout=layout)
-    #     Y, Y_h = gru.step()
+        gru = GRUHelper(X=X, W=W, R=R, layout=layout)
+        Y, Y_h = gru.step()
         
-    #     X = Tensor(Dtype.FP16x16, X.shape, to_fp(
-    #         X.flatten(), FixedImpl.FP16x16))
-    #     W = Tensor(Dtype.FP16x16, W.shape, to_fp(
-    #         W.flatten(), FixedImpl.FP16x16))
-    #     R = Tensor(Dtype.FP16x16, R.shape, to_fp(
-    #         R.flatten(), FixedImpl.FP16x16))
+        X = Tensor(Dtype.FP16x16, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP16x16))
+        W = Tensor(Dtype.FP16x16, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP16x16))
+        R = Tensor(Dtype.FP16x16, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP16x16))
         
-    #     result = [
-    #             Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
-    #             Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
-    #             ]
+        result = [
+                Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
+                Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
+                ]
 
-    #     name = "gru_fp16x16_with_batchwise_processing" 
-    #     func_sig = "NNTrait::gru("
-    #     func_sig += " @input_0,"
-    #     func_sig += " @input_1,"
-    #     func_sig += " @input_2,"
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::Some(1)," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::Some(2) " 
-    #     func_sig += " ) " 
+        name = "gru_fp16x16_with_batchwise_processing" 
+        func_sig = "NNTrait::gru("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += f" Option::Some({layout})," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
 
-    #     make_test([X, W, R], result, func_sig, name, Trait.NN)
+        make_test([X, W, R], result, func_sig, name, Trait.NN)
 
 

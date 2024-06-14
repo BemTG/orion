@@ -6,14 +6,14 @@ mod output_0;
 
 
 use orion::numbers::FixedTrait;
-use orion::operators::tensor::FP16x16TensorPartialEq;
 use orion::operators::nn::NNTrait;
 use orion::utils::{assert_eq, assert_seq_eq};
 use orion::operators::nn::FP16x16NN;
+use orion::operators::tensor::FP16x16TensorPartialEq;
 
 #[test]
 #[available_gas(2000000000)]
-fn test_gru_fp16x16_with_sequence_length() {
+fn test_gru_fp16x16_varying_sequence_length() {
     let input_0 = input_0::input_0();
     let input_1 = input_1::input_1();
     let input_2 = input_2::input_2();
