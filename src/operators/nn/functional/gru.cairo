@@ -439,6 +439,7 @@ fn f<
                 (*item).print();
                 let result = NumberTrait::one()
                     / (NumberTrait::one() + (*item * NumberTrait::neg_one()).exp());
+                result.print();
                 data_result.append(result);
             },
             Option::None => { break; }
