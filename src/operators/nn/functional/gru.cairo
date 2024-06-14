@@ -436,7 +436,7 @@ fn f<
         match z.data.pop_front() {
             Option::Some(item) => {
                 'the item'.print();
-                item.print();
+                *(item).print();
                 let result = NumberTrait::one()
                     / (NumberTrait::one() + (*item * NumberTrait::neg_one()).exp());
                 data_result.append(result);
