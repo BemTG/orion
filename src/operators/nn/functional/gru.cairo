@@ -273,6 +273,7 @@ fn step<
 
     let X_segment = split_tensor(X, *(*X).shape[0], 0);
     'checkp19'.print();
+    (X_segment).len().print();
     let mut i = 0;
     while i < (X_segment).len() {
         'checkp20'.print();
@@ -280,7 +281,7 @@ fn step<
             + H_t.matmul(@gates_r_transposed).unsqueeze(axes: array![0].span())
             + gates_b);
 
-            
+
         'checkp21'.print();
         let (mut z, mut r) = {
             let gates_split = split_tensor(@gates, 2, gates.shape.len() - 1);

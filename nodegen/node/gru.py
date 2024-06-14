@@ -304,12 +304,11 @@ class Gru(RunAll):
 
     @staticmethod
     def fp16x16_with_batchwise_processing(): 
-        X = np.array([[[1.0, 2.0]], [[3.0, 4.0]], [[5.0, 6.0]]]).astype(np.float32)
-        
+        X =  np.array([[[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]]]).astype(np.float32)
         input_size = 2
-        hidden_size = 6
-        number_of_gates = 3
+        hidden_size = 5
         weight_scale = 0.1
+        number_of_gates = 3
         layout = 1
 
         W = weight_scale * np.ones(
@@ -319,7 +318,7 @@ class Gru(RunAll):
             (1, number_of_gates * hidden_size, hidden_size)
         ).astype(np.float32)
 
-        gru = GRUHelper(X=X, W=W, R=R, layout=layout)
+        gru = GRUHelper(X=X, W=W, R=R)
         Y, Y_h = gru.step()
         
         X = Tensor(Dtype.FP16x16, X.shape, to_fp(
@@ -333,6 +332,7 @@ class Gru(RunAll):
                 Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
                 Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
                 ]
+
 
         name = "gru_fp16x16_with_batchwise_processing" 
         func_sig = "NNTrait::gru("
