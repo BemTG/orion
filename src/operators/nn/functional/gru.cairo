@@ -323,14 +323,14 @@ fn step<
 
         'issue3'.print ();
 
-        let h_default = g( dot_mul1 + dot_mul2 + w_bh + r_bh);
+        let h_default = g( @(dot_mul1 + dot_mul2 + w_bh + r_bh));
 
         'issue4'.print ();
 
         let dot_mul3 = (H_t).matmul(@r_h_tranposed);
 
 
-        let h_linear = g(dot_mul1 + (r * (dot_mul3 + r_bh)) +  w_bh);
+        let h_linear = g(@(dot_mul1 + (r * (dot_mul3 + r_bh)) +  w_bh));
 
 
         // let mut h_default = X_segment[i].matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
