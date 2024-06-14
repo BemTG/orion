@@ -310,6 +310,13 @@ fn step<
 
         'checkp24'.print();
 
+        let yy = X_segment[i].matmul( @w_h_tranposed ) ;
+        'checkp244'.print();
+        let vv = (r * *H_t).matmul( @r_h_tranposed ) ;
+        'checkp2444'.print();
+        let ff = w_bh + r_bh;
+        'checkp2445'.print();
+
         let mut h_default = X_segment[i].matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
         h_default = g(@h_default);
 
