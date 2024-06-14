@@ -426,6 +426,7 @@ fn f<
     impl TDiv: Div<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
+    +PrintTrait<T>,
 >(
     mut z: Tensor<T>
 ) -> Tensor<T> {
@@ -435,7 +436,7 @@ fn f<
         match z.data.pop_front() {
             Option::Some(item) => {
                 'the item'.print();
-                *item.print();
+                item.print();
                 let result = NumberTrait::one()
                     / (NumberTrait::one() + (*item * NumberTrait::neg_one()).exp());
                 data_result.append(result);
