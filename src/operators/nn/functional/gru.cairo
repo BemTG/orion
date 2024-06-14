@@ -313,7 +313,7 @@ fn step<
         let mut h_default = X_segment[i].matmul( @w_h_tranposed )  + (r * *H_t).matmul( @r_h_tranposed ) + w_bh + r_bh;
         h_default = g(@h_default);
 
-
+        'checkp25aa'.print();
         let mut h_linear = X_segment[i].matmul(@w_h_tranposed) + (r * (H_t.matmul(@r_h_tranposed) + r_bh)) + w_bh;
         h_linear = g( @h_linear);
 

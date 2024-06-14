@@ -237,23 +237,18 @@ class Gru(RunAll):
         hidden_size = 5
         number_of_gates = 3
 
-        # W = np.random.randn(1, number_of_gates * hidden_size, input_size).astype(
-        #     np.float32
-        # )
-        # R = np.random.randn(1, number_of_gates * hidden_size, hidden_size).astype(
-        #     np.float32
-        # )
 
-        W = np.round(np.random.randn(1, number_of_gates * hidden_size, input_size), 2).astype(np.float32)
+        W = np.round(0.5 * np.random.randn(1, number_of_gates * hidden_size, input_size).astype(np.float32),1)
 
-        R = np.round(np.random.randn(1, number_of_gates * hidden_size, hidden_size), 2).astype(np.float32)
+        R = np.round(0.5 * np.random.randn(1, number_of_gates * hidden_size, hidden_size).astype(np.float32),1)
 
         # Adding custom bias
         W_B = np.random.randn(1, number_of_gates * hidden_size).astype(np.float32)
         R_B = np.random.randn(1, number_of_gates * hidden_size).astype(np.float32)
-        # B = np.concatenate((W_B, R_B), axis=1)
-        B = np.round(np.concatenate((W_B, R_B), axis=1),2)
+        B = np.round(0.5 * np.concatenate((W_B, R_B), axis=1),1)
+       
 
+        
         gru = GRUHelper(X=X, W=W, R=R, B=B)
         Y, Y_h = gru.step()
         
