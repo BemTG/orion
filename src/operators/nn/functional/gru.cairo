@@ -288,18 +288,18 @@ fn step<
             (*gates_split[0], *gates_split[1])
         };
 
-        'the z shape'.print();
+        // 'the z shape'.print();
 
-        (z).shape.len().print();
-        (*(z).shape[0]).print();
-        (*(z).shape[1]).print();
+        // (z).shape.len().print();
+        // (*(z).shape[0]).print();
+        // (*(z).shape[1]).print();
 
-        'the z shape'.print();
+        // 'the z shape'.print();
 
-        ((z).data.len()).print();
-        (*(z).data[0]).print();
-        (*(z).data[1]).print();
-        (*(z).data[2]).print();
+        // ((z).data.len()).print();
+        // (*(z).data[0]).print();
+        // (*(z).data[1]).print();
+        // (*(z).data[2]).print();
 
         'checkp22'.print();
         z = f(z);
