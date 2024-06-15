@@ -364,53 +364,61 @@ fn step<
     let mut output: Array<Tensor<T>> = array![];
 
     if num_directions == 1 {
-        // Y = concatenated.reshape(
-        //     array![(*Y.shape[0]).into(), (*Y.shape[1]).into(), 
-        //            (*Y.shape[2]).into(), (*Y.shape[3]).into()].span(),
-        //     false
-        // );
 
-        let concatenated_h_list_tensors = Option::Some(concatenated);
-
-        let Y_strides = stride(Y.shape);
+        'the yyy shape'.print();
+        (*Y.shape[0]).print();
+        (*Y.shape[1]).print();
+        (*Y.shape[2]).print();
+        (*Y.shape[3]).print();
 
 
-        let mut Y_data = NullableVecImpl::<T>::new(); // converting Y values to nullable vec
-        let mut i = 0;
-        while i != Y.data.len() {
-            Y_data.push(*Y.data.at(i));
-            i += 1;
-        };
+        Y = concatenated.reshape(
+            array![(*Y.shape[0]).into(), (*Y.shape[1]).into(), 
+                   (*Y.shape[2]).into(), (*Y.shape[3]).into()].span(),
+            false
+        );
 
-        let process = match concatenated_h_list_tensors {
-        Option::Some(item) => {
-        let mut i = 0;
-        while i != *Y.shape.at(0) {
-            let mut j = 0;
-            while j != *Y.shape.at(2) {
-                let mut k = 0;
-                while k != *Y.shape.at(3) {
-                    let concatenate_val = item.at(array![  j, k].span());
-                    let y_offset = i * *Y_strides.at(0) + 0 * *Y_strides.at(1) + j * *Y_strides.at(2) + k;
-                    Y_data.set(y_offset, concatenate_val);
-                    k += 1;
-                };
-                j += 1;
-            };
-            i += 1;
-        }
-    },
-    Option::None => {},
-};
+//         let concatenated_h_list_tensors = Option::Some(concatenated);
 
-let mut res_data: Array<T> = array![];
-let mut i = 0;
-while i != Y_data.len() {
-    res_data.append(Y_data.at(i));
-    i += 1;
-};
+//         let Y_strides = stride(Y.shape);
 
-Y = TensorTrait::new(Y.shape, res_data.span());
+
+//         let mut Y_data = NullableVecImpl::<T>::new(); // converting Y values to nullable vec
+//         let mut i = 0;
+//         while i != Y.data.len() {
+//             Y_data.push(*Y.data.at(i));
+//             i += 1;
+//         };
+
+//         let process = match concatenated_h_list_tensors {
+//         Option::Some(item) => {
+//         let mut i = 0;
+//         while i != *Y.shape.at(0) {
+//             let mut j = 0;
+//             while j != *Y.shape.at(2) {
+//                 let mut k = 0;
+//                 while k != *Y.shape.at(3) {
+//                     let concatenate_val = item.at(array![  j, k].span());
+//                     let y_offset = i * *Y_strides.at(0) + 0 * *Y_strides.at(1) + j * *Y_strides.at(2) + k;
+//                     Y_data.set(y_offset, concatenate_val);
+//                     k += 1;
+//                 };
+//                 j += 1;
+//             };
+//             i += 1;
+//         }
+//     },
+//     Option::None => {},
+// };
+
+// let mut res_data: Array<T> = array![];
+// let mut i = 0;
+// while i != Y_data.len() {
+//     res_data.append(Y_data.at(i));
+//     i += 1;
+// };
+
+// Y = TensorTrait::new(Y.shape, res_data.span());
 
         output.append(Y);
     }
