@@ -420,7 +420,7 @@ fn step<
 
 // Y = TensorTrait::new(Y.shape, res_data.span());
 
-        output.append(Y);
+        // output.append(Y);
     }
 
     'checkp31'.print();
@@ -434,9 +434,9 @@ fn step<
         );
     
         Y_h = Y_h.squeeze(axes: Option::Some(array![0].span())); 
+        output.append(Y);
         output.append(Y_h);
     } else {
-        let mut output: Array<Tensor<T>> = array![];
         Y = Y.transpose(axes: array![2, 0, 1, 3].span());
         let mut Y_h = Y.slice(
             starts: array![0, 0, *Y.shape[2] - 1, 0].span(),
