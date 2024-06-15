@@ -5,8 +5,8 @@ use orion::numbers::{FixedTrait, FP16x16};
 
 fn input_0() -> Tensor<FP16x16> {
     let mut shape = ArrayTrait::<usize>::new();
-    shape.append(1);
     shape.append(3);
+    shape.append(1);
     shape.append(2);
 
     let mut data = ArrayTrait::new();
