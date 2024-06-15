@@ -403,7 +403,7 @@ fn step<
     Option::None => {},
 };
 
-let mut res_data: Array<FP16x16> = array![];
+let mut res_data: Array<T> = array![];
 let mut i = 0;
 while i != Y_data.len() {
     res_data.append(Y_data.at(i));
