@@ -5,7 +5,8 @@ use core::traits::Into;
 use orion::numbers::{U32IntoI32, I32IntoU32, I32Div, I32Number};
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
-
+use orion::operators::vec::{NullableVec, NullableVecImpl};
+use orion::operators::tensor::core::{stride};
 
 
 
@@ -352,7 +353,7 @@ fn step<
 
     'checkp29'.print();
  
-    let concatenated = if h_list.len() > 1 {
+    let mut concatenated = if h_list.len() > 1 {
         concat_tensors_in_array(h_list)
     } else {
         *h_list[0]
@@ -369,19 +370,19 @@ fn step<
         //     false
         // );
 
-        let concatenate = Option::Some(concatenated_h_list_tensors);
+        let concatenated_h_list_tensors = Option::Some(concatenated);
 
         let Y_strides = stride(Y.shape);
 
 
-        let mut Y_data = NullableVecImpl::<FP16x16>::new(); // converting Y values to nullable vec
+        let mut Y_data = NullableVecImpl::<T>::new(); // converting Y values to nullable vec
         let mut i = 0;
         while i != Y.data.len() {
             Y_data.push(*Y.data.at(i));
             i += 1;
         };
 
-        let process = match concatenate {
+        let process = match concatenated_h_list_tensors {
         Option::Some(item) => {
         let mut i = 0;
         while i != *Y.shape.at(0) {
