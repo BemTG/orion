@@ -110,7 +110,7 @@ fn gru<
         if layout.is_none() || layout.unwrap() == NumberTrait::<usize>::zero() {
             X = X
         } else {
-            'the x swapped'.print();
+            'the x swapped inside'.print();
             X = @TensorTrait::<T>::transpose(X, array![1, 0, 2].span())
         };
 
@@ -271,7 +271,7 @@ fn step<
     let mut H = H_0;
 
     'checkp18'.print();
-    'the x swapped'.print();
+    'the x swapped outside'.print();
     (*(*X).shape[0]).print();
 
     let X_segment = split_tensor(X, *(*X).shape[0], 0);
