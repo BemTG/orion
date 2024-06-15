@@ -390,7 +390,7 @@ fn step<
             while j != *Y.shape.at(2) {
                 let mut k = 0;
                 while k != *Y.shape.at(3) {
-                    let concatenate_val = item.at(array![ 0, j, k].span());
+                    let concatenate_val = item.at(array![  j, k].span());
                     let y_offset = i * *Y_strides.at(0) + 0 * *Y_strides.at(1) + j * *Y_strides.at(2) + k;
                     Y_data.set(y_offset, concatenate_val);
                     k += 1;
