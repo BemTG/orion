@@ -157,6 +157,7 @@ impl FP8x23NN of NNTrait<FP8x23> {
         linear_before_reset: Option<usize>,
         n_outputs: Option<usize>
     ) -> Array<Tensor<FP8x23>> {
-        panic(array!['not supported!'])
+        functional::gru::gru(X, W, R, B, sequence_length, initial_h, activation_alpha, activation_beta, 
+        activations, clip, direction, hidden_size, layout, linear_before_reset, n_outputs)
     }
 }
