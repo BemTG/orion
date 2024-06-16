@@ -210,7 +210,7 @@ fn step<
 
     'checkp11'.print();
     let seq_length = *(*X).shape[0];
-    let rank = (*X).shape.len();
+    // let rank = (*X).shape.len();
     let hidden_size = *(*H_0).shape[ (*H_0).shape.len() - 1 ] ;
     let batch_size = *(*X).shape[1]; 
 
@@ -378,49 +378,6 @@ fn step<
             false
         );
 
-//         let concatenated_h_list_tensors = Option::Some(concatenated);
-
-//         let Y_strides = stride(Y.shape);
-
-
-//         let mut Y_data = NullableVecImpl::<T>::new(); // converting Y values to nullable vec
-//         let mut i = 0;
-//         while i != Y.data.len() {
-//             Y_data.push(*Y.data.at(i));
-//             i += 1;
-//         };
-
-//         let process = match concatenated_h_list_tensors {
-//         Option::Some(item) => {
-//         let mut i = 0;
-//         while i != *Y.shape.at(0) {
-//             let mut j = 0;
-//             while j != *Y.shape.at(2) {
-//                 let mut k = 0;
-//                 while k != *Y.shape.at(3) {
-//                     let concatenate_val = item.at(array![  j, k].span());
-//                     let y_offset = i * *Y_strides.at(0) + 0 * *Y_strides.at(1) + j * *Y_strides.at(2) + k;
-//                     Y_data.set(y_offset, concatenate_val);
-//                     k += 1;
-//                 };
-//                 j += 1;
-//             };
-//             i += 1;
-//         }
-//     },
-//     Option::None => {},
-// };
-
-// let mut res_data: Array<T> = array![];
-// let mut i = 0;
-// while i != Y_data.len() {
-//     res_data.append(Y_data.at(i));
-//     i += 1;
-// };
-
-// Y = TensorTrait::new(Y.shape, res_data.span());
-
-        // output.append(Y);
     }
 
     'checkp31'.print();

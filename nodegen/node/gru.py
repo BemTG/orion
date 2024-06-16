@@ -442,7 +442,7 @@ class Gru(RunAll):
         # B = np.concatenate((W_B, R_B), axis=1)
 
 
-        gru = GRUHelper(X=X, W=W, R=R)
+        gru = GRUHelper(X=X, W=W, R=R, layout=layout)
         Y, Y_h = gru.step()
         
         X = Tensor(Dtype.FP16x16, X.shape, to_fp(
@@ -474,7 +474,7 @@ class Gru(RunAll):
         func_sig += " Option::None(())," 
         func_sig += " Option::None(())," 
         func_sig += " Option::None(())," 
-        func_sig += f" Option::None(())," 
+        func_sig += f" Option::Some({layout})," 
         func_sig += " Option::None(())," 
         func_sig += " Option::Some(2) " 
         func_sig += " ) " 
