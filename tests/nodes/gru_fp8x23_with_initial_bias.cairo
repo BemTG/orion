@@ -5,15 +5,15 @@ mod input_3;
 mod output_0;
 
 
-use orion::operators::nn::FP16x16NN;
-use orion::operators::tensor::FP16x16TensorPartialEq;
 use orion::utils::{assert_eq, assert_seq_eq};
 use orion::operators::nn::NNTrait;
 use orion::numbers::FixedTrait;
+use orion::operators::tensor::FP8x23TensorPartialEq;
+use orion::operators::nn::FP8x23NN;
 
 #[test]
 #[available_gas(2000000000)]
-fn test_gru_fp16x16_with_initial_bias() {
+fn test_gru_fp8x23_with_initial_bias() {
     let input_0 = input_0::input_0();
     let input_1 = input_1::input_1();
     let input_2 = input_2::input_2();
