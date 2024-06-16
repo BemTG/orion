@@ -5,11 +5,11 @@ mod input_3;
 mod output_0;
 
 
+use orion::operators::nn::FP8x23NN;
 use orion::utils::{assert_eq, assert_seq_eq};
 use orion::operators::nn::NNTrait;
-use orion::numbers::FixedTrait;
 use orion::operators::tensor::FP8x23TensorPartialEq;
-use orion::operators::nn::FP8x23NN;
+use orion::numbers::FixedTrait;
 
 #[test]
 #[available_gas(2000000000)]

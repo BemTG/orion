@@ -405,6 +405,75 @@ class Gru(RunAll):
 
         make_test([X, W, R, B], result, func_sig, name, Trait.NN)
 
+    
+    @staticmethod
+    def fp16x16_varying_sequence_length_without_bias(): 
+        X =  np.array(
+            [
+                [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]],
+                [[10.0, 11.0, 12.0], [13.0, 14.0, 15.0], [16.0, 17.0, 18.0]],
+            ]
+        ).astype(np.float64)
+        
+        input_size = 3
+        hidden_size = 5
+        number_of_gates = 3
+
+
+        # W = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, input_size)).astype(np.float64), 1)
+        # R = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, hidden_size)).astype(np.float64), 1)
+        # # Adding custom bias
+        # W_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # R_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # B = np.round(np.concatenate((W_B, R_B), axis=1),1)
+
+        weight_scale = 0.1
+        custom_bias = 0.1
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+       
+        
+        gru = GRUHelper(X=X, W=W, R=R)
+        Y, Y_h = gru.step()
+        
+        X = Tensor(Dtype.FP16x16, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP16x16))
+        W = Tensor(Dtype.FP16x16, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP16x16))
+        R = Tensor(Dtype.FP16x16, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP16x16))
+    
+        
+        result = [
+                Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
+                Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
+                ]
+
+        name = "gru_fp16x16_varying_sequence_length_without_bias" 
+        func_sig = "NNTrait::gru("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, W, R,], result, func_sig, name, Trait.NN)
+
 
     @staticmethod
     def fp16x16_with_batchwise_processing(): 
@@ -666,6 +735,75 @@ class Gru(RunAll):
         func_sig += " ) " 
 
         make_test([X, W, R, B], result, func_sig, name, Trait.NN)
+
+    
+    @staticmethod
+    def fp8x23_varying_sequence_length_without_bias(): 
+        X =  np.array(
+            [
+                [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]],
+                [[10.0, 11.0, 12.0], [13.0, 14.0, 15.0], [16.0, 17.0, 18.0]],
+            ]
+        ).astype(np.float64)
+        
+        input_size = 3
+        hidden_size = 5
+        number_of_gates = 3
+
+
+        # W = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, input_size)).astype(np.float64), 1)
+        # R = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, hidden_size)).astype(np.float64), 1)
+        # # Adding custom bias
+        # W_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # R_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # B = np.round(np.concatenate((W_B, R_B), axis=1),1)
+
+        weight_scale = 0.1
+        custom_bias = 0.1
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+       
+        
+        gru = GRUHelper(X=X, W=W, R=R)
+        Y, Y_h = gru.step()
+        
+        X = Tensor(Dtype.FP8x23, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP8x23))
+        W = Tensor(Dtype.FP8x23, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP8x23))
+        R = Tensor(Dtype.FP8x23, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP8x23))
+    
+        
+        result = [
+                Tensor(Dtype.FP8x23, Y.shape, to_fp(Y.flatten(), FixedImpl.FP8x23)),
+                Tensor(Dtype.FP8x23, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP8x23))
+                ]
+
+        name = "gru_fp8x23_varying_sequence_length_without_bias" 
+        func_sig = "NNTrait::gru("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, W, R,], result, func_sig, name, Trait.NN)
 
 
     @staticmethod

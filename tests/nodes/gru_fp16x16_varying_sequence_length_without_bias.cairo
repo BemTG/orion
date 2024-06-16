@@ -12,7 +12,7 @@ use orion::numbers::FixedTrait;
 
 #[test]
 #[available_gas(2000000000)]
-fn test_gru_fp16x16_default_params() {
+fn test_gru_fp16x16_varying_sequence_length_without_bias() {
     let input_0 = input_0::input_0();
     let input_1 = input_1::input_1();
     let input_2 = input_2::input_2();
