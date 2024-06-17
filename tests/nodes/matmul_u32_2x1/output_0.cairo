@@ -1,6 +1,7 @@
 use core::array::{ArrayTrait, SpanTrait};
 use orion::operators::tensor::{TensorTrait, Tensor};
-use orion::operators::tensor::{U32Tensor, U32TensorDiv};
+use orion::operators::tensor::{U32Tensor, U32TensorAdd};
+use orion::numbers::NumberTrait;
 
 fn output_0() -> Tensor<u32> {
     let mut shape = ArrayTrait::<usize>::new();
@@ -8,9 +9,9 @@ fn output_0() -> Tensor<u32> {
     shape.append(2);
 
     let mut data = ArrayTrait::new();
-    data.append(12272);
-    data.append(3848);
-    data.append(19942);
-    data.append(6253);
+    data.append(34608);
+    data.append(20160);
+    data.append(4738);
+    data.append(2760);
     TensorTrait::new(shape.span(), data.span())
 }
