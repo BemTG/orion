@@ -121,7 +121,7 @@ class Matmul(RunAll):
             b = Tensor(Dtype.U32, b.shape, b.flatten())
             y = Tensor(Dtype.U32, y.shape, y.flatten())
 
-            name = "matmul_u32_3x1"
+            name = "matmul_u32_3x2"
             make_test(
                 [a, b], y, "input_0.matmul(@input_1)", name)
 
@@ -188,11 +188,82 @@ class Matmul(RunAll):
             name = "matmul_i32_1x2"
             make_test(
                 [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_1x3():
+            a = np.random.randint(-127, 127, (1, 3)).astype(np.int32)
+            b = np.random.randint(-127, 127, (3, 1)).astype(np.int32)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I32, a.shape, a.flatten())
+            b = Tensor(Dtype.I32, b.shape, b.flatten())
+            y = Tensor(Dtype.I32, y.shape, y.flatten())
+
+            name = "matmul_i32_1x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x1():
+            a = np.random.randint(-127, 127, (3, 1)).astype(np.int32)
+            b = np.random.randint(-127, 127, (1, 3)).astype(np.int32)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I32, a.shape, a.flatten())
+            b = Tensor(Dtype.I32, b.shape, b.flatten())
+            y = Tensor(Dtype.I32, y.shape, y.flatten())
+
+            name = "matmul_i32_3x1"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_2x3():
+            a = np.random.randint(-127, 127, (2, 3)).astype(np.int32)
+            b = np.random.randint(-127, 127, (3, 2)).astype(np.int32)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I32, a.shape, a.flatten())
+            b = Tensor(Dtype.I32, b.shape, b.flatten())
+            y = Tensor(Dtype.I32, y.shape, y.flatten())
+
+            name = "matmul_i32_2x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x2():
+            a = np.random.randint(-127, 127, (3, 2)).astype(np.int32)
+            b = np.random.randint(-127, 127, (2, 3)).astype(np.int32)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I32, a.shape, a.flatten())
+            b = Tensor(Dtype.I32, b.shape, b.flatten())
+            y = Tensor(Dtype.I32, y.shape, y.flatten())
+
+            name = "matmul_i32_3x2"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x3():
+            a = np.random.randint(-127, 127, (3, 3)).astype(np.int32)
+            b = np.random.randint(-127, 127, (3, 3)).astype(np.int32)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I32, a.shape, a.flatten())
+            b = Tensor(Dtype.I32, b.shape, b.flatten())
+            y = Tensor(Dtype.I32, y.shape, y.flatten())
+
+            name = "matmul_i32_3x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
 
         matmul_1D()
         matmul_2x2()
         matmul_2x1()
         matmul_1x2()
+        matmul_3x3()
+        matmul_3x1()
+        matmul_1x3()
+        matmul_2x3()
+        matmul_3x2()
+        
 
     @staticmethod
     def matmul_i8():
@@ -247,11 +318,82 @@ class Matmul(RunAll):
             name = "matmul_i8_1x2"
             make_test(
                 [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_1x3():
+            a = np.random.randint(-4, 5, (1, 3)).astype(np.int8)
+            b = np.random.randint(-4, 5, (3, 1)).astype(np.int8)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I8, a.shape, a.flatten())
+            b = Tensor(Dtype.I8, b.shape, b.flatten())
+            y = Tensor(Dtype.I8, y.shape, y.flatten())
+
+            name = "matmul_i8_1x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x1():
+            a = np.random.randint(-4, 5, (3, 1)).astype(np.int8)
+            b = np.random.randint(-4, 5, (1, 3)).astype(np.int8)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I8, a.shape, a.flatten())
+            b = Tensor(Dtype.I8, b.shape, b.flatten())
+            y = Tensor(Dtype.I8, y.shape, y.flatten())
+
+            name = "matmul_i8_3x1"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x2():
+            a = np.random.randint(-4, 5, (3, 2)).astype(np.int8)
+            b = np.random.randint(-4, 5, (2, 3)).astype(np.int8)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I8, a.shape, a.flatten())
+            b = Tensor(Dtype.I8, b.shape, b.flatten())
+            y = Tensor(Dtype.I8, y.shape, y.flatten())
+
+            name = "matmul_i8_3x2"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_2x3():
+            a = np.random.randint(-4, 5, (2, 3)).astype(np.int8)
+            b = np.random.randint(-4, 5, (3, 2)).astype(np.int8)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I8, a.shape, a.flatten())
+            b = Tensor(Dtype.I8, b.shape, b.flatten())
+            y = Tensor(Dtype.I8, y.shape, y.flatten())
+
+            name = "matmul_i8_2x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x3():
+            a = np.random.randint(-4, 5, (3, 3)).astype(np.int8)
+            b = np.random.randint(-4, 5, (3, 3)).astype(np.int8)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.I8, a.shape, a.flatten())
+            b = Tensor(Dtype.I8, b.shape, b.flatten())
+            y = Tensor(Dtype.I8, y.shape, y.flatten())
+
+            name = "matmul_i8_3x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+
 
         matmul_1D()
         matmul_2x2()
         matmul_2x1()
         matmul_1x2()
+        matmul_3x3()
+        matmul_3x1()
+        matmul_1x3()
+        matmul_2x3()
+        matmul_3x2()
 
     @staticmethod
     def matmul_fp8x23():
@@ -318,11 +460,97 @@ class Matmul(RunAll):
             name = "matmul_fp8x23_1x2"
             make_test(
                 [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_1x3():
+            a = np.random.randint(-3, 4, (1, 3)).astype(np.int64)
+            b = np.random.randint(-3, 4, (3, 1)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP8x23, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP8x23))
+            b = Tensor(Dtype.FP8x23, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP8x23))
+            y = Tensor(Dtype.FP8x23, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP8x23))
+
+            name = "matmul_fp8x23_1x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x1():
+            a = np.random.randint(-3, 4, (3, 1)).astype(np.int64)
+            b = np.random.randint(-3, 4, (1, 3)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP8x23, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP8x23))
+            b = Tensor(Dtype.FP8x23, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP8x23))
+            y = Tensor(Dtype.FP8x23, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP8x23))
+
+            name = "matmul_fp8x23_3x1"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x2():
+            a = np.random.randint(-3, 4, (3, 2)).astype(np.int64)
+            b = np.random.randint(-3, 4, (2, 3)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP8x23, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP8x23))
+            b = Tensor(Dtype.FP8x23, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP8x23))
+            y = Tensor(Dtype.FP8x23, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP8x23))
+
+            name = "matmul_fp8x23_3x2"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+
+        def matmul_2x3():
+            a = np.random.randint(-3, 4, (2, 3)).astype(np.int64)
+            b = np.random.randint(-3, 4, (3, 2)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP8x23, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP8x23))
+            b = Tensor(Dtype.FP8x23, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP8x23))
+            y = Tensor(Dtype.FP8x23, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP8x23))
+
+            name = "matmul_fp8x23_2x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x3():
+            a = np.random.randint(-3, 4, (3, 3)).astype(np.int64)
+            b = np.random.randint(-3, 4, (3, 3)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP8x23, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP8x23))
+            b = Tensor(Dtype.FP8x23, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP8x23))
+            y = Tensor(Dtype.FP8x23, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP8x23))
+
+            name = "matmul_fp8x23_3x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
 
         matmul_1D()
         matmul_2x2()
         matmul_2x1()
         matmul_1x2()
+        matmul_3x3()
+        matmul_3x1()
+        matmul_1x3()
+        matmul_2x3()
+        matmul_3x2()
 
     @staticmethod
     def matmul_fp16x16():
@@ -389,8 +617,96 @@ class Matmul(RunAll):
             name = "matmul_fp16x16_1x2"
             make_test(
                 [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_1x3():
+            a = np.random.randint(-3, 4, (1, 3)).astype(np.int64)
+            b = np.random.randint(-3, 4, (3, 1)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP16x16, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP16x16))
+            b = Tensor(Dtype.FP16x16, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP16x16))
+            y = Tensor(Dtype.FP16x16, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP16x16))
+
+            name = "matmul_fp16x16_1x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+
+        def matmul_3x1():
+            a = np.random.randint(-3, 4, (3, 1)).astype(np.int64)
+            b = np.random.randint(-3, 4, (1, 3)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP16x16, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP16x16))
+            b = Tensor(Dtype.FP16x16, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP16x16))
+            y = Tensor(Dtype.FP16x16, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP16x16))
+
+            name = "matmul_fp16x16_3x1"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+
+        def matmul_3x2():
+            a = np.random.randint(-3, 4, (3, 2)).astype(np.int64)
+            b = np.random.randint(-3, 4, (2, 3)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP16x16, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP16x16))
+            b = Tensor(Dtype.FP16x16, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP16x16))
+            y = Tensor(Dtype.FP16x16, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP16x16))
+
+            name = "matmul_fp16x16_3x2"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_2x3():
+            a = np.random.randint(-3, 4, (2, 3)).astype(np.int64)
+            b = np.random.randint(-3, 4, (3, 2)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP16x16, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP16x16))
+            b = Tensor(Dtype.FP16x16, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP16x16))
+            y = Tensor(Dtype.FP16x16, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP16x16))
+
+            name = "matmul_fp16x16_2x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
+            
+        def matmul_3x3():
+            a = np.random.randint(-3, 4, (3, 3)).astype(np.int64)
+            b = np.random.randint(-3, 4, (3, 3)).astype(np.int64)
+            y = np.matmul(a, b)
+
+            a = Tensor(Dtype.FP16x16, a.shape, to_fp(
+                a.flatten(), FixedImpl.FP16x16))
+            b = Tensor(Dtype.FP16x16, b.shape, to_fp(
+                b.flatten(), FixedImpl.FP16x16))
+            y = Tensor(Dtype.FP16x16, y.shape, to_fp(
+                y.flatten(), FixedImpl.FP16x16))
+
+            name = "matmul_fp16x16_3x3"
+            make_test(
+                [a, b], y, "input_0.matmul(@input_1)", name)
 
         matmul_1D()
         matmul_2x2()
         matmul_2x1()
         matmul_1x2()
+        matmul_3x3()
+        matmul_3x1()
+        matmul_1x3()
+        matmul_2x3()
+        matmul_3x2()
+

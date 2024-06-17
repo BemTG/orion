@@ -9,6 +9,6 @@ fn output_0() -> Tensor<i32> {
     shape.append(1);
 
     let mut data = ArrayTrait::new();
-    data.append(1256);
+    data.append(12496);
     TensorTrait::new(shape.span(), data.span())
 }

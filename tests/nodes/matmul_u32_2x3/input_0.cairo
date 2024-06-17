@@ -9,11 +9,11 @@ fn input_0() -> Tensor<u32> {
     shape.append(3);
 
     let mut data = ArrayTrait::new();
-    data.append(86);
-    data.append(12);
-    data.append(252);
-    data.append(151);
-    data.append(174);
-    data.append(195);
+    data.append(246);
+    data.append(13);
+    data.append(84);
+    data.append(183);
+    data.append(223);
+    data.append(175);
     TensorTrait::new(shape.span(), data.span())
 }

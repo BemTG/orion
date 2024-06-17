@@ -9,7 +9,7 @@ fn input_0() -> Tensor<FP16x16> {
     shape.append(1);
 
     let mut data = ArrayTrait::new();
+    data.append(FP16x16 { mag: 196608, sign: true });
     data.append(FP16x16 { mag: 131072, sign: false });
-    data.append(FP16x16 { mag: 65536, sign: false });
     TensorTrait::new(shape.span(), data.span())
 }
