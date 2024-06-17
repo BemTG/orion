@@ -3,10 +3,10 @@ mod input_1;
 mod output_0;
 
 
-use orion::operators::tensor::{U32Tensor, U32TensorDiv};
+use orion::operators::tensor::{TensorTrait, Tensor};
+use orion::operators::tensor::{U32Tensor, U32TensorAdd};
 use orion::utils::{assert_eq, assert_seq_eq};
 use core::array::{ArrayTrait, SpanTrait};
-use orion::operators::tensor::{TensorTrait, Tensor};
 use orion::operators::tensor::U32TensorPartialEq;
 
 #[test]
@@ -14,9 +14,9 @@ use orion::operators::tensor::U32TensorPartialEq;
 fn test_matmul_u32_1d() {
     let input_0 = input_0::input_0();
     let input_1 = input_1::input_1();
-    let z = output_0::output_0();
+    let z_0 = output_0::output_0();
 
-    let y = input_0.matmul(@input_1);
+    let y_0 = input_0.matmul(@input_1);
 
-    assert_eq(y, z);
+    assert_eq(y_0, z_0);
 }

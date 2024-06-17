@@ -997,3 +997,7 @@ mod gru_fp16x16_varying_sequence_length_without_bias;
 mod gru_fp8x23_varying_sequence_length_without_bias;
 mod gru_fp16x16_with_batchwise_processing_with_bias;
 mod gru_fp8x23_with_batchwise_processing_with_bias;
+mod matmul_u32_3x3;
+mod matmul_u32_3x1;
+mod matmul_u32_1x3;
+mod matmul_u32_2x3;
