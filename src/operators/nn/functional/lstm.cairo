@@ -63,7 +63,7 @@ fn lstm<
     clip: Option<T>,
     direction: Option<DIRECTION>,
      hidden_size: Option<usize>,
-     mut input_forget: Option<usize>,
+      input_forget: Option<usize>,
      layout: Option<usize>,
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
