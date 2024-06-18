@@ -324,16 +324,16 @@ fn step<
             };
 
         'checkp22'.print();
-        i = f(@(i + @p_i + C_t));
+        i = f(i + @p_i + C_t);
         'checkp22aa'.print();
-        f = f(@(f + @p_f + C_t));
+        f = f(f + @p_f + C_t);
         c = g(@c);
         'checkp22bb'.print();
         
         
         let mut C = f * C_t + i * c;
 
-        o = f(@(o + @p_o + C));
+        o = f(o + @p_o + C);
 
         H = o * h(@C);
 
