@@ -137,10 +137,10 @@ fn lstm<
                 i += 1;
             };
 
-            B = TensorTrait::<T>::new(
+            B = Option::Some(TensorTrait::<T>::new(
                 shape: array![2 * number_of_gates * hidden_size.unwrap()].span(),
                 data: b_data_vals.span()
-            )
+            ))
         };
 
         if P.is_none() {
@@ -152,10 +152,10 @@ fn lstm<
                 i += 1;
             };
 
-            P = TensorTrait::<T>::new(
+            P = Option::Some(TensorTrait::<T>::new(
                 shape: array![number_of_peepholes * hidden_size.unwrap()].span(),
                 data: p_data_vals.span()
-            )
+            ))
         };
 
         'checkp7'.print();
@@ -170,10 +170,10 @@ fn lstm<
                 i += 1;
             };
 
-            initial_h = TensorTrait::<T>::new(
+            initial_h = Option::Some(TensorTrait::<T>::new(
                 shape: array![batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
-            )
+            ))
         };
 
         if initial_c.is_none() {
@@ -186,10 +186,10 @@ fn lstm<
                 i += 1;
             };
 
-            initial_c = TensorTrait::<T>::new(
+            initial_c = Option::Some(TensorTrait::<T>::new(
                 shape: array![batch_size, hidden_size.unwrap()].span(),
                 data: c_data_vals.span()
-            )
+            ))
         };
 
         'checkp8'.print();
@@ -201,7 +201,7 @@ fn lstm<
 
     'checkp9'.print();
 
-    let result = step(X, R, @B.unwrap(), W,  @initial_h, @initial_c, @P.unwrap(),  num_directions, linear_before_reset, layout);
+    let result = step(X, R, @B.unwrap(), W,  @initial_h.unwrap(), @initial_c.unwrap(), @P.unwrap(),  num_directions, linear_before_reset, layout);
 
     'checkp10'.print();
 
@@ -284,8 +284,8 @@ fn step<
 
 
 
-    let w_transposed = W.transpose(axes: reverse_axes(W.shape));
-    let r_transposed = R.transpose(axes: reverse_axes(R.shape));
+    let w_transposed = W.transpose(axes: reverse_axes(*W.shape));
+    let r_transposed = R.transpose(axes: reverse_axes(*R.shape));
 
     'checkp17'.print();
 
@@ -301,7 +301,7 @@ fn step<
     'checkp19'.print();
     (X_segment).len().print();
     let mut z = 0;
-    while i < (X_segment).len() {
+    while z < (X_segment).len() {
         'checkp20'.print();
         
 
@@ -314,9 +314,14 @@ fn step<
 
        
 
-        let gates = (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transpose)
-            + H_t.matmul(@r_transpose).unsqueeze(axes: array![0].span())
+        let gates = (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed)
+            + H_t.matmul(@r_transposedz).unsqueeze(axes: array![0].span())
             + (b_i + b_o));
+
+        let (mut i, mut o, mut f, mut c) = {
+                let gates_split = split_tensor(gates, 4, gates.shape.len() - 1);
+                (gates_split.at(0), gates_split.at(1), gates_split.at(2), gates_split.at(3))
+            };
 
         'checkp22'.print();
         i = f(i + p_i + C_t);
