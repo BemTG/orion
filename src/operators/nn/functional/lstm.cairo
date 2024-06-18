@@ -315,27 +315,27 @@ fn step<
        
 
         let gates = (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed)
-            + H_t.matmul(@r_transposedz).unsqueeze(axes: array![0].span())
+            + H_t.matmul(@r_transposed).unsqueeze(axes: array![0].span())
             + (b_i + b_o));
 
         let (mut i, mut o, mut f, mut c) = {
-                let gates_split = split_tensor(gates, 4, gates.shape.len() - 1);
+                let gates_split = split_tensor(@gates, 4, gates.shape.len() - 1);
                 (gates_split.at(0), gates_split.at(1), gates_split.at(2), gates_split.at(3))
             };
 
         'checkp22'.print();
-        i = f(i + p_i + C_t);
+        i = f(@(i + @p_i + C_t));
         'checkp22aa'.print();
-        f = f(f + p_f + C_t);
-        c = g(c);
+        f = f(@(f + @p_f + C_t));
+        c = g(@c);
         'checkp22bb'.print();
         
         
         let mut C = f * C_t + i * c;
 
-        o = f(o + p_o + C);
+        o = f(@(o + @p_o + C));
 
-        H = o * h(C);
+        H = o * h(@C);
 
 
         h_list.append(*H);
