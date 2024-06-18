@@ -143,4 +143,28 @@ impl FP16x16NN of NNTrait<FP16x16> {
     ) -> Tensor<FP16x16> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn lstm(
+     X: @Tensor<FP16x16>,
+     W: @Tensor<FP16x16>,
+     R: @Tensor<FP16x16>,
+     B: Option<Tensor<FP16x16>>,
+     sequence_length: Option<Tensor<FP16x16>>,
+    initial_h: Option<Tensor<FP16x16>>,
+    initial_c: Option<Tensor<FP16x16>>,
+     P: Option<Tensor<FP16x16>>,
+    activation_alpha: Option<Array<Tensor<FP16x16>>>,
+    activation_beta: Option<Array<Tensor<FP16x16>>>,
+    activations: Option<ACTIVATIONS>,
+    clip: Option<FP16x16>,
+    direction: Option<DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<FP16x16>> {
+    functional::lstm::lstm(X, W, R, B, sequence_length, initial_h, initial_c, P,  activation_alpha, activation_beta, 
+    activations, clip, direction, hidden_size, input_forget,  layout, linear_before_reset, n_outputs)
+}
 }

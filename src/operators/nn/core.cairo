@@ -817,6 +817,41 @@ trait NNTrait<T> {
         transA: bool,
         transB: bool
     ) -> Tensor<T>;
+    /// # NNTrait::lstm
+    /// 
+    /// ```rust
+    ///     fn lstm(
+    ///         A: Tensor<T>,
+    ///         B: Tensor<T>,
+    ///         C: Option<Tensor<T>>,
+    ///         alpha: Option<T>,
+    ///         beta: Option<T>,
+    ///         transA: bool,
+    ///         transB: bool
+    ///     ) -> Tensor<T>;
+    /// ```
+    /// 
+    ///
+    fn lstm(
+     X: @Tensor<T>,
+     W: @Tensor<T>,
+     R: @Tensor<T>,
+     B: Option<Tensor<T>>,
+     sequence_length: Option<Tensor<T>>,
+    initial_h: Option<Tensor<T>>,
+    initial_c: Option<Tensor<T>>,
+     P: Option<Tensor<T>>,
+    activation_alpha: Option<Array<Tensor<T>>>,
+    activation_beta: Option<Array<Tensor<T>>>,
+    activations: Option<ACTIVATIONS>,
+    clip: Option<T>,
+    direction: Option<DIRECTION>,
+     hidden_size: Option<usize>,
+     mut input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<T>> ; 
     ///
     /// # NNTrait::conv
     /// 

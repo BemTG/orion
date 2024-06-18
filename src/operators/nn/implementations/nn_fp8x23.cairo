@@ -139,4 +139,29 @@ impl FP8x23NN of NNTrait<FP8x23> {
     ) -> Tensor<FP8x23> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn lstm(
+     X: @Tensor<FP8x23>,
+     W: @Tensor<FP8x23>,
+     R: @Tensor<FP8x23>,
+     B: Option<Tensor<FP8x23>>,
+     sequence_length: Option<Tensor<FP8x23>>,
+    initial_h: Option<Tensor<FP8x23>>,
+    initial_c: Option<Tensor<FP8x23>>,
+     P: Option<Tensor<FP8x23>>,
+    activation_alpha: Option<Array<Tensor<FP8x23>>>,
+    activation_beta: Option<Array<Tensor<FP8x23>>>,
+    activations: Option<ACTIVATIONS>,
+    clip: Option<FP8x23>,
+    direction: Option<DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<FP8x23>> {
+    functional::lstm::lstm(X, W, R, B, sequence_length, initial_h, initial_c, P,  activation_alpha, activation_beta, 
+    activations, clip, direction, hidden_size, input_forget,  layout, linear_before_reset, n_outputs)
+}
+
 }

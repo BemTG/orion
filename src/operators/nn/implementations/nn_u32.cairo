@@ -130,4 +130,27 @@ impl U32NN of NNTrait<u32> {
     ) -> Tensor<u32> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn lstm(
+     X: @Tensor<u32>,
+     W: @Tensor<u32>,
+     R: @Tensor<u32>,
+     B: Option<Tensor<u32>>,
+     sequence_length: Option<Tensor<u32>>,
+    initial_h: Option<Tensor<u32>>,
+    initial_c: Option<Tensor<u32>>,
+     P: Option<Tensor<u32>>,
+    activation_alpha: Option<Array<Tensor<u32>>>,
+    activation_beta: Option<Array<Tensor<u32>>>,
+    activations: Option<ACTIVATIONS>,
+    clip: Option<u32>,
+    direction: Option<DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<u32>> {
+    panic(array!['not supported!'])
+    }
 }
