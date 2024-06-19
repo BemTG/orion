@@ -304,6 +304,8 @@ fn step<
     'checkp19'.print();
     (X_segment).len().print();
     let mut z = 0;
+
+    
     while z < (X_segment).len() {
         'checkp20'.print();
         
@@ -328,10 +330,10 @@ fn step<
 
         'checkp22'.print();
         // let mut e1 = (i + p_i) + *C_t;
-        i = f((i + p_i) + *C_t);
+        i = f(i + p_i + *C_t);
         'checkp22aa'.print();
         // let mut e2 = (f + p_f) + *C_t;
-        f = f((f + p_f) + *C_t);
+        f = f(f + p_f + *C_t);
         c = g(@c);
         'checkp22bb'.print();
         
