@@ -256,7 +256,67 @@ class Lstm(RunAll):
 
         make_test([X, W, R, B], result, func_sig, name, Trait.NN)
 
+    @staticmethod
+    def fp16x16_batchwise():
+        X =  np.array([[[1.0, 2.0]], [[3.0, 4.0]], [[5.0, 6.0]]]).astype(np.float32)
         
+        input_size = 2
+        hidden_size = 7
+        weight_scale = 0.3
+        number_of_gates = 4
+        layout = 1
+
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+
+        lstm = LSTMHelper(X=X, W=W, R=R, layout=layout)
+        Y, Y_h = lstm.step()
+        
+        X = Tensor(Dtype.FP16x16, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP16x16))
+        W = Tensor(Dtype.FP16x16, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP16x16))
+        R = Tensor(Dtype.FP16x16, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP16x16))
+        
+        result = [
+                Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
+                Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
+                ]
+
+        name = "lstm_fp16x16_batchwise"
+        func_sig = "NNTrait::lstm("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(1)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, W, R], result, func_sig, name, Trait.NN)
+
+    
+    fp16x16_default_params()
+    fp16x16_initial_bias()
+    fp16x16_batchwise()
+     
 
     # @staticmethod
     # def fp16x16_with_peepholes(): 
@@ -340,62 +400,4 @@ class Lstm(RunAll):
 
 
 
-    @staticmethod
-    def fp16x16_batchwise():
-        X =  np.array([[[1.0, 2.0]], [[3.0, 4.0]], [[5.0, 6.0]]]).astype(np.float32)
-        
-        input_size = 2
-        hidden_size = 7
-        weight_scale = 0.3
-        number_of_gates = 4
-        layout = 1
-
-        W = weight_scale * np.ones(
-            (1, number_of_gates * hidden_size, input_size)
-        ).astype(np.float64)
-        R = weight_scale * np.ones(
-            (1, number_of_gates * hidden_size, hidden_size)
-        ).astype(np.float64)
-
-        lstm = LSTMHelper(X=X, W=W, R=R, layout=layout)
-        Y, Y_h = lstm.step()
-        
-        X = Tensor(Dtype.FP16x16, X.shape, to_fp(
-            X.flatten(), FixedImpl.FP16x16))
-        W = Tensor(Dtype.FP16x16, W.shape, to_fp(
-            W.flatten(), FixedImpl.FP16x16))
-        R = Tensor(Dtype.FP16x16, R.shape, to_fp(
-            R.flatten(), FixedImpl.FP16x16))
-        
-        result = [
-                Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
-                Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
-                ]
-
-        name = "lstm_fp16x16_default_params"
-        func_sig = "NNTrait::lstm("
-        func_sig += " @input_0,"
-        func_sig += " @input_1,"
-        func_sig += " @input_2,"
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::Some(1)," 
-        func_sig += " Option::None(())," 
-        func_sig += " Option::Some(2) " 
-        func_sig += " ) " 
-
-        make_test([X, W, R], result, func_sig, name, Trait.NN)
-
     
-    
-  

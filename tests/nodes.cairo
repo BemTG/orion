@@ -1012,3 +1012,4 @@ mod matmul_u32_2x3;
 mod matmul_u32_3x2;
 mod lstm_fp16x16_default_params;
 mod lstm_fp16x16_initial_bias;
+mod lstm_fp16x16_batchwise;
