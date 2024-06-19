@@ -68,6 +68,8 @@ fn lstm<
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
 ) -> Array<Tensor<T>> {
+
+
     let num_directions = *(*W).shape[0];
     let number_of_gates: usize = 4;
     let mut number_of_peepholes :usize  = 3;
@@ -325,8 +327,8 @@ fn step<
             };
 
         'checkp22'.print();
-        let mut e1 = (i + p_i) + *C_t;
-        i = f((e1));
+        // let mut e1 = (i + p_i) + *C_t;
+        i = f((i + p_i) + *C_t);
         'checkp22aa'.print();
         // let mut e2 = (f + p_f) + *C_t;
         f = f((f + p_f) + *C_t);
@@ -352,11 +354,8 @@ fn step<
     let mut concatenated = h_list.at(0);
  
     if h_list.len() > 1 {
-        concat_tensors_in_array(h_list)
-    } else {
-        *h_list[0]
-    };
-
+        concatenated = @concat_tensors_in_array(h_list);
+    } 
     'checkp30'.print();
 
     let mut output: Array<Tensor<T>> = array![];
