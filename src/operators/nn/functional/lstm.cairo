@@ -47,7 +47,7 @@ fn lstm<
     +SubEq<T>,
     +Add<Tensor<T>>,
     +Sub<Tensor<T>>,
-     +Mul<Tensor<T>>,
+    +Mul<Tensor<T>>,
 >(
      X: @Tensor<T>,
      W: @Tensor<T>,
@@ -92,23 +92,23 @@ fn lstm<
         W = @W.squeeze(axes: Option::None(()));
 
         'checkp3'.print();
-        if B.is_some() && B.unwrap().shape.len() > 0  && B.unwrap().shape.at(0) == 1{
+        if B.is_some() && B.unwrap().shape.len() > NumberTrait::<usize>::zero()  && B.unwrap().shape.at(0) == @NumberTrait::<usize>::one() {
             B = Option::Some(B.unwrap().squeeze(axes: Option::None(())))
         };
 
-        if sequence_length.is_some() && sequence_length.unwrap().shape.len() > 0  && *sequence_length.unwrap().shape.at(0) ==1 {
+        if sequence_length.is_some() && (sequence_length.unwrap().shape).len() > NumberTrait::<usize>::zero()  && *sequence_length.unwrap().shape.at(0) == NumberTrait::<usize>::one() {
             sequence_length = Option::Some(sequence_length.unwrap().squeeze(axes: Option::None(())))
         };
 
-        if initial_h.is_some() && initial_h.unwrap().shape.len() > 0  && *initial_h.unwrap().shape.at(0) ==1 {
+        if initial_h.is_some() && (initial_h.unwrap().shape).len() > NumberTrait::<usize>::zero()  && *initial_h.unwrap().shape.at(0) == NumberTrait::<usize>::one() {
            initial_h =  Option::Some(initial_h.unwrap().squeeze(axes: Option::None(())))
         };
 
-        if initial_c.is_some() && initial_c.unwrap().shape.len() > 0  && *initial_c.unwrap().shape.at(0) ==1 {
+        if initial_c.is_some() && (initial_c.unwrap().shape).len() > NumberTrait::<usize>::zero()  && *initial_c.unwrap().shape.at(0) == NumberTrait::<usize>::one() {
            initial_c =  Option::Some(initial_c.unwrap().squeeze(axes: Option::None(())))
         };
 
-        if P.is_some() && P.unwrap().shape.len() > 0  && P.unwrap().shape.at(0) == 1{
+        if P.is_some() && (P.unwrap().shape).len() > NumberTrait::<usize>::zero()  && P.unwrap().shape.at(0) == @NumberTrait::<usize>::one(){
             B = Option::Some(B.unwrap().squeeze(axes: Option::None(())))
         };
 
@@ -320,27 +320,30 @@ fn step<
 
         let (mut i, mut o, mut f, mut c) = {
                 let gates_split = split_tensor(@gates, 4, gates.shape.len() - 1);
-                (gates_split.at(0), gates_split.at(1), gates_split.at(2), gates_split.at(3))
+                (*gates_split.at(0), *gates_split.at(1), *gates_split.at(2), *gates_split.at(3))
             };
 
         'checkp22'.print();
-        i = f(i + @p_i + C_t);
+        let mut e1 = (i + p_i) + *C_t;
+        i = f(e1);
         'checkp22aa'.print();
-        f = f(f + @p_f + C_t);
+        let mut e2 = (f + p_f) + *C_t;
+        f = f(e2);
         c = g(@c);
         'checkp22bb'.print();
         
         
-        let mut C = f * C_t + i * c;
+        let mut C = f * *C_t + i * c;
 
-        o = f(o + @p_o + C);
+        let mut e3 = o + p_o + C;
+        o = f(e3);
 
-        H = o * h(@C);
+        H = @(o * h(@C));
 
 
         h_list.append(*H);
         H_t = H;
-        C_t = C;
+        C_t = @C;
         z += 1;
     };
 
