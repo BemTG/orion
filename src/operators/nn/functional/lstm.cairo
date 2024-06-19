@@ -237,8 +237,8 @@ fn step<
     +Mul<Tensor<T>>,
 >(
     X: @Tensor<T>,
-    W: @Tensor<T>,
     R: @Tensor<T>,
+    W: @Tensor<T>,
     B: @Tensor<T>,
     H_0: @Tensor<T>,
     C_0: @Tensor<T>,
