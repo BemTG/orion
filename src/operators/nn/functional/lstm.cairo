@@ -85,6 +85,7 @@ fn lstm<
     let mut linear_before_reset = linear_before_reset;
 
     'checkp1'.print();
+    
 
     if num_directions == NumberTrait::<usize>::one() {
         'checkp2'.print();
@@ -109,7 +110,7 @@ fn lstm<
         };
 
         if P.is_some() && (P.unwrap().shape).len() > NumberTrait::<usize>::zero()  && P.unwrap().shape.at(0) == @NumberTrait::<usize>::one(){
-            B = Option::Some(B.unwrap().squeeze(axes: Option::None(())))
+            P = Option::Some(P.unwrap().squeeze(axes: Option::None(())))
         };
 
         'checkp4'.print();
@@ -314,9 +315,9 @@ fn step<
 
        
 
-        let gates = (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed)
-            + H_t.matmul(@r_transposed).unsqueeze(axes: array![0].span())
-            + (b_i + b_o));
+        let gates = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
+            + ( H_t.matmul(@r_transposed).unsqueeze(axes: array![0].span()) )
+            + (b_i + b_o) );
 
         let (mut i, mut o, mut f, mut c) = {
                 let gates_split = split_tensor(@gates, 4, gates.shape.len() - 1);
@@ -325,18 +326,18 @@ fn step<
 
         'checkp22'.print();
         let mut e1 = (i + p_i) + *C_t;
-        i = f(e1);
+        i = f((e1));
         'checkp22aa'.print();
-        let mut e2 = (f + p_f) + *C_t;
-        f = f(e2);
+        // let mut e2 = (f + p_f) + *C_t;
+        f = f((f + p_f) + *C_t);
         c = g(@c);
         'checkp22bb'.print();
         
         
         let mut C = f * *C_t + i * c;
 
-        let mut e3 = o + p_o + C;
-        o = f(e3);
+        // let mut e3 = o + p_o + C;
+        o = f(o + p_o + C);
 
         H = @(o * h(@C));
 
@@ -348,8 +349,9 @@ fn step<
     };
 
     'checkp29'.print();
+    let mut concatenated = h_list.at(0);
  
-    let mut concatenated = if h_list.len() > 1 {
+    if h_list.len() > 1 {
         concat_tensors_in_array(h_list)
     } else {
         *h_list[0]
