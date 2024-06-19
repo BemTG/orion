@@ -201,7 +201,7 @@ fn lstm<
 
     'checkp9'.print();
 
-    let result = step(X, R, @B.unwrap(), W,  @initial_h.unwrap(), @initial_c.unwrap(), @P.unwrap(),  num_directions, linear_before_reset, layout);
+    let result = step(X, R,  W, @B.unwrap(), @initial_h.unwrap(), @initial_c.unwrap(), @P.unwrap(),  num_directions, linear_before_reset, layout);
 
     'checkp10'.print();
 
@@ -237,9 +237,9 @@ fn step<
     +Mul<Tensor<T>>,
 >(
     X: @Tensor<T>,
+    W: @Tensor<T>,
     R: @Tensor<T>,
     B: @Tensor<T>,
-    W: @Tensor<T>,
     H_0: @Tensor<T>,
     C_0: @Tensor<T>,
     P: @Tensor<T>,
