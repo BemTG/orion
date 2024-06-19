@@ -146,8 +146,8 @@ impl FP16x16NN of NNTrait<FP16x16> {
 
     fn lstm(
      X: @Tensor<FP16x16>,
-     W: @Tensor<FP16x16>,
      R: @Tensor<FP16x16>,
+     W: @Tensor<FP16x16>,
      B: Option<Tensor<FP16x16>>,
      sequence_length: Option<Tensor<FP16x16>>,
     initial_h: Option<Tensor<FP16x16>>,
@@ -164,7 +164,7 @@ impl FP16x16NN of NNTrait<FP16x16> {
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
     ) -> Array<Tensor<FP16x16>> {
-    functional::lstm::lstm(X, W, R, B, sequence_length, initial_h, initial_c, P,  activation_alpha, activation_beta, 
+    functional::lstm::lstm(X, R, W, B, sequence_length, initial_h, initial_c, P,  activation_alpha, activation_beta, 
     activations, clip, direction, hidden_size, input_forget,  layout, linear_before_reset, n_outputs)
 }
 }

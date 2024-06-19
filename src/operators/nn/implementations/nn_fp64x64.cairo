@@ -140,8 +140,8 @@ impl FP64x64NN of NNTrait<FP64x64> {
 
       fn lstm(
      X: @Tensor<FP64x64>,
-     W: @Tensor<FP64x64>,
      R: @Tensor<FP64x64>,
+     W: @Tensor<FP64x64>,
      B: Option<Tensor<FP64x64>>,
      sequence_length: Option<Tensor<FP64x64>>,
     initial_h: Option<Tensor<FP64x64>>,

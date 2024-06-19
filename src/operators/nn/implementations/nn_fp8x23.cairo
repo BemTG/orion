@@ -142,8 +142,8 @@ impl FP8x23NN of NNTrait<FP8x23> {
 
     fn lstm(
      X: @Tensor<FP8x23>,
-     W: @Tensor<FP8x23>,
      R: @Tensor<FP8x23>,
+     W: @Tensor<FP8x23>,
      B: Option<Tensor<FP8x23>>,
      sequence_length: Option<Tensor<FP8x23>>,
     initial_h: Option<Tensor<FP8x23>>,
@@ -160,7 +160,7 @@ impl FP8x23NN of NNTrait<FP8x23> {
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
     ) -> Array<Tensor<FP8x23>> {
-    functional::lstm::lstm(X, W, R, B, sequence_length, initial_h, initial_c, P,  activation_alpha, activation_beta, 
+    functional::lstm::lstm(X,  R, W, B, sequence_length, initial_h, initial_c, P,  activation_alpha, activation_beta, 
     activations, clip, direction, hidden_size, input_forget,  layout, linear_before_reset, n_outputs)
 }
 

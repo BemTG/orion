@@ -135,8 +135,8 @@ impl I8NN of NNTrait<i8> {
 
     fn lstm(
      X: @Tensor<i8>,
-     W: @Tensor<i8>,
      R: @Tensor<i8>,
+     W: @Tensor<i8>,
      B: Option<Tensor<i8>>,
      sequence_length: Option<Tensor<i8>>,
     initial_h: Option<Tensor<i8>>,

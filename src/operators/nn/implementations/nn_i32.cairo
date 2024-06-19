@@ -133,8 +133,8 @@ impl I32NN of NNTrait<i32> {
 
     fn lstm(
      X: @Tensor<i32>,
-     W: @Tensor<i32>,
      R: @Tensor<i32>,
+     W: @Tensor<i32>,
      B: Option<Tensor<i32>>,
      sequence_length: Option<Tensor<i32>>,
     initial_h: Option<Tensor<i32>>,

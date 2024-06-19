@@ -141,8 +141,8 @@ impl FP32x32NN of NNTrait<FP32x32> {
 
     fn lstm(
      X: @Tensor<FP32x32>,
-     W: @Tensor<FP32x32>,
      R: @Tensor<FP32x32>,
+     W: @Tensor<FP32x32>,
      B: Option<Tensor<FP32x32>>,
      sequence_length: Option<Tensor<FP32x32>>,
     initial_h: Option<Tensor<FP32x32>>,
