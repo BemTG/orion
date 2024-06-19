@@ -50,8 +50,8 @@ fn lstm<
     +Mul<Tensor<T>>,
 >(
      X: @Tensor<T>,
-     W: @Tensor<T>,
      R: @Tensor<T>,
+     W: @Tensor<T>,
      B: Option<Tensor<T>>,
      sequence_length: Option<Tensor<T>>,
     initial_h: Option<Tensor<T>>,
