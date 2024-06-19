@@ -174,7 +174,7 @@ class Lstm(RunAll):
         func_sig += " Option::Some(2) " 
         func_sig += " ) " 
 
-        make_test([X, W, R], result, func_sig, name, Trait.NN)
+        make_test([X, R, W], result, func_sig, name, Trait.NN)
 
 
 
@@ -254,7 +254,7 @@ class Lstm(RunAll):
         func_sig += " Option::Some(2) " 
         func_sig += " ) " 
 
-        make_test([X, W, R, B], result, func_sig, name, Trait.NN)
+        make_test([X, R, W, B], result, func_sig, name, Trait.NN)
 
     @staticmethod
     def fp16x16_batchwise():
@@ -310,7 +310,7 @@ class Lstm(RunAll):
         func_sig += " Option::Some(2) " 
         func_sig += " ) " 
 
-        make_test([X, W, R], result, func_sig, name, Trait.NN)
+        make_test([X, R, W], result, func_sig, name, Trait.NN)
 
     
     fp16x16_default_params()

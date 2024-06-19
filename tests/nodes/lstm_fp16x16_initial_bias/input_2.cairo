@@ -7,25 +7,9 @@ fn input_2() -> Tensor<FP16x16> {
     let mut shape = ArrayTrait::<usize>::new();
     shape.append(1);
     shape.append(16);
-    shape.append(4);
+    shape.append(3);
 
     let mut data = ArrayTrait::new();
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
-    data.append(FP16x16 { mag: 6553, sign: false });
     data.append(FP16x16 { mag: 6553, sign: false });
     data.append(FP16x16 { mag: 6553, sign: false });
     data.append(FP16x16 { mag: 6553, sign: false });
