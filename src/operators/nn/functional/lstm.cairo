@@ -332,7 +332,7 @@ fn step<
 
         'checkp22'.print();
         // let mut e1 = (i + p_i) + *C_t;
-        i = f(i + p_i + *C_t);
+        i = f(i + p_i * *C_t);
         'the iiiii2222222'.print();
         (*i.data.at(0)).print();
         (*i.data.at(1)).print();
