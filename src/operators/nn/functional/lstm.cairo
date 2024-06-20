@@ -350,9 +350,16 @@ fn step<
         
         
         let mut C = (f * *C_t) + (i * c);
+        'the capCCCCCCCCCCCCC'.print();
+        (*C.data.at(0)).print();
+        (*C.data.at(1)).print();
 
         // let mut e3 = o + p_o + C;
         o = f(o + p_o + C);
+        'the oooooooooooooooooo'.print();
+        (*o.data.at(0)).print();
+        (*o.data.at(1)).print();
+
 
 
         H = @(o * h(@C));
