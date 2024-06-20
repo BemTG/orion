@@ -4,15 +4,15 @@ mod input_2;
 mod output_0;
 
 
-use orion::utils::{assert_eq, assert_seq_eq};
-use orion::operators::nn::FP16x16NN;
+use orion::operators::nn::FP8x23NN;
+use orion::operators::tensor::FP8x23TensorPartialEq;
 use orion::operators::nn::NNTrait;
 use orion::numbers::FixedTrait;
-use orion::operators::tensor::FP16x16TensorPartialEq;
+use orion::utils::{assert_eq, assert_seq_eq};
 
 #[test]
 #[available_gas(2000000000)]
-fn test_lstm_fp16x16_default_params() {
+fn test_lstm_FP8x23_default_params() {
     let input_0 = input_0::input_0();
     let input_1 = input_1::input_1();
     let input_2 = input_2::input_2();

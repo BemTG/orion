@@ -1014,3 +1014,7 @@ mod lstm_fp16x16_default_params;
 mod lstm_fp16x16_initial_bias;
 mod lstm_fp16x16_batchwise;
 mod lstm_fp16x16_with_peepholes;
+mod lstm_FP8x23_default_params;
+mod lstm_FP8x23_initial_bias;
+mod lstm_FP8x23_batchwise;
+mod lstm_FP8x23_with_peepholes;

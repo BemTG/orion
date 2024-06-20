@@ -312,10 +312,7 @@ class Lstm(RunAll):
 
         make_test([X, R, W], result, func_sig, name, Trait.NN)
 
-    
-    fp16x16_default_params()
-    fp16x16_initial_bias()
-    fp16x16_batchwise()
+
      
 
     @staticmethod
@@ -398,6 +395,295 @@ class Lstm(RunAll):
 
         make_test([X, R, W, B, init_h, init_c, P ], result, func_sig, name, Trait.NN)
 
+    
+
+    fp16x16_default_params()
+    fp16x16_initial_bias()
+    fp16x16_batchwise()
+    fp16x16_with_peepholes()
 
 
+# ---------------------------------------------------------------------------------------------
+        
+    @staticmethod
+    def fp8x23_default_params():
+        X =  np.array([[[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]]]).astype(np.float32)
+        input_size = 2
+        hidden_size = 3
+        weight_scale = 0.1
+        number_of_gates = 4
+
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+
+        lstm = LSTMHelper(X=X, W=W, R=R)
+        Y, Y_h = lstm.step()
+        
+        X = Tensor(Dtype.FP8x23, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP8x23))
+        W = Tensor(Dtype.FP8x23, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP8x23))
+        R = Tensor(Dtype.FP8x23, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP8x23))
+        
+        result = [
+                Tensor(Dtype.FP8x23, Y.shape, to_fp(Y.flatten(), FixedImpl.FP8x23)),
+                Tensor(Dtype.FP8x23, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP8x23))
+                ]
+
+        name = "lstm_FP8x23_default_params"
+        func_sig = "NNTrait::lstm("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, R, W], result, func_sig, name, Trait.NN)
+
+
+
+    @staticmethod
+    def FP8x23_initial_bias(): 
+        X =  np.array([[[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]]).astype(
+            np.float32
+        )
+
+
+        input_size = 3
+        hidden_size = 4
+        weight_scale = 0.1
+        custom_bias = 0.1
+        number_of_gates = 4
+
+        # W = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, input_size)).astype(np.float64), 1)
+        # R = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, hidden_size)).astype(np.float64), 1)
+        # # Adding custom bias
+        # W_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # R_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # B = np.round(np.concatenate((W_B, R_B), axis=1),1)
+
+        
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+
+        W_B = custom_bias * np.ones((1, number_of_gates * hidden_size)).astype(
+            np.float64
+        )
+        R_B = np.zeros((1, number_of_gates * hidden_size)).astype(np.float64)
+        B = np.concatenate((W_B, R_B), axis=1)
+
+       
+
+        
+        gru = LSTMHelper(X=X, W=W, R=R, B=B)
+        Y, Y_h = gru.step()
+        
+        X = Tensor(Dtype.FP8x23, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP8x23))
+        W = Tensor(Dtype.FP8x23, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP8x23))
+        R = Tensor(Dtype.FP8x23, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP8x23))
+        B = Tensor(Dtype.FP8x23, B.shape, to_fp(
+            B.flatten(), FixedImpl.FP8x23))
+        
+        result = [
+                Tensor(Dtype.FP8x23, Y.shape, to_fp(Y.flatten(), FixedImpl.FP8x23)),
+                Tensor(Dtype.FP8x23, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP8x23))
+                ]
+
+        name = "lstm_FP8x23_initial_bias"
+        func_sig = "NNTrait::lstm("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::Some(input_3)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, R, W, B], result, func_sig, name, Trait.NN)
+
+    @staticmethod
+    def FP8x23_batchwise():
+        X =  np.array([[[1.0, 2.0]], [[3.0, 4.0]], [[5.0, 6.0]]]).astype(np.float32)
+        
+        input_size = 2
+        hidden_size = 7
+        weight_scale = 0.3
+        number_of_gates = 4
+        layout = 1
+
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+
+        lstm = LSTMHelper(X=X, W=W, R=R, layout=layout)
+        Y, Y_h = lstm.step()
+        
+        X = Tensor(Dtype.FP8x23, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP8x23))
+        W = Tensor(Dtype.FP8x23, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP8x23))
+        R = Tensor(Dtype.FP8x23, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP8x23))
+        
+        result = [
+                Tensor(Dtype.FP8x23, Y.shape, to_fp(Y.flatten(), FixedImpl.FP8x23)),
+                Tensor(Dtype.FP8x23, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP8x23))
+                ]
+
+        name = "lstm_FP8x23_batchwise"
+        func_sig = "NNTrait::lstm("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(1)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, R, W], result, func_sig, name, Trait.NN)
+
+     
+
+    @staticmethod
+    def FP8x23_with_peepholes(): 
+        X = np.array([[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0]]]).astype(
+            np.float32
+        )
+
+        input_size = 4
+        hidden_size = 3
+        weight_scale = 0.1
+        number_of_gates = 4
+        number_of_peepholes = 3
+        
+
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
+
+        B = np.zeros((1, 2 * number_of_gates * hidden_size)).astype(np.float32)
+        # seq_lens = np.repeat(input.shape[0], input.shape[1]).astype(np.int32)
+        init_h = np.zeros((1, X.shape[1], hidden_size)).astype(np.float32)
+        init_c = np.zeros((1, X.shape[1], hidden_size)).astype(np.float32)
+        P = weight_scale * np.ones((1, number_of_peepholes * hidden_size)).astype(
+            np.float32
+        )
+
+
+        lstm = LSTMHelper(X=X, W=W, R=R, B=B, P=P, initial_c=init_c, initial_h=init_h)
+        Y, Y_h = lstm.step()
+        
+        X = Tensor(Dtype.FP8x23, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP8x23))
+        W = Tensor(Dtype.FP8x23, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP8x23))
+        R = Tensor(Dtype.FP8x23, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP8x23))
+        B = Tensor(Dtype.FP8x23, B.shape, to_fp(
+            B.flatten(), FixedImpl.FP8x23))
+        P = Tensor(Dtype.FP8x23, P.shape, to_fp(
+            P.flatten(), FixedImpl.FP8x23))
+        
+        init_c = Tensor(Dtype.FP8x23, init_c.shape, to_fp(
+            init_c.flatten(), FixedImpl.FP8x23))
+        
+        init_h = Tensor(Dtype.FP8x23, init_h.shape, to_fp(
+            init_h.flatten(), FixedImpl.FP8x23))
+        
+        
+        result = [
+                Tensor(Dtype.FP8x23, Y.shape, to_fp(Y.flatten(), FixedImpl.FP8x23)),
+                Tensor(Dtype.FP8x23, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP8x23))
+                ]
+
+
+        name = "lstm_FP8x23_with_peepholes"
+        func_sig = "NNTrait::lstm("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::Some(input_3)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(input_4)," 
+        func_sig += " Option::Some(input_5)," 
+        func_sig += " Option::Some(input_6)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
+
+        make_test([X, R, W, B, init_h, init_c, P ], result, func_sig, name, Trait.NN)
+
+
+    fp8x23_default_params()
+    FP8x23_initial_bias()
+    FP8x23_batchwise()
+    FP8x23_with_peepholes()
+
+
+
+    
     
