@@ -318,85 +318,85 @@ class Lstm(RunAll):
     fp16x16_batchwise()
      
 
-    # @staticmethod
-    # def fp16x16_with_peepholes(): 
-    #     X = np.array([[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0]]]).astype(
-    #         np.float32
-    #     )
+    @staticmethod
+    def fp16x16_with_peepholes(): 
+        X = np.array([[[1.0, 2.0, 3.0, 4.0], [5.0, 6.0, 7.0, 8.0]]]).astype(
+            np.float32
+        )
 
-    #     input_size = 4
-    #     hidden_size = 3
-    #     weight_scale = 0.1
-    #     number_of_gates = 4
-    #     number_of_peepholes = 3
+        input_size = 4
+        hidden_size = 3
+        weight_scale = 0.1
+        number_of_gates = 4
+        number_of_peepholes = 3
         
 
-    #     W = weight_scale * np.ones(
-    #         (1, number_of_gates * hidden_size, input_size)
-    #     ).astype(np.float64)
-    #     R = weight_scale * np.ones(
-    #         (1, number_of_gates * hidden_size, hidden_size)
-    #     ).astype(np.float64)
+        W = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, number_of_gates * hidden_size, hidden_size)
+        ).astype(np.float64)
 
-    #     B = np.zeros((1, 2 * number_of_gates * hidden_size)).astype(np.float32)
-    #     seq_lens = np.repeat(input.shape[0], input.shape[1]).astype(np.int32)
-    #     init_h = np.zeros((1, input.shape[1], hidden_size)).astype(np.float32)
-    #     init_c = np.zeros((1, input.shape[1], hidden_size)).astype(np.float32)
-    #     P = weight_scale * np.ones((1, number_of_peepholes * hidden_size)).astype(
-    #         np.float32
-    #     )
+        B = np.zeros((1, 2 * number_of_gates * hidden_size)).astype(np.float32)
+        # seq_lens = np.repeat(input.shape[0], input.shape[1]).astype(np.int32)
+        init_h = np.zeros((1, input.shape[1], hidden_size)).astype(np.float32)
+        init_c = np.zeros((1, input.shape[1], hidden_size)).astype(np.float32)
+        P = weight_scale * np.ones((1, number_of_peepholes * hidden_size)).astype(
+            np.float32
+        )
 
 
-    #     lstm = LSTMHelper(X=X, W=W, R=R, B=B, P=P, initial_c=init_c, initial_h=init_h)
-    #     Y, Y_h = lstm.step()
+        lstm = LSTMHelper(X=X, W=W, R=R, B=B, P=P, initial_c=init_c, initial_h=init_h)
+        Y, Y_h = lstm.step()
         
-    #     X = Tensor(Dtype.FP16x16, X.shape, to_fp(
-    #         X.flatten(), FixedImpl.FP16x16))
-    #     W = Tensor(Dtype.FP16x16, W.shape, to_fp(
-    #         W.flatten(), FixedImpl.FP16x16))
-    #     R = Tensor(Dtype.FP16x16, R.shape, to_fp(
-    #         R.flatten(), FixedImpl.FP16x16))
-    #     B = Tensor(Dtype.FP16x16, B.shape, to_fp(
-    #         B.flatten(), FixedImpl.FP16x16))
-    #     P = Tensor(Dtype.FP16x16, P.shape, to_fp(
-    #         P.flatten(), FixedImpl.FP16x16))
+        X = Tensor(Dtype.FP16x16, X.shape, to_fp(
+            X.flatten(), FixedImpl.FP16x16))
+        W = Tensor(Dtype.FP16x16, W.shape, to_fp(
+            W.flatten(), FixedImpl.FP16x16))
+        R = Tensor(Dtype.FP16x16, R.shape, to_fp(
+            R.flatten(), FixedImpl.FP16x16))
+        B = Tensor(Dtype.FP16x16, B.shape, to_fp(
+            B.flatten(), FixedImpl.FP16x16))
+        P = Tensor(Dtype.FP16x16, P.shape, to_fp(
+            P.flatten(), FixedImpl.FP16x16))
         
-    #     init_c = Tensor(Dtype.FP16x16, init_c.shape, to_fp(
-    #         init_c.flatten(), FixedImpl.FP16x16))
+        init_c = Tensor(Dtype.FP16x16, init_c.shape, to_fp(
+            init_c.flatten(), FixedImpl.FP16x16))
         
-    #     init_h = Tensor(Dtype.FP16x16, init_h.shape, to_fp(
-    #         init_h.flatten(), FixedImpl.FP16x16))
+        init_h = Tensor(Dtype.FP16x16, init_h.shape, to_fp(
+            init_h.flatten(), FixedImpl.FP16x16))
         
         
-    #     result = [
-    #             Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
-    #             Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
-    #             ]
+        result = [
+                Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
+                Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
+                ]
 
 
-    #     name = "lstm_fp16x16_with_peepholes"
-    #     func_sig = "NNTrait::lstm("
-    #     func_sig += " @input_0,"
-    #     func_sig += " @input_1,"
-    #     func_sig += " @input_2,"
-    #     func_sig += " Option::Some(input_3)," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::Some(input_4)," 
-    #     func_sig += " Option::Some(input_5)," 
-    #     func_sig += " Option::Some(input_6)," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::None(())," 
-    #     func_sig += " Option::Some(2) " 
-    #     func_sig += " ) " 
+        name = "lstm_fp16x16_with_peepholes"
+        func_sig = "NNTrait::lstm("
+        func_sig += " @input_0,"
+        func_sig += " @input_1,"
+        func_sig += " @input_2,"
+        func_sig += " Option::Some(input_3)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(input_4)," 
+        func_sig += " Option::Some(input_5)," 
+        func_sig += " Option::Some(input_6)," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::None(())," 
+        func_sig += " Option::Some(2) " 
+        func_sig += " ) " 
 
-    #     make_test([X, W, R, B, init_h, init_c, P ], result, func_sig, name, Trait.NN)
+        make_test([X, R, W, B, init_h, init_c, P ], result, func_sig, name, Trait.NN)
 
 
 
