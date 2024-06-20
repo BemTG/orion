@@ -340,8 +340,8 @@ fn step<
         // let mut e3 = o + p_o + C;
         o = f(o + p_o + C);
 
-        'the oooooo'.print();
-        (o).print();
+        'the iiiiiiiiiiii_______'.print();
+        (i).print();
 
         H = @(o * h(@C));
 
