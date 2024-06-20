@@ -341,7 +341,7 @@ fn step<
         o = f(o + p_o + C);
 
         'the oooooo'.print();
-        (*o.data.at[0]).print();
+        (o.at[0]).print();
 
         H = @(o * h(@C));
 
