@@ -349,7 +349,7 @@ fn step<
         'checkp22bb'.print();
         
         
-        let mut C = (f * *C_t) + (i * c);
+        let mut C = f * *C_t + i * c;
         'the capCCCCCCCCCCCCC'.print();
         (*C.data.at(0)).print();
         (*C.data.at(1)).print();
@@ -358,7 +358,7 @@ fn step<
         'the ooooooooo'.print();
         (*o.data.at(0)).print();
         (*o.data.at(1)).print();
-        o = f(o + p_o + C);
+        o = f(o + p_o * C);
         'the ooooooooo2222'.print();
         (*o.data.at(0)).print();
         (*o.data.at(1)).print();
