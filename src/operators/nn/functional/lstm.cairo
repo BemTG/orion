@@ -279,7 +279,7 @@ fn step<
     let mut h_list: Array<Tensor<T>> = array![];
     
     let (mut p_i, mut p_o, mut p_f) = {
-        let p_split = split_tensor(P, 3, 0);
+        let mut p_split = split_tensor(P, 3, 0);
         (*p_split[0], *p_split[1], *p_split[2])
     };
 
@@ -305,7 +305,7 @@ fn step<
     (X_segment).len().print();
     let mut z = 0;
 
-    
+
     while z < (X_segment).len() {
         'checkp20'.print();
         
@@ -313,7 +313,7 @@ fn step<
 
         'checkp21'.print();
         let (mut b_i, mut b_o) = {
-            let b_split = split_tensor(B, 2, 0);
+            let mut b_split = split_tensor(B, 2, 0);
             (*b_split[0], *b_split[1])
         };
 
@@ -324,7 +324,7 @@ fn step<
             + (b_i + b_o) );
 
         let (mut i, mut o, mut f, mut c) = {
-                let gates_split = split_tensor(@gates, 4, gates.shape.len() - 1);
+                let mut gates_split = split_tensor(@gates, 4, gates.shape.len() - 1);
                 (*gates_split.at(0), *gates_split.at(1), *gates_split.at(2), *gates_split.at(3))
             };
 
@@ -342,6 +342,9 @@ fn step<
 
         // let mut e3 = o + p_o + C;
         o = f(o + p_o + C);
+
+        'the oooooo'.print();
+        o.print();
 
         H = @(o * h(@C));
 
