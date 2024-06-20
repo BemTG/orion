@@ -327,11 +327,15 @@ fn step<
 
 
         'the iiiii'.print();
-        i.data.at(0).print();
+        (*i.data.at(0)).print();
+        (*i.data.at(1)).print();
 
         'checkp22'.print();
         // let mut e1 = (i + p_i) + *C_t;
         i = f(i + p_i + *C_t);
+        'the iiiii2222222'.print();
+        (*i.data.at(0)).print();
+        (*i.data.at(1)).print();
         'checkp22aa'.print();
         // let mut e2 = (f + p_f) + *C_t;
         f = f(f + p_f + *C_t);
@@ -411,7 +415,7 @@ fn step<
     output
 }
 
-fn concat_tensors_in_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +Copy<T>, +Drop<T>>(
+fn concat_tensors_in_array<T, MAG, +TensorTrait<T>, +NumberTrait<T, MAG>, +PrintTrait<T>, +Copy<T>, +Drop<T>>(
     tensor_list: Array<Tensor<T>>
 ) -> Tensor<T> {
     if tensor_list.len() == 1 {
@@ -444,7 +448,7 @@ fn f<
     impl TDiv: Div<T>,
     impl TCopy: Copy<T>,
     impl TDrop: Drop<T>,
-    +PrintTrait<T>,
+    impl TPrint: PrintTrait<T>
 >(
     mut z: Tensor<T>
 ) -> Tensor<T> {
@@ -476,6 +480,7 @@ fn h<
     +NumberTrait<T, MAG>,
     +Copy<T>,
     +Drop<T>,
+    +PrintTrait<T>,
 >(
     mut x: @Tensor<T>
 ) -> Tensor<T> {
@@ -489,6 +494,7 @@ fn g<
     +NumberTrait<T, MAG>,
     +Copy<T>,
     +Drop<T>,
+    +PrintTrait<T>,
 >(
     mut x: @Tensor<T>
 ) -> Tensor<T> {
@@ -515,6 +521,7 @@ fn split_tensor<
     +Copy<T>,
     +Drop<T>,
     +Rem<T>,
+    +PrintTrait<T>,
 >(
     mut tensor: @Tensor<T>,
     num_outputs: usize,
