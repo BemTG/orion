@@ -325,6 +325,10 @@ fn step<
                 (*gates_split.at(0), *gates_split.at(1), *gates_split.at(2), *gates_split.at(3))
             };
 
+
+        'the iiiii'.print();
+        i.data.at(0).print();
+
         'checkp22'.print();
         // let mut e1 = (i + p_i) + *C_t;
         i = f(i + p_i + *C_t);
@@ -335,13 +339,11 @@ fn step<
         'checkp22bb'.print();
         
         
-        let mut C = f * *C_t + i * c;
+        let mut C = (f * *C_t) + (i * c);
 
         // let mut e3 = o + p_o + C;
         o = f(o + p_o + C);
 
-        'the iiiiiiiiiiii_______'.print();
-        (i).print();
 
         H = @(o * h(@C));
 
