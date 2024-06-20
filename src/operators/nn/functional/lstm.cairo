@@ -38,6 +38,7 @@ fn lstm<
     +Div<T>,
     +AddEq<T>,
     +PrintTrait<T>,
+    +PrintTrait<Tensor<T>>,
     +PartialOrd<T>,
     +PartialEq<T>,
     +TryInto<T, usize>,
