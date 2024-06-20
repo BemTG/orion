@@ -355,10 +355,17 @@ fn step<
         (*C.data.at(1)).print();
 
         // let mut e3 = o + p_o + C;
-        o = f(o + p_o + C);
-        'the oooooooooooooooooo'.print();
+        'the ooooooooo'.print();
         (*o.data.at(0)).print();
         (*o.data.at(1)).print();
+        o = f(o + p_o + C);
+        'the ooooooooo2222'.print();
+        (*o.data.at(0)).print();
+        (*o.data.at(1)).print();
+
+        'the ppppoooo22'.print();
+        (*p_o.data.at(0)).print();
+        (*p_o.data.at(1)).print();
 
 
 
