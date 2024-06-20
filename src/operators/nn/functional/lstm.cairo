@@ -228,6 +228,7 @@ fn step<
     +Div<T>,
     +AddEq<T>,
     +PrintTrait<T>,
+    +PrintTrait<Tensor<T>>,
     +PartialOrd<T>,
     +PartialEq<T>,
     +TryInto<T, usize>,
@@ -282,9 +283,6 @@ fn step<
         let mut p_split = split_tensor(P, 3, 0);
         (*p_split[0], *p_split[1], *p_split[2])
     };
-
-
-
 
 
     let w_transposed = W.transpose(axes: reverse_axes(*W.shape));
