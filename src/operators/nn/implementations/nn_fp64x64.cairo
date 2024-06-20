@@ -1,6 +1,7 @@
 use orion::operators::tensor::core::Tensor;
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
+use core::debug::PrintTrait;
 use orion::numbers::fixed_point::implementations::fp64x64::core::{FP64x64, FP64x64Impl};
 use orion::operators::tensor::implementations::tensor_fp64x64::{
     FP64x64Tensor, FP64x64TensorDiv, FP64x64TensorAdd

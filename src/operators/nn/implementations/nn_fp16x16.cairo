@@ -1,4 +1,5 @@
 use orion::operators::tensor::core::Tensor;
+use core::debug::PrintTrait;
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
 use orion::numbers::fixed_point::implementations::fp16x16::core::FP16x16;
