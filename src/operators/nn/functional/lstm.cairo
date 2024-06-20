@@ -339,7 +339,13 @@ fn step<
         'checkp22aa'.print();
         // let mut e2 = (f + p_f) + *C_t;
         f = f(f + p_f + *C_t);
+        'the fffffff222'.print();
+        (*f.data.at(0)).print();
+        (*f.data.at(1)).print();
         c = g(@c);
+        'the cccc222'.print();
+        (*c.data.at(0)).print();
+        (*c.data.at(1)).print();
         'checkp22bb'.print();
         
         
