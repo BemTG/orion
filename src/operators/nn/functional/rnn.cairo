@@ -237,10 +237,7 @@ fn step<
     
   
     'checkp21'.print();
-        let (mut b_i, mut b_o) = {
-            let mut b_split = split_tensor(B, 2, 0);
-            (*b_split[0], *b_split[1])
-        };
+        
 
     let w_transposed = W.transpose(axes: reverse_axes(*W.shape));
     let r_transposed = R.transpose(axes: reverse_axes(*R.shape));
@@ -265,7 +262,10 @@ fn step<
         
 
 
-        
+        let (mut b_i, mut b_o) = {
+            let mut b_split = split_tensor(B, 2, 0);
+            (*b_split[0], *b_split[1])
+        };
        
 
         let mut H = f_tanh (

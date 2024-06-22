@@ -214,48 +214,45 @@ class Rnn(RunAll):
 
     @staticmethod
     def rnn_fp16x16_seq_length():
-        X =  np.array(
-            [
-                [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]],
-                [[10.0, 11.0, 12.0], [13.0, 14.0, 15.0], [16.0, 17.0, 18.0]],
-            ]
-        ).astype(np.float32)
+        X = np.array([
+            [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]],
+            [[10.0, 11.0, 12.0], [13.0, 14.0, 15.0], [16.0, 17.0, 18.0]],
+                            ]
+                        ).astype(np.float32)
+
         
+        # X =  np.array([[[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]]).astype(
+        #     np.float32
+        # )
+
+
         input_size = 3
         hidden_size = 5
+        custom_bias = 0.1
         weight_scale = 0.1
 
-        W = np.random.uniform(low=0.0, high=0.2, size=(1, hidden_size, input_size)).astype(np.float32)
-        R = np.random.uniform(low=0.0, high=0.2, size=(1, hidden_size, hidden_size)).astype(np.float32)
-        
-
+        # W = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, input_size)).astype(np.float64), 1)
+        # R = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size, hidden_size)).astype(np.float64), 1)
         # # Adding custom bias
-        # W_B = np.random.randn(1, hidden_size).astype(np.float32)
-        # R_B = np.random.randn(1, hidden_size).astype(np.float32)
-        # B = np.concatenate((W_B, R_B), axis=1)
+        # W_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # R_B = np.round(np.random.uniform(0.05, 0.1, (1, number_of_gates * hidden_size)).astype(np.float64),1)
+        # B = np.round(np.concatenate((W_B, R_B), axis=1),1)
 
-        # Adding custom bias
-        W_B = np.random.uniform(low=0.0, high=0.2, size=(1, hidden_size)).astype(np.float32)
-        R_B = np.random.uniform(low=0.0, high=0.2, size=(1, hidden_size)).astype(np.float32)
+        
+        W = weight_scale * np.ones(
+            (1,  hidden_size, input_size)
+        ).astype(np.float64)
+        R = weight_scale * np.ones(
+            (1, hidden_size, hidden_size)
+        ).astype(np.float64)
+
+        W_B = custom_bias * np.ones((1, hidden_size)).astype(
+            np.float64
+        )
+        R_B = np.zeros((1,hidden_size)).astype(np.float64)
         B = np.concatenate((W_B, R_B), axis=1)
 
-        # W = weight_scale * np.ones(
-        #     (1,  hidden_size, input_size)
-        # ).astype(np.float64)
-        # R = weight_scale * np.ones(
-        #     (1, hidden_size, hidden_size)
-        # ).astype(np.float64)
-
-        # W_B = weight_scale * np.ones((1, hidden_size)).astype(
-        #     np.float64
-        # )
-        # R_B = np.zeros((1,hidden_size)).astype(np.float64)
-        # B = np.concatenate((W_B, R_B), axis=1)
-
-        # W_B = np.random.uniform(low=0.0, high=0.1, size=(1, hidden_size)).astype(np.float32)
-        # R_B = np.zeros((1,hidden_size)).astype(np.float64)
-        # B = np.concatenate((W_B, R_B), axis=1)
-
+        
         rnn = RNNHelper(X=X, W=W, R=R, B=B)
         Y, Y_h = rnn.step()
         
@@ -267,7 +264,7 @@ class Rnn(RunAll):
             R.flatten(), FixedImpl.FP16x16))
         B = Tensor(Dtype.FP16x16, B.shape, to_fp(
             B.flatten(), FixedImpl.FP16x16))
-        
+
         result = [
                 Tensor(Dtype.FP16x16, Y.shape, to_fp(Y.flatten(), FixedImpl.FP16x16)),
                 Tensor(Dtype.FP16x16, Y_h.shape, to_fp(Y_h.flatten(), FixedImpl.FP16x16))
