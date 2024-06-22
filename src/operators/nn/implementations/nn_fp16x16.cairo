@@ -130,6 +130,20 @@ impl FP16x16NN of NNTrait<FP16x16> {
         )
     }
 
+    fn conv(
+        X: @Tensor<FP16x16>,
+        W: @Tensor<FP16x16>,
+        B: Option<Span<FP16x16>>,
+        auto_pad: Option<functional::conv::AUTO_PAD>,
+        dilations: Option<Span<usize>>,
+        group: Option<usize>,
+        kernel_shape: Option<Span<usize>>,
+        pads: Option<Span<usize>>,
+        strides: Option<Span<usize>>,
+    ) -> Tensor<FP16x16> {
+        functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
+    }
+
     fn rnn(
      X: @Tensor<FP16x16>,
      R: @Tensor<FP16x16>,
