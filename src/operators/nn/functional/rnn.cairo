@@ -255,8 +255,6 @@ fn step<
     'checkp19'.print();
     (X_segment).len().print();
     let mut z = 0;
-
-
     while z < (X_segment).len() {
         'checkp20'.print();
         
@@ -291,7 +289,7 @@ fn step<
     h_list.len().print();
 
     'checkp29'.print();
-    // let mut concatenated = h_list.at(0);
+    let mut concatenated = h_list.at(0);
  
     if h_list.len() > 1 {
         concatenated = @concat_tensors_in_array(h_list);
