@@ -289,11 +289,11 @@ fn step<
     h_list.len().print();
 
     'checkp29'.print();
-    let mut concatenated = @((h_list).at(0));
- 
-    if h_list.len() > 1 {
-        concatenated = @concat_tensors_in_array(h_list);
-    } 
+    let mut concatenated = if h_list.len() > 1 {
+        concat_tensors_in_array(h_list)
+    } else {
+        *h_list[0]
+    };
     'checkp30'.print();
 
     let mut output: Array<Tensor<T>> = array![];
