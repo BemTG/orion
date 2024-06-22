@@ -829,14 +829,14 @@ trait NNTrait<T> {
     initial_h: Option<Tensor<T>>,
     activation_alpha: Option<Array<Tensor<T>>>,
     activation_beta: Option<Array<Tensor<T>>>,
-    activations: Option<ACTIVATIONS>,
+    activations: Option<functional::rnn::ACTIVATIONS>,
     clip: Option<T>,
-    direction: Option<DIRECTION>,
+    direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
      hidden_size: Option<usize>,
      layout: Option<usize>,
      linear_before_reset: Option<usize>,
     n_outputs: Option<usize>
-    ) -> Array<Tensor<T>> 
+    ) -> Array<Tensor<T>>  ;
     ///
     /// # NNTrait::conv
     /// 
