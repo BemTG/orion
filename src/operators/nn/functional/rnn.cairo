@@ -232,6 +232,11 @@ fn step<
     );
 
     'checkp14'.print();
+    let (mut b_i, mut b_o) = {
+            let mut b_split = split_tensor(B, 2, 0);
+            (*b_split[0], *b_split[1])
+        };
+
 
     let mut h_list: Array<Tensor<T>> = array![];
     
@@ -260,11 +265,6 @@ fn step<
         
 
 
-        let (mut b_i, mut b_o) = {
-            let mut b_split = split_tensor(B, 2, 0);
-            (*b_split[0], *b_split[1])
-        };
-       
 
         let mut H = f_tanh (
             @( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
@@ -272,7 +272,11 @@ fn step<
             + (b_i + b_o) )
         );
 
-        
+        'the X seg'.print();
+        (X_segment[z].shape).len().print();
+        (*(*X_segment[z].shape).at(0)).print();
+        (*(*X_segment[z].shape).at(1)).print();
+        (*(*X_segment[z].shape).at(2)).print();
 
 
         h_list.append(H);
