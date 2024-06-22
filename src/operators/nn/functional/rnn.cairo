@@ -292,7 +292,7 @@ fn step<
     let mut concatenated = *h_list.at(0);
  
     if h_list.len() > 1 {
-        concatenated = @concat_tensors_in_array(h_list);
+        concatenated = concat_tensors_in_array(h_list);
     } 
     'checkp30'.print();
 
