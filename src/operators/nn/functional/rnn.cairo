@@ -287,6 +287,9 @@ fn step<
         z += 1;
     };
 
+    'the len of h'.print();
+    h_list.len().print();
+
     'checkp29'.print();
     let mut concatenated = h_list.at(0);
  
