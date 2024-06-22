@@ -250,6 +250,8 @@ fn step<
     'checkp17'.print();
 
     let mut H_t = H_0;
+
+    let mut H = H_0;
   
 
     'checkp18'.print();
