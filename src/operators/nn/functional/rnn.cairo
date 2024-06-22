@@ -292,7 +292,7 @@ fn step<
 
 
         h_list.append(*H);
-        H_t = H.unsqueeze(axes: array![0].span());
+        H_t = @H.unsqueeze(axes: array![0].span());
         z += 1;
     };
 
