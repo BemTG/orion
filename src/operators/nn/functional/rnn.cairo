@@ -274,11 +274,6 @@ fn step<
 
         
 
-    
-
-
-      
-
 
         h_list.append(H);
         H_t = @H;
@@ -287,6 +282,16 @@ fn step<
 
     'the len of h'.print();
     h_list.len().print();
+
+    'the HHHHHH1'.print();
+    h_list.at(0).shape.at(0).print();
+    h_list.at(0).shape.at(1).print();
+    h_list.at(0).shape.at(2).print();
+
+    'the HHHHHH2'.print();
+    h_list.at(1).shape.at(0).print();
+    h_list.at(1).shape.at(1).print();
+    h_list.at(1).shape.at(2).print();
 
     'checkp29'.print();
     let mut concatenated = if h_list.len() > 1 {
