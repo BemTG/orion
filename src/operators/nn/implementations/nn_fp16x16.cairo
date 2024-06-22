@@ -3,7 +3,7 @@ use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
 use orion::numbers::fixed_point::implementations::fp16x16::core::FP16x16;
 use orion::operators::tensor::implementations::tensor_fp16x16::{
-    FP16x16Tensor, FP16x16TensorDiv, FP16x16TensorAdd
+    FP16x16Tensor, FP16x16TensorDiv, FP16x16TensorAdd, FP16x16TensorSub, FP16x16TensorMul
 };
 use orion::numbers::fixed_point::implementations::fp16x16wide::core::{
     FP16x16WImpl, FP16x16WTryIntoFP16x16, FP16x16W, FP16x16IntoFP16x16W
