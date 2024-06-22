@@ -9,7 +9,6 @@ use orion::operators::vec::{NullableVec, NullableVecImpl};
 use orion::operators::tensor::core::{stride};
 
 
-
 #[derive(Copy, Drop)]
 enum ACTIVATIONS {
     SIGMOID,

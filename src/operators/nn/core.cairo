@@ -829,7 +829,7 @@ trait NNTrait<T> {
     initial_h: Option<Tensor<T>>,
     activation_alpha: Option<Array<Tensor<T>>>,
     activation_beta: Option<Array<Tensor<T>>>,
-    activations: Option<functional::rnn::ACTIVATIONS>,
+    activations: Option<orion::operators::nn::functional::rnn::ACTIVATIONS>,  
     clip: Option<T>,
     direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
      hidden_size: Option<usize>,

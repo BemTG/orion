@@ -149,7 +149,7 @@ impl FP8x23NN of NNTrait<FP8x23> {
     initial_h: Option<Tensor<FP8x23>>,
     activation_alpha: Option<Array<Tensor<FP8x23>>>,
     activation_beta: Option<Array<Tensor<FP8x23>>>,
-    activations: Option<functional::rnn::ACTIVATIONS>,
+    activations: Option<orion::operators::nn::functional::rnn::ACTIVATIONS>,  
     clip: Option<FP8x23>,
     direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
      hidden_size: Option<usize>,
