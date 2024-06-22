@@ -285,7 +285,7 @@ fn step<
         );
 
         'the hthththt'.print();
-        H_t.shape.len().print();
+        ((*H_t.shape).len()).print();
         'the ht shapr at0'.print();
         (*(*H_t.shape).at(0)).print();
         (*(*H_t.shape).at(1)).print();
