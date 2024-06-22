@@ -266,8 +266,8 @@ fn step<
     (*(*X_segment.at(0).shape).at(1)).print();
     // (*(*X_segment.at(0).shape).at(2)).print();
 
-    (*(*X_segment.at(0).shape).at(0)).print();
-    (*(*X_segment.at(0).shape).at(1)).print();
+    (*(*X_segment.at(1).shape).at(0)).print();
+    (*(*X_segment.at(1).shape).at(1)).print();
     // (*(*X_segment.at(0).shape).at(2)).print();
 
     let mut z = 0;
