@@ -147,7 +147,7 @@ fn rnn<
             };
 
             initial_h = Option::Some(TensorTrait::<T>::new(
-                shape: array![batch_size, hidden_size.unwrap()].span(),
+                shape: array![1, batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             ))
         };
@@ -278,8 +278,8 @@ fn step<
 
 
 
-        H = f_tanh (
-            ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
+        H = @f_tanh (
+            @( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
             + ( H_t.matmul(@r_transposed).unsqueeze(axes: array![0].span()) )
             + (b_i + b_o) )
         );
