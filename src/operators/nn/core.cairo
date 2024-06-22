@@ -817,6 +817,26 @@ trait NNTrait<T> {
         transA: bool,
         transB: bool
     ) -> Tensor<T>;
+    /// # NNTrait::rnn
+    /// 
+    ///
+    fn rnn(
+     X: @Tensor<T>,
+     R: @Tensor<T>,
+     W: @Tensor<T>,
+     B: Option<Tensor<T>>,
+     sequence_length: Option<Tensor<T>>,
+    initial_h: Option<Tensor<T>>,
+    activation_alpha: Option<Array<Tensor<T>>>,
+    activation_beta: Option<Array<Tensor<T>>>,
+    activations: Option<ACTIVATIONS>,
+    clip: Option<T>,
+    direction: Option<DIRECTION>,
+     hidden_size: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<T>> 
     ///
     /// # NNTrait::conv
     /// 

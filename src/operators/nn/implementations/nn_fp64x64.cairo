@@ -137,4 +137,27 @@ impl FP64x64NN of NNTrait<FP64x64> {
     ) -> Tensor<FP64x64> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn rnn(
+     X: @Tensor<FP64x64>,
+     R: @Tensor<FP64x64>,
+     W: @Tensor<FP64x64>,
+     B: Option<Tensor<FP64x64>>,
+     sequence_length: Option<Tensor<FP64x64>>,
+    initial_h: Option<Tensor<FP64x64>>,
+    initial_c: Option<Tensor<FP64x64>>,
+     P: Option<Tensor<FP64x64>>,
+    activation_alpha: Option<Array<Tensor<FP64x64>>>,
+    activation_beta: Option<Array<Tensor<FP64x64>>>,
+    activations: Option<functional::rnn::ACTIVATIONS>,
+    clip: Option<FP64x64>,
+    direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<FP64x64>> {
+    panic(array!['not supported!'])
+}
 }

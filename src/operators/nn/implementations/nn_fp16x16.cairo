@@ -130,17 +130,27 @@ impl FP16x16NN of NNTrait<FP16x16> {
         )
     }
 
-    fn conv(
-        X: @Tensor<FP16x16>,
-        W: @Tensor<FP16x16>,
-        B: Option<Span<FP16x16>>,
-        auto_pad: Option<functional::conv::AUTO_PAD>,
-        dilations: Option<Span<usize>>,
-        group: Option<usize>,
-        kernel_shape: Option<Span<usize>>,
-        pads: Option<Span<usize>>,
-        strides: Option<Span<usize>>,
-    ) -> Tensor<FP16x16> {
-        functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
-    }
+    fn rnn(
+     X: @Tensor<FP16x16>,
+     R: @Tensor<FP16x16>,
+     W: @Tensor<FP16x16>,
+     B: Option<Tensor<FP16x16>>,
+     sequence_length: Option<Tensor<FP16x16>>,
+    initial_h: Option<Tensor<FP16x16>>,
+    initial_c: Option<Tensor<FP16x16>>,
+     P: Option<Tensor<FP16x16>>,
+    activation_alpha: Option<Array<Tensor<FP16x16>>>,
+    activation_beta: Option<Array<Tensor<FP16x16>>>,
+    activations: Option<functional::rnn::ACTIVATIONS>,
+    clip: Option<FP16x16>,
+    direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<FP16x16>> {
+    functional::rnn::rnn(X,  R, W, B, sequence_length, initial_h, activation_alpha, activation_beta, 
+    activations, clip, direction, hidden_size,  layout, linear_before_reset, n_outputs)
+}
 }

@@ -130,4 +130,27 @@ impl I32NN of NNTrait<i32> {
     ) -> Tensor<i32> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn rnn(
+     X: @Tensor<i32>,
+     R: @Tensor<i32>,
+     W: @Tensor<i32>,
+     B: Option<Tensor<i32>>,
+     sequence_length: Option<Tensor<i32>>,
+    initial_h: Option<Tensor<i32>>,
+    initial_c: Option<Tensor<i32>>,
+     P: Option<Tensor<i32>>,
+    activation_alpha: Option<Array<Tensor<i32>>>,
+    activation_beta: Option<Array<Tensor<i32>>>,
+    activations: Option<functional::rnn::ACTIVATIONS>,
+    clip: Option<i32>,
+    direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<i32>> {
+    panic(array!['not supported!'])
+}
 }
