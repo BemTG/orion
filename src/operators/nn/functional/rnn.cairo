@@ -273,10 +273,9 @@ fn step<
         );
 
         'the X seg'.print();
-        (X_segment[z].shape).len().print();
-        ((X_segment[z].shape).at(0)).print();
-        ((X_segment[z].shape).at(1)).print();
-        ((X_segment[z].shape).at(2)).print();
+        (X_segment[z].shape.at(0)).print();
+        (X_segment[z].shape.at(1)).print();
+        (X_segment[z].shape.at(2)).print();
 
 
         h_list.append(H);
