@@ -147,7 +147,7 @@ fn rnn<
             };
 
             initial_h = Option::Some(TensorTrait::<T>::new(
-                shape: array![1, batch_size, hidden_size.unwrap()].span(),
+                shape: array![ batch_size, hidden_size.unwrap()].span(),
                 data: h_data_vals.span()
             ))
         };
@@ -284,7 +284,12 @@ fn step<
             + (b_i + b_o) )
         );
 
-        
+        'the hthththt'.print();
+        H_t.shape.len().print();
+        'the ht shapr at0'.print();
+        (*(*H_t.shape).at(0)).print();
+        (*(*H_t.shape).at(1)).print();
+
 
         h_list.append(*H);
         H_t = H;
