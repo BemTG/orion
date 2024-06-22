@@ -257,8 +257,19 @@ fn step<
     (*(*X).shape[0]).print();
 
     let X_segment = split_tensor(X, *(*X).shape[0], 0);
+
     'checkp19'.print();
     (X_segment).len().print();
+    'the X seg'.print();
+
+    (*(*X_segment.at(0).shape).at(0)).print();
+    (*(*X_segment.at(0).shape).at(1)).print();
+    (*(*X_segment.at(0).shape).at(2)).print();
+
+    (*(*X_segment.at(0).shape).at(0)).print();
+    (*(*X_segment.at(0).shape).at(1)).print();
+    (*(*X_segment.at(0).shape).at(2)).print();
+
     let mut z = 0;
     while z < (X_segment).len() {
         'checkp20'.print();
@@ -272,11 +283,7 @@ fn step<
             + (b_i + b_o) )
         );
 
-        'the X seg'.print();
-        (X_segment[z].shape.at(0)).print();
-        (X_segment[z].shape.at(1)).print();
-        (X_segment[z].shape.at(2)).print();
-
+        
 
         h_list.append(H);
         H_t = @H;
