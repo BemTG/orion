@@ -248,7 +248,7 @@ fn step<
     let r_transposed = R.transpose(axes: reverse_axes(*R.shape));
 
     'r transposed len'.print();
-    (*r_transposed.shape).len().print();
+    ((r_transposed.shape).len()).print();
 
     'checkp17'.print();
 
