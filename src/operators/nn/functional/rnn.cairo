@@ -300,7 +300,7 @@ fn step<
 
          
 
-       let mut C2 =( ( H_t.matmul(@r_transposed.squeeze(axes: Option::Some(array![2].span())))).unsqueeze(axes: array![0].span()) );
+       let mut C2 =( ( H_t.matmul(@r_transposed.unsqueeze(axes: array![2].span()))).unsqueeze(axes: array![0].span()) );
 
 
         'C2 shapelen'.print();
