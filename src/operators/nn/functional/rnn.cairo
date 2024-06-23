@@ -276,13 +276,11 @@ fn step<
         'checkp20'.print();
         
 
-
-
-        H = @f_tanh (
-            @( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
+        let mut C = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
             + ( H_t.matmul(@r_transposed).unsqueeze(axes: array![0].span()) )
-            + (b_i + b_o) )
-        );
+            + (b_i + b_o) );
+
+        H = @f_tanh (@C);
 
         'the hthththt'.print();
         ((*H_t.shape).len()).print();
@@ -292,7 +290,7 @@ fn step<
 
 
         h_list.append(*H);
-        H_t = @H.squeeze(axes: Option::None(()));
+        H_t = H;
         z += 1;
     };
 
