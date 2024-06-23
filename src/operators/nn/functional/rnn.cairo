@@ -324,7 +324,7 @@ fn step<
 
 
         h_list.append(*H);
-        H_t = H;
+        H_t = H.squeeze(axes: Option::None(()));
         z += 1;
     };
 
