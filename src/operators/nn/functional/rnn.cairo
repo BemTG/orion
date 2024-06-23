@@ -274,6 +274,36 @@ fn step<
     let mut z = 0;
     while z < (X_segment).len() {
         'checkp20'.print();
+
+         let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) );
+
+        let mut C2 =(H_t.unsqueeze(axes: array![0].span()).matmul(@r_transposed) );
+
+           
+        let mut C3 =  (b_i + b_o) ;
+
+
+        'C1 shapelen'.print();
+        ((C1.shape).len()).print();
+        'C1 shape at0'.print();
+        (*(C1.shape).at(0)).print();
+        (*(C1.shape).at(1)).print();
+        (*(C1.shape).at(2)).print();
+
+        'C2 shapelen'.print();
+        ((C2.shape).len()).print();
+        'C2 shape at0'.print();
+        (*(C2.shape).at(0)).print();
+        (*(C2.shape).at(1)).print();
+        (*(C2.shape).at(2)).print();
+
+        'C3 shapelen'.print();
+        ((C3.shape).len()).print();
+        'C3 shape at0'.print();
+        (*(C3.shape).at(0)).print();
+        // (*(C3.shape).at(1)).print();
+
+
         
 
 
