@@ -292,8 +292,13 @@ fn step<
         (*(C3.shape).at(0)).print();
         // (*(C3.shape).at(1)).print();
 
+         let mut shape = ArrayTrait::<usize>::new();
+        let mut data = ArrayTrait::<i32>::new();
+        data.append(2);
+        let position = TensorTrait::<i32>::new(shape.span(), data.span());
 
-       let mut C2 =( ( H_t.matmul(@r_transposed.squeeze(axes: Option::Some(2, false)))).unsqueeze(axes: array![0].span()) );
+
+       let mut C2 =( ( H_t.matmul(@r_transposed.squeeze(axes: Option::Some(position)))).unsqueeze(axes: array![0].span()) );
 
 
         'C2 shapelen'.print();
@@ -305,7 +310,7 @@ fn step<
 
         
 
-
+       
         
 
 
