@@ -305,7 +305,7 @@ fn step<
 
 
 
-        H = @f_tanh(C1 + C2 + C3);
+        H = @f_tanh(@C1 + @C2 + @C3);
 
         'the hthththt'.print();
         ((*H_t.shape).len()).print();
