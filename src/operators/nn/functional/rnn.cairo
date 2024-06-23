@@ -303,7 +303,7 @@ fn step<
         (*(C2.shape).at(2)).print();
 
 
-        let mut C3 =  C1 + C3 ;
+        let mut C3 =  C1 + C2;
         'C3 shapelen'.print();
         ((C3.shape).len()).print();
         'C3 shape at0'.print();
