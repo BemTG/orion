@@ -281,7 +281,7 @@ fn step<
     while z < (X_segment).len() {
         'checkp20'.print();
 
-         let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) ) + ( ( H_t.matmul(@r_transposed)));
+         let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) ) + ( ( H_t.matmul(@r_transposed))) + b_i + b_o;
          'C1 shapelen'.print();
         ((C1.shape).len()).print();
         'C1 shape at0'.print();
