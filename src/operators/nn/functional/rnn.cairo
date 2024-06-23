@@ -283,6 +283,11 @@ fn step<
            
         let mut C3 =  (b_i + b_o) ;
 
+        H = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) )+
+            (H_t.unsqueeze(axes: array![0].span()).matmul(@r_transposed) ) +
+            (b_i + b_o) ;
+
+
         'C1 shapelen'.print();
         ((C1.shape).len()).print();
         'C1 shape at0'.print();
@@ -305,7 +310,7 @@ fn step<
 
 
 
-        H = @f_tanh(@(C1 + C2 + C3));
+        H = @f_tanh(@(H));
 
         'the hthththt'.print();
         ((*H_t.shape).len()).print();
