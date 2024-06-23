@@ -247,6 +247,9 @@ fn step<
     let w_transposed = W.transpose(axes: reverse_axes(*W.shape));
     let r_transposed = R.transpose(axes: reverse_axes(*R.shape));
 
+    'r transposed len'.print();
+    (*r_transposed.shape).len().print();
+
     'checkp17'.print();
 
     let mut H_t = H_0;
