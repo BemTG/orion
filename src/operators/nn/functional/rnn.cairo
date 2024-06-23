@@ -299,7 +299,7 @@ fn step<
         ((C3.shape).len()).print();
         'C3 shape at0'.print();
         (*(C3.shape).at(0)).print();
-        (*(C3.shape).at(1)).print();
+        // (*(C3.shape).at(1)).print();
 
 
 
