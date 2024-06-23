@@ -281,7 +281,7 @@ fn step<
     while z < (X_segment).len() {
         'checkp20'.print();
 
-         let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) );
+         let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) ) + ( ( H_t.matmul(@r_transposed)).unsqueeze(axes: array![0].span()) );
          'C1 shapelen'.print();
         ((C1.shape).len()).print();
         'C1 shape at0'.print();
@@ -300,15 +300,15 @@ fn step<
 
          
 
-       let mut C2 =( ( H_t.matmul(@r_transposed.unsqueeze(axes: array![2].span()))).unsqueeze(axes: array![0].span()) );
+    //    let mut C2 =( ( H_t.matmul(@r_transposed)).unsqueeze(axes: array![0].span()) );
 
 
-        'C2 shapelen'.print();
-        ((C2.shape).len()).print();
-        'C2 shape at0'.print();
-        (*(C2.shape).at(0)).print();
-        (*(C2.shape).at(1)).print();
-        (*(C2.shape).at(2)).print();
+    //     'C2 shapelen'.print();
+    //     ((C2.shape).len()).print();
+    //     'C2 shape at0'.print();
+    //     (*(C2.shape).at(0)).print();
+    //     (*(C2.shape).at(1)).print();
+    //     (*(C2.shape).at(2)).print();
 
         
 
@@ -319,7 +319,7 @@ fn step<
 
         H = @f_tanh (
             @( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
-            + ( ( H_t.matmul(@r_transposed.squeeze(axes: Option::None(())))).unsqueeze(axes: array![0].span()) ) 
+            + ( ( H_t.matmul(@r_transposed)).unsqueeze(axes: array![0].span()) ) 
             + (b_i + b_o) )
         );
 
