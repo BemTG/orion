@@ -278,10 +278,10 @@ fn step<
 
         let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) );
 
-        let mut C2 = ( (H_t.unsqueeze(axes: array![0].span()).matmul(@r_transposed) );
+        let mut C2 =(H_t.unsqueeze(axes: array![0].span()).matmul(@r_transposed) );
 
            
-        let mut C3 =  (b_i + b_o) );
+        let mut C3 =  (b_i + b_o) ;
 
         'C1 shapelen'.print();
         (*(*C1.shape).len()).print();
