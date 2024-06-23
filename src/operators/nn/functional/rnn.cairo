@@ -269,13 +269,13 @@ fn step<
     (X_segment).len().print();
     'the X seg'.print();
 
-    (*(*X_segment.at(0).shape).at(0)).print();
-    (*(*X_segment.at(0).shape).at(1)).print();
-    // (*(*X_segment.at(0).shape).at(2)).print();
+    // (*(*X_segment.at(0).shape).at(0)).print();
+    // (*(*X_segment.at(0).shape).at(1)).print();
+    // // (*(*X_segment.at(0).shape).at(2)).print();
 
-    (*(*X_segment.at(1).shape).at(0)).print();
-    (*(*X_segment.at(1).shape).at(1)).print();
-    // (*(*X_segment.at(0).shape).at(2)).print();
+    // (*(*X_segment.at(1).shape).at(0)).print();
+    // (*(*X_segment.at(1).shape).at(1)).print();
+    // // (*(*X_segment.at(0).shape).at(2)).print();
 
     let mut z = 0;
     while z < (X_segment).len() {
@@ -283,33 +283,33 @@ fn step<
 
          let mut C1 = ( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) ) ) ;
          
-         'C1 shapelen'.print();
-        ((C1.shape).len()).print();
-        'C1 shape at0'.print();
-        (*(C1.shape).at(0)).print();
-        (*(C1.shape).at(1)).print();
-        (*(C1.shape).at(2)).print();
+        //  'C1 shapelen'.print();
+        // ((C1.shape).len()).print();
+        // 'C1 shape at0'.print();
+        // (*(C1.shape).at(0)).print();
+        // (*(C1.shape).at(1)).print();
+        // (*(C1.shape).at(2)).print();
 
          
 
        let mut C2 =( ( H_t.matmul(@r_transposed)) );
 
 
-        'C2 shapelen'.print();
-        ((C2.shape).len()).print();
-        'C2 shape at0'.print();
-        (*(C2.shape).at(0)).print();
-        (*(C2.shape).at(1)).print();
-        (*(C2.shape).at(2)).print();
+        // 'C2 shapelen'.print();
+        // ((C2.shape).len()).print();
+        // 'C2 shape at0'.print();
+        // (*(C2.shape).at(0)).print();
+        // (*(C2.shape).at(1)).print();
+        // (*(C2.shape).at(2)).print();
 
 
-        let mut C3 =  C1 + C2;
-        'C3 shapelen'.print();
-        ((C3.shape).len()).print();
-        'C3 shape at0'.print();
-        (*(C3.shape).at(0)).print();
-        (*(C3.shape).at(1)).print();
-        (*(C3.shape).at(2)).print();
+        // let mut C3 =  C1 + C2;
+        // 'C3 shapelen'.print();
+        // ((C3.shape).len()).print();
+        // 'C3 shape at0'.print();
+        // (*(C3.shape).at(0)).print();
+        // (*(C3.shape).at(1)).print();
+        // (*(C3.shape).at(2)).print();
 
         
 
@@ -324,11 +324,11 @@ fn step<
             + (b_i + b_o) )
         );
 
-        'the hthththt'.print();
-        ((*H_t.shape).len()).print();
-        'the ht shapr at0'.print();
-        (*(*H_t.shape).at(0)).print();
-        (*(*H_t.shape).at(1)).print();
+        // 'the hthththt'.print();
+        // ((*H_t.shape).len()).print();
+        // 'the ht shapr at0'.print();
+        // (*(*H_t.shape).at(0)).print();
+        // (*(*H_t.shape).at(1)).print();
 
 
         h_list.append(*H);
@@ -340,15 +340,15 @@ fn step<
     'the len of h'.print();
     h_list.len().print();
 
-    'the HHHHHH1'.print();
-    (*(*h_list.at(0).shape).at(0)).print();
-    (*(*h_list.at(0).shape).at(1)).print();
-    (*(*h_list.at(0).shape).at(2)).print();
+    // 'the HHHHHH1'.print();
+    // (*(*h_list.at(0).shape).at(0)).print();
+    // (*(*h_list.at(0).shape).at(1)).print();
+    // (*(*h_list.at(0).shape).at(2)).print();
 
-    'the HHHHHH2'.print();
-    (*(*h_list.at(1).shape).at(0)).print();
-    (*(*h_list.at(1).shape).at(1)).print();
-    (*(*h_list.at(1).shape).at(2)).print();
+    // 'the HHHHHH2'.print();
+    // (*(*h_list.at(1).shape).at(0)).print();
+    // (*(*h_list.at(1).shape).at(1)).print();
+    // (*(*h_list.at(1).shape).at(2)).print();
 
     'checkp29'.print();
     let mut concatenated = if h_list.len() > 1 {
@@ -362,11 +362,11 @@ fn step<
 
     if num_directions == 1 {
 
-        'the yyy shape'.print();
-        (*Y.shape[0]).print();
-        (*Y.shape[1]).print();
-        (*Y.shape[2]).print();
-        (*Y.shape[3]).print();
+        // 'the yyy shape'.print();
+        // (*Y.shape[0]).print();
+        // (*Y.shape[1]).print();
+        // (*Y.shape[2]).print();
+        // (*Y.shape[3]).print();
 
 
         Y = concatenated.reshape(
