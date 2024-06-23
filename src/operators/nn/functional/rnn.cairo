@@ -319,7 +319,7 @@ fn step<
 
         H = @f_tanh (
             @( (X_segment[z].unsqueeze(axes: array![0].span()).matmul(@w_transposed) )
-            + ( ( H_t.matmul(@r_transposed)) ) 
+            + ( ( H_t.matmul(@r_transposed)).unsqueeze(axes: array![0].span()) ) 
             + (b_i + b_o) )
         );
 
