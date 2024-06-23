@@ -284,19 +284,19 @@ fn step<
         let mut C3 =  (b_i + b_o) ;
 
         'C1 shapelen'.print();
-        (*(*C1.shape).len()).print();
+        (*(C1.shape).len()).print();
         'C1 shape at0'.print();
         (*(*C1.shape).at(0)).print();
         (*(*C1.shape).at(1)).print();
 
         'C2 shapelen'.print();
-        (*(*C2.shape).len()).print();
+        (*(C2.shape).len()).print();
         'C2 shape at0'.print();
         (*(*C2.shape).at(0)).print();
         (*(*C2.shape).at(1)).print();
 
         'C3 shapelen'.print();
-        (*(*C3.shape).len()).print();
+        (*(C3.shape).len()).print();
         'C3 shape at0'.print();
         (*(*C3.shape).at(0)).print();
         (*(*C3.shape).at(1)).print();
