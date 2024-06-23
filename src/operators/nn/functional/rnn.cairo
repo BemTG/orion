@@ -290,26 +290,26 @@ fn step<
         (*(C1.shape).at(1)).print();
         (*(C1.shape).at(2)).print();
 
+         
 
-           
-        let mut C3 =  (b_i + b_o) ;
+       let mut C2 =( ( H_t.matmul(@r_transposed)).unsqueeze(axes: array![0].span()) );
+
+
+        'C2 shapelen'.print();
+        ((C2.shape).len()).print();
+        'C2 shape at0'.print();
+        (*(C2.shape).at(0)).print();
+        (*(C2.shape).at(1)).print();
+        (*(C2.shape).at(2)).print();
+
+
+        let mut C3 =  C1 + C3 ;
         'C3 shapelen'.print();
         ((C3.shape).len()).print();
         'C3 shape at0'.print();
         (*(C3.shape).at(0)).print();
-        // (*(C3.shape).at(1)).print();
-
-         
-
-    //    let mut C2 =( ( H_t.matmul(@r_transposed)).unsqueeze(axes: array![0].span()) );
-
-
-    //     'C2 shapelen'.print();
-    //     ((C2.shape).len()).print();
-    //     'C2 shape at0'.print();
-    //     (*(C2.shape).at(0)).print();
-    //     (*(C2.shape).at(1)).print();
-    //     (*(C2.shape).at(2)).print();
+        (*(C3.shape).at(1)).print();
+        (*(C3.shape).at(2)).print();
 
         
 
