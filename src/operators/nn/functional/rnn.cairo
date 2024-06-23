@@ -293,7 +293,7 @@ fn step<
         // (*(C3.shape).at(1)).print();
 
 
-       let mut C2 =(H_t.unsqueeze(axes: array![0].span()).matmul(@r_transposed) );
+       let mut C2 =(H_t.unsqueeze(axes: array![0].span()).matmul(@r_transposed.squeeze(axes: Option::None(()));) );
 
 
         'C2 shapelen'.print();
@@ -324,7 +324,8 @@ fn step<
 
 
         h_list.append(*H);
-        H_t = @H.squeeze(axes: Option::None(()));
+        // H_t = @H.squeeze(axes: Option::None(()));
+        H_t = H;
         z += 1;
     };
 
