@@ -249,6 +249,9 @@ fn step<
 
     'r transposed len'.print();
     ((r_transposed.shape).len()).print();
+    (*(r_transposed.shape).at(0)).print();
+        (*(r_transposed.shape).at(1)).print();
+    
 
     'checkp17'.print();
 
