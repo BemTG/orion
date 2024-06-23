@@ -288,12 +288,14 @@ fn step<
         'C1 shape at0'.print();
         (*(C1.shape).at(0)).print();
         (*(C1.shape).at(1)).print();
+        (*(C1.shape).at(2)).print();
 
         'C2 shapelen'.print();
         ((C2.shape).len()).print();
         'C2 shape at0'.print();
         (*(C2.shape).at(0)).print();
         (*(C2.shape).at(1)).print();
+        (*(C2.shape).at(2)).print();
 
         'C3 shapelen'.print();
         ((C3.shape).len()).print();
@@ -303,7 +305,7 @@ fn step<
 
 
 
-        H = @f_tanh (@(C1 + C2 + C3));
+        H = @f_tanh(C1 + C2 + C3);
 
         'the hthththt'.print();
         ((*H_t.shape).len()).print();
