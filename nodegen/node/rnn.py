@@ -239,18 +239,14 @@ class Rnn(RunAll):
         # B = np.round(np.concatenate((W_B, R_B), axis=1),1)
 
         
-        W = weight_scale * np.ones(
-            (1,  hidden_size, input_size)
-        ).astype(np.float64)
-        R = weight_scale * np.ones(
-            (1, hidden_size, hidden_size)
-        ).astype(np.float64)
+        W = weight_scale * np.ones((1, hidden_size, input_size)).astype(np.float32)
+        R = weight_scale * np.ones((1, hidden_size, hidden_size)).astype(np.float32)
 
-        W_B = custom_bias * np.ones((1, hidden_size)).astype(
-            np.float64
-        )
-        R_B = np.zeros((1,hidden_size)).astype(np.float64)
+        # Adding custom bias
+        W_B = custom_bias * np.ones((1, hidden_size)).astype(np.float32)
+        R_B = np.zeros((1, hidden_size)).astype(np.float32)
         B = np.concatenate((W_B, R_B), axis=1)
+
 
         
         rnn = RNNHelper(X=X, W=W, R=R, B=B)
