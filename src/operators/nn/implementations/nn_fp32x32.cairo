@@ -1,6 +1,7 @@
 use orion::operators::tensor::core::Tensor;
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
+use core::debug::PrintTrait;
 use orion::numbers::fixed_point::implementations::fp32x32::core::{FP32x32, FP32x32Impl};
 use orion::operators::tensor::implementations::tensor_fp32x32::{
     FP32x32Tensor, FP32x32TensorDiv, FP32x32TensorAdd
@@ -137,4 +138,30 @@ impl FP32x32NN of NNTrait<FP32x32> {
     ) -> Tensor<FP32x32> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+
+    fn lstm(
+     X: @Tensor<FP32x32>,
+     R: @Tensor<FP32x32>,
+     W: @Tensor<FP32x32>,
+     B: Option<Tensor<FP32x32>>,
+     sequence_length: Option<Tensor<FP32x32>>,
+    initial_h: Option<Tensor<FP32x32>>,
+    initial_c: Option<Tensor<FP32x32>>,
+     P: Option<Tensor<FP32x32>>,
+    activation_alpha: Option<Array<Tensor<FP32x32>>>,
+    activation_beta: Option<Array<Tensor<FP32x32>>>,
+    activations: Option<functional::lstm::ACTIVATIONS>,
+    clip: Option<FP32x32>,
+    direction: Option<orion::operators::nn::functional::lstm::DIRECTION>,
+     hidden_size: Option<usize>,
+      input_forget: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<FP32x32>> {
+    panic(array!['not supported!'])
+}
+
+
 }
