@@ -1,4 +1,3 @@
-
 # NNTrait::conv
 
 ```rust
