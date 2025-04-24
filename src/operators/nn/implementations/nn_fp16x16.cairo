@@ -2,15 +2,22 @@ use orion::operators::tensor::core::Tensor;
 use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
 use orion::numbers::fixed_point::implementations::fp16x16::core::FP16x16;
+use orion::numbers::fixed_point::implementations::fp16x16::core::{
+    HALF, ONE, MAX, FP16x16Add, FP16x16AddEq, FP16x16Sub, FP16x16Mul, FP16x16MulEq,
+    FP16x16TryIntoU128, FP16x16PartialEq, FP16x16PartialOrd, FP16x16SubEq, FP16x16Neg, FP16x16Div,
+    FP16x16IntoFelt252,
+};
 use orion::operators::tensor::implementations::tensor_fp16x16::{
-    FP16x16Tensor, FP16x16TensorDiv, FP16x16TensorAdd
+    FP16x16Tensor, FP16x16TensorDiv, FP16x16TensorAdd, FP16x16TensorSub, FP16x16TensorMul
 };
 use orion::numbers::fixed_point::implementations::fp16x16wide::core::{
     FP16x16WImpl, FP16x16WTryIntoFP16x16, FP16x16W, FP16x16IntoFP16x16W
 };
 use orion::operators::tensor::implementations::tensor_fp16x16wide::{
-    FP16x16WTensor, FP16x16WTensorDiv, FP16x16WTensorAdd
+    FP16x16WTensor, FP16x16WTensorDiv, FP16x16WTensorAdd, FP16x16WTensorSub, FP16x16WTensorMul
 };
+
+
 
 impl FP16x16NN of NNTrait<FP16x16> {
     fn relu(tensor: @Tensor<FP16x16>) -> Tensor<FP16x16> {
@@ -143,4 +150,26 @@ impl FP16x16NN of NNTrait<FP16x16> {
     ) -> Tensor<FP16x16> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn gru(
+         X: @Tensor<FP16x16>,
+        W: @Tensor<FP16x16>,
+        R: @Tensor<FP16x16>,
+        B: Option<Tensor<FP16x16>>,
+        sequence_length: Option<Tensor<FP16x16>>,
+        initial_h: Option<Tensor<FP16x16>>,
+        activation_alpha: Option<Array<Tensor<FP16x16>>>,
+        activation_beta: Option<Array<Tensor<FP16x16>>>,
+        activations: Option<functional::gru::ACTIVATIONS>,
+        clip: Option<FP16x16>,
+        direction: Option<functional::gru::DIRECTION>,
+        hidden_size: Option<usize>,
+        layout: Option<usize>,
+        linear_before_reset: Option<usize>,
+        n_outputs: Option<usize>
+    ) -> Array<Tensor<FP16x16>> {
+        functional::gru::gru(X, W, R, B, sequence_length, initial_h, activation_alpha, activation_beta, 
+        activations, clip, direction, hidden_size, layout, linear_before_reset, n_outputs)
+    }
 }
+

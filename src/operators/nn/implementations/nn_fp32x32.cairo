@@ -137,4 +137,24 @@ impl FP32x32NN of NNTrait<FP32x32> {
     ) -> Tensor<FP32x32> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn gru(
+        X: @Tensor<FP32x32>,
+        W: @Tensor<FP32x32>,
+        R: @Tensor<FP32x32>,
+        B: Option<Tensor<FP32x32>>,
+        sequence_length: Option<Tensor<FP32x32>>,
+        initial_h: Option<Tensor<FP32x32>>,
+        activation_alpha: Option<Array<Tensor<FP32x32>>>,
+        activation_beta: Option<Array<Tensor<FP32x32>>>,
+        activations: Option<functional::gru::ACTIVATIONS>,
+        clip: Option<FP32x32>,
+        direction: Option<functional::gru::DIRECTION>,
+        hidden_size: Option<usize>,
+        layout: Option<usize>,
+        linear_before_reset: Option<usize>,
+        n_outputs: Option<usize>
+    ) -> Array<Tensor<FP32x32>> {
+        panic(array!['not supported!'])
+    }
 }
