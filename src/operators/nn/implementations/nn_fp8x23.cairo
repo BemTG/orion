@@ -3,7 +3,7 @@ use orion::operators::nn::core::NNTrait;
 use orion::operators::nn::functional;
 use orion::numbers::fixed_point::implementations::fp8x23::core::FP8x23;
 use orion::operators::tensor::implementations::tensor_fp8x23::{
-    FP8x23Tensor, FP8x23TensorDiv, FP8x23TensorAdd
+    FP8x23Tensor, FP8x23TensorDiv, FP8x23TensorAdd, FP8x23TensorSub, FP8x23TensorMul
 };
 use orion::numbers::fixed_point::implementations::fp8x23wide::core::{
     FP8x23WImpl, FP8x23WTryIntoFP8x23, FP8x23W, FP8x23IntoFP8x23W
@@ -139,4 +139,25 @@ impl FP8x23NN of NNTrait<FP8x23> {
     ) -> Tensor<FP8x23> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn rnn(
+     X: @Tensor<FP8x23>,
+     R: @Tensor<FP8x23>,
+     W: @Tensor<FP8x23>,
+     B: Option<Tensor<FP8x23>>,
+     sequence_length: Option<Tensor<FP8x23>>,
+    initial_h: Option<Tensor<FP8x23>>,
+    activation_alpha: Option<Array<Tensor<FP8x23>>>,
+    activation_beta: Option<Array<Tensor<FP8x23>>>,
+    activations: Option<orion::operators::nn::functional::rnn::ACTIVATIONS>,  
+    clip: Option<FP8x23>,
+    direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
+     hidden_size: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<FP8x23>> {
+    functional::rnn::rnn(X,  R, W, B, sequence_length, initial_h, activation_alpha, activation_beta, 
+    activations, clip, direction, hidden_size,  layout, linear_before_reset, n_outputs)
+}
 }

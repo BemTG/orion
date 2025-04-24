@@ -130,4 +130,24 @@ impl I8NN of NNTrait<i8> {
     ) -> Tensor<i8> {
         functional::conv::conv(X, W, B, auto_pad, dilations, group, kernel_shape, pads, strides)
     }
+
+    fn rnn(
+     X: @Tensor<i8>,
+     R: @Tensor<i8>,
+     W: @Tensor<i8>,
+     B: Option<Tensor<i8>>,
+     sequence_length: Option<Tensor<i8>>,
+    initial_h: Option<Tensor<i8>>,
+    activation_alpha: Option<Array<Tensor<i8>>>,
+    activation_beta: Option<Array<Tensor<i8>>>,
+    activations: Option<functional::rnn::ACTIVATIONS>,
+    clip: Option<i8>,
+    direction: Option<orion::operators::nn::functional::rnn::DIRECTION>,
+     hidden_size: Option<usize>,
+     layout: Option<usize>,
+     linear_before_reset: Option<usize>,
+    n_outputs: Option<usize>
+    ) -> Array<Tensor<i8>> {
+    panic(array!['not supported!'])
+}
 }
